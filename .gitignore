@@ -11,3 +11,15 @@
 *.lai
 *.la
 *.a
+
+# images, pointclouds, 3D models
+*.png
+*.jpg
+*.pcd
+*.ply
+
+# compilation objects, libs and binaries
+obj/
+lib/
+bin/
+
