@@ -1,0 +1,4 @@
+essential
+=========
+
+Everything worth versioned
