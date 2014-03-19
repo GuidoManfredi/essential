@@ -1,0 +1,16 @@
+This folder contains three stacks corresponding to the mains steps of objects perception.
+Each stack contains various ways to do their respective jobs.
+
+- Segmentation :
+Make the difference between objects and the rest of the world in an image
+or pointcloud. For now, there is only one method which segment plans in a pointcloud and
+then regroup points in clusters (these are our objects). It reproject these clusters
+on an rgb image to obtain a rgb segmentation.
+- Recognition :
+The cluster previously segmented is compared, thanks to some descriptors,
+to a database of objects. If possible, the cluster is identified as corresponding to
+some object which model is known.
+- Localisation :
+Thanks to the model of the object, a position of the object is computed
+in the localisation step.
+

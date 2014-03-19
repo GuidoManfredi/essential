@@ -1,0 +1,22 @@
+<package>
+  <description brief="opencv_publisher">
+
+     opencv_publisher is a package which take the video stream from opencv (opencv opens the default camera)
+     and publish it in a ros topic. The reason of this package is to allow easy calibration (with camera_calibration
+     package) for any camera accessible from opencv (for example webcams).
+
+  </description>
+  <author>Guido ManfrediInconnuInconnu0561336342</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/opencv_publisher</url>
+  <depend package="sensor_msgs"/>  
+  <depend package="opencv2"/>
+  <depend package="cv_bridge"/>
+  <depend package="roscpp"/>
+  <depend package="std_msgs"/>  
+  <depend package="image_transport"/>
+  <depend package="camera_info_manager"/>  
+</package>
+
+

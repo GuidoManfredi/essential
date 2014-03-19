@@ -1,0 +1,91 @@
+#include "ros/ros.h"
+#include "pcl_ros/point_cloud.h"
+#include "pcl/point_types.h"
+
+#include "seg_plans_objs/PointCloudArray.h"
+#include "reco_3d/OBB.h"
+#include "reco_3d/OBBArray.h"
+#include "reco_3d/StringArray.h"
+
+#include "BoundingBoxer.h"
+
+using namespace std;
+// obb = oriented bounding box
+BoundingBoxer obb_computer;
+
+ros::Publisher pub_obb;
+ros::Publisher pub_candidates;
+vector<string> candidates;
+reco_3d::OBBArray msg_obbs;
+
+void load_training_data (string filepath) {
+
+}
+
+vector<string> recognize (vector<string> candidates, float x, float y, float z) {
+	vector<string> remaining_candidates;
+	for (int i=0; i<known_object_name.size(); ++i) {
+		if (   x > known_object_obb[i].x - known_object_stddev[i].x
+				&& x < known_object_obb[i].x + known_object_stddev[i].x
+				&& y > known_object_obb[i].y - known_object_stddev[i].y
+				&& y < known_object_obb[i].y + known_object_stddev[i].y
+				&& z > known_object_obb[i].z - known_object_stddev[i].z
+				&& z < known_object_obb[i].z + known_object_stddev[i].z
+				&& find(candidates.begin(), candidates.end(), known_object_name[i]) != v.end() )
+			remaining_candidates.push_back(known_object_name[i]);
+	}
+	return remaining_candidates;
+}
+
+// Callback for pointcloud subscriber
+void reco_cb (const seg_plans_objs::PointCloudArray::ConstPtr& msg) {
+	msg_obbs.array.clear ();
+	Eigen::Vector3f t;
+	Eigen::Quaternionf q;
+	double w, h, d;
+	
+	for (int i=0; i<msg->clusters.size(); ++i) {
+		Cloud::Ptr cloud (new Cloud);
+		pcl::fromROSMsg(msg->clusters[i], *cloud);
+		obb_computer.bounding_box_mvbb (cloud, q, t, w, h, d);
+		//obb_computer.bounding_box_pca (cloud, q, t, w, h, d);
+		reco_3d::OBB box;
+		box.width = w; box.height = h; box.depth = d;
+		box.transform.pose.position.x = t(0);
+		box.transform.pose.position.y = t(1);
+		box.transform.pose.position.z = t(2);
+		box.transform.pose.orientation.w = q.w();
+		box.transform.pose.orientation.x = q.x();
+		box.transform.pose.orientation.y = q.y();
+		box.transform.pose.orientation.z = q.z();
+		msg_obbs.array.push_back(box);
+	}
+	pub_obb.publish (msg_obbs);
+	//pub_candidates.publish ();
+	// out put : vector<string> candidates, MVBB<transform, dims> bounding_boxes
+}
+
+void save_candidates_cb (const reco_3d::StringArrayConstPtr& msg) {
+	//candidates.swap(msg->array);
+}
+
+int main(int argc, char **argv) {
+  ros::init(argc, argv, "reco_3d_node");
+  ros::NodeHandle n;
+  
+	// Input
+  ros::Subscriber sub_pointcloud = n.subscribe("segmented_clusters", 10, reco_cb);
+  ros::Subscriber sub_candidates = n.subscribe("pipo", 10, save_candidates_cb);
+  // Output
+  pub_obb = n.advertise<reco_3d::OBBArray>("reco_3d_obb", 10);
+  pub_candidates = n.advertise<reco_3d::StringArray>("reco_3d_candidates", 10);
+  
+  cout << "Ready to compute bounding boxes." << endl;
+ 	ros::Rate loop_rate(10);
+  while (ros::ok()) {
+	  ros::spinOnce();
+	  loop_rate.sleep();
+  }
+
+  return 0;
+}

@@ -1,0 +1,2 @@
+Dans TrainHist lire une image ET un masque. On a besoin des deux pour savoir
+quels pixels considerer. En extraire un descripteur.

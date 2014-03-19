@@ -1,0 +1,124 @@
+#ifndef DEF_ROBBOT_PLAN_DETECTOR
+#define DEF_ROBBOT_PLAN_DETECTOR
+
+#include <iostream>
+#include <pcl/ModelCoefficients.h>
+#include <pcl/io/pcd_io.h>
+#include <pcl/point_types.h>
+#include <pcl/sample_consensus/method_types.h>
+#include <pcl/sample_consensus/model_types.h>
+#include <pcl/segmentation/sac_segmentation.h>
+#include <pcl/filters/extract_indices.h>
+#include <pcl/filters/voxel_grid.h>
+#include <pcl/kdtree/kdtree.h>
+#include <pcl/segmentation/extract_clusters.h>
+#include <pcl/filters/project_inliers.h>
+
+#include <pcl/surface/convex_hull.h>
+
+#include <pcl/common/pca.h>
+
+#include "gdiam.h"
+
+#include "defines.h"
+
+class PlanDetector
+{
+public:
+	//////////////////////////////////////////////////////////////////////////////
+	//
+	// Computation functions
+	//
+	//////////////////////////////////////////////////////////////////////////////
+	int detect_plans (Cloud::ConstPtr cloud);
+	//int xyz_filter (Cloud::ConstPtr cloud, std::vector<int> interval_min, std::vector<int> interval_max);
+	// Segments the last pointcloud filtered from plans
+	int segment ();
+	int segment (Cloud::ConstPtr cloud);
+	//////////////////////////////////////////////////////////////////////////////
+	//
+	//  Get a bounding box for all clusters using mvbb method
+	//
+	//////////////////////////////////////////////////////////////////////////////
+	void bbox (std::vector<Eigen::Quaternionf> &quaternion, std::vector<Eigen::Vector3f> &translation,
+						std::vector<double> &width, std::vector<double> &height, std::vector<double> &depth);
+	//////////////////////////////////////////////////////////////////////////////
+	//
+	//  Get a bounding box from cluster number 'i' using mvbb method
+	//
+	//////////////////////////////////////////////////////////////////////////////						
+	void bbox (int i,
+							Eigen::Quaternionf &quaternion, Eigen::Vector3f &translation,
+							double &width, double &height, double &depth);
+	//////////////////////////////////////////////////////////////////////////////
+	//
+	//  Get a bounding box from a cloud using pca method
+	//
+	//////////////////////////////////////////////////////////////////////////////							
+	void bbox_pca (Cloud::ConstPtr cloud, 
+									Eigen::Quaternionf &quaternion, Eigen::Vector3f &translation,
+									double &width, double &height, double &depth);	
+	//////////////////////////////////////////////////////////////////////////////
+	//
+	//  Get a bounding box from a cloud using mvbb method
+	//
+	//////////////////////////////////////////////////////////////////////////////
+	void bbox_mvbb (Cloud::ConstPtr cloud,
+												Eigen::Quaternionf &quaternion, Eigen::Vector3f &translation,
+												double &width, double &height, double &depth);															
+
+	void bbox_mvbb (Cloud::ConstPtr cloud,
+												Eigen::Quaternionf &quaternion, Eigen::Vector3f &translation,
+												double &width, double &height, double &depth,
+												PointType &min, PointType &max);
+															
+	void project_on_plan (Cloud::ConstPtr in, Cloud::Ptr &out);
+	int get_closest_plan_id (Cloud::ConstPtr cloud);																
+	double distance_to_plan(PointType p, pcl::ModelCoefficients::ConstPtr c);
+	void pcl2gdiam (Cloud::ConstPtr cloud, gdiam_real* points);
+	//////////////////////////////////////////////////////////////////////////////
+	//
+	// Getter functions
+	//
+	//////////////////////////////////////////////////////////////////////////////	
+	int num_plans ();
+	Cloud::ConstPtr get_plan (int i);
+	std::vector< Cloud::ConstPtr > get_plans ();
+	Cloud::ConstPtr get_filtered_cloud ();
+	Cloud::ConstPtr get_cluster(int i);
+	std::vector< Cloud::ConstPtr > get_clusters();
+
+	PlanDetector ();
+	~PlanDetector ();
+	
+private:
+	//////////////////////////////////////////////////////////////////////////////
+	//
+	// Computation Machines
+	//
+	//////////////////////////////////////////////////////////////////////////////
+	pcl::SACSegmentation< PointType > m_seg;
+  pcl::VoxelGrid< PointType > m_vox;
+	pcl::ExtractIndices< PointType > m_extract;
+	pcl::search::KdTree< PointType >::Ptr m_tree;
+  pcl::EuclideanClusterExtraction< PointType > m_ec;
+	pcl::PCA< PointType > m_pca;
+	//////////////////////////////////////////////////////////////////////////////
+	//
+	// Temporary internal variables
+	//
+	//////////////////////////////////////////////////////////////////////////////	
+	pcl::PointIndices::Ptr m_inliers;		
+	Cloud::Ptr m_tmp, m_cloud_filtered;
+  std::vector<pcl::PointIndices> m_cluster_indices;
+	//////////////////////////////////////////////////////////////////////////////
+	//
+	// Output variables
+	//
+	//////////////////////////////////////////////////////////////////////////////
+	std::vector<pcl::ModelCoefficients::ConstPtr> m_vec_coefs;
+	std::vector< Cloud::ConstPtr > m_vec_plans;
+  std::vector< Cloud::ConstPtr > m_cloud_cluster;
+};
+
+#endif

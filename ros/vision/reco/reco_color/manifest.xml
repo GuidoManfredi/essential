@@ -1,0 +1,18 @@
+<package>
+  <description brief="reco_color">
+
+     reco_color
+
+  </description>
+  <author>Guido ManfrediInconnuInconnu0561336342</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/reco_color</url>
+  <depend package="roscpp"/>
+  <depend package="sensor_msgs"/>
+  <depend package="opencv2"/>
+  <depend package="cv_bridge"/>
+
+</package>
+
+

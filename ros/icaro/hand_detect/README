@@ -1,0 +1,11 @@
+Attention ! Le boulet qui a fait la cascade pour detection de main n'as pris
+que des mains droites pour l'entrainement. Donc ce detecteur detecte bien les
+mains droites mais galere severment pour les gauches. A corriger si un jour
+le temps s'arrete.
+
+rosservice call detect_hands 1.0
+
+rosrun opencv_publisher stream 1 webcam image
+rosrun hand_detect hand_detect image
+rosrun hand_track hand_track image
+rosrun opencv_display display_hand image /detection_targ /tracking_target

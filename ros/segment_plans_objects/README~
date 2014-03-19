@@ -1,0 +1,5 @@
+Start the segmentation giving it the pointcloud topic and rgb topic (pointcloud
+topic must be the registered one).
+
+This node expose a service. The service is called with one argument : the number
+of plans to find.

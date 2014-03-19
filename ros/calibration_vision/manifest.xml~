@@ -1,0 +1,19 @@
+<package>
+  <description brief="calibration_vision">
+
+     calibration_vision
+
+  </description>
+  <author>Guido ManfrediH1200561336856</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/calibration_vision</url>
+  <depend package="roscpp"/>
+  <depend package="pcl_ros"/>
+  <depend package="pcl"/>
+  <depend package="tf"/>
+  <depend package="sensor_msgs"/>
+
+</package>
+
+

@@ -1,0 +1,16 @@
+<package>
+  <description brief="perception_models">
+
+     perception_models
+
+  </description>
+  <author>Guido ManfrediInconnuInconnu0561336342</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/perception_models</url>
+	<depend package="roscpp"/>
+	<depend package="pcl"/>
+	<depend package="pcl_ros"/>
+</package>
+
+

@@ -1,0 +1,55 @@
+#include "ICP.h"
+
+ICP::ICP () {
+ 	//icp_.setUseReciprocalCorrespondences (true);
+  icp_.setMaxCorrespondenceDistance (0.005); // 1cm
+	icp_.setMaximumIterations (100);
+}
+/*
+std::vector<float> ICP::align (pcl::PointCloud<pcl::PointXYZ>::ConstPtr cluster,
+															 std::vector<pcl::PointCloud<pcl::PointXYZ>::ConstPtr> model,
+															 std::vector<pcl::PointCloud<pcl::PointXYZ>::Ptr> &final_cloud,
+															 std::vector<Eigen::Matrix4f> &final_transform) {
+	std::vector<float> fitness;
+	for (size_t i=0; i<model.size(); ++i)
+		pcl::PointCloud<pcl::PointXYZ>::Ptr tmp_cloud;
+		Eigen::Matrix4f tmp_transform;
+		float tmp_fitness;
+		tmp_fitness = align (cluster, model[i], tmp_cloud, tmp_transform);
+
+		fitness.push_back (tmp_fitness);
+		final_cloud.push_back (tmp_cloud);
+		final_transform.push_back (tmp_transform);
+	}
+}
+*/
+float ICP::align (pcl::PointCloud<pcl::PointXYZ>::ConstPtr cluster,
+									 pcl::PointCloud<pcl::PointXYZ>::ConstPtr model,
+									 pcl::PointCloud<pcl::PointXYZ>::Ptr final_cloud,
+									 Eigen::Matrix4f &final_transform) {
+	icp_.setInputSource(model);
+	icp_.setInputTarget (cluster);
+	icp_.align(*final_cloud);
+	final_transform = icp_.getFinalTransformation ();
+	return icp_.getFitnessScore();
+}
+
+float ICP::align (pcl::PointCloud<pcl::PointXYZ>::ConstPtr cluster,
+									 pcl::PointCloud<pcl::PointXYZ>::ConstPtr model,
+									 Eigen::Matrix4f &final_transform) {
+	// The initial guess is the center of the cluster (cluster is in camera frame)
+	Eigen::Vector4f centroid;
+	compute3DCentroid (*cluster, centroid);
+	pcl::PointCloud<pcl::PointXYZ>::Ptr transformed_cluster (new pcl::PointCloud<pcl::PointXYZ>);
+	demeanPointCloud (*cluster, centroid, *transformed_cluster);
+	
+	icp_.setInputSource(model);
+	icp_.setInputTarget (transformed_cluster);
+	pcl::PointCloud<pcl::PointXYZ>::Ptr final_cloud (new pcl::PointCloud<pcl::PointXYZ>);
+	icp_.align(*final_cloud);
+	final_transform = icp_.getFinalTransformation ();
+	//final_transform(0, 3) += centroid(0);
+	//final_transform(1, 3) += centroid(1);
+	//final_transform(2, 3) += centroid(2);
+	return icp_.getFitnessScore();
+}

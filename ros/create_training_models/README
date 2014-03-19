@@ -1,0 +1,13 @@
+This package is intended to take pointcloud snapshots of an objects lying on a
+plane. This is usefull to create a database for model training.
+
+./snapshot rgbd_pointcloud_topic path_to_save_dir
+
+After launching the application, the visualizer will show what the xtion sees.
+Whenever you want to take a snapshot, press "s".
+The snapshot will be shown in the visualizer.
+Press "s" to confirm it and it will save it to the path_to_save_dir.
+If the snapshot is wrong, press "d"; the visualizer will again show you what the
+xtion sees, and you will be able to take another snapshot by pressing "s".
+
+Snapshots are RGBXYZ points.

@@ -1,0 +1,5 @@
+Ajouter egalement possibilité de n'utiliser qu'une partie des exemples disponibles
+pour une instance donnée. (Permet d'aller plus vite et de découper le dataset
+en training et evaluation) => A FAIRE : le decoupage doit pouvoir etre fait "que
+pour les classes" ou "que pour les poses" ou "que pour les instances" ou un mix.
+DUUUUUUUUUURRRR !

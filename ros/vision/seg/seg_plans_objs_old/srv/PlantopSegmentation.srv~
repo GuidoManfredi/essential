@@ -1,0 +1,10 @@
+int64 num_plans_requested
+---
+int32 NO_CLOUD_RECEIVED=1
+int32 NO_TABLE=2
+int32 OTHER_ERROR=3
+int32 SUCCESS=4
+tabletop_object_detector/Table table
+sensor_msgs/PointCloud[] clusters
+sensor_msgs/Image[] cluster_images
+int32 result

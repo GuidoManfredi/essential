@@ -1,0 +1,22 @@
+#include "OBBComputer.h"
+#include "Trainer.h"
+#include "Reco.h"
+
+using namespace std;
+
+int main (int argc, char** argv)
+{
+	if (argc != 2)
+		cout << "Usage: reco pose_path" << endl;
+	
+	Reco rec (3);
+	pcl::PointXYZ pt (0.4434, 0.1914, 0.02726);
+	cout << "Loading stats" << endl;
+	//rec.load_stats ("xyz_instance_stats.txt");
+	//rec.load_stats ("xyz_class_stats.txt");
+	rec.load_stats ("xyz_class_stats.txt");
+	cout << "Reconing " << endl;
+	rec.reco (pt, 0.90);
+	
+	return 0;
+}

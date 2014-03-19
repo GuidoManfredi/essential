@@ -1,0 +1,57 @@
+#include "ros/ros.h"
+#include <cv_bridge/cv_bridge.h>
+#include <sensor_msgs/image_encodings.h>
+
+#include "opencv2/imgproc/imgproc.hpp"
+#include "opencv2/highgui/highgui.hpp"
+
+#include "sensor_msgs/Image.h"
+#include "seg_plans_objs/PointCloudArray.h"
+
+using namespace std;
+using namespace cv;
+namespace enc = sensor_msgs::image_encodings;
+
+Mat current_image;
+
+void save_image (const sensor_msgs::Image::ConstPtr& msg) {
+  cv_bridge::CvImagePtr cv_ptr;
+  try {
+    cv_ptr = cv_bridge::toCvCopy(msg, enc::BGR8);
+  }
+  catch (cv_bridge::Exception& e) {
+    ROS_ERROR("cv_bridge exception: %s", e.what());
+    return;
+  }
+  current_image = cv_ptr->image;
+}
+
+void process_clusters (const seg_plans_objs::PointCloudArray::ConstPtr& msg) {
+	for (int i=0; i < msg->clusters.size (); ++i) {
+	
+	}
+}
+
+int main (int argc, char** argv) {
+	if (argc != 3) {
+		std::cout << "Usage: seg_color_mask in_clusters_topic in_image_topic" << std::endl;
+		return 1;
+	}
+
+  ros::init(argc, argv, "color_mask_node");
+  ros::NodeHandle n;
+
+	// Input
+  ros::Subscriber sub_clusters = n.subscribe(argv[1], 1000, process_clusters);
+  ros::Subscriber sub_image = n.subscribe(argv[2], 1000, save_image);
+	// Output
+  ros::Publisher pub_masks = n.advertise<cv::Mat>("color_masks", 1000);
+  
+ 	ros::Rate loop_rate(10);
+  while (ros::ok()) {
+		ros::spinOnce ();
+		loop_rate.sleep ();
+  }
+
+	return 0;
+}

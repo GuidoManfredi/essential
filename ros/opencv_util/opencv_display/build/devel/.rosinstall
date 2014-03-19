@@ -1,0 +1,2 @@
+- setup-file:
+    local-name: /home/gmanfred/devel/ros/my_packs/opencv_util/opencv_display/build/devel/setup.sh

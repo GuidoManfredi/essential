@@ -1,0 +1,12 @@
+GENERAL
+Supprimer BoundingBoxer et remplacer par simples fonctions C. (pas besoin
+d'une classe ici).
+
+ERREURS GDIAM:
+-Prendre en compte toutes les erreurs dues à des asserts et renvoyer une boite
+nulle dans ces cas là.
+
+PCA
+-Implementer une pca 3D pour obtenir obb
+-Implementer une pca 2D qui travaille sur le bas de l'objet (intersection
+table/objet) et donne obb.

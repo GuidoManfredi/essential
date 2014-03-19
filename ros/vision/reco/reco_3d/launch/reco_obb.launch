@@ -1,0 +1,3 @@
+<launch>
+	<node pkg="reco_3d" type="reco_3d" name="reco_3d_obb" respawn="true"></node>
+</launch>

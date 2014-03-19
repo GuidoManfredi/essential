@@ -1,0 +1,10 @@
+ARGS SERVICE :
+Mettre deux arguments pour le service pour le nombre de plans et le nombre de 
+clusters à segmenter.
+Faire que le service retourne une information (du type nombre de plans trouvés et
+nombre de clusters segmentés).
+
+CROP IMAGE :
+Finir le cropping d'image pour obtenir et publier un vecteur de vignettes contenant
+l'image des differentes objets.
+- Remplir le header des images envoyées avec

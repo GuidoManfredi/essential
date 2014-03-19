@@ -1,0 +1,147 @@
+#include <ros/ros.h>
+#include <cv_bridge/cv_bridge.h>
+#include <sensor_msgs/image_encodings.h>
+
+#include "hand_track/HandTrack.h"
+#include "hand_msgs/RotatedRectangle.h"
+#include "Tracker.h"
+
+namespace enc = sensor_msgs::image_encodings;
+using namespace std;
+using namespace cv;
+
+Tracker tracker;
+Rect init_pose;
+RotatedRect target;
+
+void images_cb (const sensor_msgs::ImageConstPtr& msg) {
+	cv_bridge::CvImagePtr cv_ptr;
+	try {
+	  cv_ptr = cv_bridge::toCvCopy(msg, enc::BGR8);
+	}
+	catch (cv_bridge::Exception& e) {
+	  ROS_ERROR("cv_bridge exception: %s", e.what());
+	  return;
+	}
+
+	if (tracker.initialized()) {
+		cout << "Tracking..." << endl;
+		target = tracker.camshift_track (cv_ptr->image);
+	}	else {
+		if ( init_pose.width > 0 && init_pose.height > 0) {
+			cout << "Init track" << endl;
+			target = tracker.camshift_init (cv_ptr->image, init_pose);
+		}
+	}
+}
+
+bool track_hands (hand_track::HandTrack::Request &req,
+									hand_track::HandTrack::Response &res) {
+	init_pose.x = req.rect[0].x+5;
+	init_pose.y = req.rect[0].y+5;
+	init_pose.width = req.rect[0].width-5;
+	init_pose.height = req.rect[0].height-5;
+	tracker.tracker_initialized = false;
+	return true;
+}
+
+
+int main (int argc, char** argv) {
+	if (argc != 2) {
+		cout << "Usage : hand_track images_topic" << endl;
+		return 1;
+	}
+
+  ros::init(argc, argv, "hand_track");
+  ros::NodeHandle n;
+
+	ros::Subscriber sub_images = n.subscribe(argv[1], 10, images_cb);
+  ros::ServiceServer srv_hands = n.advertiseService("/track_hands", track_hands);
+ 	ros::Publisher pub_rect = n.advertise<hand_msgs::RotatedRectangle>("/tracking_target", 10);
+
+	ros::Rate loop_rate(10);
+	while (ros::ok()) {
+		ros::spinOnce ();
+		//cout << "target: " << target.size.width << " " << target.size.height << endl;
+		hand_msgs::RotatedRectangle rotrect;
+		rotrect.x = target.center.x;
+		rotrect.y = target.center.y;
+		rotrect.width = target.size.width;
+		rotrect.height = target.size.height;
+		rotrect.angle = target.angle;
+		pub_rect.publish (rotrect);
+		
+		loop_rate.sleep();
+	}
+	
+	return 0;
+}
+////////////////////////////////////////////////////////////////////////////////
+// TESTING CODE
+////////////////////////////////////////////////////////////////////////////////
+/*
+void test ();
+bool selectObject = false;
+Point origin;
+Rect selection;
+Mat frame;
+bool init;
+
+static void onMouse( int event, int x, int y, int, void* )
+{
+    if( selectObject )
+    {
+        selection.x = MIN(x, origin.x);
+        selection.y = MIN(y, origin.y);
+        selection.width = std::abs(x - origin.x);
+        selection.height = std::abs(y - origin.y);
+        selection &= Rect(0, 0, frame.cols, frame.rows);
+    }
+
+    switch( event )
+    {
+    case CV_EVENT_LBUTTONDOWN:
+        origin = Point(x,y);
+        selection = Rect(x,y,0,0);
+        selectObject = true;
+        break;
+    case CV_EVENT_LBUTTONUP:
+        selectObject = false;
+        if( selection.width > 0 && selection.height > 0 )
+            init = true;
+        break;
+    }
+}
+
+void draw (Mat img, RotatedRect rect) {
+	Scalar color = CV_RGB(0,0,255);
+	ellipse(img, rect, color);
+}
+
+void test () {
+  VideoCapture cap(0); // open the default camera
+  if(!cap.isOpened())  // check if we succeeded
+      return;
+
+  namedWindow("HandTracking", 0);
+  setMouseCallback( "HandTracking", onMouse, 0 );
+  for(;;) {
+    RotatedRect hand;
+    cap >> frame; // get a new frame from camera
+    if (init == true) {
+			if (!tracker.initialized()) {
+			  hand = tracker.camshift (frame, selection);
+			  draw (frame, hand);
+			}
+		  else {
+			  RotatedRect hand;
+			  hand = tracker.camshift_track (frame);
+			  draw (frame, hand);
+			}
+    }
+  	
+	  imshow("HandTracking", frame);
+	  waitKey(10);
+  }
+}
+*/

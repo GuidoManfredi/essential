@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_layout_file>
+	<ActiveTarget name="Debug" />
+	<File name="BoW.cpp" open="0" top="0" tabpos="0">
+		<Cursor position="4221" topLine="78" />
+	</File>
+	<File name="BoW.h" open="0" top="0" tabpos="0">
+		<Cursor position="703" topLine="0" />
+	</File>
+	<File name="Face.cpp" open="0" top="0" tabpos="2">
+		<Cursor position="35" topLine="0" />
+	</File>
+	<File name="Face.h" open="1" top="0" tabpos="6">
+		<Cursor position="81" topLine="0" />
+	</File>
+	<File name="Object.cpp" open="0" top="0" tabpos="0">
+		<Cursor position="512" topLine="0" />
+	</File>
+	<File name="Object.h" open="0" top="0" tabpos="0">
+		<Cursor position="12" topLine="0" />
+	</File>
+	<File name="POD.cpp" open="1" top="0" tabpos="2">
+		<Cursor position="553" topLine="21" />
+	</File>
+	<File name="POD.h" open="1" top="0" tabpos="3">
+		<Cursor position="363" topLine="6" />
+	</File>
+	<File name="POM.cpp" open="1" top="0" tabpos="4">
+		<Cursor position="1732" topLine="27" />
+	</File>
+	<File name="POM.h" open="1" top="0" tabpos="5">
+		<Cursor position="316" topLine="0" />
+	</File>
+	<File name="Pipeline2D.cpp" open="0" top="0" tabpos="4">
+		<Cursor position="3375" topLine="82" />
+	</File>
+	<File name="Pipeline2D.h" open="0" top="0" tabpos="5">
+		<Cursor position="2451" topLine="27" />
+	</File>
+	<File name="PipelineGeom.cpp" open="0" top="0" tabpos="0">
+		<Cursor position="543" topLine="0" />
+	</File>
+	<File name="PipelineGeom.h" open="0" top="0" tabpos="0">
+		<Cursor position="91" topLine="0" />
+	</File>
+	<File name="SyntheticViewGenerator.cpp" open="1" top="0" tabpos="7">
+		<Cursor position="495" topLine="12" />
+	</File>
+	<File name="SyntheticViewGenerator.h" open="0" top="0" tabpos="9">
+		<Cursor position="32" topLine="0" />
+	</File>
+	<File name="main.cpp" open="1" top="1" tabpos="1">
+		<Cursor position="3305" topLine="7" />
+	</File>
+</CodeBlocks_layout_file>

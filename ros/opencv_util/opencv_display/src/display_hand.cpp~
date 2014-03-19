@@ -1,0 +1,72 @@
+#include <ros/ros.h>
+#include <cv_bridge/cv_bridge.h>
+#include <sensor_msgs/image_encodings.h>
+#include <opencv2/opencv.hpp>
+
+#include "hand_msgs/Rectangle.h"
+#include "hand_msgs/RotatedRectangle.h"
+
+namespace enc = sensor_msgs::image_encodings;
+using namespace cv;
+using namespace std;
+
+Rect detection;
+RotatedRect tracking;
+Mat frame;
+
+void image_cb (const sensor_msgs::ImageConstPtr& msg) {
+	cv_bridge::CvImagePtr cv_ptr;
+  try
+  {
+    cv_ptr = cv_bridge::toCvCopy(msg, enc::BGR8);
+  }
+  catch (cv_bridge::Exception& e)
+  {
+    ROS_ERROR("cv_bridge exception: %s", e.what());
+    return;
+  }
+	frame = cv_ptr->image;
+}
+
+void detection_cb (const hand_msgs::Rectangle& msg) {
+	detection = Rect (Point2f(msg.x, msg.y),
+										Size2f(msg.width, msg.height));
+}
+
+void tracking_cb (const hand_msgs::RotatedRectangle& msg) {
+	tracking = RotatedRect (Point2f(msg.x, msg.y),
+												Size2f(msg.width, msg.height),
+												msg.angle);
+}
+
+int main (int argc, char** argv) {
+	if (argc != 4) {
+		cout << "Usage : display_hand image_topic detection_topic tracking_topic" << endl;
+		return 1;
+	}
+
+	ros::init(argc, argv, "opencv_display_hand");
+	ros::NodeHandle n;
+	// Subscribe to relevant information
+	ros::Subscriber sub_image = n.subscribe(argv[1], 10, image_cb);
+	ros::Subscriber sub_detection = n.subscribe(argv[2], 10, detection_cb);
+	ros::Subscriber sub_tracking = n.subscribe(argv[3], 10, tracking_cb);
+  
+	ros::Rate loop_rate(10);
+	Scalar red (0,0,255);
+	Scalar blue (255,0,0);
+	namedWindow("HandTracking", 0);
+	while (ros::ok()) {
+	  ros::spinOnce();
+	  waitKey(10);
+	  ellipse(frame, tracking, red);
+ 		rectangle(frame, detection, blue);
+		
+		if (!frame.empty())
+			imshow("HandTracking", frame);
+	  loop_rate.sleep();
+	}
+
+  return 0;
+}
+

@@ -1,0 +1,133 @@
+# depslib dependency file v1.0
+1363907841 source:/home/gmanfred/devel/these/projects/Carod/Detector.cpp
+	"Detector.h"
+
+1363166753 /home/gmanfred/devel/these/projects/Carod/Detector.h
+	"opencv2/calib3d/calib3d.hpp"
+	"Object.h"
+	"Matcher.h"
+	"PoseEstimator.h"
+
+1363167182 /home/gmanfred/devel/these/projects/Carod/Object.h
+	<iostream>
+	<string>
+	<pcl/io/pcd_io.h>
+	<pcl/point_types.h>
+	<opencv2/highgui/highgui.hpp>
+	<opencv2/core/core.hpp>
+	<opencv2/features2d/features2d.hpp>
+
+1363907005 /home/gmanfred/devel/these/projects/Carod/Matcher.h
+	<cstdio>
+	<vector>
+	<opencv2/opencv.hpp>
+	<opencv2/core/core.hpp>
+	<opencv2/features2d/features2d.hpp>
+	<opencv2/nonfree/nonfree.hpp>
+	<opencv2/legacy/legacy.hpp>
+	<opencv2/imgproc/imgproc.hpp>
+
+1363194197 /home/gmanfred/devel/these/projects/Carod/PoseEstimator.h
+	"opencv2/calib3d/calib3d.hpp"
+	"rpnp.h"
+	"NonLinearLS.h"
+	"Random.h"
+
+1382446428 /home/gmanfred/devel/these/projects/Carod/rpnp.h
+	<opencv2/core/core.hpp>
+	<iostream>
+	<fstream>
+	<cmath>
+
+1361970691 /home/gmanfred/devel/these/projects/Carod/NonLinearLS.h
+	<Eigen/StdVector>
+	<tr1/random>
+	<iostream>
+	<stdint.h>
+	<tr1/unordered_set>
+	"g2o/core/graph_optimizer_sparse.h"
+	"g2o/core/block_solver.h"
+	"g2o/core/solver.h"
+	"g2o/solvers/cholmod/linear_solver_cholmod.h"
+	"g2o/solvers/dense/linear_solver_dense.h"
+	"g2o/core/structure_only_solver.h"
+	"g2o/core/base_vertex.h"
+	"g2o/core/base_binary_edge.h"
+	"g2o/core/base_multi_edge.h"
+	<Eigen/Eigen>
+	<Eigen/Geometry>
+	<cstdio>
+	<iostream>
+	<fstream>
+
+1361969883 /home/gmanfred/devel/these/projects/Carod/Random.h
+	<cstdlib>
+
+1363274600 source:/home/gmanfred/devel/these/projects/Carod/NonLinearLS.cpp
+	"NonLinearLS.h"
+
+1363167173 source:/home/gmanfred/devel/these/projects/Carod/Object.cpp
+	"Object.h"
+
+1363274577 source:/home/gmanfred/devel/these/projects/Carod/PoseEstimator.cpp
+	"PoseEstimator.h"
+
+1361969987 source:/home/gmanfred/devel/these/projects/Carod/Random.cpp
+	"Random.h"
+	"Timestamp.h"
+	<cstdlib>
+
+1361969980 /home/gmanfred/devel/these/projects/Carod/Timestamp.h
+	<iostream>
+
+1361970032 source:/home/gmanfred/devel/these/projects/Carod/Timestamp.cpp
+	<cstdio>
+	<cstdlib>
+	<ctime>
+	<cmath>
+	<sstream>
+	<iomanip>
+	<sys/timeb.h>
+	<sys/time.h>
+	"Timestamp.h"
+
+1363167162 source:/home/gmanfred/devel/these/projects/Carod/Trainer.cpp
+	"Trainer.h"
+
+1362051267 /home/gmanfred/devel/these/projects/Carod/Trainer.h
+	<fstream>
+	<boost/filesystem.hpp>
+	<boost/algorithm/string.hpp>
+	<opencv2/core/core.hpp>
+	<opencv2/imgproc/imgproc.hpp>
+	<opencv2/highgui/highgui.hpp>
+	<opencv2/features2d/features2d.hpp>
+	"Matcher.h"
+	"Object.h"
+
+1363274377 source:/home/gmanfred/devel/these/projects/Carod/Viewer.cpp
+	"Viewer.h"
+
+1361363873 /home/gmanfred/devel/these/projects/Carod/Viewer.h
+	<boost/thread/thread.hpp>
+	<pcl/common/common_headers.h>
+	<pcl/visualization/pcl_visualizer.h>
+	"opencv2/core/core.hpp"
+
+1206030810 source:/home/gmanfred/devel/these/projects/Carod/epnp.cpp
+	<iostream>
+	"epnp.h"
+
+1206030848 /home/gmanfred/devel/these/projects/Carod/epnp.h
+	<cv.h>
+
+1354611699 source:/home/gmanfred/devel/these/projects/Carod/file_tools.cpp
+	"file_tools.h"
+
+1354611703 /home/gmanfred/devel/these/projects/Carod/file_tools.h
+	<boost/filesystem.hpp>
+	<boost/algorithm/string.hpp>
+
+1363274699 source:/home/gmanfred/devel/these/projects/Carod/rpnp.cpp
+	"rpnp.h"
+

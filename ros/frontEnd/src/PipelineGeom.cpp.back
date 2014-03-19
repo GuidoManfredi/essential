@@ -1,0 +1,159 @@
+#include "PipelineGeom.h"
+
+using namespace cv;
+using namespace std;
+
+PipelineGeom::PipelineGeom (std::string calibration_file) {
+	Mat K(3,3,CV_32F);
+  Mat d(5,1,CV_32F);
+  FileStorage r_fs;
+  r_fs.open (calibration_file, cv::FileStorage::READ);
+  r_fs["camera_matrix"]>>K;
+  r_fs["distortion_coefficients"]>>d;
+  r_fs.release ();
+	
+	K_ = K;
+	d_ = d;
+	PNP_.set_internal_parameters(K_.at<double>(0, 2), K_.at<double>(1, 2),
+                                K_.at<double>(0, 0), K_.at<double>(1, 1));
+}
+
+Matx34d PipelineGeom::computePose (vector<Point3f> p3d, vector<Point2f> p2d,
+																	vector<int> &inliers) {
+	assert (p3d.size() != 0 && "Error: computePose: No 3D points");
+	assert (p2d.size() != 0 && "Error: computePose: No 2D points");
+	
+	Mat tvec(3, 1, CV_32F), rvec(3, 1, CV_32F);
+	vector<float> distCoeffs; // empty, we don't use it as images are already rectified
+	
+	//solveRPnPRansac(p3d, p2d, K_, distCoeffs, rvec, tvec, false, 1000, 3.0, 100, inliers);
+
+	solvePnPRansac(p3d, p2d, K_, distCoeffs, rvec, tvec, false, 1000, 3.0, 300, inliers, CV_EPNP);
+	size_t n = inliers.size();
+	if (n >= 100) {
+		vector<Point3f> refined_p3d (n);
+		vector<Point2f> refined_p2d (n);
+		for (size_t i=0; i<n; ++i) {
+			refined_p3d[i] = p3d[inliers[i]];
+			refined_p2d[i] = p2d[inliers[i]];
+		}
+		solvePnPRansac(refined_p3d, refined_p2d, K_, distCoeffs, rvec, tvec, false, 1000, 3.0, 100, inliers, CV_EPNP);
+	}
+	//solvePnP (tmp_p3d, tmp_p2d, K_, distCoeffs, rvec, tvec, false, CV_EPNP);
+
+	Mat R;
+	Rodrigues(rvec, R);
+	
+	Matx34d P(R.at<double>(0,0),	R.at<double>(0,1),	R.at<double>(0,2), tvec.at<double>(0),
+						R.at<double>(1,0),	R.at<double>(1,1),	R.at<double>(1,2), tvec.at<double>(1),
+						R.at<double>(2,0),	R.at<double>(2,1),	R.at<double>(2,2), tvec.at<double>(2));
+	
+	return P;
+}
+////////////////////////////////////////////////////////////////////////////////
+// PRIVATE METHODS
+////////////////////////////////////////////////////////////////////////////////
+void PipelineGeom::solveRPnPRansac (vector<Point3f> p3d, vector<Point2f> p2d, Mat K, vector<float> d,
+											Mat &rvec, Mat &tvec, bool initial_guess, int max_its, float
+											max_reproj_error, int min_inliers_count, vector<int> &inliers) {
+	Mat R (3, 3, CV_32F);
+	computePnPRansac (p3d, p2d, K, max_its, max_reproj_error, R, tvec, inliers);
+	Rodrigues (R,  rvec);
+}
+
+void PipelineGeom::computePnPRansac (vector<Point3f> p3d, vector<Point2f> p2d, Mat K,
+                                        int max_its, double max_reprojection_error,
+                                        Mat &R_out, Mat &t_out, vector<int> &inliers_out) {
+  double R[3][3], best_R[3][3];
+  double t[3], best_t[3];
+  vector<int> inliers, best_inliers;
+  int number_points = 4;
+  PNP_.set_maximum_number_of_correspondences (number_points);
+  for (int i=0; i < max_its; ++i) {
+    addRandomCorrespondences (number_points, p3d, p2d);
+    PNP_.compute_pose(R, t);
+    inliers = get_inliers (p3d, p2d, K, R, t, max_reprojection_error);
+    if (inliers.size() > best_inliers.size()) {
+      memcpy(best_R, R, sizeof(R));
+      memcpy(best_t, t, sizeof(t));
+      best_inliers.swap (inliers);
+    }
+  }
+  
+  int n = best_inliers.size();
+  vector<Point3f> tmp_p3d(n);
+  vector<Point2f> tmp_p2d(n);
+  for (size_t i=0; i<n; ++i) {
+    tmp_p3d[i] = p3d[best_inliers[i]];
+    tmp_p2d[i] = p2d[best_inliers[i]];
+  }
+
+  PNP_.set_maximum_number_of_correspondences (n);
+  addCorrespondences (tmp_p3d, tmp_p2d);
+  PNP_.compute_pose(best_R, best_t);
+
+	R_out.at<float>(0, 1) = best_R[0][1];  R_out.at<float>(0, 1) = best_R[0][1];  R_out.at<float>(0, 2) = best_R[0][2];
+	R_out.at<float>(1, 1) = best_R[1][1];  R_out.at<float>(1, 1) = best_R[1][1];  R_out.at<float>(1, 2) = best_R[1][2];
+	R_out.at<float>(2, 1) = best_R[2][1];  R_out.at<float>(2, 1) = best_R[2][1];  R_out.at<float>(2, 2) = best_R[2][2];
+	t_out.at<float>(0) = best_t[0];	t_out.at<float>(1) = best_t[1];	t_out.at<float>(2) = best_t[2];
+  inliers_out.swap (best_inliers);
+}
+
+vector<int> PipelineGeom::get_inliers(vector<Point3f> p3d, vector<Point2f> p2d,
+														          Mat K, double R[3][3], double t[3],
+														          double max_reprojection_error) {
+  vector<int> inliers;
+  for(int i = 0; i < p3d.size(); ++i) {
+    float err = reprojectionError (p3d[i], p2d[i], K, R, t);
+    if ( err <= max_reprojection_error)
+      inliers.push_back (i);
+  }
+  return inliers;
+}
+
+float PipelineGeom::reprojectionError (Point3f p3d, Point2f p2d,
+									                      Mat K, double R[3][3], double t[3]) {
+	double p3[3];
+	p3[0] = p3d.x;	p3[1] = p3d.y;	p3[2] = p3d.z;
+  double Xc = dot(R[0], p3) + t[0];
+  double Yc = dot(R[1], p3) + t[1];
+  double Zc = dot(R[2], p3) + t[2];
+  double ue = K.at<double>(0,2) + K.at<double>(0,0) * Xc / Zc;
+  double ve = K.at<double>(1,2) + K.at<double>(1,1) * Yc / Zc;
+  double u = p2d.x;
+  double v = p2d.y;
+  //if (Zc < 0)
+    //err = sqrt(2*(-Zc + 10)*(-Zc +10));
+  //else
+  double err = 0;
+  err = sqrt((u-ue)*(u-ue)+(v-ve)*(v-ve));
+  return err;
+}
+
+void PipelineGeom::addRandomCorrespondences (int num_points,
+																vector<Point3f> p3d, vector<Point2f> p2d) {
+  PNP_.reset_correspondences();
+  int n = p3d.size();
+  int rand_idx[num_points];
+  vector<Point3f> tmp_p3d (n);
+  vector<Point2f> tmp_p2d (n);
+  for (int i=0; i<num_points;) {
+    rand_idx[i] = Random::RandomInt(0, n-1);
+    if ((i == 0) || (find(rand_idx, rand_idx + i, rand_idx[i]) == rand_idx + i)) {
+      Point3f p3 = p3d[rand_idx[i]];
+      Point2f p2 = p2d[rand_idx[i]];
+      PNP_.add_correspondence (p3.x, p3.y, p3.z, p2.x, p2.y);
+      ++i;
+    }
+  }
+}
+
+void PipelineGeom::addCorrespondences (vector<Point3f> p3d, vector<Point2f> p2d) {
+  PNP_.reset_correspondences();
+  int n= p3d.size();
+  for (int i=0; i<n; ++i) {
+    Point3f p3 = p3d[i];
+    Point2f p2 = p2d[i];
+    PNP_.add_correspondence (p3.x, p3.y, p3.z, p2.x, p2.y);
+  }
+}

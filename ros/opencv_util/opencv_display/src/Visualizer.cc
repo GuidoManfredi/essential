@@ -1,0 +1,200 @@
+#include <GL/gl.h>
+#include <GL/glu.h>
+
+#include "Visualizer.h"
+
+using namespace cv;
+using namespace std;
+
+void draw_callback(void* param) {
+  Visualizer * display = static_cast<Visualizer*>(param);
+  if (display)
+      display->draw();
+}
+
+Visualizer::Visualizer() {
+	Mat K = Mat::zeros(3, 3, CV_32F);
+	Visualizer ("Default name", Size(640, 480), K);
+}
+
+Visualizer::Visualizer(std::string windowName, Size frame_size, const Mat K)
+  : isTextureInitialized_(false)
+  , K_(K)
+  , windowName_(windowName) {
+  // Create window with OpenGL support
+  namedWindow(windowName, cv::WINDOW_OPENGL);
+
+  // Resize it exactly to video size
+  cv::resizeWindow(windowName, frame_size.width, frame_size.height);
+  width_ = frame_size.width;
+  height_ = frame_size.height;
+
+  // Initialize OpenGL draw callback
+  setOpenGlContext(windowName);
+  setOpenGlDrawCallback(windowName, draw_callback, this);
+}
+
+Visualizer::~Visualizer() {
+  cv::setOpenGlDrawCallback(windowName_, 0, 0);
+}
+
+void Visualizer::updateBackground(const cv::Mat& frame) {
+  frame.copyTo(backgroundImage_);
+}
+
+void Visualizer::updatePose(const cv::Mat& pose) {
+	// transform to OpenGL column major format.
+	object_pose = pose.t();
+	object_pose.convertTo(object_pose, CV_32F);
+}
+
+void Visualizer::updateWindow() {
+	cv::updateWindow(windowName_);
+}
+
+void Visualizer::draw() {
+  glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
+  drawCameraFrame();
+  if (!object_pose.empty()) {
+	  drawAugmentedScene();
+	}
+  glFlush();
+}
+
+
+void Visualizer::drawCameraFrame() {
+  // Initialize texture for background image
+  if (!isTextureInitialized_) {
+    glGenTextures(1, &backgroundTextureId_);
+    glBindTexture(GL_TEXTURE_2D, backgroundTextureId_);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    isTextureInitialized_ = true;
+  }
+
+  width_ = backgroundImage_.cols;
+  height_ = backgroundImage_.rows;
+
+  glPixelStorei(GL_PACK_ALIGNMENT, 1);
+  glBindTexture(GL_TEXTURE_2D, backgroundTextureId_);
+
+  // Upload new texture data
+  if (backgroundImage_.channels() == 3)
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width_, height_, 0, GL_BGR_EXT, GL_UNSIGNED_BYTE, backgroundImage_.data);
+  else if(backgroundImage_.channels() == 4)
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width_, height_, 0, GL_BGRA_EXT, GL_UNSIGNED_BYTE, backgroundImage_.data);
+  else if (backgroundImage_.channels()==1)
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width_, height_, 0, GL_LUMINANCE, GL_UNSIGNED_BYTE, backgroundImage_.data);
+
+  const GLfloat bgTextureVertices[] = { 0, 0, width_, 0, 0, height_, width_, height_ };
+  const GLfloat bgTextureCoords[]   = { 1, 0, 1, 1, 0, 0, 0, 1 };
+  const GLfloat proj[]              = { 0, -2.f/width_, 0, 0, -2.f/height_, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 1 };
+
+  glMatrixMode(GL_PROJECTION);
+  glLoadMatrixf(proj);
+
+  glMatrixMode(GL_MODELVIEW);
+  glLoadIdentity();
+
+  glEnable(GL_TEXTURE_2D);
+  glBindTexture(GL_TEXTURE_2D, backgroundTextureId_);
+
+  // Update attribute values.
+  glEnableClientState(GL_VERTEX_ARRAY);
+  glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+
+  glVertexPointer(2, GL_FLOAT, 0, bgTextureVertices);
+  glTexCoordPointer(2, GL_FLOAT, 0, bgTextureCoords);
+
+  glColor4f(1,1,1,1);
+  glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+
+  glDisableClientState(GL_VERTEX_ARRAY);
+  glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+  glDisable(GL_TEXTURE_2D);
+}
+
+void Visualizer::drawAugmentedScene() {
+  // Init augmentation projection
+  Mat projection_matrix (4, 4, CV_32F);
+  buildProjectionMatrix(projection_matrix);
+  
+  glMatrixMode(GL_PROJECTION);
+  glLoadMatrixf(reinterpret_cast<const GLfloat*>(&projection_matrix.data[0]));
+
+  glMatrixMode(GL_MODELVIEW);
+  glLoadIdentity();
+  
+  // Set the axis transformation and render model
+  glLoadMatrixf(reinterpret_cast<const GLfloat*>(&object_pose.data[0]));
+  drawCoordinateAxis();
+}
+
+void Visualizer::buildProjectionMatrix(Mat &proj_mat) {
+	// Near/far clipping distances
+  float nearPlane = 0.01f;
+  float farPlane  = 100.0f;
+
+  // Camera parameters
+  float f_x = K_.at<double> (0, 0);
+  float f_y = K_.at<double> (1, 1);
+  float c_x = K_.at<double> (0, 2);
+  float c_y = K_.at<double> (1, 2);
+
+  proj_mat.at<float>(0, 0) = -2.0f * f_x / width_;
+  proj_mat.at<float>(0, 1) = 0.0f;
+  proj_mat.at<float>(0, 2) = 0.0f;
+  proj_mat.at<float>(0, 3) = 0.0f;
+
+  proj_mat.at<float>(1, 0) = 0.0f;
+  proj_mat.at<float>(1, 1) = 2.0f * f_y / height_;
+  proj_mat.at<float>(1, 2) = 0.0f;
+  proj_mat.at<float>(1, 3) = 0.0f;
+
+  proj_mat.at<float>(2, 0) = 2.0f * c_x / width_ - 1.0f;
+  proj_mat.at<float>(2, 1) = 2.0f * c_y / height_ - 1.0f;    
+  proj_mat.at<float>(2, 2) = -( farPlane + nearPlane) / ( farPlane - nearPlane );
+  proj_mat.at<float>(2, 3) = -1.0f;
+
+  proj_mat.at<float>(3, 0) = 0.0f;
+  proj_mat.at<float>(3, 1) = 0.0f;
+  proj_mat.at<float>(3, 2) = -2.0f * farPlane * nearPlane / ( farPlane - nearPlane );        
+  proj_mat.at<float>(3, 3) = 0.0f;
+}
+
+
+void Visualizer::drawCoordinateAxis() {
+  static float lineX[] = {0,0,0,1,0,0};
+  static float lineY[] = {0,0,0,0,1,0};
+  static float lineZ[] = {0,0,0,0,0,1};
+
+  glLineWidth(2);
+
+  glBegin(GL_LINES);
+
+  glColor3f(1.0f, 0.0f, 0.0f);
+  glVertex3fv(lineX);
+  //glVertex3fv(lineX + 1);
+  glVertex3fv(lineX + 3);
+
+  glColor3f(0.0f, 1.0f, 0.0f);
+  glVertex3fv(lineY);
+  //glVertex3fv(lineY + 1);
+  glVertex3fv(lineY + 3);
+
+  glColor3f(0.0f, 0.0f, 1.0f);
+  glVertex3fv(lineZ);
+  //glVertex3fv(lineZ + 1);
+  glVertex3fv(lineZ + 3);
+
+  glEnd();
+}
+
+void Visualizer::setK (Mat K) {
+	K_ = K;
+}
+
+void Visualizer::setSize (int width, int height) {
+	width_ = width;
+	height_ = height;
+}

@@ -1,0 +1,2 @@
+- setup-file:
+    local-name: /home/gmanfred/devel/ros/packs/vision/seg/seg_color_mask/build/devel/setup.sh

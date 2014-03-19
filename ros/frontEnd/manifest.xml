@@ -1,0 +1,20 @@
+<package>
+  <description brief="frontEnd">
+
+     frontEnd
+
+  </description>
+  <author>Guido ManfrediInconnuInconnu0561336342</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/frontEnd</url>
+  <depend package="roscpp"/>
+  <depend package="geometry_msgs"/>
+  <depend package="sensor_msgs"/>
+  <depend package="opencv2"/>
+  <depend package="pcl_ros"/>
+  <depend package="pcl_conversions"/>
+
+</package>
+
+

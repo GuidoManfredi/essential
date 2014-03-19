@@ -1,0 +1,24 @@
+Premier type de descripteur :
+	4 direction de vote possible.
+	Toutes les positions visitées (quelque soit leur couleur) votent.
+
+Deuxieme type:
+	8 directions possibles (image integrale tournée de 45 degrés).
+	Toutes les positions visitées (quelque soit leur couleur) votent.
+	+ Plus de precision spatiale.
+	- Temps de calcul plus élevé : plus d'images integrales à calculer.
+
+Troisieme type:
+	4/8 direction possibles.
+	Les positions visitées votent et la couleur de cette position est repertoriée
+	commme ayant fait ce votes. Chaque bin à un ensemble de votes (4/8 directions)
+	pour chaque autre bin.
+	+ Plus de precision (positionement bin/bin).
+	+ Pas de cout de calcul suplémentaire.
+
+(A voir) Quatrieme type :
+	Lors de calcul image integral, on regarde pas seulement si couleur présente là ou pas (0 ou 1)
+	mais on regarde aussi force de la couleur et on ajoute valeur du pixel.
+
+Voir si possible de combiner tous ça avec soft binning scheme.
+Reflechir à la maniere de calculer les distances, tester plusieurs distances et combiner deux descripteurs.

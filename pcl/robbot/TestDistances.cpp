@@ -1,0 +1,163 @@
+#include "TestDistances.h"
+
+using namespace std;
+using namespace pcl;
+using namespace boost::filesystem;
+
+TestDistances::TestDistances () {
+	_recognition = new Reco(3);
+}							
+
+TestDistances::~TestDistances () {}
+
+void TestDistances::retrieve_variances (std::string stats_filepath,
+																				float percent_example_start,
+																				float percent_example_end,
+																				vector<float> &variances_x,
+																				vector<float> &variances_y,
+																				vector<float> &variances_z) {
+	int n = get_num_lines (stats_filepath);
+	int start = n*percent_example_start;
+	int end = n*percent_example_start;
+
+  std::ifstream file (stats_filepath.c_str());
+  std::string line;
+
+	for (int i = start; i<end; ++i)
+	{
+		getline (file, line);
+		vector<string> splitted;
+		boost::split (splitted, line, boost::algorithm::is_any_of(" "));
+
+		if (splitted.size () >= 13) {
+			variances_x.push_back (atof (splitted[4].c_str()));
+			variances_y.push_back (atof (splitted[8].c_str()));
+			variances_z.push_back (atof (splitted[12].c_str()));
+			
+			sort (variances_x.begin(), variances_x.end());
+			sort (variances_y.begin(), variances_y.end());
+			sort (variances_z.begin(), variances_z.end());
+		}
+		if (splitted.size () >= 25) {
+			variances_x.push_back (atof(splitted[16].c_str()));
+			variances_y.push_back (atof(splitted[20].c_str()));
+			variances_z.push_back (atof(splitted[24].c_str()));
+			
+			// All variances have same size, we use variances_x size here.
+			int end_min = variances_x.size()/2.0;
+			int start_max = end_min + 1;
+			sort (variances_x.begin(), variances_x.begin() + end_min);
+			sort (variances_y.begin(), variances_y.begin() + end_min);
+			sort (variances_z.begin(), variances_z.begin() + end_min);
+			sort (variances_x.begin() + start_max, variances_x.end());
+			sort (variances_y.begin() + start_max, variances_y.end());
+			sort (variances_z.begin() + start_max, variances_z.end());
+		}
+		else
+			cout << "Too much/few data on this line. Skipping." << endl;
+	}  														
+	
+	file.close ();
+}
+																
+void TestDistances::compute_candidates ( string dataset_path,
+																					string result_file,
+																					string stats_filepath,
+																					float percent_example_start,
+																					float percent_example_end,
+																					float confidence,
+																					vector< vector<string> > &candidates) {
+	vector<PointXYZ> instance_box_dimensions;																					
+	_recognition->load_stats (stats_filepath);
+	// Dataset level
+	if (is_directory (dataset_path)) {
+  	directory_iterator end_itr;
+    for (directory_iterator i (dataset_path); i != end_itr; ++i) {
+    	// Class level
+  		if (is_directory (i->path().string()))	{
+				directory_iterator end_itr;
+				for (directory_iterator j (i->path().string()); j != end_itr; ++j)	{
+					if (is_directory (j->path().string()))	{
+						cout << "Processing " << j->path().string() + "/" + result_file << endl;
+						instance_box_dimensions= read_boxes_dimensions (j->path().string() + "/" + result_file,
+																													percent_example_start,
+																													percent_example_end);
+						get_candidates (instance_box_dimensions, confidence);
+					}
+				}
+			}
+    }
+  }
+  
+  candidates = _all_candidates;
+}
+
+	 	// Qualify : true positive, false positive, etc.
+	 	/*
+		for (size_t j=0; j<candidates.size (); ++j)
+		{
+			if ( path2class (splitted[0]).compare (candidates[j]) == 0)
+				_true_positive[_counter] += 1;
+			else
+				_true_positive[_counter] += 1;
+		}
+		*/
+
+vector<PointXYZ> TestDistances::read_boxes_dimensions (std::string results_filepath,
+																											float percent_example_start,
+																											float percent_example_end) {
+	vector<PointXYZ> return_vector;																					
+	int n = get_num_lines (results_filepath);
+	int start = n*percent_example_start;
+	int end = n*percent_example_end;
+	
+  std::ifstream file (results_filepath.c_str());
+  if (!file.is_open() )
+  	cout << "Cannot open file " << results_filepath << endl;
+ 
+  std::string line;
+  pcl::PointXYZ pt;
+	for (int i = 0; i<n; ++i) {
+		getline (file, line);
+		if (i >= start && i<end) {
+			vector<string> splitted;
+			boost::split (splitted, line, boost::algorithm::is_any_of(" "));
+			pt.x = atof (splitted[1].c_str());
+			pt.y = atof (splitted[2].c_str());
+			pt.z = atof (splitted[3].c_str());
+			return_vector.push_back(pt);
+			_all_names.push_back (splitted[0]);
+		}
+	}
+	file.close ();
+	
+	return return_vector;
+}
+
+void TestDistances::get_candidates (vector<PointXYZ> box_dimensions,
+																		float confidence) {
+	int n = box_dimensions.size();																					
+	vector<string> this_pose_candidates;
+	//this_pose_candidates.resize (n);
+	
+	for (int i = 0; i<n; ++i) {	
+		this_pose_candidates = _recognition->reco (box_dimensions[i], confidence);
+		_recognition->save_results (_all_names[i]);
+		_all_candidates.push_back (this_pose_candidates);
+		_recognition->save_results (_all_names[i]);
+	}
+}
+
+float TestDistances::get_num_lines (string filename)
+{
+  int number_of_lines = 0;
+  std::string line;
+  std::ifstream file (filename.c_str());
+
+  while (getline (file, line))
+	    ++number_of_lines;
+      
+	file.close ();
+	 
+  return number_of_lines;
+}

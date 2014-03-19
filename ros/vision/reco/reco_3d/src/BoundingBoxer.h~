@@ -1,0 +1,26 @@
+#include <cmath>
+#include <iostream>
+
+#include <pcl/io/
+#include <pcl/common/pca.h>
+#include "pcl/point_types.h"
+
+#include "defines.h"
+#include "gdiam.h"
+
+class BoundingBoxer
+{
+ public:
+  BoundingBoxer () {}
+  ~BoundingBoxer () {}
+  void bounding_box_pca (Cloud::ConstPtr cloud,
+											 	 Eigen::Quaternionf &quaternion,
+											 	 Eigen::Vector3f &translation,
+												 double &width, double &height, double &depth);  
+  void bounding_box_mvbb (Cloud::ConstPtr cloud,
+													Eigen::Quaternionf &quaternion,
+													Eigen::Vector3f &translation,
+													double &width, double &height, double &depth);
+ private:
+	void pcl2gdiam (Cloud::ConstPtr cloud, gdiam_real* points);
+};

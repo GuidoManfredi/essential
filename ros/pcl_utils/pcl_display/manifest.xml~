@@ -1,0 +1,18 @@
+<package>
+  <description brief="pcl_display">
+
+     pcl_display
+
+  </description>
+  <author>Guido ManfrediInconnuInconnu0561336342</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/pcl_display</url>
+  <depend package="roscpp"/>
+  <depend package="pcl_ros"/>
+  <depend package="pcl_conversions"/>
+  <depend package="segment_plans_objects"/>
+  <depend package="reco_3d"/>
+</package>
+
+

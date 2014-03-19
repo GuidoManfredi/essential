@@ -1,0 +1,4 @@
+/home/gmanfred/devel/pcl/calibration_recalage/build/CMakeFiles/generate_views.dir
+/home/gmanfred/devel/pcl/calibration_recalage/build/CMakeFiles/recalage_features.dir
+/home/gmanfred/devel/pcl/calibration_recalage/build/CMakeFiles/recalage_icp.dir
+/home/gmanfred/devel/pcl/calibration_recalage/build/CMakeFiles/recalage_robuste.dir

@@ -1,0 +1,20 @@
+<package>
+  <description brief="seg_plans_objs">
+
+     seg_plans_obj
+
+  </description>
+  <author>Guido Manfredi</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/seg_plans_objs</url>
+  <depend package="roscpp"/>
+  <depend package="pcl"/>
+  <depend package="opencv2"/>
+  <depend package="sensor_msgs"/>
+  <depend package="cv_bridge"/>
+  <depend package="pcl_ros"/>
+  <depend package="tabletop_object_detector"/>
+</package>
+
+

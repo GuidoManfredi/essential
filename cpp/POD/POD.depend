@@ -1,0 +1,56 @@
+# depslib dependency file v1.0
+1381850149 source:/home/gmanfred/devel/these/projects/POD/POD.cpp
+	"POD.h"
+
+1381827062 /home/gmanfred/devel/these/projects/POD/POD.h
+	"PlanarObject.h"
+	"Pipeline.h"
+
+1381826778 /home/gmanfred/devel/these/projects/POD/PlanarObject.h
+	<opencv2/core/core.hpp>
+	<opencv2/features2d/features2d.hpp>
+
+1381741131 /home/gmanfred/devel/these/projects/POD/Matcher.h
+	<cstdio>
+	<vector>
+	<opencv2/opencv.hpp>
+	<opencv2/core/core.hpp>
+	<opencv2/features2d/features2d.hpp>
+	<opencv2/nonfree/nonfree.hpp>
+	<opencv2/legacy/legacy.hpp>
+	<opencv2/imgproc/imgproc.hpp>
+
+1382543671 /home/gmanfred/devel/these/projects/POD/Pipeline.h
+	<opencv2/core/core.hpp>
+	<opencv2/highgui/highgui.hpp>
+	<opencv2/calib3d/calib3d.hpp>
+	<opencv2/features2d/features2d.hpp>
+	<opencv2/nonfree/nonfree.hpp>
+	<opencv2/gpu/gpu.hpp>
+	<opencv2/nonfree/gpu.hpp>
+	"PlanarObject.h"
+
+1382538902 source:/home/gmanfred/devel/these/projects/POD/Pipeline.cpp
+	<cmath>
+	<iterator>
+	<iostream>
+	<iomanip>
+	<cassert>
+	"Pipeline.h"
+
+1381826766 source:/home/gmanfred/devel/these/projects/POD/PlanarObject.cpp
+	"PlanarObject.h"
+
+1382538603 source:/home/gmanfred/devel/these/projects/POD/main.cpp
+	<iostream>
+	<assert.h>
+	"POD.h"
+	"POM.h"
+
+1382542176 source:/home/gmanfred/devel/these/projects/POD/POM.cpp
+	"POM.h"
+
+1381827237 /home/gmanfred/devel/these/projects/POD/POM.h
+	"Pipeline.h"
+	"PlanarObject.h"
+

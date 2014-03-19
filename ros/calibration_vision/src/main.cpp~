@@ -1,0 +1,61 @@
+#include <ros/ros.h>
+#include <tf/transform_listener.h>
+#include <>
+
+pcl::PointCloud<pcl::PointXYZ>::Ptr scene (new pcl::PointCloud<pcl::PointXYZ>);
+
+void align (const PointCloud::Ptr model, const PointCloud::Ptr scene, 
+						Eigen::Matrix4f initial_guess,
+						Eigen::Matrix4f &final_transform) {
+	pcl::PointCloud<pcl::PointXYZ> transformed_model;
+	pcl::transformPointCloud (*model, transformed_cloud, initial_guess));
+
+	pcl::IterativeClosestPoint<pcl::PointXYZ, pcl::PointXYZ> icp;
+  icp.setInputCloud(transformed_model);
+  icp.setInputTarget(scene);
+  pcl::PointCloud<pcl::PointXYZ> Final;
+  icp.align(Final);
+	/*
+	std::cout << "Has converged : " << icp.hasConverged() << std::endl
+  					<< " score : " << icp.getFitnessScore() << std::endl;
+  std::cout << icp.getFinalTransformation() << std::endl;
+	*/
+	final_transform = icp.getFinalTransformation();
+}
+
+void pcd_callback (sensor_msgs::PointCloud2 msg) {
+ pcl::fromROSMsg(msg, scene);
+}
+
+int main(int argc, char** argv){
+	assert (argc == 4 && "Usage : calibrate_xtion_position /sensor_frame /target /pointcloud_topic")
+
+  ros::init(argc, argv, "calibrate_xtion_position");
+  ros::NodeHandle node;
+
+	ros::Subscriber pcd_sub = n.subscribe(argv[3], 1, pcd_callback);
+
+  tf::TransformListener listener;
+
+  pcl::PointCloud<pcl::PointXYZ>::Ptr model (new pcl::PointCloud<pcl::PointXYZ>);
+
+  pcl::io::loadPCDFile<pcl::PointXYZ> ("../models/arm_segment_last.pcd", *model);
+  std::cout << "Loaded model " << model->points.size () << "  points." << std::endl;
+
+  ros::Rate rate(10.0);
+  while (node.ok()){
+    tf::StampedTransform transform;
+    try{
+      listener.lookupTransform(argv[1], argv[2], ros::Time(0), transform);
+			align (model)
+    }
+    catch (tf::TransformException ex){
+      ROS_ERROR("%s",ex.what());
+    }
+
+		ros::spinOnce();
+    rate.sleep();
+  }
+  return 0;
+};
+

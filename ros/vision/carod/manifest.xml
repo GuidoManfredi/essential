@@ -1,0 +1,18 @@
+<package>
+  <description brief="carod">
+
+     carod
+
+  </description>
+  <author>Guido ManfrediInconnuInconnu0561336342</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/carod</url>
+  <depend package="roscpp"/>
+  <depend package="std_msgs"/>
+  <depend package="opencv_display"/>
+  <depend package="pcl"/>
+  <depend package="geometry_msgs"/>  
+</package>
+
+

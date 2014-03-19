@@ -1,0 +1,36 @@
+ROBBOT : Recognition with Oriented Bounding Boxes for ObjecTs
+(obb = oriented bounding box)
+This package is divided in three parts
+
+
+//
+// Part I : Training from database
+//
+OBBComputer class : browse a directory containing .pcd files and compute bounding
+boxes for each pcd. Save the results in a file in the directories.
+
+Trainer class : Go get the results from OBBComputer and compute the mean and
+covariance of bounding boxes for each class and instance.
+
+Clean class : Erase files left by previous training processes.
+
+//
+// Part II : Recognition from training results and input .pcd
+//
+Reco class : Load a file containing stats about a training set. For a given
+pointcloud, computes the mahalanobis distance to each instance/class. Given a
+confidence level, can filter the training set to keep only a subset of candidate
+objects.
+
+//
+// Part III : Test and results extraction for papers
+//
+Test class : Use the Reco class on a test set and get the N min and max variance instances for each instance/class.
+Compute the N closest candidats for a given pointcloud with XYZ and LAB obbs. And
+Compute the true positives, false positives, true negatives and false negatives.
+ Deduce the precision-recall curve.
+ 
+NORMAL USE :
+Run ./compute_obbs on the whole dataset (training + test) => results files with obbs dimensions
+Run train on the training set => means and covariances
+Run TestDistances on the test set => best/wrost mean, covariances, number of candidates, precision-recall curves.

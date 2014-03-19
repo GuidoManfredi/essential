@@ -1,0 +1,16 @@
+sensor_msgs/PointCloud2 cluster
+string[] names
+---
+#whether there was an error
+int32 SUCCESS=0
+int32 TF_ERROR=1
+
+#the pose of the box frame
+geometry_msgs/PoseStamped pose
+#the dimensions of the box
+geometry_msgs/Vector3 box_dims
+#remaining candidates after recognition
+string[] names
+
+#the actual error code
+int32 result

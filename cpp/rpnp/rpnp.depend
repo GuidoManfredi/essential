@@ -1,0 +1,16 @@
+# depslib dependency file v1.0
+1382454992 source:/home/gmanfred/devel/these/projects/rpnp/rpnp.cpp
+	"rpnp.h"
+
+1382455407 /home/gmanfred/devel/these/projects/rpnp/rpnp.h
+	<opencv2/core/core.hpp>
+	<iostream>
+	<fstream>
+	<cmath>
+
+1382455061 source:/home/gmanfred/devel/these/projects/rpnp/main.cpp
+	<iostream>
+	<fstream>
+	<boost/algorithm/string.hpp>
+	"rpnp.h"
+

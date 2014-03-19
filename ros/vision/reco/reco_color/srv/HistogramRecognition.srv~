@@ -1,0 +1,13 @@
+sensor_msgs/Image sticker
+string[] names
+---
+#whether there was an error
+int32 SUCCESS=0
+int32 ERROR=1
+
+float32[] hist
+#remaining candidates after recognition
+string[] names
+
+#the actual error code
+int32 result

@@ -1,0 +1,13 @@
+cmake_minimum_required(VERSION 2.8 FATAL_ERROR)
+project(rcod)
+find_package(PCL 1.7 REQUIRED)
+include_directories(${PCL_INCLUDE_DIRS})
+link_directories(${PCL_LIBRARY_DIRS})
+add_definitions(${PCL_DEFINITIONS})
+
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-deprecated-declarations")
+
+include_directories (/home/gmanfred/devel/libraries/pcl/apps/3d_rec_framework/include ${CMAKE_CURRENT_SOURCE_DIR}/include)
+
+add_executable(generate_views src/generate_views.cpp)
+target_link_libraries(generate_views ${PCL_LIBRARIES})

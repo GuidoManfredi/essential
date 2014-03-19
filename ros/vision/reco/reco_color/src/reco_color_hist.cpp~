@@ -1,0 +1,45 @@
+#include "ros/ros.h"
+#include "opencv2/opencv.h"
+
+using namespace std;
+using namespace cv;
+
+ros::Publisher pub_hist;
+ros::Publisher pub_candidates;
+vector<string> candidates;
+
+// Callback for pointcloud subscriber
+void reco_histograme (const sensor_msgs::Image msg) {
+	//Cloud::Ptr current_cloud = msg;
+	//pub_hist.publish ();
+	//pub_candidates.publish ();
+	// vector<string> candidates
+}
+
+void save_candidates (const reco_mvbb::StringArrayConstPtr& msg) {
+	candidates = msg->array;
+}
+
+int main(int argc, char **argv) {
+	if (argc != 2) {
+		std::cout << "Usage: reco_mvbb in_clusters_topic" << std::endl;
+		return 1;
+	}
+  ros::init(argc, argv, "reco_color_node");
+  ros::NodeHandle n;
+  
+	// Input
+  ros::Subscriber sub_pointcloud = n.subscribe(argv[1], 1000, reco_histograme);
+  ros::Subscriber sub_candidates = n.subscribe(argv[1], 1000, save_candidates);
+  // Output
+  pub_hist = n.advertise<reco_color::Histograme>("reco_color_hist", 1000);
+  pub_candidates = n.advertise<reco_mvbb::StringArray>("reco_color_candidates", 1000);
+  
+ 	ros::Rate loop_rate(10);
+  while (ros::ok()) {
+	  ros::spinOnce();
+	  loop_rate.sleep();
+  }
+
+  return 0;
+}

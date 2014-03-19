@@ -1,0 +1,36 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/gmanfred/devel/pcl/ROBBOT/Clean.cpp
+Clean.h
+/home/gmanfred/devel/pcl/ROBBOT/Clean.h
+
+/home/gmanfred/devel/pcl/ROBBOT/Clean.h
+boost/filesystem.hpp
+-
+string_tools.h
+/home/gmanfred/devel/pcl/ROBBOT/string_tools.h
+
+/home/gmanfred/devel/pcl/ROBBOT/clean.cpp
+Clean.h
+/home/gmanfred/devel/pcl/ROBBOT/Clean.h
+
+/home/gmanfred/devel/pcl/ROBBOT/string_tools.cpp
+string_tools.h
+/home/gmanfred/devel/pcl/ROBBOT/string_tools.h
+
+/home/gmanfred/devel/pcl/ROBBOT/string_tools.h
+vector
+-
+boost/filesystem.hpp
+-
+boost/lambda/bind.hpp
+-
+boost/algorithm/string.hpp
+-
+

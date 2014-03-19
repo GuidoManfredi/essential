@@ -1,0 +1,11 @@
+<launch>
+	<include file="$(find openni_launch)/launch/openni.launch"/>
+
+	<node pkg="segment_plans_objects" type="segment_plans_objects" 
+				name="segment_plans_objects"
+				args="/camera/depth/points /camera/rgb/image_rect"/>
+	
+	<node pkg="pcl_display" type="pcl_display" 
+			name="display_segmentation_recognition"
+			args="/plans_objects_segmentation objects_recognition"/>
+</launch>

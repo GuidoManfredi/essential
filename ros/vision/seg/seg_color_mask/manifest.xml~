@@ -1,0 +1,18 @@
+<package>
+  <description brief="seg_color_mask">
+
+     seg_color_mask
+
+  </description>
+  <author>Guido ManfrediInconnuInconnu0561336342</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/seg_color_mask</url>
+  <depend package="roscpp"/>
+  <depend package="sensor_msgs"/>
+  <depend package="opencv2"/>
+  <depend package="seg_plans_objs"/>
+
+</package>
+
+

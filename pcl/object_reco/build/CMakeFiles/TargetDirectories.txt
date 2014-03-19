@@ -1,0 +1,2 @@
+/home/gmanfred/devel/pcl/objectReco/build/CMakeFiles/reco.dir
+/home/gmanfred/devel/pcl/objectReco/build/CMakeFiles/train.dir

@@ -1,0 +1,55 @@
+#include <opencv2/core/core.hpp>
+#include <opencv2/calib3d/calib3d.hpp>
+#include <opencv2/features2d/features2d.hpp>
+#include <opencv2/nonfree/nonfree.hpp>
+
+using namespace std;
+using namespace cv;
+
+void filterNaNKeyPoints (Mat depth, vector<KeyPoint> kpts,
+	    				 vector<KeyPoint> &filtered_kpts,
+	    				 vector<Point3f> &filtered_p3d) {
+	filtered_kpts.clear();
+	filtered_p3d.clear();
+	for (size_t i=0; i<kpts.size(); ++i) {
+		Vec3f p3 = depth.at<Vec3f>(kpts[i].pt.y, kpts[i].pt.x); //* 1e3; // in meters, convert in milimeters
+		if ( !isnan(p3[0]) && !isnan(p3[1]) && !isnan(p3[2]) ) {
+			filtered_kpts.push_back (kpts[i]);
+			filtered_p3d.push_back (p3); // looks like Vec3f ~= Point3f
+		}
+	}
+}
+
+double meanReprojectionError (vector<Point3f> p3d, vector<Point2f> p2d,
+                               Mat R, Mat t) {
+    vector<float> d;
+    vector<Point2f> proj_p2d;
+    projectPoints (p3d, rvec, tvec, K_, d, proj_p2d);
+    
+    double error = norm (Mat(p2d), Mat(proj_p2d), CV_L2);
+    int num_points = p3d.size();
+    return error_sum = sqrt(error*error/num_points);
+}
+
+void main () {
+    // Retrieve by some way a grayscale image and the corresponding depth image
+    Mat image, depth;
+
+    Ptr<FeatureDetector> detector = new SIFT();
+    vector<KeyPoint> keypoints;
+    detector->detect (image, keypoints);
+    vector<Point2f> points2d;
+    for ( size_t i = 0; i < keypoints.size(); ++i ) {
+        points2d.push_back (keypoints[i].pt);
+    }
+    
+    vector<Point3f> points3d;
+    vector<KeyPoint> filtered_points2d;
+    filterNaNKeyPoints (Mat depth, keypoints, filtered_points2d, points3d);
+
+    Mat rvec = Mat::zeros(3, 1, CV_32F);
+    Mat tvec = Mat::zeros(3, 1, CV_32F);    
+    double error = meanReprojectionError (points3d, filtered_points2d, rvec, tvec);
+    
+    cout << "Reprojection error : " << error << endl;
+}

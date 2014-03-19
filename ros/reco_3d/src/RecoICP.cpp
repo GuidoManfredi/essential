@@ -1,0 +1,79 @@
+#include "RecoICP.h"
+
+using namespace boost::filesystem;
+using namespace std;
+
+RecoICP::RecoICP() {}
+
+std::vector<std::pair<std::string, float> >
+RecoICP::recognize (pcl::PointCloud<pcl::PointXYZ>::ConstPtr cloud,
+					 Eigen::Matrix4f &final_transform,
+					 std::vector<std::string> candidates) {
+	std::vector<std::pair<std::string, float> > name_fitness_map;
+	std::vector<Eigen::Matrix4f> transform;
+	
+	name_fitness_map = recognize(cloud, transform, candidates);
+	
+	int min_idx = getMinFitnessIndex (name_fitness_map);
+	final_transform = transform[min_idx];
+	return name_fitness_map;
+}
+
+std::vector<std::pair<std::string, float> >
+RecoICP::recognize (pcl::PointCloud<pcl::PointXYZ>::ConstPtr cloud,
+					 std::vector<Eigen::Matrix4f> &final_transform,
+					 std::vector<std::string> candidates) {
+	std::vector<std::pair<std::string, float> > name_fitness_map;
+	//selecting candidates
+	std::vector<pcl::PointCloud<pcl::PointXYZ>::ConstPtr> model;
+	for (size_t i=0; i<model_.size(); ++i) {
+		if (candidates.empty() ||
+		    find(candidates.begin(), candidates.end(), model_name_[i]) != candidates.end()) {
+    	Eigen::Matrix4f transform;
+	    float fitness = icp_.align (cloud, model_[i], transform);
+ 			pair<string, float> name_fitness (model_name_[i], fitness);
+	    name_fitness_map.insert (name_fitness_map.begin(), name_fitness);
+	    final_transform.push_back (transform);
+		}
+	}
+	return name_fitness_map;
+}
+
+int RecoICP::loadModels (std::string pcd_dir_path) {
+	path dir_path (pcd_dir_path);
+  try {
+    if (exists(dir_path)) {
+      if (is_directory(dir_path)) {
+	      directory_iterator end_itr;
+        for (directory_iterator it( dir_path ); it != end_itr; ++it) {
+        	if (extension(it->path()) == ".pcd") {
+	        	pcl::PointCloud<pcl::PointXYZ>::Ptr model (new pcl::PointCloud<pcl::PointXYZ>);
+		        pcl::io::loadPCDFile<pcl::PointXYZ> (it->path().string(), *model);
+		        model_.push_back (model);
+		        model_name_.push_back (it->path().filename().string());
+		        cout << model_name_.back() << endl;
+		      }
+  	    }
+  	    return model_.size();
+      }
+    }
+  }
+  catch (const filesystem_error& ex) {
+    std::cout << ex.what() << '\n';
+  }
+  return 0;
+}
+////////////////////////////////////////////////////////////////////////////////
+// PRIVATE METHODS
+////////////////////////////////////////////////////////////////////////////////
+int RecoICP::getMinFitnessIndex (std::vector<std::pair<string,float> > fitness) {
+	float min_val = 1000.0;
+	int min_idx = 0;
+	for (size_t i=0; i<fitness.size(); ++i) {
+		if (fitness[i].second < min_val) {
+			min_val = fitness[i].second;
+			min_idx = i;
+		}
+	}
+	return min_idx;
+}

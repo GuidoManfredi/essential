@@ -1,0 +1,93 @@
+/**
+*  Cylindrical And Rectangular Object Detection
+*  This node get an image or region and try to select which of the candidats are
+*  possibly represented and their associated pose.
+*  IN :
+*    Mat image
+*    Matx33 intrinsic parameters
+*    vector<string> candidats
+*  OUT :
+*    vector<string> remaining candidates
+*    vector<Matx33> remaining candidates poses
+**/
+
+#include <ros/ros.h>
+#include <image_transport/image_transport.h>
+#include <cv_bridge/cv_bridge.h>
+#include <std_msgs/String.h>
+#include <sensor_msgs/Image.h>
+#include <sensor_msgs/image_encodings.h>
+
+#include "geometry_msgs/TransformStamped.h"
+#include "TexturedPipeline.h"
+
+namespace enc = sensor_msgs::image_encodings;
+using namespace std;
+using namespace cv;
+
+TexturedPipeline* pipeline;
+
+void image_callback(const sensor_msgs::ImageConstPtr& msg) {
+	cv_bridge::CvImagePtr cv_ptr;
+  try
+  {
+    cv_ptr = cv_bridge::toCvCopy(msg, enc::BGR8);
+  }
+  catch (cv_bridge::Exception& e)
+  {
+    ROS_ERROR("cv_bridge exception: %s", e.what());
+    return;
+  }
+	pipeline->recognise_localise(cv_ptr->image);
+}
+
+int main (int argc, char** argv) {
+	if (argc != 4) {
+		cout << "Usage : carod_node image_topic" << endl;
+		return 1;
+	}
+
+	ros::init(argc, argv, "carod_node");
+	ros::NodeHandle n;
+	// Load intrinsic parameters
+	Mat K(3,3,CV_64F);
+  Mat d(5,1,CV_64F);
+  FileStorage r_fs;
+  r_fs.open ("/home/gmanfred/.ros/camera_info/webcam_gilgamesh_opencv.yml", cv::FileStorage::READ);
+  r_fs["camera_matrix"]>>K;
+  r_fs["distortion_coefficients"]>>d;
+  r_fs.release ();
+	// Subscribe/Publish to relevant topics
+	ros::Subscriber image_subscriber = n.subscribe(argv[1], 1000, image_callback);
+  ros::Publisher recognition_publisher =
+  				n.advertise<std_msgs::String>("textured_recognition", 1000);	
+  ros::Publisher localisation_publisher =
+  				n.advertise<geometry_msgs::TransformStamped>("textured_localisation", 1000);
+  // Init carod
+  pipeline = new TexturedPipeline (K);
+  
+	ros::Rate loop_rate(10);
+	std_msgs::String candidate_names;
+	geometry_msgs::TransformStamped candidate_locations;
+	while (ros::ok()) {
+	  ros::spinOnce();
+	  //candidate_names.data = pipeline->get_recognised_names();
+ 	  //candidate_locations.data = pipeline->get_recognised_locations();
+	  recognition_publisher.publish(candidate_names);
+	  localisation_publisher.publish(candidate_locations);
+	  loop_rate.sleep();
+	}
+
+  return 0;
+}
+
+// TODO LIST
+// Think about how to integrate incoming and outgoing candidates.
+// Change opencv_display::LocaPose name and structure so there is only one big
+// structure to transfer.
+// Move saves functions from Object to Train class
+// Make custom messages in Carod for publication.
+// Fix publishers warning
+// Code load_data for Object class to load .pcd file and descriptors
+// Change everywhere KeyPoints by Point2d with only x y information
+

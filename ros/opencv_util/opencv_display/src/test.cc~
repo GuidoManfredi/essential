@@ -1,0 +1,73 @@
+#include "Visualizer.h"
+/*
+#include "ros/ros.h"
+#include "std_msgs/String.h"
+#include "opencv_display/LocaPose.h"
+#include "std_msgs/String.h"
+*/
+
+using namespace cv;
+using namespace std;
+
+int main (int argc, char** argv) {
+
+	Mat K(3,3,CV_32FC1);
+  Mat d(5,1,CV_32FC1);
+  FileStorage r_fs;
+  r_fs.open ("/home/gmanfred/.ros/camera_info/webcam_gilgamesh_opencv.yml", cv::FileStorage::READ);
+  r_fs["camera_matrix"]>>K;
+  r_fs["distortion_coefficients"]>>d;
+  r_fs.release ();
+
+	Mat img = imread ("/home/gmanfred/Desktop/spideyTest.jpg");
+	cv::Size size(img.cols, img.rows);	
+	Visualizer display("test", img.size(), K);
+	
+	// dans le noeud ros transformer la matrice entrant en float et la
+	// mettre en column major format
+	Mat pose = (Mat_<float>(4,4) <<  0.904649, -0.395126,  0.159642,  0,
+																	 0.378819, 0.574008,   -0.725955, 0,
+																	 0.195208, 0.71721,    0.668957,  0,
+																	-0.243246, 0.0737445,  -4.09743,  1);
+	/*
+	Mat pose = (Mat_<float>(4,4) << 1, 0, 0, 0,
+																	 0, 1, 0, 0,
+																	 0, 0, 1, 0,
+																	 -0.24, 0.07, -4, 1);
+	*/
+	display.updateBackground(img);
+	display.updatePose(pose.t());
+	display.updateWindow();
+	
+  cv::waitKey(0);	
+
+  return 0;
+}
+/*
+void localisation_callback(const opencv_display::LocaPose::ConstPtr& poses_msg) {
+	Mat T (3, 4, CV_64F);
+	T.at<double>(0,0) = poses_msg->r00;	T.at<double>(0,1) = poses_msg->r01;	T.at<double>(0,2) = poses_msg->r02;
+	T.at<double>(1,0) = poses_msg->r10;	T.at<double>(1,1) = poses_msg->r11;	T.at<double>(1,2) = poses_msg->r12;	
+	T.at<double>(2,0) = poses_msg->r20;	T.at<double>(2,1) = poses_msg->r21;	T.at<double>(2,2) = poses_msg->r22;
+	T.at<double>(0, 3) = poses_msg->x;	T.at<double>(1, 3) = poses_msg->y;	T.at<double>(2, 3) = poses_msg->z;
+	//display.updateCoordinateAxis (T);
+}
+
+void recognition_callback(const std_msgs::String::ConstPtr& names_msg) {
+	//display.update_names ();
+}
+
+int main (int argc, char** argv) {
+	ros::init(argc, argv, "opencv_display_poses");
+	ros::NodeHandle n;
+	ros::Subscriber localisation_subscriber = n.subscribe("texture_localisation", 1000, localisation_callback);
+	ros::Subscriber recognition_subscriber = n.subscribe("texture_recognition", 1000, recognition_callback);
+	
+	while (ros::ok()) {
+	  ros::spinOnce();
+		//display.draw ();
+	}
+
+  return 0;  
+}
+*/

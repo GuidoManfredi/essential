@@ -1,0 +1,5 @@
+<launch>
+	<node pkg="perception_models" type="generate_views" name="views_generator"
+				args="$(find perception_models)/views $(find perception_models)/cad
+				$(find perception_models)/models"/>
+</launch>

@@ -1,0 +1,8 @@
+Save image : bpy.ops.image.save()
+Save image as : bpy.ops.image.save_as()
+Render image : bpy.ops.render.render()
+Add camera : bpy.ops.object.camera_add()
+
+Activate Zbuffer : ImageFormatSettings.use_zbuffer
+Specify output : ImageFormatSettings.file_format
+Demander Z au rendering : SceneRenderLayer.use_pass_z

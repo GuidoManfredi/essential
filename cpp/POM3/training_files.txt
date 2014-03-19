@@ -1,0 +1,8 @@
+/home/gmanfred/devel/datasets/Caltech101_color/accordion/
+/home/gmanfred/devel/datasets/Caltech101_color/airplanes/
+/home/gmanfred/devel/datasets/Caltech101_color/anchor/
+/home/gmanfred/devel/datasets/Caltech101_color/ant/
+/home/gmanfred/devel/datasets/Caltech101_color/barrel/
+/home/gmanfred/devel/datasets/Caltech101_color/bass/
+/home/gmanfred/devel/datasets/Caltech101_color/beaver/
+/home/gmanfred/devel/datasets/Caltech101_color/dolphin/
