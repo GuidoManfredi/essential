@@ -26,5 +26,13 @@ set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
 #target_link_libraries(${PROJECT_NAME} another_library)
 #rosbuild_add_boost_directories()
 #rosbuild_link_boost(${PROJECT_NAME} thread)
-#rosbuild_add_executable(example examples/example.cpp)
+rosbuild_add_executable(main pom/main.cpp
+                             pom/Object.cpp
+                             pom/View.cpp
+                             pom/Pipeline2D.cpp
+                             pom/PipelineGeom.cpp
+                             pom/commons.cpp
+                             pom/POM.cpp
+                             pom/POD.cpp)
+target_link_libraries(main /home/gmanfred/devel/sandbox/SiftGPU/bin/libsiftgpu.so)
 #target_link_libraries(example ${PROJECT_NAME})

@@ -2,7 +2,7 @@
 <CodeBlocks_project_file>
 	<FileVersion major="1" minor="6" />
 	<Project>
-		<Option title="pompod" />
+		<Option title="pom" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
 		<Build>
@@ -45,6 +45,8 @@
 		</Compiler>
 		<Unit filename="Object.cpp" />
 		<Unit filename="Object.h" />
+		<Unit filename="POD.cpp" />
+		<Unit filename="POD.h" />
 		<Unit filename="POM.cpp" />
 		<Unit filename="POM.h" />
 		<Unit filename="Pipeline2D.cpp" />

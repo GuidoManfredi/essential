@@ -2,14 +2,13 @@
 
 #include <opencv2/highgui/highgui.hpp>
 
+#include <pcl/io/pcd_io.h>
+#include <pcl/point_types.h>
 
 #include "Pipeline2D.h"
 #include "Object.h"
 #include "commons.h"
 
-//./bin/modelingPlanar /home/gmanfred/devel/datasets/my_objects/purfruit/
-//                     /home/gmanfred/devel/datasets/my_objects/purfruit/corners.txt7
-//                     /home/gmanfred/devel/datasets/my_objects/purfruit/dimensions.txt
 class POM {
   public:
     POM ();

@@ -21,6 +21,7 @@ Object POM::model (std::vector<cv::Mat> images,
         Mat descriptors;
         vector<Point3f> points3d;
         extractFeatures (images[i], keypoints, descriptors);
+        cout << "Extracted " << keypoints.size() << " keypoints." << endl;
         Mat rectified_image;
         rectifyImage (i, images[i], corners2d[i], dimensions,
                       rectified_image);
@@ -28,14 +29,18 @@ Object POM::model (std::vector<cv::Mat> images,
 //        waitKey(0);
         convert2Dto3D (i, images[i], dimensions, corners2d[i], keypoints,
                        points3d);
-        savePoints3d (points3d, "test.pcd");
-        cout << i << endl << Mat(points3d) << endl;
-        //object.addView (points3d, descriptors);
+        cout << "Computed " << points3d.size() << " 3D points." << endl;
+        //cout << i << endl << Mat(points3d) << endl;
+        object.addView (points3d, descriptors);
     }
+    vector<Point3f> points3d;
+    object.getPoints (points3d);
+    savePoints3d (points3d, "test.pcd");
+
     return object;
 }
 
-void savePoints3d (std::vector<cv::Point3f> points3d, std::string filename) {
+void POM::savePoints3d (std::vector<cv::Point3f> points3d, std::string filename) {
   pcl::PointCloud<pcl::PointXYZ>::Ptr cloud (new pcl::PointCloud<pcl::PointXYZ>);
 
   for (size_t i = 0; i < points3d.size(); ++i) {
@@ -126,41 +131,14 @@ void POM::local2global (int face, Point3f dimensions,
     }
 }
 
-//p3d.dim = keypoints.pt.dim * object.dim/image.dim
 void POM::convert2DtoLocal3D (Mat image, Point3f dimensions, vector<KeyPoint> keypoints,
                           vector<Point3f> &points3d) {
     points3d.resize(keypoints.size());
     for (size_t i = 0; i < keypoints.size(); ++i) {
         points3d[i].x = 0;
-        points3d[i].y = keypoints[i].pt.x * dimensions.x/image.cols;
-        points3d[i].z = -keypoints[i].pt.y * dimensions.y/image.rows;
+        points3d[i].y = (keypoints[i].pt.x - image.cols/2) * dimensions.x/image.cols;
+        points3d[i].z = -(keypoints[i].pt.y - image.rows/2) * dimensions.y/image.rows;
     }
-}
-
-vector<Point3f> POM::getLocalCorners3DPaveDroit (int face, Point3f dimensions) {
-    float w, h, d; // on utilise des demi mesures car repere au centre de la face.
-    w = dimensions.x/2;
-    h = dimensions.y/2;
-    d = dimensions.z/2;
-
-    vector<Point3f> points3d;
-    Point3f ul, ur, dl, dr; // up, down, right, left. ul = up left
-    if ( face == 0 || face == 2 ) {
-        ul = Point3f (0, -w, h);
-        ur = Point3f (0, w, h);
-        dl = Point3f (0, -w, -h);
-        dr = Point3f (0, w, -h);
-    } else {
-        ul = Point3f (0, -d, h);
-        ur = Point3f (0, d, h);
-        dl = Point3f (0, -d, -h);
-        dr = Point3f (0, d, -h);
-    }
-    points3d.push_back (ul);
-    points3d.push_back (ur);
-    points3d.push_back (dl);
-    points3d.push_back (dr);
-    return points3d;
 }
 
 vector<Point2f> POM::getCorners (Mat image) {

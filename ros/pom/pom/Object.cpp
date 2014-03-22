@@ -12,6 +12,18 @@ void Object::addView (std::vector<Point3f> points3d, cv::Mat descriptors) {
     views_.push_back (view);
 }
 
+//void Object::getDescriptors () {
+//}
+
+void Object::getPoints (vector<Point3f> &points3d) {
+    points3d.clear();
+    for (size_t i = 0; i < views_.size(); ++i) {
+        for (size_t j = 0; j < views_[i].points3d_.size(); ++j) {
+            points3d.push_back (views_[i].points3d_[j]);
+        }
+    }
+}
+
 void Object::write(cv::FileStorage& fs) const {
     fs << "{" << "number_views" << number_views_;
     for ( int i = 0; i < number_views_; ++i ) {

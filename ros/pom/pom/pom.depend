@@ -13,8 +13,10 @@
 	<opencv2/calib3d/calib3d.hpp>
 	<opencv2/imgproc/imgproc.hpp>
 
-1395421706 /home/gmanfred/devel/essential/ros/pom/pom/POM.h
+1395421902 /home/gmanfred/devel/essential/ros/pom/pom/POM.h
 	<opencv2/highgui/highgui.hpp>
+	<pcl/io/pcd_io.h>
+	<pcl/point_types.h>
 	"Pipeline2D.h"
 	"Object.h"
 	"commons.h"

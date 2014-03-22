@@ -10,6 +10,7 @@
   <url>http://ros.org/wiki/pom</url>
   <depend package="roscpp"/>
   <depend package="opencv2"/>
+  <depend package="pcl_ros"/>
 
 </package>
 

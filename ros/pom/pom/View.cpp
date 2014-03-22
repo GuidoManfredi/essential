@@ -5,6 +5,10 @@ using namespace cv;
 
 View::View() {}
 
+Mat View::transform () {
+    return Rt2P (R_, t_);
+}
+
 void View::write(cv::FileStorage& fs) const {
     fs << "{" << "number_points" << number_points_;
     for ( int i = 0; i < number_points_; ++i ) {

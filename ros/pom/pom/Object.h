@@ -6,6 +6,7 @@ class Object {
   public:
     Object ();
     void addView (std::vector<cv::Point3f> points3d, cv::Mat descriptors);
+    void getPoints (std::vector<cv::Point3f> &points3d);
 
     void write (cv::FileStorage& fs) const;
     void read (const cv::FileNode& node);
