@@ -13,6 +13,10 @@
 // si des descripteurs sont en double, lors du matching ils ne seront pas pris
 // en compte par siftgpu, vas savoir pourquoi...
 
+// ./bin/detect_object image pose lait
+// rosrun opencv_publisher stream 0 webcam image
+// rosrun opencv_display display_poses age pose
+
 using namespace std;
 using namespace cv;
 namespace enc = sensor_msgs::image_encodings;
@@ -37,7 +41,11 @@ void cloud_callback(const sensor_msgs::ImageConstPtr& msg) {
 //    waitKey(1);
     int start = cv::getTickCount();
     P = detecter.process (cv_ptr->image);
-    P = P.inv(); // for display
+    cout << P << endl;
+    //P = P.inv();
+    P.at<float>(0, 3) *= -1.0/100;
+    P.at<float>(1, 3) *= -1.0/100;
+    P.at<float>(2, 3) *= -1.0/100;
     //cout << P << endl;
     int end = cv::getTickCount();
     float time_period = 1 / cv::getTickFrequency();
