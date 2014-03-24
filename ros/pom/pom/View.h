@@ -11,7 +11,6 @@ class View {
     void write (cv::FileStorage& fs) const;
     void read (const cv::FileNode& node);
 
-    int number_points_;
     cv::Mat view_;
     std::vector<cv::KeyPoint> keypoints_;
     std::vector<cv::Point3f> points3d_;

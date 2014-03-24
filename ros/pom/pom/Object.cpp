@@ -3,17 +3,23 @@
 using namespace std;
 using namespace cv;
 
-Object::Object () {}
+Object::Object () {
+    number_views_ = 0;
+}
 
 void Object::addView (std::vector<Point3f> points3d, cv::Mat descriptors) {
     View view;
     view.points3d_.swap (points3d);
     descriptors.copyTo(view.descriptors_);
+    ++number_views_;
     views_.push_back (view);
 }
 
-//void Object::getDescriptors () {
-//}
+void Object::getDescriptors (Mat &descriptors) {
+    descriptors = Mat::zeros (0, 0, CV_32F);
+    for (size_t i = 0; i < views_.size(); ++i)
+        descriptors.push_back (views_[i].descriptors_);
+}
 
 void Object::getPoints (vector<Point3f> &points3d) {
     points3d.clear();

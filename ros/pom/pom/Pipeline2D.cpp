@@ -18,6 +18,7 @@ Pipeline2D::Pipeline2D() {
         cout << "SiftGPU not supported" << endl;
     };
 
+    matcher_.SetMaxSift (8192);
     minNumberMatchesAllowed_                  = 8;
 }
 
@@ -86,23 +87,6 @@ bool Pipeline2D::describeFeatures(const cv::Mat image, std::vector<cv::KeyPoint>
     return false;
 }
 
-bool Pipeline2D::describeFeatures(const cv::Mat image, std::vector<int> keypoints_index, cv::Mat& descriptors)
-{
-    assert(!image.empty());
-    assert(image.channels() == 1);
-
-    int num_keypoints = sift_.GetFeatureNum();
-    if ( num_keypoints != 0 ) {
-	    vector<float> gpu_descriptors(128*num_keypoints);
-	    sift_.GetFeatureVector(NULL, &gpu_descriptors[0]);
-	    // converting to opencv
-	    descriptors = GPUdesc2desc (gpu_descriptors, keypoints_index);
-    	return true;
-    }
-
-    return false;
-}
-
 bool Pipeline2D::extractFeatures(const cv::Mat& image, std::vector<cv::KeyPoint>& keypoints, cv::Mat& descriptors)
 {
     detectFeatures(image, keypoints);
@@ -120,11 +104,9 @@ bool Pipeline2D::match (const cv::Mat &desc1, const cv::Mat &desc2,
 }
 
 void Pipeline2D::matchNoMinimum (const cv::Mat &desc1, const cv::Mat &desc2,
-                           std::vector<cv::DMatch>& matches) {
+                                  std::vector<cv::DMatch>& matches) {
     assert (desc1.data && desc2.data);
     matches.clear();
-    SiftMatchGPU matcher_;
-    matcher_.SetMaxSift (4096);
     if(matcher_.VerifyContextGL() == 0) return;
     vector<float> des1 = desc2GPUdesc (desc1);
     vector<float> des2 = desc2GPUdesc (desc2);
@@ -132,10 +114,10 @@ void Pipeline2D::matchNoMinimum (const cv::Mat &desc1, const cv::Mat &desc2,
     matcher_.SetDescriptors(0, desc1.rows, &des1[0]);
     matcher_.SetDescriptors(1, desc2.rows, &des2[0]);
     //Match and read back result to input buffer
-    int match_buf[4096][2];
+    int match_buf[8192][2];
 
-    int nmatch = matcher_.GetSiftMatch(4096, match_buf);
-    //cout << nmatch << endl;
+    int nmatch = matcher_.GetSiftMatch(8192, match_buf);
+    //cout << "NMatch: " << nmatch << endl;
     // convert to opencv
     for ( size_t i = 0; i < nmatch; ++i) {
         DMatch m;

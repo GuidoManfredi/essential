@@ -54,4 +54,5 @@ class Pipeline2D {
     std::vector<float> desc2GPUdesc (cv::Mat descs);
 
     SiftGPU sift_;
+    SiftMatchGPU matcher_;
 };

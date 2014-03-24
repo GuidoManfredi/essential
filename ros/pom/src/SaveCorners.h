@@ -13,7 +13,7 @@ class SaveCorners {
   public:
     SaveCorners (std::string object_dir);
     ~SaveCorners ();
-    void saveCornersObject (std::string object_dir, int start_number, int step);
+    void saveCornersObject ();
   private:
     void getCornersOnePicture (cv::Mat image);
     void saveCorners (std::vector<cv::Point2f> corners);

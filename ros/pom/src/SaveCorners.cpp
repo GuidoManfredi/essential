@@ -16,18 +16,15 @@ SaveCorners::~SaveCorners () {
     file_.close();
 }
 
-void SaveCorners::saveCornersObject (string object_dir, int start_number, int step) {
-    int idx_step = step/5;
-    for ( size_t i = start_number; i < v_.size(); ) {
-        if ( extension(v_[i]) == ".png" ) {
+void SaveCorners::saveCornersObject () {
+    for ( size_t i = 0; i < v_.size(); ++i) {
+        if ( extension(v_[i]) == ".png" || extension(v_[i]) == ".jpg") {
             cout << "Processing " << v_[i].string() << endl;
             Mat image = imread (v_[i].string(), CV_LOAD_IMAGE_GRAYSCALE);
             getCornersOnePicture (image);
             saveCorners (corners);
-            i += idx_step;
         } else {
-            cout << "Kikou " << v_[i].string() << endl;
-            ++i;
+            cout << "Not processing " << v_[i].string() << endl;
         }
     }
 }
@@ -38,7 +35,7 @@ void SaveCorners::getCornersOnePicture (Mat image) {
     namedWindow ("Select object corners");
     setMouseCallback ("Select object corners", mouse_cb);
     imshow ("Select object corners", image);
-    cout << "Select object corners in that order: top left, top right, bottom left, bottom right. Then press any key to continue." << endl;
+    cout << "Select object corners in that order: top left, top right, bottom right, bottom left. Then press any key to continue." << endl;
     waitKey(0);
 }
 

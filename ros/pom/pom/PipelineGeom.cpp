@@ -16,22 +16,20 @@ void PipelineGeom::mySolvePnP (Mat p3d, Mat p2d, Mat K,
 //    cout << p3d << endl;
 //    cout << p2d << endl;
     vector<int> inliers_idx;
+//    solvePnPRansac (p3d, p2d, K, vector<float>(), rvec, tov,
+//                    false, 1000, 4.0, p3d.rows*0.8, inliers_idx); // 80% inliers
+//    p3d_inliers = p3d;
+//    p2d_inliers = p2d;
     solvePnPRansac (p3d, p2d, K, vector<float>(), rvec, tov,
                     false, 1000, 4.0, p3d.rows*0.8, inliers_idx, CV_EPNP); // 80% inliers
     // Reffine with LM
     if ( inliers_idx.size() > 4 ) {
-//    cout << inliers_idx.size() << endl;
-//    cout << p3d_inliers.size() << endl;
-//    cout << p2d_inliers.size() << endl;
         pointsFromIndex (p3d, p2d, inliers_idx, p3d_inliers, p2d_inliers);
         solvePnP (p3d_inliers, p2d_inliers, K, vector<float>(), rvec, tov, true);
     } else {
         p3d_inliers = p3d;
         p2d_inliers = p2d;
     }
-//    cout << "Result" << endl;
-//    cout << rvec << endl;
-//    cout << tov << endl;
     Rodrigues (rvec, Rov);
 
     Rov.convertTo (Rov, CV_32F);

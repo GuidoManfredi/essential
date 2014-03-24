@@ -1,0 +1,98 @@
+#include "FilesManager.h"
+
+using namespace std;
+using namespace boost::filesystem;
+using namespace cv;
+
+FilesManager::FilesManager () {}
+
+vector<Mat> FilesManager::getImages (string images_path) {
+    vector<Mat> images;
+    boost::filesystem::path bf_images_path(images_path);
+    if ( is_regular_file(bf_images_path) ) {
+        Mat image = getImage (bf_images_path.string());
+        images.push_back (image);
+    }
+    else if ( is_directory(bf_images_path) ) {
+        typedef vector<path> vec;  
+        vec v;
+        copy(directory_iterator(bf_images_path), directory_iterator(), back_inserter(v));
+        sort(v.begin(), v.end());
+  
+        for (vec::const_iterator it (v.begin()); it != v.end(); ++it)
+        {
+            Mat image = getImage (it->string());
+            if (image.data) {
+                images.push_back (image);
+            }
+        }
+    }
+    return images;
+}
+
+vector<vector<Point2f> > FilesManager::getCorners (string corners_file) {
+    ifstream file (corners_file.c_str());
+    string line;
+    vector<vector<Point2f> > all_corners;
+    if (file.is_open()) {
+        while ( getline (file,line) ) {
+            vector<string> parts;
+            boost::split(parts, line, boost::is_any_of(" "));
+            vector<Point2f> corners;
+            //cout << "Partsize " << parts.size() << endl;
+            // TODO change ca
+            //for ( size_t i = 0; i < parts.size(); i += 2 ) {
+            for ( size_t i = 0; i < 8; i += 2 ) {
+                int x = atoi (parts[i].c_str());
+                int y = atoi (parts[i+1].c_str());
+                corners.push_back (Point2f(x, y));
+            }
+            all_corners.push_back (corners);
+        }
+        file.close();
+    }
+    return all_corners;
+}
+
+Point3f FilesManager::getDimensions (string corners_file) {
+    Point3f dimensions;
+    
+    ifstream file (corners_file.c_str());
+    string line;
+    vector<vector<Point2f> > all_corners;
+    if (file.is_open()) {
+        while ( getline (file,line) ) {
+            vector<string> parts;
+            boost::split(parts, line, boost::is_any_of(" "));
+            for ( size_t i = 0; i < 3; ++i ) {
+                int x = atoi (parts[0].c_str());
+                int y = atoi (parts[1].c_str());
+                int z = atoi (parts[2].c_str());
+                dimensions = Point3f (x, y, z);
+            }
+        }
+        file.close();
+    }
+    return dimensions;
+}
+////////////////////////////////////////////////////////////////////////////////
+//  PRIVATE METHODS
+////////////////////////////////////////////////////////////////////////////////
+Mat FilesManager::getImage (string image_path) {
+    Mat image;
+    boost::filesystem::path bf_images_path(image_path);
+    if (extension(bf_images_path) == ".png"
+        || extension(bf_images_path) == ".jpg") {
+        image = imread (bf_images_path.string(), CV_LOAD_IMAGE_COLOR);
+        if(! image.data )
+            cout << "Could not open or find the image at " << bf_images_path.string() << endl;
+    } else {
+        cout << "Did not read " << bf_images_path.string() << endl;
+    }
+    return image;
+}
+
+string FilesManager::getDirName (string train_dir) {
+    boost::filesystem::path bf_images_path(train_dir);
+    return bf_images_path.stem().string();
+}

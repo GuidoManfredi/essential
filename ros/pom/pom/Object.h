@@ -1,11 +1,14 @@
 #pragma once
 
+#include <iostream>
+
 #include "View.h"
 
 class Object {
   public:
     Object ();
     void addView (std::vector<cv::Point3f> points3d, cv::Mat descriptors);
+    void getDescriptors (cv::Mat &descriptors);
     void getPoints (std::vector<cv::Point3f> &points3d);
 
     void write (cv::FileStorage& fs) const;
