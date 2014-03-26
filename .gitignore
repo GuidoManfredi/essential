@@ -3,6 +3,11 @@
 *.lo
 *.o
 
+# CMake files ?
+*.cmake
+*.bin
+*.lisp
+
 # Compiled Dynamic libraries
 *.so
 *.dylib
