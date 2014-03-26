@@ -1,0 +1,13 @@
+# depslib dependency file v1.0
+1395738799 source:/home/gmanfred/devel/essential/ros/human/hgd/hgd/Detector.cpp
+	"Detector.h"
+
+1395738792 /home/gmanfred/devel/essential/ros/human/hgd/hgd/Detector.h
+	<iostream>
+	<vector>
+	<string>
+	<opencv2/core/core.hpp>
+	<opencv2/objdetect/objdetect.hpp>
+	<opencv2/imgproc/imgproc.hpp>
+	<opencv2/highgui/highgui.hpp>
+

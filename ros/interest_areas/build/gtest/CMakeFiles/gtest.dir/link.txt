@@ -1,1 +1,0 @@
-/usr/bin/c++  -fPIC -O2 -g   -shared -Wl,-soname,libgtest.so -o /home/gmanfred/devel/ros/icra2013/interest_areas/lib/libgtest.so CMakeFiles/gtest.dir/src/gtest-all.cc.o -L/opt/ros/groovy/lib -L/home/gmanfred/devel/ros/icra2013/interest_areas/build/gtest/src -lpthread -Wl,-rpath,/opt/ros/groovy/lib:/home/gmanfred/devel/ros/icra2013/interest_areas/build/gtest/src 

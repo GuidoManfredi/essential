@@ -1,7 +1,0 @@
-<launch>
-	<include file="$(find reco_3d)/launch/reco_icp.launch"/>	
-	
-	<node pkg="pcl_display" type="pcl_display" 
-			name="display_segmentation_recognition"
-			args="/plans_objects_segmentation //objects_recognition_icp"/>
-</launch>
