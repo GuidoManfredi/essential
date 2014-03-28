@@ -39,13 +39,12 @@ class Visualizer:
     
     def draw(self):
         self.img = self.drawFrame (self.img, self.projected_points)
-        cv2.imshow ('Localised!', self.img)
+        cv2.imshow ('Localisation !', self.img)
         cv2.waitKey(1)
 
     def project(self, r, t):
         d = np.array([])
         projected_points, jac = cv2.projectPoints(self.points, r, t, self.K, d)
-        print projected_points
         return projected_points
     
     def drawFrame(self, img, corners):
@@ -81,10 +80,10 @@ def pose_callback(msg):
     r, t = msgToArray2 (msg)
     vis.updatePose(r, t)
 
-def main():
+def main(in_image_topic, in_pose_topic):
     rospy.init_node('opencv_display_pose', anonymous=True)
-    rospy.Subscriber("pose", LocaPose, pose_callback)
-    rospy.Subscriber("image", Image, image_callback)
+    rospy.Subscriber(in_pose_topic, LocaPose, pose_callback)
+    rospy.Subscriber(in_image_topic, Image, image_callback)
 
     try:
         rospy.spin()
@@ -92,5 +91,8 @@ def main():
         print "Shutting down"
     cv2.destroyAllWindows()
     
+help = '''Usage : display_pose in_image_topic in_pose_topic'''
+    
 if __name__ == '__main__':
-    main()
+    print help
+    main(sys.argv[1], sys.argv[2])
