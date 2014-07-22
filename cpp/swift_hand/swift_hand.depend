@@ -1,0 +1,61 @@
+# depslib dependency file v1.0
+1405690219 source:/home/gmanfred/devel/essential/cpp/swift_hand/Matcher.cpp
+	"Matcher.h"
+
+1405690130 /home/gmanfred/devel/essential/cpp/swift_hand/Matcher.h
+	<cstdio>
+	<vector>
+	<opencv2/opencv.hpp>
+	<opencv2/core/core.hpp>
+	<opencv2/features2d/features2d.hpp>
+	<opencv2/nonfree/nonfree.hpp>
+	<opencv2/legacy/legacy.hpp>
+	<opencv2/imgproc/imgproc.hpp>
+
+1406041556 source:/home/gmanfred/devel/essential/cpp/swift_hand/main.cpp
+	<iostream>
+	<fstream>
+	<opencv2/ml/ml.hpp>
+	<opencv2/highgui/highgui.hpp>
+	"Pipeline2D.h"
+	"generateList.h"
+
+1405687407 /home/gmanfred/devel/essential/cpp/swift_hand/Posture.h
+	<opencv2/core/core.hpp>
+	<opencv2/features2d/features2d.hpp>
+
+1405693012 /home/gmanfred/devel/essential/cpp/swift_hand/Pipeline.h
+	<iostream>
+	<opencv2/highgui/highgui.hpp>
+	"Posture.h"
+	"Pipeline2d.h"
+
+1405693240 /home/gmanfred/devel/essential/cpp/swift_hand/Pipeline2d.h
+	<opencv2/core/core.hpp>
+	<opencv2/features2d/features2d.hpp>
+
+1405935313 source:/home/gmanfred/devel/essential/cpp/swift_hand/BoF.cpp
+	"BoF.h"
+
+1405933629 /home/gmanfred/devel/essential/cpp/swift_hand/BoF.h
+	"opencv2/core/core.hpp"
+	"opencv2/features2d/features2d.hpp"
+
+1406037855 source:/home/gmanfred/devel/essential/cpp/swift_hand/Pipeline2D.cpp
+	<cassert>
+	<opencv2/imgproc/imgproc.hpp>
+	<opencv2/nonfree/nonfree.hpp>
+	"Pipeline2D.h"
+
+1406037782 /home/gmanfred/devel/essential/cpp/swift_hand/Pipeline2D.h
+	<iostream>
+	<opencv2/core/core.hpp>
+	<opencv2/features2d/features2d.hpp>
+	"BoF.h"
+
+1405947278 /home/gmanfred/devel/essential/cpp/swift_hand/generateList.h
+	<fstream>
+
+1405947210 source:/home/gmanfred/devel/essential/cpp/swift_hand/generateList.cpp
+	"generateList.h"
+

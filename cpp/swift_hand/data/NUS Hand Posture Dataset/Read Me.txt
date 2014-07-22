@@ -1,0 +1,12 @@
+NUS hand posture dataset consists 10 classes of postures, 24 sample images per class, which are captured by varying the position
+and size of the hand within the image frame. Both greyscale and color images are available (160×120 pixels). 
+The hand postures are selected in such a way that the inter class variation in the appearance of the postures is less, which makes the recognition task challenging.
+
+This dataset is used to test the recognition accuracy of the algorithm reported in the below paper. 
+Pramod Kumar P, Prahlad Vadakkepat, and Loh Ai Poh, “Hand posture and face recognition using a Fuzzy-Rough Approach”, International  
+Journal of Humanoid Robotics, vol.7, no.3, pp.331-356, September, 2010.
+The dataset can be used for academic research purposes free of cost, by citing this paper.
+
+PS: The background of the images in this dataset is uniform.  Another hand posture dataset containing images with 
+complex background is available (NUS hand posture dataset-II) at http://www.ece.nus.edu.sg/stfpage/elepv/NUS-HandSet/
+  
