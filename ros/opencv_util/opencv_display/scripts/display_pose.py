@@ -49,13 +49,15 @@ class Visualizer:
     
     def drawFrame(self, img, corners):
         origin = tuple(corners[0].ravel())
+        cv2.line(img, origin, tuple(corners[3].ravel()), (255,0,0), self.thickness)
         cv2.line(img, origin, tuple(corners[1].ravel()), (0,0,255), self.thickness)
         cv2.line(img, origin, tuple(corners[2].ravel()), (0,255,0), self.thickness)
-        cv2.line(img, origin, tuple(corners[3].ravel()), (255,0,0), self.thickness)
         return img
 ################################################################################
 vis = Visualizer ()
-filepath = '/home/gmanfred/.ros/camera_info/webcam_gilgamesh_opencv.yml'
+#filepath = '/home/gmanfred/.ros/camera_info/webcam_gilgamesh_opencv.yml'
+filepath = '/home/gmanfred/.ros/camera_info/my_xtion.yml'
+print 'Using calibration file ' + filepath
 vis.loadIntrinsic (filepath)
 bridge = CvBridge()
 
