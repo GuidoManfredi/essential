@@ -28,6 +28,8 @@ class Pipeline2D {
                            cv::Mat &vocabulary);*/
     void setVocabulary (cv::Mat vocabulary);
     cv::Mat getVocabulary();
+    void saveVocabulary (std::string path);
+    int loadVocabulary (std::string path);
 
     bool computeBoW (cv::Mat image, std::vector<cv::KeyPoint> keypoints,
                      cv::Mat &bow_descriptor);

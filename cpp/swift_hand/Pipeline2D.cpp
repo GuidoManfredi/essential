@@ -146,6 +146,21 @@ cv::Mat Pipeline2D::getVocabulary() {
     return bow_extractor_->getVocabulary();
 }
 
+void Pipeline2D::saveVocabulary (string path) {
+    cv::FileStorage fs(path.c_str(), cv::FileStorage::WRITE);
+    fs << "Vocabulary" << bow_extractor_->getVocabulary();
+    fs.release();
+}
+
+int Pipeline2D::loadVocabulary (string path) {
+    cv::FileStorage fs(path.c_str(), cv::FileStorage::READ);
+    Mat vocabulary;
+    fs["Vocabulary"] >> vocabulary;
+    setVocabulary(vocabulary);
+    fs.release();
+    return vocabulary.rows;
+}
+
 void Pipeline2D::matchDescriptorsToVocabularies (const cv::Mat &query_descriptor, const std::vector<cv::Mat> &training_vocabulary,
                                                  std::vector<int>& distances) {
     distances.clear();
