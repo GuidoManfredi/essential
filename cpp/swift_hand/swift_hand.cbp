@@ -19,6 +19,7 @@
 					<Add library="/usr/local/lib/libopencv_highgui.so" />
 					<Add library="/usr/local/lib/libopencv_features2d.so" />
 					<Add library="/usr/local/lib/libopencv_ml.so" />
+					<Add library="/usr/local/lib/libopencv_nonfree.so" />
 				</Linker>
 			</Target>
 			<Target title="Release">
@@ -47,8 +48,10 @@
 		</Linker>
 		<Unit filename="BoF.cpp" />
 		<Unit filename="BoF.h" />
-		<Unit filename="Pipeline2d.cpp" />
-		<Unit filename="Pipeline2d.h" />
+		<Unit filename="Pipeline2D.cpp" />
+		<Unit filename="Pipeline2D.h" />
+		<Unit filename="generateList.cpp" />
+		<Unit filename="generateList.h" />
 		<Unit filename="main.cpp" />
 		<Extensions>
 			<code_completion />
