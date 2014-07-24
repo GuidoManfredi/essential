@@ -48,8 +48,12 @@
 		</Linker>
 		<Unit filename="BoF.cpp" />
 		<Unit filename="BoF.h" />
+		<Unit filename="Database.cpp" />
+		<Unit filename="Database.h" />
 		<Unit filename="Pipeline2D.cpp" />
 		<Unit filename="Pipeline2D.h" />
+		<Unit filename="SwiftHand.cpp" />
+		<Unit filename="SwiftHand.h" />
 		<Unit filename="generateList.cpp" />
 		<Unit filename="generateList.h" />
 		<Unit filename="main.cpp" />

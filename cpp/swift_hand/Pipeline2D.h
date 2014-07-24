@@ -37,16 +37,6 @@ class Pipeline2D {
                      cv::Mat &descriptors, cv::Mat &bow_descriptor);
     int matchBoW (const cv::Mat &query_bow, const std::vector<cv::Mat> &training_bow);
     double distanceBoW (cv::Mat query, cv::Mat train);
-    // Bocabulary functions
-    //bool computeVocabulary (cv::Mat descriptors, cv::Mat &vocabulary);
-    void matchDescriptorsToVocabularies (const cv::Mat &query_descriptor,
-                                         const std::vector<cv::Mat> &training_vocabulary,
-                                         std::vector<int>& distances);
-    void matchDescriptorsToVocabularies (const cv::Mat &query_descriptor,
-                                         const std::vector<cv::Mat> &training_vocabulary,
-                                         std::vector<double>& distances);
-    void matchVocabularyToVocabulary (const cv::Mat &query_vocabulary, const std::vector<cv::Mat> &training_vocabulary,
-                                      std::vector<double>& distances);
 
     unsigned int minNumberMatchesAllowed_;
 

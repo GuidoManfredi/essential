@@ -9,7 +9,7 @@ using namespace std;
 using namespace cv;
 
 Pipeline2D::Pipeline2D() {
-    number_visual_words_ = 100; // vocabulary size
+    number_visual_words_ = 750; // vocabulary size
 
     detector_                                 = new cv::SIFT();
     extractor_                                = new cv::SIFT();
@@ -161,35 +161,3 @@ int Pipeline2D::loadVocabulary (string path) {
     return vocabulary.rows;
 }
 
-void Pipeline2D::matchDescriptorsToVocabularies (const cv::Mat &query_descriptor, const std::vector<cv::Mat> &training_vocabulary,
-                                                 std::vector<int>& distances) {
-    distances.clear();
-    for (size_t i = 0; i < training_vocabulary.size(); ++i ) {
-        std::vector<cv::DMatch> matches;
-        matcher_->match (query_descriptor, training_vocabulary[i], matches);
-        distances.push_back (matches.size());
-    }
-}
-
-void Pipeline2D::matchDescriptorsToVocabularies (const cv::Mat &query_descriptor, const std::vector<cv::Mat> &training_vocabulary,
-                                                 std::vector<double>& distances) {
-    distances.clear();
-    for (size_t i = 0; i < training_vocabulary.size(); ++i ) {
-        std::vector<cv::DMatch> matches;
-        matcher_->match (query_descriptor, training_vocabulary[i], matches);
-        double tmp_distance = 0;
-        for (size_t k = 0; k < matches.size(); ++k) {
-            tmp_distance += matches[k].distance;
-        }
-        distances.push_back (tmp_distance);
-    }
-}
-
-void Pipeline2D::matchVocabularyToVocabulary (const cv::Mat &query_vocabulary, const std::vector<cv::Mat> &training_vocabulary,
-                                    std::vector<double>& distances) {
-    distances.clear();
-    for (size_t i = 0; i < training_vocabulary.size(); ++i ) {
-        double distance = norm (query_vocabulary, training_vocabulary, CV_L2);
-        distances.push_back (distance);
-    }
-}

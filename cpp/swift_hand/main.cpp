@@ -8,7 +8,7 @@
 // TODO
 // Faire fonctions pour avoir les trues positives et false positive à partir de la
 //  confusion matrix (ROC curve).
-// Regarder pourquoi jamais de resultats pour les class 2 et 4.
+// Regarder pourquoi jamais de resultats pour les class 2, 4 et 6.
 // Sauvegarder des données pour des tailles de vocab differentes.
 
 using namespace std;
@@ -42,21 +42,46 @@ void createVocabAndSaveData () {
 
 void LoadDataAndTuneParameters () {
     Mat train_matrix, train_labels, test_matrix, test_labels;
-    train_matrix = db.loadMat("train_matrix.yaml");
+    train_matrix = db.loadMat("train_matrix250.yaml");
     train_labels = db.loadMat("train_labels.yaml");
-    test_matrix = db.loadMat("test_matrix.yaml");
+    test_matrix = db.loadMat("test_matrix250.yaml");
     test_labels = db.loadMat("test_labels.yaml");
+
     // Tune parameters
-    float min_c = 1e-6, step_c = 10, max_c = 1e6;
-    float min_gamma = 1e-6, step_gamma = 10, max_gamma = 1e6;
+    float min_c = 1e-5, step_c = 10, max_c = 1e5;
+    float min_gamma = 1e-5, step_gamma = 10, max_gamma = 1e5;
     sh.tuneParameters(train_matrix, train_labels, test_matrix, test_labels,
                       min_c, step_c, max_c,
                       min_gamma, step_gamma, max_gamma);
 }
 
+void mat2libsvm(Mat data, Mat labels, string path) {
+    ofstream s;
+    s.open (path.c_str());
+    for (size_t i = 0; i < data.rows; ++i) {
+        s << labels.at<float>(i) << " ";
+        for (size_t j = 0; j < data.row(i).cols; ++j) {
+            s << j + 1 << ":" << data.row(i).at<float>(j) << " ";
+        }
+        s << endl;
+    }
+    s.close();
+}
+
+void mat2libsvm() {
+    Mat train_matrix, train_labels, test_matrix, test_labels;
+    train_matrix = db.loadMat("train_matrix100.yaml");
+    train_labels = db.loadMat("train_labels.yaml");
+    test_matrix = db.loadMat("test_matrix100.yaml");
+    test_labels = db.loadMat("test_labels.yaml");
+    mat2libsvm(train_matrix, train_labels, "train");
+    mat2libsvm(test_matrix, test_labels, "test");
+}
+
 int main() {
     //createVocabAndSaveData ();
-    LoadDataAndTuneParameters ();
+    //LoadDataAndTuneParameters ();
+    mat2libsvm();
     return 0;
 }
 /*
@@ -75,3 +100,4 @@ for(;;) {
     if(waitKey(30) >= 0) break;
 }
 */
+
