@@ -86,6 +86,7 @@ bool Pipeline2D::createVocabulary (vector<Mat> images,
     vector<KeyPoint> tmp_kpts;
     cv::Mat tmp_descs;
     for ( size_t i = 0; i < images.size(); ++i ) {
+        //imshow("kikou",images[i]); waitKey(0);
         Mat gray;
         getGray(images[i], gray);
         extractFeatures(gray, tmp_kpts, tmp_descs);

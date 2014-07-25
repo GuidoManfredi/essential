@@ -12,7 +12,7 @@
 	<opencv2/legacy/legacy.hpp>
 	<opencv2/imgproc/imgproc.hpp>
 
-1406301829 source:/home/gmanfred/devel/essential/cpp/swift_hand/main.cpp
+1406303448 source:/home/gmanfred/devel/essential/cpp/swift_hand/main.cpp
 	<iostream>
 	<fstream>
 	<opencv2/highgui/highgui.hpp>
@@ -42,15 +42,16 @@
 	"opencv2/core/core.hpp"
 	"opencv2/features2d/features2d.hpp"
 
-1406302102 source:/home/gmanfred/devel/essential/cpp/swift_hand/Pipeline2D.cpp
+1406303418 source:/home/gmanfred/devel/essential/cpp/swift_hand/Pipeline2D.cpp
 	<cassert>
 	<opencv2/imgproc/imgproc.hpp>
 	<opencv2/nonfree/nonfree.hpp>
 	"Pipeline2D.h"
 
-1406300083 /home/gmanfred/devel/essential/cpp/swift_hand/Pipeline2D.h
+1406303235 /home/gmanfred/devel/essential/cpp/swift_hand/Pipeline2D.h
 	<iostream>
 	<opencv2/core/core.hpp>
+	<opencv2/highgui/highgui.hpp>
 	<opencv2/features2d/features2d.hpp>
 	"BoF.h"
 
@@ -62,7 +63,7 @@
 1406299179 source:/home/gmanfred/devel/essential/cpp/swift_hand/generateList.cpp
 	"generateList.h"
 
-1406302121 source:/home/gmanfred/devel/essential/cpp/swift_hand/Database.cpp
+1406303402 source:/home/gmanfred/devel/essential/cpp/swift_hand/Database.cpp
 	"Database.h"
 
 1406300322 /home/gmanfred/devel/essential/cpp/swift_hand/Database.h
