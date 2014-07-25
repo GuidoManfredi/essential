@@ -1,11 +1,11 @@
 #include "HOM.h"
 
 int main (int argc, char** argv) {
-    assert(argc == 1 && "Usage: model image_path);
+    assert(argc == 1 && "Usage: model object_id image_path output_path");
 
     HOM modeler;
-    Face face = modeler.createFace(argv[1]);
-    modeler.save(face);
+    Face face = modeler.createFace(argv[2], atoi(argv[1]));
+    face.save(argv[3]);
     
     return 0;
 }

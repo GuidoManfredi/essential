@@ -2,6 +2,7 @@
 
 #include <opencv2/core/core.hpp>
 #include "Face.h"
+#include "FilesManager.h"
 
 class HOD {
   public:
@@ -14,21 +15,13 @@ class HOD {
     void setIntrinsics(cv::Mat K);
     void loadIntrinsics(std::string intrinsics_path);
 
-    //std::vector<Face> getFaces(std::vector<Object> objs);
-    //int find(Object obj, cv::Mat frame, cv::Mat P);
-    //int loadObjectsList(std::string list_path);
-    //int loadObject(std::string path);
   private:
     int findFaces(std::vector<Face> faces, cv::Mat frame, vector<cv::Mat> P);
     int findFace(Face face, cv::Mat frame, 
-                 std::vector<cv::DMatch> &matches, cv::Mat P);
-                 
-    int ReadList(std::string list_path,
-                 std::vector<std::string> paths);
+                 std::vector<cv::DMatch> &inlier_matches, cv::Mat P);
                 
     cv::Mat K_;
     std::vector<Faces> faces_;
-    //std::vector<Object> objs_;
 };
 
 /*

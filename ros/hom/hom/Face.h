@@ -8,7 +8,9 @@ class Face {
     Face();
     Face(cv::Mat img, std::vector<cv::KeyPoint> kpts, cv::Mat descs);
     
+    save(std::string file_path);
   private:
+    int id;
     cv::Mat image_;
     std::vector<cv::KeyPoint> keypoints_;
     cv::Mat descriptors_;

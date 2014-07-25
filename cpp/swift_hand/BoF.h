@@ -19,7 +19,7 @@ class BoF
     int descriptorType() const;
 
   private:
-    cv::Mat vocabulary;
+    cv::Mat vocabulary_;
     cv::Ptr<cv::DescriptorExtractor> dextractor;
     cv::Ptr<cv::DescriptorMatcher> dmatcher;
 };

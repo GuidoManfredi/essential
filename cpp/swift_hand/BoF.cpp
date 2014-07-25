@@ -51,16 +51,16 @@ BoF::BoF( const Ptr<DescriptorExtractor>& _dextractor,
 BoF::~BoF()
 {}
 
-void BoF::setVocabulary( const Mat& _vocabulary )
+void BoF::setVocabulary( const Mat& vocabulary )
 {
     dmatcher->clear();
-    vocabulary = _vocabulary;
-    dmatcher->add( vector<Mat>(1, vocabulary) );
+    vocabulary_ = vocabulary;
+    dmatcher->add( vector<Mat>(1, vocabulary_) );
 }
 
 const Mat& BoF::getVocabulary() const
 {
-    return vocabulary;
+    return vocabulary_;
 }
 
 void BoF::compute( const Mat& image, vector<KeyPoint>& keypoints, Mat& imgDescriptor,
@@ -107,7 +107,7 @@ void BoF::compute( const Mat& image, vector<KeyPoint>& keypoints, Mat& imgDescri
 
 int BoF::descriptorSize() const
 {
-    return vocabulary.empty() ? 0 : vocabulary.rows;
+    return vocabulary_.empty() ? 0 : vocabulary_.rows;
 }
 
 int BoF::descriptorType() const

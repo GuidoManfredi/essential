@@ -7,6 +7,8 @@
 
 class Pipeline2D {
   public:
+
+  private:
     int extractFeatures(cv::Mat image, 
                     std::vector<cv::KeyPoint> &kpts, cv::Mat &descriptors);
     int match(cv::Mat descs1, cv::Mat descs2, 

@@ -9,15 +9,15 @@ using namespace std;
 using namespace cv;
 
 Pipeline2D::Pipeline2D() {
-    number_visual_words_ = 750; // vocabulary size
+    number_visual_words_ = 500; // vocabulary size
 
     detector_                                 = new cv::SIFT();
     extractor_                                = new cv::SIFT();
     matcher_                                  = new cv::BFMatcher(cv::NORM_L2, true);
 
     bow_matcher_                              = new cv::BFMatcher(cv::NORM_L2, false);
-    bow_trainer_ = new BOWKMeansTrainer(number_visual_words_);
-    bow_extractor_ = new BoF(extractor_, bow_matcher_);
+    bow_trainer_                              = new BOWKMeansTrainer(number_visual_words_);
+    bow_extractor_                            = new BoF(extractor_, bow_matcher_);
 
     minNumberMatchesAllowed_                  = 8;
 }
@@ -86,7 +86,9 @@ bool Pipeline2D::createVocabulary (vector<Mat> images,
     vector<KeyPoint> tmp_kpts;
     cv::Mat tmp_descs;
     for ( size_t i = 0; i < images.size(); ++i ) {
-        extractFeatures(images[i], tmp_kpts, tmp_descs);
+        Mat gray;
+        getGray(images[i], gray);
+        extractFeatures(gray, tmp_kpts, tmp_descs);
         bow_trainer_->add(tmp_descs);
     }
     vocabulary = bow_trainer_->cluster();
@@ -109,24 +111,6 @@ bool Pipeline2D::computeBoW (Mat image, vector<KeyPoint> keypoints,
                              Mat &descriptors, Mat &bow_descriptor) {
     vector<vector<int> > pointIdxsOfClusters;
     bow_extractor_->compute(image, keypoints, bow_descriptor, &pointIdxsOfClusters, &descriptors);
-}
-
-int Pipeline2D::matchBoW (const cv::Mat &query_bow, const std::vector<cv::Mat> &training_bow) {
-    double min_distance = 1000;
-    int min_i = 0;
-    for ( size_t i = 0; i < training_bow.size(); ++i ) {
-        double distance = distanceBoW (query_bow, training_bow[i]);
-        if (distance < min_distance) {
-            min_i = i;
-            min_distance = distance;
-        }
-    }
-    return min_i;
-}
-
-double Pipeline2D::distanceBoW (Mat query, Mat train) {
-    double distance = compareHist(query, train, CV_COMP_BHATTACHARYYA);
-    return distance;
 }
 ////////////////////////////////////////////////////////////////////////////////
 // Vocabulary Part

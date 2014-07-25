@@ -35,8 +35,6 @@ class Pipeline2D {
                      cv::Mat &bow_descriptor);
     bool computeBoW (cv::Mat image, std::vector<cv::KeyPoint> keypoints,
                      cv::Mat &descriptors, cv::Mat &bow_descriptor);
-    int matchBoW (const cv::Mat &query_bow, const std::vector<cv::Mat> &training_bow);
-    double distanceBoW (cv::Mat query, cv::Mat train);
 
     unsigned int minNumberMatchesAllowed_;
 

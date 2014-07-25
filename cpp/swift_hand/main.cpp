@@ -3,6 +3,7 @@
 #include <opencv2/highgui/highgui.hpp>
 #include "SwiftHand.h"
 #include "Database.h"
+#include "HandSeg.h"
 #include "generateList.h"
 
 // TODO
@@ -20,39 +21,62 @@ CvSVM mySVM;
 SwiftHand sh;
 Database db;
 
-void createVocabAndSaveData () {
-    // Create data
+void generateMarcelUniformTrainList(string list_path) {
+    bool append = false;
+    generateListFromFolder("/home/gmanfred/devel/essential/cpp/swift_hand/data/Marcel-Test/A/uniform/", list_path, ".ppm", append, 1);
+    append = true;
+    generateListFromFolder("/home/gmanfred/devel/essential/cpp/swift_hand/data/Marcel-Test/B/uniform/", list_path, ".ppm", append, 2);
+    generateListFromFolder("/home/gmanfred/devel/essential/cpp/swift_hand/data/Marcel-Test/C/uniform/", list_path, ".ppm", append, 3);
+    generateListFromFolder("/home/gmanfred/devel/essential/cpp/swift_hand/data/Marcel-Test/Five/uniform/", list_path, ".ppm", append, 4);
+    generateListFromFolder("/home/gmanfred/devel/essential/cpp/swift_hand/data/Marcel-Test/Point/uniform/", list_path, ".ppm", append, 5);
+    generateListFromFolder("/home/gmanfred/devel/essential/cpp/swift_hand/data/Marcel-Test/V/uniform/", list_path, ".ppm", append, 6);
+}
+
+void generateMarcelComplexTestList6(string list_path) {
+    bool append = false;
+    generateListFromFolder("/home/gmanfred/devel/essential/cpp/swift_hand/data/Marcel-Test/A/complex/", list_path, ".ppm", append, 1);
+    append = true;
+    generateListFromFolder("/home/gmanfred/devel/essential/cpp/swift_hand/data/Marcel-Test/B/complex/", list_path, ".ppm", append, 2);
+    generateListFromFolder("/home/gmanfred/devel/essential/cpp/swift_hand/data/Marcel-Test/C/complex/", list_path, ".ppm", append, 3);
+    generateListFromFolder("/home/gmanfred/devel/essential/cpp/swift_hand/data/Marcel-Test/Five/complex/", list_path, ".ppm", append, 4);
+    generateListFromFolder("/home/gmanfred/devel/essential/cpp/swift_hand/data/Marcel-Test/Point/complex/", list_path, ".ppm", append, 5);
+    generateListFromFolder("/home/gmanfred/devel/essential/cpp/swift_hand/data/Marcel-Test/V/complex/", list_path, ".ppm", append, 6);
+}
+
+void generateMoeslundUniformTrainList(string list_path) {
+    bool append = false;
+    generateListFromFolder("/home/gmanfred/devel/essential/cpp/swift_hand/data/moeslund/A/", list_path, ".tif", append, 1);
+    append = true;
+    generateListFromFolder("/home/gmanfred/devel/essential/cpp/swift_hand/data/moeslund/B/", list_path, ".tif", append, 2);
+}
+
+void generateMarcelComplexTestList2(string list_path) {
+    bool append = false;
+    generateListFromFolder("/home/gmanfred/devel/essential/cpp/swift_hand/data/Marcel-Test/A/complex/", list_path, ".ppm", append, 1);
+    append = true;
+    generateListFromFolder("/home/gmanfred/devel/essential/cpp/swift_hand/data/Marcel-Test/B/complex/", list_path, ".ppm", append, 2);
+}
+
+void createVocabAndSaveData (string train_list_path, string test_list_path) {
     cv::Mat train_matrix, test_matrix;
     std::vector<float> train_labels, test_labels;
+    bool skin_seg = false;
     cout << "Loading train data" << endl;
-//    db.createTrainDataVocab ("/home/gmanfred/devel/essential/cpp/swift_hand/data/Marcel-Train/marcel_train_list.txt", "vocab.yaml",
-//                            train_matrix, train_labels);
-    db.createTrainData ("/home/gmanfred/devel/essential/cpp/swift_hand/data/Marcel-Train/marcel_train_list.txt",
-                        train_matrix, train_labels);
+    db.createTrainData (train_list_path, train_matrix, train_labels, skin_seg);
+
     cout << "Loading test data" << endl;
-    db.createTestData ("/home/gmanfred/devel/essential/cpp/swift_hand/data/Marcel-Test/marcel_test_list.txt",
-                       test_matrix, test_labels);
+    skin_seg = true;
+    db.createTestData (test_list_path, test_matrix, test_labels, skin_seg);
+
+    cout << "Saving train data" << endl;
     db.saveMat("train_matrix.yaml", train_matrix);
     Mat train_labels_mat(train_labels.size(), 1, CV_32F, &train_labels[0]); // convert vector to matrix
     db.saveMat("train_labels.yaml", train_labels_mat);
+
+    cout << "Saving test data" << endl;
     db.saveMat("test_matrix.yaml", test_matrix);
     Mat test_labels_mat(test_labels.size(), 1, CV_32F, &test_labels[0]); // convert vector to matrix
     db.saveMat("test_labels.yaml", test_labels_mat);
-}
-
-void LoadDataAndTuneParameters () {
-    Mat train_matrix, train_labels, test_matrix, test_labels;
-    train_matrix = db.loadMat("train_matrix250.yaml");
-    train_labels = db.loadMat("train_labels.yaml");
-    test_matrix = db.loadMat("test_matrix250.yaml");
-    test_labels = db.loadMat("test_labels.yaml");
-
-    // Tune parameters
-    float min_c = 1e-5, step_c = 10, max_c = 1e5;
-    float min_gamma = 1e-5, step_gamma = 10, max_gamma = 1e5;
-    sh.tuneParameters(train_matrix, train_labels, test_matrix, test_labels,
-                      min_c, step_c, max_c,
-                      min_gamma, step_gamma, max_gamma);
 }
 
 void mat2libsvm(Mat data, Mat labels, string path) {
@@ -70,17 +94,29 @@ void mat2libsvm(Mat data, Mat labels, string path) {
 
 void mat2libsvm() {
     Mat train_matrix, train_labels, test_matrix, test_labels;
-    train_matrix = db.loadMat("train_matrix100.yaml");
+    train_matrix = db.loadMat("train_matrix.yaml");
     train_labels = db.loadMat("train_labels.yaml");
-    test_matrix = db.loadMat("test_matrix100.yaml");
+    test_matrix = db.loadMat("test_matrix.yaml");
     test_labels = db.loadMat("test_labels.yaml");
     mat2libsvm(train_matrix, train_labels, "train");
     mat2libsvm(test_matrix, test_labels, "test");
 }
 
+void testSkinSeg() {
+    Mat image = imread("/home/gmanfred/devel/essential/cpp/swift_hand/data/Marcel-Test/A/complex/A-complex02.ppm", CV_LOAD_IMAGE_COLOR);
+    HandSeg hs;
+    Mat hand = hs.getHand(image);
+    imshow("kikou", hand); waitKey(0);
+}
+
 int main() {
-    //createVocabAndSaveData ();
-    //LoadDataAndTuneParameters ();
+    string train_list_path("data/train_list.txt");
+    string test_list_path("data/test_list.txt");
+    generateMarcelUniformTrainList(train_list_path);
+    generateMarcelComplexTestList6(test_list_path);
+    //generateMoeslundUniformTrainList(train_list_path);
+    //generateMarcelComplexTestList2(test_list_path);
+    createVocabAndSaveData (train_list_path, test_list_path);
     mat2libsvm();
     return 0;
 }

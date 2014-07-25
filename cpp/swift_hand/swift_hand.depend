@@ -12,12 +12,13 @@
 	<opencv2/legacy/legacy.hpp>
 	<opencv2/imgproc/imgproc.hpp>
 
-1406204821 source:/home/gmanfred/devel/essential/cpp/swift_hand/main.cpp
+1406301829 source:/home/gmanfred/devel/essential/cpp/swift_hand/main.cpp
 	<iostream>
 	<fstream>
 	<opencv2/highgui/highgui.hpp>
 	"SwiftHand.h"
 	"Database.h"
+	"HandSeg.h"
 	"generateList.h"
 
 1405687407 /home/gmanfred/devel/essential/cpp/swift_hand/Posture.h
@@ -34,39 +35,42 @@
 	<opencv2/core/core.hpp>
 	<opencv2/features2d/features2d.hpp>
 
-1405935313 source:/home/gmanfred/devel/essential/cpp/swift_hand/BoF.cpp
+1406300530 source:/home/gmanfred/devel/essential/cpp/swift_hand/BoF.cpp
 	"BoF.h"
 
-1405933629 /home/gmanfred/devel/essential/cpp/swift_hand/BoF.h
+1406300484 /home/gmanfred/devel/essential/cpp/swift_hand/BoF.h
 	"opencv2/core/core.hpp"
 	"opencv2/features2d/features2d.hpp"
 
-1406196385 source:/home/gmanfred/devel/essential/cpp/swift_hand/Pipeline2D.cpp
+1406302102 source:/home/gmanfred/devel/essential/cpp/swift_hand/Pipeline2D.cpp
 	<cassert>
 	<opencv2/imgproc/imgproc.hpp>
 	<opencv2/nonfree/nonfree.hpp>
 	"Pipeline2D.h"
 
-1406191918 /home/gmanfred/devel/essential/cpp/swift_hand/Pipeline2D.h
+1406300083 /home/gmanfred/devel/essential/cpp/swift_hand/Pipeline2D.h
 	<iostream>
 	<opencv2/core/core.hpp>
 	<opencv2/features2d/features2d.hpp>
 	"BoF.h"
 
-1406122748 /home/gmanfred/devel/essential/cpp/swift_hand/generateList.h
+1406299183 /home/gmanfred/devel/essential/cpp/swift_hand/generateList.h
 	<fstream>
+	<boost/filesystem.hpp>
+	<boost/algorithm/string.hpp>
 
-1406122761 source:/home/gmanfred/devel/essential/cpp/swift_hand/generateList.cpp
+1406299179 source:/home/gmanfred/devel/essential/cpp/swift_hand/generateList.cpp
 	"generateList.h"
 
-1406128125 source:/home/gmanfred/devel/essential/cpp/swift_hand/Database.cpp
+1406302121 source:/home/gmanfred/devel/essential/cpp/swift_hand/Database.cpp
 	"Database.h"
 
-1406128131 /home/gmanfred/devel/essential/cpp/swift_hand/Database.h
+1406300322 /home/gmanfred/devel/essential/cpp/swift_hand/Database.h
 	<fstream>
 	<opencv2/core/core.hpp>
 	<opencv2/highgui/highgui.hpp>
 	<opencv2/imgproc/imgproc.hpp>
+	"HandSeg.h"
 	"Pipeline2D.h"
 
 1406205584 source:/home/gmanfred/devel/essential/cpp/swift_hand/SwiftHand.cpp
@@ -75,4 +79,13 @@
 1406129532 /home/gmanfred/devel/essential/cpp/swift_hand/SwiftHand.h
 	<fstream>
 	<opencv2/ml/ml.hpp>
+
+1406301978 source:/home/gmanfred/devel/essential/cpp/swift_hand/HandSeg.cpp
+	"HandSeg.h"
+
+1406290913 /home/gmanfred/devel/essential/cpp/swift_hand/HandSeg.h
+	<iostream>
+	<opencv2/core/core.hpp>
+	<opencv2/imgproc/imgproc.hpp>
+	<opencv2/highgui/highgui.hpp>
 
