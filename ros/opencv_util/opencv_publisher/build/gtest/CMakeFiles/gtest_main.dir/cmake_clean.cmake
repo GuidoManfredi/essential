@@ -1,7 +1,7 @@
 FILE(REMOVE_RECURSE
   "CMakeFiles/gtest_main.dir/src/gtest_main.cc.o"
-  "/home/gmanfred/devel/ros/my_packs/opencv_util/opencv_publisher/lib/libgtest_main.pdb"
-  "/home/gmanfred/devel/ros/my_packs/opencv_util/opencv_publisher/lib/libgtest_main.so"
+  "/home/gmanfred/devel/essential/ros/opencv_util/opencv_publisher/lib/libgtest_main.pdb"
+  "/home/gmanfred/devel/essential/ros/opencv_util/opencv_publisher/lib/libgtest_main.so"
 )
 
 # Per-language clean rules from dependency scanning.

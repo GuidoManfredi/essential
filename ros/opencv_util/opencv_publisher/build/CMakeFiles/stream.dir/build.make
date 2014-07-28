@@ -35,10 +35,10 @@ RM = /usr/bin/cmake -E remove -f
 CMAKE_EDIT_COMMAND = /usr/bin/ccmake
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/gmanfred/devel/ros/my_packs/opencv_util/opencv_publisher
+CMAKE_SOURCE_DIR = /home/gmanfred/devel/essential/ros/opencv_util/opencv_publisher
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/gmanfred/devel/ros/my_packs/opencv_util/opencv_publisher/build
+CMAKE_BINARY_DIR = /home/gmanfred/devel/essential/ros/opencv_util/opencv_publisher/build
 
 # Include any dependencies generated for this target.
 include CMakeFiles/stream.dir/depend.make
@@ -52,43 +52,43 @@ include CMakeFiles/stream.dir/flags.make
 CMakeFiles/stream.dir/src/stream.cpp.o: CMakeFiles/stream.dir/flags.make
 CMakeFiles/stream.dir/src/stream.cpp.o: ../src/stream.cpp
 CMakeFiles/stream.dir/src/stream.cpp.o: ../manifest.xml
-CMakeFiles/stream.dir/src/stream.cpp.o: /opt/ros/hydro/share/cpp_common/package.xml
-CMakeFiles/stream.dir/src/stream.cpp.o: /opt/ros/hydro/share/rostime/package.xml
-CMakeFiles/stream.dir/src/stream.cpp.o: /opt/ros/hydro/share/roscpp_traits/package.xml
-CMakeFiles/stream.dir/src/stream.cpp.o: /opt/ros/hydro/share/roscpp_serialization/package.xml
-CMakeFiles/stream.dir/src/stream.cpp.o: /opt/ros/hydro/share/genmsg/package.xml
-CMakeFiles/stream.dir/src/stream.cpp.o: /opt/ros/hydro/share/genpy/package.xml
-CMakeFiles/stream.dir/src/stream.cpp.o: /opt/ros/hydro/share/message_runtime/package.xml
-CMakeFiles/stream.dir/src/stream.cpp.o: /opt/ros/hydro/share/std_msgs/package.xml
-CMakeFiles/stream.dir/src/stream.cpp.o: /opt/ros/hydro/share/geometry_msgs/package.xml
-CMakeFiles/stream.dir/src/stream.cpp.o: /opt/ros/hydro/share/sensor_msgs/package.xml
-CMakeFiles/stream.dir/src/stream.cpp.o: /opt/ros/hydro/share/catkin/package.xml
-CMakeFiles/stream.dir/src/stream.cpp.o: /opt/ros/hydro/share/opencv2/package.xml
-CMakeFiles/stream.dir/src/stream.cpp.o: /opt/ros/hydro/share/rosconsole/package.xml
-CMakeFiles/stream.dir/src/stream.cpp.o: /opt/ros/hydro/share/cv_bridge/package.xml
-CMakeFiles/stream.dir/src/stream.cpp.o: /opt/ros/hydro/share/rosgraph_msgs/package.xml
-CMakeFiles/stream.dir/src/stream.cpp.o: /opt/ros/hydro/share/xmlrpcpp/package.xml
-CMakeFiles/stream.dir/src/stream.cpp.o: /opt/ros/hydro/share/roscpp/package.xml
-CMakeFiles/stream.dir/src/stream.cpp.o: /opt/ros/hydro/share/message_filters/package.xml
-CMakeFiles/stream.dir/src/stream.cpp.o: /opt/ros/hydro/share/console_bridge/package.xml
-CMakeFiles/stream.dir/src/stream.cpp.o: /opt/ros/hydro/share/class_loader/package.xml
-CMakeFiles/stream.dir/src/stream.cpp.o: /opt/ros/hydro/share/rospack/package.xml
-CMakeFiles/stream.dir/src/stream.cpp.o: /opt/ros/hydro/share/roslib/package.xml
-CMakeFiles/stream.dir/src/stream.cpp.o: /opt/ros/hydro/share/pluginlib/package.xml
-CMakeFiles/stream.dir/src/stream.cpp.o: /opt/ros/hydro/share/image_transport/package.xml
-CMakeFiles/stream.dir/src/stream.cpp.o: /opt/ros/hydro/share/camera_calibration_parsers/package.xml
-CMakeFiles/stream.dir/src/stream.cpp.o: /opt/ros/hydro/share/camera_info_manager/package.xml
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/gmanfred/devel/ros/my_packs/opencv_util/opencv_publisher/build/CMakeFiles $(CMAKE_PROGRESS_1)
+CMakeFiles/stream.dir/src/stream.cpp.o: /opt/ros/groovy/share/cpp_common/package.xml
+CMakeFiles/stream.dir/src/stream.cpp.o: /opt/ros/groovy/share/rostime/package.xml
+CMakeFiles/stream.dir/src/stream.cpp.o: /opt/ros/groovy/share/roscpp_traits/package.xml
+CMakeFiles/stream.dir/src/stream.cpp.o: /opt/ros/groovy/share/roscpp_serialization/package.xml
+CMakeFiles/stream.dir/src/stream.cpp.o: /opt/ros/groovy/share/genmsg/package.xml
+CMakeFiles/stream.dir/src/stream.cpp.o: /opt/ros/groovy/share/genpy/package.xml
+CMakeFiles/stream.dir/src/stream.cpp.o: /opt/ros/groovy/share/message_runtime/package.xml
+CMakeFiles/stream.dir/src/stream.cpp.o: /opt/ros/groovy/share/std_msgs/package.xml
+CMakeFiles/stream.dir/src/stream.cpp.o: /opt/ros/groovy/share/geometry_msgs/package.xml
+CMakeFiles/stream.dir/src/stream.cpp.o: /opt/ros/groovy/share/sensor_msgs/package.xml
+CMakeFiles/stream.dir/src/stream.cpp.o: /opt/ros/groovy/share/catkin/package.xml
+CMakeFiles/stream.dir/src/stream.cpp.o: /opt/ros/groovy/share/opencv2/package.xml
+CMakeFiles/stream.dir/src/stream.cpp.o: /opt/ros/groovy/share/rosconsole/package.xml
+CMakeFiles/stream.dir/src/stream.cpp.o: /opt/ros/groovy/share/cv_bridge/package.xml
+CMakeFiles/stream.dir/src/stream.cpp.o: /opt/ros/groovy/share/rosgraph_msgs/package.xml
+CMakeFiles/stream.dir/src/stream.cpp.o: /opt/ros/groovy/share/xmlrpcpp/package.xml
+CMakeFiles/stream.dir/src/stream.cpp.o: /opt/ros/groovy/share/roscpp/package.xml
+CMakeFiles/stream.dir/src/stream.cpp.o: /opt/ros/groovy/share/message_filters/package.xml
+CMakeFiles/stream.dir/src/stream.cpp.o: /opt/ros/groovy/share/console_bridge/package.xml
+CMakeFiles/stream.dir/src/stream.cpp.o: /opt/ros/groovy/share/class_loader/package.xml
+CMakeFiles/stream.dir/src/stream.cpp.o: /opt/ros/groovy/share/rospack/package.xml
+CMakeFiles/stream.dir/src/stream.cpp.o: /opt/ros/groovy/share/roslib/package.xml
+CMakeFiles/stream.dir/src/stream.cpp.o: /opt/ros/groovy/share/pluginlib/package.xml
+CMakeFiles/stream.dir/src/stream.cpp.o: /opt/ros/groovy/share/image_transport/package.xml
+CMakeFiles/stream.dir/src/stream.cpp.o: /opt/ros/groovy/share/camera_calibration_parsers/package.xml
+CMakeFiles/stream.dir/src/stream.cpp.o: /opt/ros/groovy/share/camera_info_manager/package.xml
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/gmanfred/devel/essential/ros/opencv_util/opencv_publisher/build/CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/stream.dir/src/stream.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/stream.dir/src/stream.cpp.o -c /home/gmanfred/devel/ros/my_packs/opencv_util/opencv_publisher/src/stream.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/stream.dir/src/stream.cpp.o -c /home/gmanfred/devel/essential/ros/opencv_util/opencv_publisher/src/stream.cpp
 
 CMakeFiles/stream.dir/src/stream.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/stream.dir/src/stream.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -E /home/gmanfred/devel/ros/my_packs/opencv_util/opencv_publisher/src/stream.cpp > CMakeFiles/stream.dir/src/stream.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -E /home/gmanfred/devel/essential/ros/opencv_util/opencv_publisher/src/stream.cpp > CMakeFiles/stream.dir/src/stream.cpp.i
 
 CMakeFiles/stream.dir/src/stream.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/stream.dir/src/stream.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -S /home/gmanfred/devel/ros/my_packs/opencv_util/opencv_publisher/src/stream.cpp -o CMakeFiles/stream.dir/src/stream.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -S /home/gmanfred/devel/essential/ros/opencv_util/opencv_publisher/src/stream.cpp -o CMakeFiles/stream.dir/src/stream.cpp.s
 
 CMakeFiles/stream.dir/src/stream.cpp.o.requires:
 .PHONY : CMakeFiles/stream.dir/src/stream.cpp.o.requires
@@ -124,6 +124,6 @@ CMakeFiles/stream.dir/clean:
 .PHONY : CMakeFiles/stream.dir/clean
 
 CMakeFiles/stream.dir/depend:
-	cd /home/gmanfred/devel/ros/my_packs/opencv_util/opencv_publisher/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/gmanfred/devel/ros/my_packs/opencv_util/opencv_publisher /home/gmanfred/devel/ros/my_packs/opencv_util/opencv_publisher /home/gmanfred/devel/ros/my_packs/opencv_util/opencv_publisher/build /home/gmanfred/devel/ros/my_packs/opencv_util/opencv_publisher/build /home/gmanfred/devel/ros/my_packs/opencv_util/opencv_publisher/build/CMakeFiles/stream.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/gmanfred/devel/essential/ros/opencv_util/opencv_publisher/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/gmanfred/devel/essential/ros/opencv_util/opencv_publisher /home/gmanfred/devel/essential/ros/opencv_util/opencv_publisher /home/gmanfred/devel/essential/ros/opencv_util/opencv_publisher/build /home/gmanfred/devel/essential/ros/opencv_util/opencv_publisher/build /home/gmanfred/devel/essential/ros/opencv_util/opencv_publisher/build/CMakeFiles/stream.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/stream.dir/depend
 

@@ -35,10 +35,10 @@ RM = /usr/bin/cmake -E remove -f
 CMAKE_EDIT_COMMAND = /usr/bin/ccmake
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/gmanfred/devel/ros/my_packs/opencv_util/opencv_publisher
+CMAKE_SOURCE_DIR = /home/gmanfred/devel/essential/ros/opencv_util/opencv_publisher
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/gmanfred/devel/ros/my_packs/opencv_util/opencv_publisher/build
+CMAKE_BINARY_DIR = /home/gmanfred/devel/essential/ros/opencv_util/opencv_publisher/build
 
 # Utility rule file for doxygen.
 
@@ -46,7 +46,7 @@ CMAKE_BINARY_DIR = /home/gmanfred/devel/ros/my_packs/opencv_util/opencv_publishe
 include CMakeFiles/doxygen.dir/progress.make
 
 CMakeFiles/doxygen:
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/gmanfred/devel/ros/my_packs/opencv_util/opencv_publisher/build/CMakeFiles $(CMAKE_PROGRESS_1)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/gmanfred/devel/essential/ros/opencv_util/opencv_publisher/build/CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "doxygen found"
 
 doxygen: CMakeFiles/doxygen
@@ -62,6 +62,6 @@ CMakeFiles/doxygen.dir/clean:
 .PHONY : CMakeFiles/doxygen.dir/clean
 
 CMakeFiles/doxygen.dir/depend:
-	cd /home/gmanfred/devel/ros/my_packs/opencv_util/opencv_publisher/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/gmanfred/devel/ros/my_packs/opencv_util/opencv_publisher /home/gmanfred/devel/ros/my_packs/opencv_util/opencv_publisher /home/gmanfred/devel/ros/my_packs/opencv_util/opencv_publisher/build /home/gmanfred/devel/ros/my_packs/opencv_util/opencv_publisher/build /home/gmanfred/devel/ros/my_packs/opencv_util/opencv_publisher/build/CMakeFiles/doxygen.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/gmanfred/devel/essential/ros/opencv_util/opencv_publisher/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/gmanfred/devel/essential/ros/opencv_util/opencv_publisher /home/gmanfred/devel/essential/ros/opencv_util/opencv_publisher /home/gmanfred/devel/essential/ros/opencv_util/opencv_publisher/build /home/gmanfred/devel/essential/ros/opencv_util/opencv_publisher/build /home/gmanfred/devel/essential/ros/opencv_util/opencv_publisher/build/CMakeFiles/doxygen.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/doxygen.dir/depend
 

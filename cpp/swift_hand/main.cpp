@@ -21,40 +21,49 @@ CvSVM mySVM;
 SwiftHand sh;
 Database db;
 
+string base_path ("/home/gmanfred/devel/essential/cpp/swift_hand/data/");
+
+void generateMoeslundTrainList(string list_path) {
+    bool append = false;
+    generateListFromFolder(base_path + "moeslund/A/", list_path, ".tif", append, 1);
+    append = true;
+    generateListFromFolder(base_path + "moeslund/B/", list_path, ".tif", append, 2);
+}
+
 void generateMarcelUniformTrainList(string list_path) {
     bool append = false;
-    generateListFromFolder("/home/gmanfred/devel/essential/cpp/swift_hand/data/Marcel-Test/MiniTrieschGallery/A/uniform/", list_path, ".pgm", append, 1);
+    generateListFromFolder(base_path + "Marcel-Test/MiniTrieschGallery/A/uniform/", list_path, ".pgm", append, 1);
     append = true;
-    generateListFromFolder("/home/gmanfred/devel/essential/cpp/swift_hand/data/Marcel-Test/MiniTrieschGallery/B/uniform/", list_path, ".pgm", append, 2);
-    generateListFromFolder("/home/gmanfred/devel/essential/cpp/swift_hand/data/Marcel-Test/MiniTrieschGallery/C/uniform/", list_path, ".pgm", append, 3);
-    //generateListFromFolder("/home/gmanfred/devel/essential/cpp/swift_hand/data/Marcel-Test/MiniTrieschGallery/Five/uniform/", list_path, ".pgm", append, 4);
-    //generateListFromFolder("/home/gmanfred/devel/essential/cpp/swift_hand/data/Marcel-Test/MiniTrieschGallery/Point/uniform/", list_path, ".pgm", append, 5);
-    generateListFromFolder("/home/gmanfred/devel/essential/cpp/swift_hand/data/Marcel-Test/MiniTrieschGallery/V/uniform/", list_path, ".pgm", append, 6);
+    generateListFromFolder(base_path + "Marcel-Test/MiniTrieschGallery/B/uniform/", list_path, ".pgm", append, 2);
+    //generateListFromFolder(base_path + "Marcel-Test/MiniTrieschGallery/C/uniform/", list_path, ".pgm", append, 3);
+    //generateListFromFolder(base_path + "Marcel-Test/MiniTrieschGallery/Five/uniform/", list_path, ".pgm", append, 3);
+    //generateListFromFolder(base_path + "Marcel-Test/MiniTrieschGallery/Point/uniform/", list_path, ".pgm", append, 3);
+    //generateListFromFolder(base_path + "Marcel-Test/MiniTrieschGallery/V/uniform/", list_path, ".pgm", append, 6);
+    generateListFromFolder(base_path + "Marcel-Train/mini/A/", list_path, ".ppm", append, 1);
+    generateListFromFolder(base_path + "Marcel-Train/mini/B/", list_path, ".ppm", append, 2);
+    generateListFromFolder(base_path + "Marcel-Train/mini/Five/", list_path, ".ppm", append, 3);
 }
 
-void generateMarcelComplexTestList6(string list_path) {
+void generateMarcelComplexTestList(string list_path) {
     bool append = false;
-    generateListFromFolder("/home/gmanfred/devel/essential/cpp/swift_hand/data/Marcel-Test/MiniTrieschGallery/A/complex/", list_path, ".pgm", append, 1);
+    generateListFromFolder(base_path + "Marcel-Test/A/complex/", list_path, ".ppm", append, 1);
     append = true;
-    generateListFromFolder("/home/gmanfred/devel/essential/cpp/swift_hand/data/Marcel-Test/MiniTrieschGallery/B/complex/", list_path, ".pgm", append, 2);
-    generateListFromFolder("/home/gmanfred/devel/essential/cpp/swift_hand/data/Marcel-Test/MiniTrieschGallery/C/complex/", list_path, ".pgm", append, 3);
-    //generateListFromFolder("/home/gmanfred/devel/essential/cpp/swift_hand/data/Marcel-Test/MiniTrieschGallery/Five/complex/", list_path, ".pgm", append, 4);
-    //generateListFromFolder("/home/gmanfred/devel/essential/cpp/swift_hand/data/Marcel-Test/MiniTrieschGallery/Point/complex/", list_path, ".pgm", append, 5);
-    generateListFromFolder("/home/gmanfred/devel/essential/cpp/swift_hand/data/Marcel-Test/MiniTrieschGallery/V/complex/", list_path, ".pgm", append, 6);
+    generateListFromFolder(base_path + "Marcel-Test/B/complex/", list_path, ".ppm", append, 2);
+    //generateListFromFolder(base_path + "Marcel-Test/MiniTrieschGallery/C/complex/", list_path, ".ppm", append, 3);
+    //generateListFromFolder(base_path + "Marcel-Test/Five/complex/", list_path, ".ppm", append, 3);
+    //generateListFromFolder(base_path + "Marcel-Test/Point/complex/", list_path, ".ppm", append, 3);
+    //generateListFromFolder(base_path + "Marcel-Test/MiniTrieschGallery/V/complex/", list_path, ".ppm", append, 6);
 }
 
-void generateMoeslundUniformTrainList(string list_path) {
+void generateMarcelComplexTestListMini(string list_path) {
     bool append = false;
-    generateListFromFolder("/home/gmanfred/devel/essential/cpp/swift_hand/data/moeslund/A/", list_path, ".tif", append, 1);
+    generateListFromFolder(base_path + "Marcel-Test/MiniTrieschGallery/A/complex/", list_path, ".pgm", append, 1);
     append = true;
-    generateListFromFolder("/home/gmanfred/devel/essential/cpp/swift_hand/data/moeslund/B/", list_path, ".tif", append, 2);
-}
-
-void generateMarcelComplexTestList2(string list_path) {
-    bool append = false;
-    generateListFromFolder("/home/gmanfred/devel/essential/cpp/swift_hand/data/Marcel-Test/A/complex/", list_path, ".ppm", append, 1);
-    append = true;
-    generateListFromFolder("/home/gmanfred/devel/essential/cpp/swift_hand/data/Marcel-Test/B/complex/", list_path, ".ppm", append, 2);
+    generateListFromFolder(base_path + "Marcel-Test/MiniTrieschGallery/B/complex/", list_path, ".pgm", append, 2);
+    //generateListFromFolder(base_path + "Marcel-Test/MiniTrieschGallery/C/complex/", list_path, ".pgm", append, 3);
+    //generateListFromFolder(base_path + "Marcel-Test/MiniTrieschGallery/Five/complex/", list_path, ".pgm", append, 4);
+    generateListFromFolder(base_path + "Marcel-Test/MiniTrieschGallery/Point/complex/", list_path, ".pgm", append, 3);
+    //generateListFromFolder(base_path + "Marcel-Test/MiniTrieschGallery/V/complex/", list_path, ".pgm", append, 6);
 }
 
 void createVocabAndSaveData (string train_list_path, string test_list_path) {
@@ -103,21 +112,25 @@ void mat2libsvm() {
 }
 
 void testSkinSeg() {
-    Mat image = imread("/home/gmanfred/devel/essential/cpp/swift_hand/data/Marcel-Test/A/complex/A-complex02.ppm", CV_LOAD_IMAGE_COLOR);
+    Mat image = imread(base_path + "Marcel-Test/A/complex/A-complex02.ppm", CV_LOAD_IMAGE_COLOR);
     HandSeg hs;
     Mat hand = hs.getHand(image);
     imshow("kikou", hand); waitKey(0);
 }
 
-int main() {
+void tuneSVM() {
     string train_list_path("data/train_list.txt");
     string test_list_path("data/test_list.txt");
-    generateMarcelUniformTrainList(train_list_path);
-    generateMarcelComplexTestList6(test_list_path);
-    //generateMoeslundUniformTrainList(train_list_path);
-    //generateMarcelComplexTestList2(test_list_path);
+    //generateMarcelUniformTrainList(train_list_path);
+    generateMoeslundTrainList(train_list_path);
+    generateMarcelComplexTestList(test_list_path);
     createVocabAndSaveData (train_list_path, test_list_path);
     mat2libsvm();
+}
+
+int main() {
+    //tuneSVM();
+    testSkinSeg();
     return 0;
 }
 /*

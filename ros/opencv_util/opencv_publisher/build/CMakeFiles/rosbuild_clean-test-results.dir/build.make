@@ -35,10 +35,10 @@ RM = /usr/bin/cmake -E remove -f
 CMAKE_EDIT_COMMAND = /usr/bin/ccmake
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/gmanfred/devel/ros/my_packs/opencv_util/opencv_publisher
+CMAKE_SOURCE_DIR = /home/gmanfred/devel/essential/ros/opencv_util/opencv_publisher
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/gmanfred/devel/ros/my_packs/opencv_util/opencv_publisher/build
+CMAKE_BINARY_DIR = /home/gmanfred/devel/essential/ros/opencv_util/opencv_publisher/build
 
 # Utility rule file for rosbuild_clean-test-results.
 
@@ -61,6 +61,6 @@ CMakeFiles/rosbuild_clean-test-results.dir/clean:
 .PHONY : CMakeFiles/rosbuild_clean-test-results.dir/clean
 
 CMakeFiles/rosbuild_clean-test-results.dir/depend:
-	cd /home/gmanfred/devel/ros/my_packs/opencv_util/opencv_publisher/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/gmanfred/devel/ros/my_packs/opencv_util/opencv_publisher /home/gmanfred/devel/ros/my_packs/opencv_util/opencv_publisher /home/gmanfred/devel/ros/my_packs/opencv_util/opencv_publisher/build /home/gmanfred/devel/ros/my_packs/opencv_util/opencv_publisher/build /home/gmanfred/devel/ros/my_packs/opencv_util/opencv_publisher/build/CMakeFiles/rosbuild_clean-test-results.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/gmanfred/devel/essential/ros/opencv_util/opencv_publisher/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/gmanfred/devel/essential/ros/opencv_util/opencv_publisher /home/gmanfred/devel/essential/ros/opencv_util/opencv_publisher /home/gmanfred/devel/essential/ros/opencv_util/opencv_publisher/build /home/gmanfred/devel/essential/ros/opencv_util/opencv_publisher/build /home/gmanfred/devel/essential/ros/opencv_util/opencv_publisher/build/CMakeFiles/rosbuild_clean-test-results.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/rosbuild_clean-test-results.dir/depend
 

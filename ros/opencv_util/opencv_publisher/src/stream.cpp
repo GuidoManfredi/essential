@@ -1,4 +1,4 @@
-ma#include <iostream>
+#include <iostream>
 
 #include <ros/ros.h>
 #include <opencv2/imgproc/imgproc.hpp>
@@ -36,7 +36,7 @@ int main(int argc, char** argv)
 	//capture.open(CV_CAP_OPENNI); // capture from asus xtion
 	//capture.open(CV_CAP_OPENNI_ASUS); // capture from asus xtion
 	capture.open(atoi(argv[1])); // capture from video device #argv[1]
-	capture.set(CV_CAP_OPENNI_IMAGE_GENERATOR_OUTPUT_MODE, CV_CAP_OPENNI_VGA_30HZ);
+	//capture.set(CV_CAP_OPENNI_IMAGE_GENERATOR_OUTPUT_MODE, CV_CAP_OPENNI_VGA_30HZ);
 	//capture.set(CV_CAP_OPENNI_IMAGE_GENERATOR_OUTPUT_MODE, CV_CAP_OPENNI_SXGA_30HZ);
 	//capture.set(CV_CAP_OPENNI_IMAGE_GENERATOR_OUTPUT_MODE, CV_CAP_OPENNI_QVGA_30HZ);
 	if (!capture.isOpened())

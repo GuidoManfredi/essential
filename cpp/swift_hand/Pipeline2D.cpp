@@ -9,6 +9,7 @@ using namespace std;
 using namespace cv;
 
 Pipeline2D::Pipeline2D() {
+    // 500 = best
     number_visual_words_ = 500; // vocabulary size
 
     detector_                                 = new cv::SIFT();
