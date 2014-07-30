@@ -1,0 +1,85 @@
+# depslib dependency file v1.0
+1406637440 source:/home/gmanfred/devel/essential/ros/objects/hom/hom/Face.cpp
+	"Face.h"
+	<iostream>
+
+1406637029 /home/gmanfred/devel/essential/ros/objects/hom/hom/Face.h
+	<opencv2/core/core.hpp>
+	<opencv2/features2d/features2d.hpp>
+
+1406565334 source:/home/gmanfred/devel/essential/ros/objects/hom/hom/FilesManager.cpp
+	"FilesManager.h"
+
+1406562242 /home/gmanfred/devel/essential/ros/objects/hom/hom/FilesManager.h
+	<fstream>
+	<boost/filesystem.hpp>
+	<boost/algorithm/string.hpp>
+	<opencv2/core/core.hpp>
+	<opencv2/highgui/highgui.hpp>
+
+1406642984 source:/home/gmanfred/devel/essential/ros/objects/hom/hom/HOD.cpp
+	"HOD.h"
+
+1406711315 /home/gmanfred/devel/essential/ros/objects/hom/hom/HOD.h
+	<opencv2/core/core.hpp>
+	"HOM.h"
+	"FilesManager.h"
+	"PipelineGpu2D.h"
+	"PipelineGeom.h"
+
+1406621807 source:/home/gmanfred/devel/essential/ros/objects/hom/hom/HOM.cpp
+	"HOM.h"
+
+1406711334 /home/gmanfred/devel/essential/ros/objects/hom/hom/HOM.h
+	<opencv2/core/core.hpp>
+	"PipelineGpu2D.h"
+	"Face.h"
+	"FilesManager.h"
+
+1406709210 /home/gmanfred/devel/essential/ros/objects/hom/hom/Pipeline2D.h
+	<iostream>
+	<opencv2/core/core.hpp>
+	<opencv2/features2d/features2d.hpp>
+	<GL/glew.h>
+	<GL/glut.h>
+	"/home/gmanfred/devel/sandbox/SiftGPU/src/SiftGPU/SiftGPU.h"
+
+1406710726 source:/home/gmanfred/devel/essential/ros/objects/hom/hom/main.cpp
+	<iostream>
+	"HOM.h"
+	"HOD.h"
+
+1406709474 source:/home/gmanfred/devel/essential/ros/objects/hom/hom/Pipeline2D.cpp
+	<cassert>
+	<opencv2/imgproc/imgproc.hpp>
+	<opencv2/nonfree/nonfree.hpp>
+	"Pipeline2D.h"
+
+1349298500 /home/gmanfred/devel/sandbox/SiftGPU/src/SiftGPU/SiftGPU.h
+
+1406711325 /home/gmanfred/devel/essential/ros/objects/hom/hom/PipelineGeom.h
+	<opencv2/core/core.hpp>
+	<opencv2/highgui/highgui.hpp>
+	<opencv2/imgproc/imgproc.hpp>
+	<opencv2/features2d/features2d.hpp>
+	<opencv2/calib3d/calib3d.hpp>
+	"Face.h"
+	"PipelineGpu2D.h"
+
+1406705506 source:/home/gmanfred/devel/essential/ros/objects/hom/hom/PipelineGeom.cpp
+	"PipelineGeom.h"
+
+1406711221 /home/gmanfred/devel/essential/ros/objects/hom/hom/PipelineGpu2D.h
+	<iostream>
+	<opencv2/core/core.hpp>
+	<opencv2/features2d/features2d.hpp>
+	<GL/glew.h>
+	<GL/glut.h>
+	"/home/gmanfred/devel/sandbox/SiftGPU/src/SiftGPU/SiftGPU.h"
+
+1406711252 source:/home/gmanfred/devel/essential/ros/objects/hom/hom/PipelineGpu2D.cpp
+	<cassert>
+	<opencv2/imgproc/imgproc.hpp>
+	<opencv2/nonfree/nonfree.hpp>
+	"PipelineGpu2D.h"
+

@@ -1,0 +1,5 @@
+#pragma once
+
+
+int ReadList(std::string list_path,
+             std::vector<std::string> paths);

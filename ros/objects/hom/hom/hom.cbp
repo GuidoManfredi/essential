@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="hom" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/hom" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+				<Linker>
+					<Add library="/usr/local/lib/libopencv_core.so" />
+					<Add library="/usr/local/lib/libopencv_highgui.so" />
+					<Add library="/usr/local/lib/libopencv_features2d.so" />
+					<Add library="/usr/local/lib/libopencv_imgproc.so" />
+					<Add library="/usr/local/lib/libopencv_calib3d.so" />
+					<Add library="/usr/lib/libboost_filesystem.so" />
+					<Add library="/usr/lib/libboost_system.so" />
+					<Add library="/home/gmanfred/devel/sandbox/SiftGPU/bin/libsiftgpu.so" />
+					<Add library="/usr/local/lib/libopencv_nonfree.so" />
+				</Linker>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/hom" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+					<Add library="/usr/local/lib/libopencv_core.so" />
+					<Add library="/usr/local/lib/libopencv_highgui.so" />
+					<Add library="/usr/local/lib/libopencv_features2d.so" />
+					<Add library="/usr/local/lib/libopencv_imgproc.so" />
+					<Add library="/usr/local/lib/libopencv_calib3d.so" />
+					<Add library="/usr/lib/libboost_filesystem.so" />
+					<Add library="/usr/lib/libboost_system.so" />
+					<Add library="/home/gmanfred/devel/sandbox/SiftGPU/bin/libsiftgpu.so" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+			<Add option="-fexceptions" />
+		</Compiler>
+		<Unit filename="Face.cpp" />
+		<Unit filename="Face.h" />
+		<Unit filename="FilesManager.cpp" />
+		<Unit filename="FilesManager.h" />
+		<Unit filename="HOD.cpp" />
+		<Unit filename="HOD.h" />
+		<Unit filename="HOM.cpp" />
+		<Unit filename="HOM.h" />
+		<Unit filename="Pipeline2D.cpp" />
+		<Unit filename="Pipeline2D.h" />
+		<Unit filename="PipelineGeom.cpp" />
+		<Unit filename="PipelineGeom.h" />
+		<Unit filename="PipelineGpu2D.cpp" />
+		<Unit filename="PipelineGpu2D.h" />
+		<Unit filename="main.cpp" />
+		<Extensions>
+			<code_completion />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
