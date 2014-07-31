@@ -17,13 +17,15 @@ int main (int argc, char** argv) {
 Object model (string dir) {
     cout << "Loading images" << endl;
     FilesManager fm;
-    vector<Mat> images = fm.getImages (dir);
+    vector<Mat> images;
+    vector<int> faces;
+    fm.getImagesAndFaces (dir, images, faces);
     vector<vector<Point2f> > corners = fm.getCorners (dir + "/corners.txt");
     Point3f dimensions = fm.getDimensions (dir + "/dimensions.txt");
     cout << "Loaded files in " << dir << endl;
 
     cout << "Modeling" << endl;
-    Object object = modeler.model (images, corners, dimensions);
+    Object object = modeler.model (images, faces, corners, dimensions);
 
     cout << "Saving object" << endl;
     string object_name = fm.getDirName (dir);

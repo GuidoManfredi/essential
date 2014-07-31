@@ -17,8 +17,8 @@ class POD
     void setIntrinsic (cv::Mat K);
     void loadIntrinsic (std::string path);
     std::string objectName (int object_number);
-    void process (const cv::Mat image, std::vector<cv::Mat> &poses);
-    void process (View current, std::vector<cv::Mat> &poses);
+    void process (const cv::Mat image, std::vector<cv::Mat> &poses, std::vector<std::string> &names);
+    void process (View current, std::vector<cv::Mat> &poses, std::vector<std::string> &names);
 
   private:
     View createView (cv::Mat image);

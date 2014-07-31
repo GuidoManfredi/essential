@@ -18,15 +18,16 @@
 // rosrun opencv_publisher stream 0 webcam image
 // rosrun opencv_display display_poses_from_tf image
 // TODO lire les parametres intrinseques depuis topic
-//      pouvoir recuperer noms des objets dont on a les poses
-//      Recuperer soft pour faire les corners (qui est dans le package)
 //      Donner un dossier out pour les objet.yaml
 //      Faire la doc
 //      Charger models en lisant liste (+fonctions de debug quand fichier non disponible
 //      Blinder POM et POD mais mettre du debug pour faire remonter les problems ou les printer.
 //      Blinder create_objetct et detect_object avec un max de ROS_INFO/WARN/ERR
 //      Faire le multi object draw dans opencv_display_from_tf
-//      Donner des noms au objets a l'interieur du fichier yaml ? (ou nom du fichier suffit ?)
+//      Ask for a camera name in the arguments and use it for broadcasting the right transform
+//      FINIR LOCAL2GLOBAL LES CAS 4 ET 5
+//      Faire en sorte de pouvoir creer un model meme quand on a que des images de front/top/bottom (cf petit beurre)
+//      Dans create model ne pas laisser de trailing / ou alors le nom du dossier ne sera pas bien lu. (a corriger)
 using namespace std;
 using namespace cv;
 namespace enc = sensor_msgs::image_encodings;
@@ -52,7 +53,7 @@ void image_callback(const sensor_msgs::ImageConstPtr& msg) {
 //	imshow ("Input", cv_ptr->image);
 //    waitKey(1);
     int start = cv::getTickCount();
-    detecter.process (cv_ptr->image, Ps);
+    detecter.process (cv_ptr->image, Ps, names);
     int end = cv::getTickCount();
     float time_period = 1 / cv::getTickFrequency();
     ROS_INFO("Procesing time: %f s.", (end - start) * time_period);
@@ -67,31 +68,36 @@ int main (int argc, char** argv) {
 	ros::Subscriber cloud_subscriber = n.subscribe(argv[1], 1, image_callback);
 
     detecter.loadIntrinsic ("/home/gmanfred/.ros/camera_info/webcam_gilgamesh_opencv.yml");
+    detecter.loadObject("small_reveil_fruite");
     detecter.loadObject(argv[2]);
+
+    ros::Rate loop_rate(10);
 	while (ros::ok()) {
         ros::spinOnce();
         broadcastPoses(Ps);
+        loop_rate.sleep();
     }
 
     return 0;
 }
 
 void broadcastPoses (vector<Mat> Ps) {
-    static tf::TransformBroadcaster br;
+    static tf::TransformBroadcaster br[2];
     for (size_t i = 0; i < Ps.size(); ++i) {
         tf::Transform transform = mat2msg(Ps[i]);
-        string object_name ("pipo");
-        //br.sendTransform(tf::StampedTransform(transform, ros::Time::now(), "world", object_name));
-        br.sendTransform(tf::StampedTransform(transform, ros::Time::now(), object_name, "world"));
+        string object_name = names[i];
+        //cout << "broadcast " << names[i] << endl;
+        //br[i].sendTransform(tf::StampedTransform(transform, ros::Time::now(), object_name, "world"));
+        br[i].sendTransform(tf::StampedTransform(transform, ros::Time::now(), "world", object_name));
     }
 }
   
 
 tf::Transform mat2msg (Mat P) {
-    //P = P.inv();
     Mat cvR = P(Rect(0,0,3,3));
     tf::Matrix3x3 R = cvR2tfR(cvR);
-    tf::Vector3 t(P.at<float>(0, 3), P.at<float>(1, 3), P.at<float>(2, 3));
+    //tf::Vector3 t(P.at<float>(0, 3), P.at<float>(1, 3), P.at<float>(2, 3));
+    tf::Vector3 t(P.at<float>(0, 3)/1000, P.at<float>(1, 3)/1000, P.at<float>(2, 3)/1000);
     return tf::Transform(R, t);
 }
 

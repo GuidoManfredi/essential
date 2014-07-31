@@ -8,28 +8,13 @@ using namespace cv;
 
 POM::POM () {}
 
-void POM::setIntrinsic(Mat K) {
-    K.copyTo(K_);
-    if (!K_.data)
-        cout << "Set intrinsic failed" << endl;
-}
-
-void POM::loadIntrinsic (string calibration_file) {
-    Mat K(3,3,CV_32F);
-    FileStorage r_fs;
-    r_fs.open (calibration_file, cv::FileStorage::READ);
-    r_fs["camera_matrix"]>>K;
-    r_fs.release ();
-    setIntrinsic (K);
-}
-
-Object POM::model (std::vector<cv::Mat> images,
+Object POM::model (std::vector<cv::Mat> images, std::vector<int> faces,
                    std::vector<std::vector<Point2f> > corners2d,
                    Point3f dimensions) {
     Object object;
     for ( size_t i = 0; i < images.size(); ++i ) {
         Mat rectified_image;
-        rectifyImage (i, images[i], corners2d[i], dimensions,
+        rectifyImage (faces[i], images[i], corners2d[i], dimensions,
                       rectified_image);
         //imshow ("Rectified Image", rectified_image); waitKey(0);
 
@@ -39,18 +24,18 @@ Object POM::model (std::vector<cv::Mat> images,
         extractFeatures (rectified_image, keypoints, descriptors);
         cout << "Extracted " << keypoints.size() << " keypoints." << endl;
 
-        convert2Dto3D (i, rectified_image, dimensions, corners2d[i], keypoints,
+        convert2Dto3D (faces[i], rectified_image, dimensions, corners2d[i], keypoints,
                        points3d);
         cout << "Computed " << points3d.size() << " 3D points." << endl;
         object.addView (points3d, descriptors);
     }
     vector<Point3f> points3d;
     object.getPoints (points3d);
-    //savePoints3d (points3d, "output.pcd");
+    savePoints3d (points3d, "model.pcd");
 
     return object;
 }
-/*
+
 void POM::savePoints3d (std::vector<cv::Point3f> points3d, std::string filename) {
   pcl::PointCloud<pcl::PointXYZ>::Ptr cloud (new pcl::PointCloud<pcl::PointXYZ>);
 
@@ -67,7 +52,7 @@ void POM::savePoints3d (std::vector<cv::Point3f> points3d, std::string filename)
 
   pcl::io::savePCDFileASCII(filename, *cloud);
 }
-*/
+
 ////////////////////////////////////////////////////////////////////////////////
 //  PRIVATE METHODS
 ////////////////////////////////////////////////////////////////////////////////
@@ -77,7 +62,7 @@ void POM::extractFeatures (Mat image, vector<KeyPoint> &keypoints, Mat &descript
     pipeline2d_.extractFeatures(gray, keypoints, descriptors);
 }
 
-void POM::rectifyImage (int face, Mat image, vector<Point2f> corners2d, Point3f dimensions,
+void POM::rectifyImage (Mat image, vector<Point2f> corners2d, Point3f dimensions,
                     Mat &rectified_image) {
     vector<Point2f> frontal_corners = getCorners (corners2d);
     //cout << corners2d << endl << frontal_corners << endl;
@@ -129,15 +114,15 @@ void POM::local2global (int face, Point3f dimensions,
         R.at<float>(0,1) = -1;
         R.at<float>(1,0) = 1;
     } else if ( face == 2 ) {
-        t.at<float>(0) = -dimensions.z/2;
-        R.at<float>(0,0) = -1;
-        R.at<float>(1,1) = -1;
-    } else if ( face == 3 ) {
         t.at<float>(1) = -dimensions.x/2;
         R.at<float>(0,0) = 0;
         R.at<float>(1,1) = 0;
         R.at<float>(0,1) = 1;
         R.at<float>(1,0) = -1;
+    } else if ( face == 3 ) {
+        t.at<float>(0) = -dimensions.z/2;
+        R.at<float>(0,0) = -1;
+        R.at<float>(1,1) = -1;
     } else if ( face == 4 ) {
         ;
     } else {

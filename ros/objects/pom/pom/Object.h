@@ -1,7 +1,5 @@
 #pragma once
 
-#include <iostream>
-
 #include "View.h"
 
 class Object {
@@ -10,12 +8,14 @@ class Object {
     void addView (std::vector<cv::Point3f> points3d, cv::Mat descriptors);
     void getDescriptors (cv::Mat &descriptors);
     void getPoints (std::vector<cv::Point3f> &points3d);
+    std::string name();
 
     void write (cv::FileStorage& fs) const;
     void read (const cv::FileNode& node);
 
     int number_views_;
     std::vector<View> views_;
+    std::string name_;
 };
 
 static void write(cv::FileStorage& fs, const std::string&, const Object& x){

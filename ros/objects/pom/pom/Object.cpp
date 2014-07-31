@@ -1,3 +1,5 @@
+#include <iostream>
+
 #include "Object.h"
 
 using namespace std;
@@ -30,6 +32,10 @@ void Object::getPoints (vector<Point3f> &points3d) {
     }
 }
 
+string Object::name() {
+    return name_;
+}
+
 void Object::write(cv::FileStorage& fs) const {
     fs << "{" << "number_views" << number_views_;
     for ( int i = 0; i < number_views_; ++i ) {
@@ -41,6 +47,10 @@ void Object::write(cv::FileStorage& fs) const {
 }
 
 void Object::read(const FileNode& node) {
+    if (node.isNamed())
+        name_ = node.name();
+    else
+        cout << "Warning : no name for this object." << endl;
     node["number_views"] >> number_views_;
     views_.resize(number_views_);
     for ( int i = 0; i < number_views_; ++i ) {

@@ -6,9 +6,23 @@
 
 #IncludeRegexTransform: 
 
-/home/gmanfred/devel/essential/ros/objects/pom/pom/Object.h
-iostream
+/home/gmanfred/devel/essential/ros/objects/pom/pom/FilesManager.cpp
+FilesManager.h
+/home/gmanfred/devel/essential/ros/objects/pom/pom/FilesManager.h
+
+/home/gmanfred/devel/essential/ros/objects/pom/pom/FilesManager.h
+fstream
 -
+boost/filesystem.hpp
+-
+boost/algorithm/string.hpp
+-
+opencv2/core/core.hpp
+-
+opencv2/highgui/highgui.hpp
+-
+
+/home/gmanfred/devel/essential/ros/objects/pom/pom/Object.h
 View.h
 /home/gmanfred/devel/essential/ros/objects/pom/pom/View.h
 
@@ -75,8 +89,6 @@ opencv2/highgui/highgui.hpp
 -
 
 /home/gmanfred/devel/essential/ros/objects/pom/src/../pom/Object.h
-iostream
--
 View.h
 /home/gmanfred/devel/essential/ros/objects/pom/src/../pom/View.h
 

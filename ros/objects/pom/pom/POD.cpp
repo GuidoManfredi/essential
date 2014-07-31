@@ -36,33 +36,33 @@ void POD::loadIntrinsic (string calibration_file) {
     setIntrinsic (K);
 }
 
-std::string objectName (int object_number) {
-    //return objects[i].
-    ;
-}
-
-void POD::process (const Mat image, vector<Mat> &poses) {
+void POD::process (const Mat image, vector<Mat> &poses, vector<string> &names) {
+    poses.clear(); names.clear();
     View view = createView (image);
-    process (view, poses);
+    process (view, poses, names);
 }
 
-void POD::process (View current, vector<Mat> &poses) {
+void POD::process (View current, vector<Mat> &poses, vector<string> &names) {
+    poses.clear(); names.clear();
     for (size_t i = 0; i < objects_.size(); ++i) {
         vector<DMatch> matches;
-        cout << "Matching" << endl;
+        //cout << "Matching" << endl;
         match (current, objects_[i], matches);
-        cout << "Found " << matches.size() << " matches." << endl;
-        cout << "Computing pose" << endl;
+        cout << "Matches: " << matches.size() << endl;
+        //cout << "Computing pose" << endl;
         Mat pose = computePose (current, objects_[i], matches);
         poses.push_back(pose);
+        names.push_back(objects_[i].name());
     }
 }
-
+////////////////////////////////////////////////////////////////////////////////
+//  PRIVATE METHODS
+////////////////////////////////////////////////////////////////////////////////
 View POD::createView (Mat image) {
     View view;
     pipeline2d_.getGray (image, view.view_);
     pipeline2d_.extractFeatures (view.view_, view.keypoints_, view.descriptors_);
-    cout << "Extracted " << view.keypoints_.size() << " keypoints." << endl;
+    //cout << "Extracted " << view.keypoints_.size() << " keypoints." << endl;
     return view;
 }
 

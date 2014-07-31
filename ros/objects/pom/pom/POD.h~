@@ -12,20 +12,23 @@ class POD
   public:
     POD ();
     void setObject (Object object);
+    void loadObject (std::string path);
+    //void loadObjectFromList (std::string list_path);
     void setIntrinsic (cv::Mat K);
-    void loadIntrinsic (cv::Mat K);
-    cv::Mat process (const cv::Mat image);
-    cv::Mat process (View &current);
+    void loadIntrinsic (std::string path);
+    std::string objectName (int object_number);
+    void process (const cv::Mat image, std::vector<cv::Mat> &poses, std::vector<std::string> &names);
+    void process (View current, std::vector<cv::Mat> &poses, std::vector<std::string> &names);
 
   private:
     View createView (cv::Mat image);
     void match (View current, Object object, std::vector<cv::DMatch> &matches);
-    float computePose (View current, Object object, std::vector<cv::DMatch> matches);
+    cv::Mat computePose (View current, Object object, std::vector<cv::DMatch> matches);
     void match2points (std::vector<cv::KeyPoint> keypoints, std::vector<cv::Point3f> points, std::vector<cv::DMatch> matches,
                         std::vector<cv::Point2f> &points2d, std::vector<cv::Point3f> &points3d);
 
     cv::Mat K_;
-    Object object_;
+    std::vector<Object> objects_;
     Pipeline2D pipeline2d_;
     PipelineGeom pipelineGeom_;
 };

@@ -7,8 +7,6 @@
 #IncludeRegexTransform: 
 
 /home/gmanfred/devel/essential/ros/objects/pom/src/../pom/Object.h
-iostream
--
 View.h
 /home/gmanfred/devel/essential/ros/objects/pom/src/../pom/View.h
 

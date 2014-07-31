@@ -66,6 +66,9 @@ CMakeFiles/create_object.dir/src/create_object.cpp.o: /opt/ros/groovy/share/xmlr
 CMakeFiles/create_object.dir/src/create_object.cpp.o: /opt/ros/groovy/share/roscpp/package.xml
 CMakeFiles/create_object.dir/src/create_object.cpp.o: /opt/ros/groovy/share/catkin/package.xml
 CMakeFiles/create_object.dir/src/create_object.cpp.o: /opt/ros/groovy/share/opencv2/package.xml
+CMakeFiles/create_object.dir/src/create_object.cpp.o: /opt/ros/groovy/share/geometry_msgs/package.xml
+CMakeFiles/create_object.dir/src/create_object.cpp.o: /opt/ros/groovy/share/sensor_msgs/package.xml
+CMakeFiles/create_object.dir/src/create_object.cpp.o: /opt/ros/groovy/share/cv_bridge/package.xml
 CMakeFiles/create_object.dir/src/create_object.cpp.o: /opt/ros/groovy/share/rospack/package.xml
 CMakeFiles/create_object.dir/src/create_object.cpp.o: /opt/ros/groovy/share/roslib/package.xml
 CMakeFiles/create_object.dir/src/create_object.cpp.o: /opt/ros/groovy/share/rosgraph/package.xml
@@ -85,16 +88,10 @@ CMakeFiles/create_object.dir/src/create_object.cpp.o: /opt/ros/groovy/share/node
 CMakeFiles/create_object.dir/src/create_object.cpp.o: /opt/ros/groovy/share/message_filters/package.xml
 CMakeFiles/create_object.dir/src/create_object.cpp.o: /opt/ros/groovy/share/nodelet_topic_tools/package.xml
 CMakeFiles/create_object.dir/src/create_object.cpp.o: /opt/ros/groovy/share/flann/package.xml
-CMakeFiles/create_object.dir/src/create_object.cpp.o: /opt/ros/groovy/share/geometry_msgs/package.xml
-CMakeFiles/create_object.dir/src/create_object.cpp.o: /opt/ros/groovy/share/sensor_msgs/package.xml
 CMakeFiles/create_object.dir/src/create_object.cpp.o: /opt/ros/groovy/share/pcl_msgs/package.xml
 CMakeFiles/create_object.dir/src/create_object.cpp.o: /opt/ros/groovy/share/pcl/package.xml
 CMakeFiles/create_object.dir/src/create_object.cpp.o: /opt/ros/groovy/share/tf/package.xml
 CMakeFiles/create_object.dir/src/create_object.cpp.o: /opt/ros/groovy/share/pcl_ros/package.xml
-CMakeFiles/create_object.dir/src/create_object.cpp.o: /opt/ros/groovy/share/image_transport/package.xml
-CMakeFiles/create_object.dir/src/create_object.cpp.o: /opt/ros/groovy/share/cv_bridge/package.xml
-CMakeFiles/create_object.dir/src/create_object.cpp.o: /home/gmanfred/devel/essential/ros/opencv_util/opencv_display/manifest.xml
-CMakeFiles/create_object.dir/src/create_object.cpp.o: /home/gmanfred/devel/essential/ros/opencv_util/opencv_display/msg_gen/generated
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/gmanfred/devel/essential/ros/objects/pom/build/CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/create_object.dir/src/create_object.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/create_object.dir/src/create_object.cpp.o -c /home/gmanfred/devel/essential/ros/objects/pom/src/create_object.cpp
@@ -133,6 +130,9 @@ CMakeFiles/create_object.dir/pom/Object.cpp.o: /opt/ros/groovy/share/xmlrpcpp/pa
 CMakeFiles/create_object.dir/pom/Object.cpp.o: /opt/ros/groovy/share/roscpp/package.xml
 CMakeFiles/create_object.dir/pom/Object.cpp.o: /opt/ros/groovy/share/catkin/package.xml
 CMakeFiles/create_object.dir/pom/Object.cpp.o: /opt/ros/groovy/share/opencv2/package.xml
+CMakeFiles/create_object.dir/pom/Object.cpp.o: /opt/ros/groovy/share/geometry_msgs/package.xml
+CMakeFiles/create_object.dir/pom/Object.cpp.o: /opt/ros/groovy/share/sensor_msgs/package.xml
+CMakeFiles/create_object.dir/pom/Object.cpp.o: /opt/ros/groovy/share/cv_bridge/package.xml
 CMakeFiles/create_object.dir/pom/Object.cpp.o: /opt/ros/groovy/share/rospack/package.xml
 CMakeFiles/create_object.dir/pom/Object.cpp.o: /opt/ros/groovy/share/roslib/package.xml
 CMakeFiles/create_object.dir/pom/Object.cpp.o: /opt/ros/groovy/share/rosgraph/package.xml
@@ -152,16 +152,10 @@ CMakeFiles/create_object.dir/pom/Object.cpp.o: /opt/ros/groovy/share/nodelet/pac
 CMakeFiles/create_object.dir/pom/Object.cpp.o: /opt/ros/groovy/share/message_filters/package.xml
 CMakeFiles/create_object.dir/pom/Object.cpp.o: /opt/ros/groovy/share/nodelet_topic_tools/package.xml
 CMakeFiles/create_object.dir/pom/Object.cpp.o: /opt/ros/groovy/share/flann/package.xml
-CMakeFiles/create_object.dir/pom/Object.cpp.o: /opt/ros/groovy/share/geometry_msgs/package.xml
-CMakeFiles/create_object.dir/pom/Object.cpp.o: /opt/ros/groovy/share/sensor_msgs/package.xml
 CMakeFiles/create_object.dir/pom/Object.cpp.o: /opt/ros/groovy/share/pcl_msgs/package.xml
 CMakeFiles/create_object.dir/pom/Object.cpp.o: /opt/ros/groovy/share/pcl/package.xml
 CMakeFiles/create_object.dir/pom/Object.cpp.o: /opt/ros/groovy/share/tf/package.xml
 CMakeFiles/create_object.dir/pom/Object.cpp.o: /opt/ros/groovy/share/pcl_ros/package.xml
-CMakeFiles/create_object.dir/pom/Object.cpp.o: /opt/ros/groovy/share/image_transport/package.xml
-CMakeFiles/create_object.dir/pom/Object.cpp.o: /opt/ros/groovy/share/cv_bridge/package.xml
-CMakeFiles/create_object.dir/pom/Object.cpp.o: /home/gmanfred/devel/essential/ros/opencv_util/opencv_display/manifest.xml
-CMakeFiles/create_object.dir/pom/Object.cpp.o: /home/gmanfred/devel/essential/ros/opencv_util/opencv_display/msg_gen/generated
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/gmanfred/devel/essential/ros/objects/pom/build/CMakeFiles $(CMAKE_PROGRESS_2)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/create_object.dir/pom/Object.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/create_object.dir/pom/Object.cpp.o -c /home/gmanfred/devel/essential/ros/objects/pom/pom/Object.cpp
@@ -200,6 +194,9 @@ CMakeFiles/create_object.dir/pom/View.cpp.o: /opt/ros/groovy/share/xmlrpcpp/pack
 CMakeFiles/create_object.dir/pom/View.cpp.o: /opt/ros/groovy/share/roscpp/package.xml
 CMakeFiles/create_object.dir/pom/View.cpp.o: /opt/ros/groovy/share/catkin/package.xml
 CMakeFiles/create_object.dir/pom/View.cpp.o: /opt/ros/groovy/share/opencv2/package.xml
+CMakeFiles/create_object.dir/pom/View.cpp.o: /opt/ros/groovy/share/geometry_msgs/package.xml
+CMakeFiles/create_object.dir/pom/View.cpp.o: /opt/ros/groovy/share/sensor_msgs/package.xml
+CMakeFiles/create_object.dir/pom/View.cpp.o: /opt/ros/groovy/share/cv_bridge/package.xml
 CMakeFiles/create_object.dir/pom/View.cpp.o: /opt/ros/groovy/share/rospack/package.xml
 CMakeFiles/create_object.dir/pom/View.cpp.o: /opt/ros/groovy/share/roslib/package.xml
 CMakeFiles/create_object.dir/pom/View.cpp.o: /opt/ros/groovy/share/rosgraph/package.xml
@@ -219,16 +216,10 @@ CMakeFiles/create_object.dir/pom/View.cpp.o: /opt/ros/groovy/share/nodelet/packa
 CMakeFiles/create_object.dir/pom/View.cpp.o: /opt/ros/groovy/share/message_filters/package.xml
 CMakeFiles/create_object.dir/pom/View.cpp.o: /opt/ros/groovy/share/nodelet_topic_tools/package.xml
 CMakeFiles/create_object.dir/pom/View.cpp.o: /opt/ros/groovy/share/flann/package.xml
-CMakeFiles/create_object.dir/pom/View.cpp.o: /opt/ros/groovy/share/geometry_msgs/package.xml
-CMakeFiles/create_object.dir/pom/View.cpp.o: /opt/ros/groovy/share/sensor_msgs/package.xml
 CMakeFiles/create_object.dir/pom/View.cpp.o: /opt/ros/groovy/share/pcl_msgs/package.xml
 CMakeFiles/create_object.dir/pom/View.cpp.o: /opt/ros/groovy/share/pcl/package.xml
 CMakeFiles/create_object.dir/pom/View.cpp.o: /opt/ros/groovy/share/tf/package.xml
 CMakeFiles/create_object.dir/pom/View.cpp.o: /opt/ros/groovy/share/pcl_ros/package.xml
-CMakeFiles/create_object.dir/pom/View.cpp.o: /opt/ros/groovy/share/image_transport/package.xml
-CMakeFiles/create_object.dir/pom/View.cpp.o: /opt/ros/groovy/share/cv_bridge/package.xml
-CMakeFiles/create_object.dir/pom/View.cpp.o: /home/gmanfred/devel/essential/ros/opencv_util/opencv_display/manifest.xml
-CMakeFiles/create_object.dir/pom/View.cpp.o: /home/gmanfred/devel/essential/ros/opencv_util/opencv_display/msg_gen/generated
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/gmanfred/devel/essential/ros/objects/pom/build/CMakeFiles $(CMAKE_PROGRESS_3)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/create_object.dir/pom/View.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/create_object.dir/pom/View.cpp.o -c /home/gmanfred/devel/essential/ros/objects/pom/pom/View.cpp
@@ -267,6 +258,9 @@ CMakeFiles/create_object.dir/pom/Pipeline2D.cpp.o: /opt/ros/groovy/share/xmlrpcp
 CMakeFiles/create_object.dir/pom/Pipeline2D.cpp.o: /opt/ros/groovy/share/roscpp/package.xml
 CMakeFiles/create_object.dir/pom/Pipeline2D.cpp.o: /opt/ros/groovy/share/catkin/package.xml
 CMakeFiles/create_object.dir/pom/Pipeline2D.cpp.o: /opt/ros/groovy/share/opencv2/package.xml
+CMakeFiles/create_object.dir/pom/Pipeline2D.cpp.o: /opt/ros/groovy/share/geometry_msgs/package.xml
+CMakeFiles/create_object.dir/pom/Pipeline2D.cpp.o: /opt/ros/groovy/share/sensor_msgs/package.xml
+CMakeFiles/create_object.dir/pom/Pipeline2D.cpp.o: /opt/ros/groovy/share/cv_bridge/package.xml
 CMakeFiles/create_object.dir/pom/Pipeline2D.cpp.o: /opt/ros/groovy/share/rospack/package.xml
 CMakeFiles/create_object.dir/pom/Pipeline2D.cpp.o: /opt/ros/groovy/share/roslib/package.xml
 CMakeFiles/create_object.dir/pom/Pipeline2D.cpp.o: /opt/ros/groovy/share/rosgraph/package.xml
@@ -286,16 +280,10 @@ CMakeFiles/create_object.dir/pom/Pipeline2D.cpp.o: /opt/ros/groovy/share/nodelet
 CMakeFiles/create_object.dir/pom/Pipeline2D.cpp.o: /opt/ros/groovy/share/message_filters/package.xml
 CMakeFiles/create_object.dir/pom/Pipeline2D.cpp.o: /opt/ros/groovy/share/nodelet_topic_tools/package.xml
 CMakeFiles/create_object.dir/pom/Pipeline2D.cpp.o: /opt/ros/groovy/share/flann/package.xml
-CMakeFiles/create_object.dir/pom/Pipeline2D.cpp.o: /opt/ros/groovy/share/geometry_msgs/package.xml
-CMakeFiles/create_object.dir/pom/Pipeline2D.cpp.o: /opt/ros/groovy/share/sensor_msgs/package.xml
 CMakeFiles/create_object.dir/pom/Pipeline2D.cpp.o: /opt/ros/groovy/share/pcl_msgs/package.xml
 CMakeFiles/create_object.dir/pom/Pipeline2D.cpp.o: /opt/ros/groovy/share/pcl/package.xml
 CMakeFiles/create_object.dir/pom/Pipeline2D.cpp.o: /opt/ros/groovy/share/tf/package.xml
 CMakeFiles/create_object.dir/pom/Pipeline2D.cpp.o: /opt/ros/groovy/share/pcl_ros/package.xml
-CMakeFiles/create_object.dir/pom/Pipeline2D.cpp.o: /opt/ros/groovy/share/image_transport/package.xml
-CMakeFiles/create_object.dir/pom/Pipeline2D.cpp.o: /opt/ros/groovy/share/cv_bridge/package.xml
-CMakeFiles/create_object.dir/pom/Pipeline2D.cpp.o: /home/gmanfred/devel/essential/ros/opencv_util/opencv_display/manifest.xml
-CMakeFiles/create_object.dir/pom/Pipeline2D.cpp.o: /home/gmanfred/devel/essential/ros/opencv_util/opencv_display/msg_gen/generated
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/gmanfred/devel/essential/ros/objects/pom/build/CMakeFiles $(CMAKE_PROGRESS_4)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/create_object.dir/pom/Pipeline2D.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/create_object.dir/pom/Pipeline2D.cpp.o -c /home/gmanfred/devel/essential/ros/objects/pom/pom/Pipeline2D.cpp
@@ -334,6 +322,9 @@ CMakeFiles/create_object.dir/pom/PipelineGeom.cpp.o: /opt/ros/groovy/share/xmlrp
 CMakeFiles/create_object.dir/pom/PipelineGeom.cpp.o: /opt/ros/groovy/share/roscpp/package.xml
 CMakeFiles/create_object.dir/pom/PipelineGeom.cpp.o: /opt/ros/groovy/share/catkin/package.xml
 CMakeFiles/create_object.dir/pom/PipelineGeom.cpp.o: /opt/ros/groovy/share/opencv2/package.xml
+CMakeFiles/create_object.dir/pom/PipelineGeom.cpp.o: /opt/ros/groovy/share/geometry_msgs/package.xml
+CMakeFiles/create_object.dir/pom/PipelineGeom.cpp.o: /opt/ros/groovy/share/sensor_msgs/package.xml
+CMakeFiles/create_object.dir/pom/PipelineGeom.cpp.o: /opt/ros/groovy/share/cv_bridge/package.xml
 CMakeFiles/create_object.dir/pom/PipelineGeom.cpp.o: /opt/ros/groovy/share/rospack/package.xml
 CMakeFiles/create_object.dir/pom/PipelineGeom.cpp.o: /opt/ros/groovy/share/roslib/package.xml
 CMakeFiles/create_object.dir/pom/PipelineGeom.cpp.o: /opt/ros/groovy/share/rosgraph/package.xml
@@ -353,16 +344,10 @@ CMakeFiles/create_object.dir/pom/PipelineGeom.cpp.o: /opt/ros/groovy/share/nodel
 CMakeFiles/create_object.dir/pom/PipelineGeom.cpp.o: /opt/ros/groovy/share/message_filters/package.xml
 CMakeFiles/create_object.dir/pom/PipelineGeom.cpp.o: /opt/ros/groovy/share/nodelet_topic_tools/package.xml
 CMakeFiles/create_object.dir/pom/PipelineGeom.cpp.o: /opt/ros/groovy/share/flann/package.xml
-CMakeFiles/create_object.dir/pom/PipelineGeom.cpp.o: /opt/ros/groovy/share/geometry_msgs/package.xml
-CMakeFiles/create_object.dir/pom/PipelineGeom.cpp.o: /opt/ros/groovy/share/sensor_msgs/package.xml
 CMakeFiles/create_object.dir/pom/PipelineGeom.cpp.o: /opt/ros/groovy/share/pcl_msgs/package.xml
 CMakeFiles/create_object.dir/pom/PipelineGeom.cpp.o: /opt/ros/groovy/share/pcl/package.xml
 CMakeFiles/create_object.dir/pom/PipelineGeom.cpp.o: /opt/ros/groovy/share/tf/package.xml
 CMakeFiles/create_object.dir/pom/PipelineGeom.cpp.o: /opt/ros/groovy/share/pcl_ros/package.xml
-CMakeFiles/create_object.dir/pom/PipelineGeom.cpp.o: /opt/ros/groovy/share/image_transport/package.xml
-CMakeFiles/create_object.dir/pom/PipelineGeom.cpp.o: /opt/ros/groovy/share/cv_bridge/package.xml
-CMakeFiles/create_object.dir/pom/PipelineGeom.cpp.o: /home/gmanfred/devel/essential/ros/opencv_util/opencv_display/manifest.xml
-CMakeFiles/create_object.dir/pom/PipelineGeom.cpp.o: /home/gmanfred/devel/essential/ros/opencv_util/opencv_display/msg_gen/generated
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/gmanfred/devel/essential/ros/objects/pom/build/CMakeFiles $(CMAKE_PROGRESS_5)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/create_object.dir/pom/PipelineGeom.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/create_object.dir/pom/PipelineGeom.cpp.o -c /home/gmanfred/devel/essential/ros/objects/pom/pom/PipelineGeom.cpp
@@ -401,6 +386,9 @@ CMakeFiles/create_object.dir/pom/commons.cpp.o: /opt/ros/groovy/share/xmlrpcpp/p
 CMakeFiles/create_object.dir/pom/commons.cpp.o: /opt/ros/groovy/share/roscpp/package.xml
 CMakeFiles/create_object.dir/pom/commons.cpp.o: /opt/ros/groovy/share/catkin/package.xml
 CMakeFiles/create_object.dir/pom/commons.cpp.o: /opt/ros/groovy/share/opencv2/package.xml
+CMakeFiles/create_object.dir/pom/commons.cpp.o: /opt/ros/groovy/share/geometry_msgs/package.xml
+CMakeFiles/create_object.dir/pom/commons.cpp.o: /opt/ros/groovy/share/sensor_msgs/package.xml
+CMakeFiles/create_object.dir/pom/commons.cpp.o: /opt/ros/groovy/share/cv_bridge/package.xml
 CMakeFiles/create_object.dir/pom/commons.cpp.o: /opt/ros/groovy/share/rospack/package.xml
 CMakeFiles/create_object.dir/pom/commons.cpp.o: /opt/ros/groovy/share/roslib/package.xml
 CMakeFiles/create_object.dir/pom/commons.cpp.o: /opt/ros/groovy/share/rosgraph/package.xml
@@ -420,16 +408,10 @@ CMakeFiles/create_object.dir/pom/commons.cpp.o: /opt/ros/groovy/share/nodelet/pa
 CMakeFiles/create_object.dir/pom/commons.cpp.o: /opt/ros/groovy/share/message_filters/package.xml
 CMakeFiles/create_object.dir/pom/commons.cpp.o: /opt/ros/groovy/share/nodelet_topic_tools/package.xml
 CMakeFiles/create_object.dir/pom/commons.cpp.o: /opt/ros/groovy/share/flann/package.xml
-CMakeFiles/create_object.dir/pom/commons.cpp.o: /opt/ros/groovy/share/geometry_msgs/package.xml
-CMakeFiles/create_object.dir/pom/commons.cpp.o: /opt/ros/groovy/share/sensor_msgs/package.xml
 CMakeFiles/create_object.dir/pom/commons.cpp.o: /opt/ros/groovy/share/pcl_msgs/package.xml
 CMakeFiles/create_object.dir/pom/commons.cpp.o: /opt/ros/groovy/share/pcl/package.xml
 CMakeFiles/create_object.dir/pom/commons.cpp.o: /opt/ros/groovy/share/tf/package.xml
 CMakeFiles/create_object.dir/pom/commons.cpp.o: /opt/ros/groovy/share/pcl_ros/package.xml
-CMakeFiles/create_object.dir/pom/commons.cpp.o: /opt/ros/groovy/share/image_transport/package.xml
-CMakeFiles/create_object.dir/pom/commons.cpp.o: /opt/ros/groovy/share/cv_bridge/package.xml
-CMakeFiles/create_object.dir/pom/commons.cpp.o: /home/gmanfred/devel/essential/ros/opencv_util/opencv_display/manifest.xml
-CMakeFiles/create_object.dir/pom/commons.cpp.o: /home/gmanfred/devel/essential/ros/opencv_util/opencv_display/msg_gen/generated
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/gmanfred/devel/essential/ros/objects/pom/build/CMakeFiles $(CMAKE_PROGRESS_6)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/create_object.dir/pom/commons.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/create_object.dir/pom/commons.cpp.o -c /home/gmanfred/devel/essential/ros/objects/pom/pom/commons.cpp
@@ -468,6 +450,9 @@ CMakeFiles/create_object.dir/pom/POM.cpp.o: /opt/ros/groovy/share/xmlrpcpp/packa
 CMakeFiles/create_object.dir/pom/POM.cpp.o: /opt/ros/groovy/share/roscpp/package.xml
 CMakeFiles/create_object.dir/pom/POM.cpp.o: /opt/ros/groovy/share/catkin/package.xml
 CMakeFiles/create_object.dir/pom/POM.cpp.o: /opt/ros/groovy/share/opencv2/package.xml
+CMakeFiles/create_object.dir/pom/POM.cpp.o: /opt/ros/groovy/share/geometry_msgs/package.xml
+CMakeFiles/create_object.dir/pom/POM.cpp.o: /opt/ros/groovy/share/sensor_msgs/package.xml
+CMakeFiles/create_object.dir/pom/POM.cpp.o: /opt/ros/groovy/share/cv_bridge/package.xml
 CMakeFiles/create_object.dir/pom/POM.cpp.o: /opt/ros/groovy/share/rospack/package.xml
 CMakeFiles/create_object.dir/pom/POM.cpp.o: /opt/ros/groovy/share/roslib/package.xml
 CMakeFiles/create_object.dir/pom/POM.cpp.o: /opt/ros/groovy/share/rosgraph/package.xml
@@ -487,16 +472,10 @@ CMakeFiles/create_object.dir/pom/POM.cpp.o: /opt/ros/groovy/share/nodelet/packag
 CMakeFiles/create_object.dir/pom/POM.cpp.o: /opt/ros/groovy/share/message_filters/package.xml
 CMakeFiles/create_object.dir/pom/POM.cpp.o: /opt/ros/groovy/share/nodelet_topic_tools/package.xml
 CMakeFiles/create_object.dir/pom/POM.cpp.o: /opt/ros/groovy/share/flann/package.xml
-CMakeFiles/create_object.dir/pom/POM.cpp.o: /opt/ros/groovy/share/geometry_msgs/package.xml
-CMakeFiles/create_object.dir/pom/POM.cpp.o: /opt/ros/groovy/share/sensor_msgs/package.xml
 CMakeFiles/create_object.dir/pom/POM.cpp.o: /opt/ros/groovy/share/pcl_msgs/package.xml
 CMakeFiles/create_object.dir/pom/POM.cpp.o: /opt/ros/groovy/share/pcl/package.xml
 CMakeFiles/create_object.dir/pom/POM.cpp.o: /opt/ros/groovy/share/tf/package.xml
 CMakeFiles/create_object.dir/pom/POM.cpp.o: /opt/ros/groovy/share/pcl_ros/package.xml
-CMakeFiles/create_object.dir/pom/POM.cpp.o: /opt/ros/groovy/share/image_transport/package.xml
-CMakeFiles/create_object.dir/pom/POM.cpp.o: /opt/ros/groovy/share/cv_bridge/package.xml
-CMakeFiles/create_object.dir/pom/POM.cpp.o: /home/gmanfred/devel/essential/ros/opencv_util/opencv_display/manifest.xml
-CMakeFiles/create_object.dir/pom/POM.cpp.o: /home/gmanfred/devel/essential/ros/opencv_util/opencv_display/msg_gen/generated
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/gmanfred/devel/essential/ros/objects/pom/build/CMakeFiles $(CMAKE_PROGRESS_7)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/create_object.dir/pom/POM.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/create_object.dir/pom/POM.cpp.o -c /home/gmanfred/devel/essential/ros/objects/pom/pom/POM.cpp
@@ -535,6 +514,9 @@ CMakeFiles/create_object.dir/pom/FilesManager.cpp.o: /opt/ros/groovy/share/xmlrp
 CMakeFiles/create_object.dir/pom/FilesManager.cpp.o: /opt/ros/groovy/share/roscpp/package.xml
 CMakeFiles/create_object.dir/pom/FilesManager.cpp.o: /opt/ros/groovy/share/catkin/package.xml
 CMakeFiles/create_object.dir/pom/FilesManager.cpp.o: /opt/ros/groovy/share/opencv2/package.xml
+CMakeFiles/create_object.dir/pom/FilesManager.cpp.o: /opt/ros/groovy/share/geometry_msgs/package.xml
+CMakeFiles/create_object.dir/pom/FilesManager.cpp.o: /opt/ros/groovy/share/sensor_msgs/package.xml
+CMakeFiles/create_object.dir/pom/FilesManager.cpp.o: /opt/ros/groovy/share/cv_bridge/package.xml
 CMakeFiles/create_object.dir/pom/FilesManager.cpp.o: /opt/ros/groovy/share/rospack/package.xml
 CMakeFiles/create_object.dir/pom/FilesManager.cpp.o: /opt/ros/groovy/share/roslib/package.xml
 CMakeFiles/create_object.dir/pom/FilesManager.cpp.o: /opt/ros/groovy/share/rosgraph/package.xml
@@ -554,16 +536,10 @@ CMakeFiles/create_object.dir/pom/FilesManager.cpp.o: /opt/ros/groovy/share/nodel
 CMakeFiles/create_object.dir/pom/FilesManager.cpp.o: /opt/ros/groovy/share/message_filters/package.xml
 CMakeFiles/create_object.dir/pom/FilesManager.cpp.o: /opt/ros/groovy/share/nodelet_topic_tools/package.xml
 CMakeFiles/create_object.dir/pom/FilesManager.cpp.o: /opt/ros/groovy/share/flann/package.xml
-CMakeFiles/create_object.dir/pom/FilesManager.cpp.o: /opt/ros/groovy/share/geometry_msgs/package.xml
-CMakeFiles/create_object.dir/pom/FilesManager.cpp.o: /opt/ros/groovy/share/sensor_msgs/package.xml
 CMakeFiles/create_object.dir/pom/FilesManager.cpp.o: /opt/ros/groovy/share/pcl_msgs/package.xml
 CMakeFiles/create_object.dir/pom/FilesManager.cpp.o: /opt/ros/groovy/share/pcl/package.xml
 CMakeFiles/create_object.dir/pom/FilesManager.cpp.o: /opt/ros/groovy/share/tf/package.xml
 CMakeFiles/create_object.dir/pom/FilesManager.cpp.o: /opt/ros/groovy/share/pcl_ros/package.xml
-CMakeFiles/create_object.dir/pom/FilesManager.cpp.o: /opt/ros/groovy/share/image_transport/package.xml
-CMakeFiles/create_object.dir/pom/FilesManager.cpp.o: /opt/ros/groovy/share/cv_bridge/package.xml
-CMakeFiles/create_object.dir/pom/FilesManager.cpp.o: /home/gmanfred/devel/essential/ros/opencv_util/opencv_display/manifest.xml
-CMakeFiles/create_object.dir/pom/FilesManager.cpp.o: /home/gmanfred/devel/essential/ros/opencv_util/opencv_display/msg_gen/generated
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/gmanfred/devel/essential/ros/objects/pom/build/CMakeFiles $(CMAKE_PROGRESS_8)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/create_object.dir/pom/FilesManager.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/create_object.dir/pom/FilesManager.cpp.o -c /home/gmanfred/devel/essential/ros/objects/pom/pom/FilesManager.cpp

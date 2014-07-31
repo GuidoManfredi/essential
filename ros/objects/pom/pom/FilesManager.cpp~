@@ -6,6 +6,32 @@ using namespace cv;
 
 FilesManager::FilesManager () {}
 
+void FilesManager::getImagesAndFaces (std::string images_path,
+                                      std::vector<cv::Mat> &images, std::vector<int> &faces) {
+    boost::filesystem::path bf_images_path(images_path);
+    if ( is_regular_file(bf_images_path) ) {
+        Mat image = getImage (bf_images_path.string());
+        images.push_back (image);
+    }
+    else if ( is_directory(bf_images_path) ) {
+        typedef vector<path> vec;  
+        vec v;
+        copy(directory_iterator(bf_images_path), directory_iterator(), back_inserter(v));
+        sort(v.begin(), v.end());
+  
+        for (vec::const_iterator it (v.begin()); it != v.end(); ++it)
+        {
+            Mat image = getImage (it->string());
+            if (image.data) {
+                images.push_back (image);
+                string face = getDirName(it->string());
+                cout << atoi(face.c_str()) << endl;
+                faces.push_back(atoi(face.c_str()));
+            }
+        }
+    }
+}
+
 vector<Mat> FilesManager::getImages (string images_path) {
     vector<Mat> images;
     boost::filesystem::path bf_images_path(images_path);
