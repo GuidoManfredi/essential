@@ -1,0 +1,74 @@
+#include <ros/ros.h>
+#include <pcl_ros/point_cloud.h>
+#include <pcl/point_types.h>
+
+#include "reco_3d/IterativeClosestPointRecognition.h"
+#include "RecoICP.h"
+
+using namespace std;
+typedef pcl::PointCloud<pcl::PointXYZ> Cloud;
+// obb = oriented bounding box
+RecoICP reco;
+
+// Callback for pointcloud subscriber
+bool recognize (reco_3d::IterativeClosestPointRecognition::Request &req,
+								reco_3d::IterativeClosestPointRecognition::Response &res) {
+	std::vector< std::pair<std::string, float> > candidats;
+	std::vector<std::string> names;
+	std::vector<float> distances;
+	Eigen::Matrix4f transform;
+	
+	Cloud::Ptr cloud (new Cloud);
+	pcl::fromROSMsg(req.cluster, *cloud);
+	
+	candidats = reco.recognize (cloud, transform);
+	
+	Eigen::Matrix3f R;
+	R << transform(0,0), transform(0,1), transform(0,2),
+				transform(1,0), transform(1,1), transform(1,2),
+				transform(2,0), transform(2,1), transform(2,2);
+	Eigen::Quaternionf q (R);
+	
+	//TODO fill header
+	//res.pose.header = cloud->header;
+	res.pose.pose.position.x = transform (0, 3);
+	res.pose.pose.position.y = transform (1, 3);
+	res.pose.pose.position.z = transform (2, 3);
+	res.pose.pose.orientation.x = q.x();
+	res.pose.pose.orientation.y = q.y();
+	res.pose.pose.orientation.z = q.z();
+	res.pose.pose.orientation.w = q.w();
+	for (size_t i = 0; i < candidats.size(); ++i) {
+		names.push_back (candidats[i].first);
+		distances.push_back (candidats[i].second);
+	}
+	res.names = names;
+	res.distances = distances;
+	res.result = 0;
+
+	ROS_INFO("Recognition finished. Transform :");
+	cout << transform << endl;
+	cout << names[0] << " " << distances[0] << endl;
+	cout << names[1] << " " << distances[1] << endl;
+
+	return true;
+}
+
+int main(int argc, char **argv) {
+  ros::init(argc, argv, "reco_obb_node");
+  ros::NodeHandle n;
+
+  ros::ServiceServer srv_plans = n.advertiseService("/objects_recognition_icp", recognize);
+  
+  int num = reco.loadModels (argv[1]);
+  ROS_INFO ("Loaded %d models from %s.", num, argv[1]);
+  
+  ROS_INFO("Recognition iterative closes point service ready.");
+ 	ros::Rate loop_rate(10);
+  while (ros::ok()) {
+	  ros::spinOnce();
+	  loop_rate.sleep();
+  }
+
+  return 0;
+}
