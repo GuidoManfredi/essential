@@ -1,0 +1,18 @@
+#include <actionlib/client/simple_action_client.h>
+#include <pr2_controllers_msgs/PointHeadAction.h>
+
+// Our Action interface type, provided as a typedef for convenience
+typedef actionlib::SimpleActionClient<pr2_controllers_msgs::PointHeadAction> PointHeadClient;
+
+class Head {
+  public:
+    Head();
+    ~Head();
+    void lookAt(std::string camera, std::string frame_id, double x, double y, double z);
+    void shakeHead(int n);
+    
+  private:
+    PointHeadClient* point_head_client_;
+};
+
+

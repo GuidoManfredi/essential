@@ -1,0 +1,115 @@
+#include "../pr2_commander/Gripper.h"
+
+//Action client initialization
+Gripper::Gripper(){
+    //Initialize the client for the Action interface to the gripper controller
+    //and tell the action client that we want to spin a thread by default
+    gripper_client_ = new GripperClient("r_gripper_sensor_controller/gripper_action", true);
+    contact_client_  = new ContactClient("r_gripper_sensor_controller/find_contact",true);
+    slip_client_  = new SlipClient("r_gripper_sensor_controller/slip_servo",true);
+    event_detector_client_  = new EventDetectorClient("r_gripper_sensor_controller/event_detector",true);
+
+    //wait for the gripper action server to come up 
+    while(!gripper_client_->waitForServer(ros::Duration(5.0))){
+        ROS_INFO("Waiting for the r_gripper_sensor_controller/gripper_action action server to come up");
+    }
+
+    while(!contact_client_->waitForServer(ros::Duration(5.0))){
+        ROS_INFO("Waiting for the r_gripper_sensor_controller/find_contact action server to come up");
+    }
+    
+    while(!slip_client_->waitForServer(ros::Duration(5.0))){
+        ROS_INFO("Waiting for the r_gripper_sensor_controller/slip_servo action server to come up");
+    }    
+
+    while(!event_detector_client_->waitForServer(ros::Duration(5.0))){
+        ROS_INFO("Waiting for the r_gripper_sensor_controller/event_detector action server to come up");
+    }
+}
+
+Gripper::~Gripper(){
+    delete gripper_client_;
+    delete contact_client_;
+    delete slip_client_;
+    delete event_detector_client_;
+}
+// open, wait for something to be given, close
+void Gripper::grab() {
+    open();
+    detect();
+    findTwoContacts();
+}
+
+// wait for something to be given, close
+void Gripper::give() {
+    detect();
+    open();
+}
+
+//Open the gripper
+void Gripper::open(){
+    pr2_controllers_msgs::Pr2GripperCommandGoal open;
+    open.command.position = 0.09;    // position open (9 cm)
+    open.command.max_effort = -1.0;  // unlimited motor effort
+
+    ROS_INFO("Sending open goal");
+    gripper_client_->sendGoal(open);
+    gripper_client_->waitForResult();
+    if(gripper_client_->getState() == actionlib::SimpleClientGoalState::SUCCEEDED)
+        ROS_INFO("The gripper opened!");
+    else
+        ROS_INFO("The gripper failed to open.");
+}
+
+//Find two contacts on the robot gripper
+void Gripper::findTwoContacts(){
+    pr2_gripper_sensor_msgs::PR2GripperFindContactGoal findTwo;
+    findTwo.command.contact_conditions = findTwo.command.BOTH;  // close until both fingers contact
+    findTwo.command.zero_fingertip_sensors = true;   // zero fingertip sensor values before moving
+
+    ROS_INFO("Sending find 2 contact goal");
+    contact_client_->sendGoal(findTwo);
+    contact_client_->waitForResult(ros::Duration(5.0));
+    if(contact_client_->getState() == actionlib::SimpleClientGoalState::SUCCEEDED)
+    {
+        ROS_INFO("Contact found. Left: %d, Right: %d", contact_client_->getResult()->data.left_fingertip_pad_contact, 
+                 contact_client_->getResult()->data.right_fingertip_pad_contact);
+        ROS_INFO("Contact force. Left: %f, Right: %f", contact_client_->getResult()->data.left_fingertip_pad_force, 
+             contact_client_->getResult()->data.right_fingertip_pad_force);
+    }
+    else
+        ROS_INFO("The gripper did not find a contact.");
+}
+
+
+//Slip servo the robot
+void Gripper::slipServo(){
+    pr2_gripper_sensor_msgs::PR2GripperSlipServoGoal slip_goal;
+
+    ROS_INFO("Slip Servoing");
+    slip_client_->sendGoal(slip_goal);
+    //slip_client_->waitForResult();  // thre is no reason to wait since this action never returns a result
+    if(slip_client_->getState() == actionlib::SimpleClientGoalState::SUCCEEDED)
+        ROS_INFO("You Should Never See This Message!");
+    else
+        ROS_INFO("SlipServo Action returned without success.");
+}  
+
+
+//move into event_detector mode to detect object contact
+void Gripper::detect(){
+    pr2_gripper_sensor_msgs::PR2GripperEventDetectorGoal place_goal;
+    place_goal.command.trigger_conditions = place_goal.command.FINGER_SIDE_IMPACT_OR_SLIP_OR_ACC;  
+    place_goal.command.acceleration_trigger_magnitude = 4.0;  // set the contact acceleration to n m/s^2
+    place_goal.command.slip_trigger_magnitude = .005;
+
+    ROS_INFO("Waiting for object placement contact...");
+    event_detector_client_->sendGoal(place_goal);
+    event_detector_client_->waitForResult();
+    if(event_detector_client_->getState() == actionlib::SimpleClientGoalState::SUCCEEDED) {
+        ROS_INFO("Contact.");
+        ROS_INFO("cond met: %d, acc_met: %d, slip_met: %d", event_detector_client_->getResult()->data.trigger_conditions_met, event_detector_client_->getResult()->data.acceleration_event, event_detector_client_->getResult()->data.slip_event);
+    }
+    else
+        ROS_INFO("Place Failure");
+}
