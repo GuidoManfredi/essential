@@ -92,3 +92,4 @@ vector<sensor_msgs::PointCloud2> pcl2ros (vector<pcl::PointCloud<pcl::PointXYZ> 
     return ros_clouds;
 }
 
+

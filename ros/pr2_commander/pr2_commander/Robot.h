@@ -10,6 +10,11 @@ class Robot {
 
     void grab ();
     void give ();
+    
+    void moveArm ( bool arm, double shoulder_pan, double shoulder_lift,
+                    double upper_roll, double elbow_flex,
+                    double forearm_roll,
+                    double wrist_flex, double wrist_roll);
     void moveWrist (double step);
     
     void lookAt (std::string xyz_frame, double x, double y, double z);
@@ -24,9 +29,9 @@ class Robot {
   private:
     Arm* r_arm_;
     Arm* l_arm_;
-    Gripper r_gripper_;
     Head head_;
-    
+    Gripper r_gripper_;
+
     std::string main_camera_;
     tf::TransformListener tf_;
     

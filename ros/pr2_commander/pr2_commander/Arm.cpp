@@ -24,8 +24,8 @@ Arm::~Arm()
 
 //! Sends the command to start a given trajectory
 void Arm::startTrajectory(pr2_controllers_msgs::JointTrajectoryGoal goal) {
-    // When to start the trajectory: 1s from now
-    goal.trajectory.header.stamp = ros::Time::now() + ros::Duration(1.0);
+    // When to start the trajectory: 0.5s from now
+    goal.trajectory.header.stamp = ros::Time::now() + ros::Duration(0.5);
     traj_client_->sendGoal(goal);
 }
 
@@ -71,12 +71,12 @@ pr2_controllers_msgs::JointTrajectoryGoal Arm::moveArmTo(std::vector<std::string
         goal.trajectory.points[0].positions[i] = positions[i];
         goal.trajectory.points[0].velocities[i] = 0.0;
     }
-    goal.trajectory.points[0].time_from_start = ros::Duration(1.0);
+    // Trajectory duration : 3s
+    goal.trajectory.points[0].time_from_start = ros::Duration(3.0);
     return goal;
 }
 
-actionlib::SimpleClientGoalState Arm::getState()
-{
+actionlib::SimpleClientGoalState Arm::getState() {
     return traj_client_->getState();
 }
 
