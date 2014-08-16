@@ -1,7 +1,9 @@
-#include "COM.h"
+#include "../scan_object/COM.h"
 
 using namespace std;
 using namespace cv;
+
+COM::COM () {;}
 
 void COM::addFrame (cv::Mat image, cv::Mat depth, cv::Mat P) {
     // Acquire new image
@@ -12,18 +14,25 @@ void COM::addFrame (cv::Mat image, cv::Mat depth, cv::Mat P) {
     vector<Point3f> p3d;
     filterNaNKeyPoints (depth, raw_kpts, kpts, p3d); // remove NaN of depth from keypoints
     // Compute descriptors
+    ROS_INFO ("Computing descriptors");
     Mat descs;
     pipe2d_.describeFeatures (gray, kpts, descs);
+    ROS_INFO ("Adding %d descriptors", descs.rows);
     addDescriptors(descs);
-
     // Apply transform to 3D points
+    ROS_INFO ("Transforming points");
     vector<Point3f> transformed_p3d;
     transform (p3d, P, transformed_p3d);
     // Refine 3d pose
+    ROS_INFO ("Refining points");
     refine (p3d, transformed_p3d);
     addPoints(transformed_p3d);
     // Remove duplicate points
     removeDuplicates();
+}
+
+vector<Point3f> COM::p3d() {
+    return p3d_;
 }
 ///////////////////////////////////////////////////////////////////////////////
 // PRIVATE METHODS
@@ -54,7 +63,10 @@ void COM::refine (vector<Point3f> pts1, vector<Point3f> pts2) {
 }
 
 void COM::addDescriptors(Mat descs) {
-    vconcat(descs_, descs, descs_);
+    if (descs_.rows == 0)
+        descs_ = descs;
+    else
+        vconcat(descs_, descs, descs_);
 }
 
 void COM::addPoints(vector<Point3f> p3d) {

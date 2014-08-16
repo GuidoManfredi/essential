@@ -2,7 +2,7 @@
 
 #include "tools.h"
 #include "Pipeline2D.h"
-#include "PipelineGeom.h"
+#include <pcl/registration/icp.h>
 
 // For each new frame
     // Acquiere pointcloud and transform
@@ -15,8 +15,9 @@
 // Cheating Object Modeling
 class COM {
   public:
-    COM (std::string calibration_file);
+    COM ();
     void addFrame (cv::Mat image, cv::Mat depth, cv::Mat P);
+    std::vector<cv::Point3f> p3d();
     void saveModel(std::string filepath);
 
   private:
@@ -34,6 +35,5 @@ class COM {
     cv::Mat descs_;
 
     Pipeline2D pipe2d_;
-    PipelineGeom pipeGeom_;
     pcl::IterativeClosestPoint<pcl::PointXYZ, pcl::PointXYZ> icp_;
 };

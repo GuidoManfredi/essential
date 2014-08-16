@@ -1,5 +1,7 @@
-#include <ros/ros.h>
 #include <assert.h>
+
+#include <ros/ros.h>
+#include <tf/transform_listener.h>
 
 #include <geometry_msgs/PoseStamped.h>
 #include <geometry_msgs/PoseArray.h>
@@ -8,21 +10,20 @@
 
 #include <pcl_ros/point_cloud.h>
 #include <pcl/point_types.h>
+#include <pcl/visualization/cloud_viewer.h>
 
-#include "COM.h"
+#include <opencv2/highgui/highgui.hpp>
+
+#include "../scan_object/COM.h"
+#include "scan_object/AddFrame.h"
 
 using namespace std;
 using namespace cv;
 using namespace pcl;
 
+COM* com;
 Mat img, depth;
-
-/** TODO
- *
- * Problem quand prend 2 keyframe d'affilé : perdu.
- * Corriger sens de rotation du repere
- *
-**/
+// TODO ne pas recreer un nouveau tf listener a chaque appel de camera2target
 /*
 3 sources d'erreur : 
     Utiliser camera/depth_registered/points
@@ -32,6 +33,9 @@ Mat img, depth;
     Verifier que openni_launch recupere les bon parametres intrinseques pour
     sa rectification.
 */
+
+Mat camera2target (string camera, string target);
+
 void cloud_callback(const sensor_msgs::PointCloud2& msg) {
 	PointCloud<PointXYZRGB>::Ptr cloud (new PointCloud<PointXYZRGB>);
 	fromROSMsg (msg, *cloud);
@@ -55,40 +59,63 @@ void cloud_callback(const sensor_msgs::PointCloud2& msg) {
 	depth = tmp_depth;
 	img = tmp_rgb;
 	//imshow ("depth", depth);
-	//imshow ("rgb", tmp_rgb);
-	//waitKey(1);
+	imshow ("rgb", tmp_rgb);
+	waitKey(0);
 }
 
-int main(int argc, char** argv)
-{
-	assert (argc==6 && "Usage : frontEnd in_image_topic in_cloud_topic out_pointcloud_topic");
+bool addFrame (scan_object::AddFrame::Request &req, 
+                scan_object::AddFrame::Response &res) {
+    ROS_INFO("Adding new frame");
 	
-	ros::init(argc, argv, "frontEnd");
+    Mat P = camera2target (req.camera, req.target);
+    com->addFrame (img, depth, P);
+    
+    return true;
+}
+
+// roslaunch openni_launch openni.launch camera:=kinect
+// rosrun scan_object com /camera/depth_registered/points
+// rosservice call AddFrame head_mount_kinect_ir_optical_frame r_gripper_tool_frame
+int main(int argc, char** argv) {
+	assert (argc == 2 && "Usage : com in_color_cloud_topic");
+	
+	ros::init(argc, argv, "cheating_object_modeler");
 	ros::NodeHandle n;
 
-	ros::Subscriber cloud_subscriber = n.subscribe(argv[2], 1, cloud_callback);
-	ros::Publisher points_publisher = n.advertise<frontEnd::CloudArray>(argv[3], 1);
+    com = new COM;
 
-	string calibration_path ("/home/gmanfred/.ros/camera_info/my_xtion.yml");
-	COM com (calibration_path);
+	ros::Subscriber cloud_subscriber = n.subscribe(argv[1], 1, cloud_callback);
+    ros::ServiceServer add_frame_service = n.advertiseService("AddFrame", addFrame);
 
-	ros::Rate loop_rate (10);
-	while (ros::ok()) {
-		ros::spinOnce ();
-		com.addFrame (img, depth, );
-		loop_rate.sleep ();
-	}
-
-  return 0;
-}
-
-vector<sensor_msgs::PointCloud2> pcl2ros (vector<pcl::PointCloud<pcl::PointXYZ> > clouds) {
-    vector<sensor_msgs::PointCloud2> ros_clouds;
-    for ( size_t i = 0; i < clouds.size(); ++i ) {
-        sensor_msgs::PointCloud2 ros;
-        pcl::toROSMsg(clouds[i], ros);
-        ros_clouds.push_back(ros);
+    ros::Rate loop_rate(10);
+    pcl::visualization::CloudViewer viewer ("Model");
+    while (ros::ok() && !viewer.wasStopped ()) {
+        ros::spinOnce();
+        
+        pcl::PointCloud<pcl::PointXYZ>::Ptr cloud (new pcl::PointCloud<pcl::PointXYZ>);
+        vec2pcd (com->p3d(), cloud);
+        if (!cloud->points.empty())
+            viewer.showCloud (cloud);
+            
+        loop_rate.sleep();
     }
-    return ros_clouds;
+            
+    return 0;
 }
+
+Mat camera2target (string camera, string target) {
+    tf::TransformListener listener;
+
+	tf::StampedTransform transform;
+    try {
+        listener.waitForTransform(camera, target, ros::Time(0), ros::Duration(10.0) );
+        listener.lookupTransform(camera, target, ros::Time(0), transform);
+    }
+    catch (tf::TransformException ex) {
+        ROS_ERROR("%s",ex.what());
+    }
+    return transform2mat (transform);
+}
+
+
 
