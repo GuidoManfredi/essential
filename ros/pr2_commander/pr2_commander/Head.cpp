@@ -15,7 +15,7 @@ Head::~Head() {
     delete point_head_client_;
 }
 
-//! Points the high-def camera frame at a point in a given frame
+//! Points the given camera frame at a point in a given frame
 void Head::lookAt(std::string camera, std::string frame_id, double x, double y, double z) {
     //the goal message we will be sending
     pr2_controllers_msgs::PointHeadGoal goal;
@@ -24,7 +24,7 @@ void Head::lookAt(std::string camera, std::string frame_id, double x, double y, 
     point.header.frame_id = frame_id;
     point.point.x = x; point.point.y = y; point.point.z = z;
     goal.target = point;
-    //we are pointing the high-def camera frame 
+    //we are pointing the camera frame 
     //(pointing_axis defaults to X-axis)
     goal.pointing_frame = camera;
     //take at least 0.5 seconds to get there

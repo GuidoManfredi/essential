@@ -17,8 +17,8 @@ class Robot {
                     double wrist_flex, double wrist_roll);
     void moveWrist (double step);
     
-    void lookAt (std::string xyz_frame, double x, double y, double z);
-    void lookAtHand (std::string camera, std::string hand, double offset);
+    void lookAt (std::string camera, std::string xyz_frame, double x, double y, double z);
+    void lookAtTarget (std::string camera, std::string target);
     
     void scan (double start, double step, double end);
     void fullScan (double step);
@@ -32,7 +32,6 @@ class Robot {
     Head head_;
     Gripper r_gripper_;
 
-    std::string main_camera_;
     tf::TransformListener tf_;
     
     std::vector<double> give_pose;

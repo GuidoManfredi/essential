@@ -15,7 +15,7 @@ Head::~Head() {
     delete point_head_client_;
 }
 
-//! Points the high-def camera frame at a point in a given frame
+//! Points the given camera frame at a point in a given frame
 void Head::lookAt(std::string camera, std::string frame_id, double x, double y, double z) {
     //the goal message we will be sending
     pr2_controllers_msgs::PointHeadGoal goal;
@@ -41,9 +41,9 @@ void Head::shakeHead(int n) {
     int count = 0;
     while (ros::ok() && ++count <= n ) {
       //Looks at a point forward (x=5m), slightly left (y=1m), and 1.2m up
-      lookAt("", "base_link", 5.0, 1.0, 1.2);
+      lookAt("high_def_frame", "base_link", 5.0, 1.0, 1.2);
       //Looks at a point forward (x=5m), slightly right (y=-1m), and 1.2m up
-      lookAt("", "base_link", 5.0, -1.0, 1.2);
+      lookAt("high_def_frame", "base_link", 5.0, -1.0, 1.2);
     }
 }
 

@@ -40,7 +40,7 @@ void Gripper::grab() {
     findTwoContacts();
 }
 
-// wait for something to be given, close
+// wait object to be taken, open
 void Gripper::give() {
     detect();
     open();
@@ -99,9 +99,9 @@ void Gripper::slipServo(){
 //move into event_detector mode to detect object contact
 void Gripper::detect(){
     pr2_gripper_sensor_msgs::PR2GripperEventDetectorGoal place_goal;
-    place_goal.command.trigger_conditions = place_goal.command.FINGER_SIDE_IMPACT_OR_SLIP_OR_ACC;  
-    place_goal.command.acceleration_trigger_magnitude = 4.0;  // set the contact acceleration to n m/s^2
-    place_goal.command.slip_trigger_magnitude = .005;
+    place_goal.command.trigger_conditions = place_goal.command.FINGER_SIDE_IMPACT_OR_ACC;  
+    place_goal.command.acceleration_trigger_magnitude = 8.0;  // set the contact acceleration to n m/s^2
+    //place_goal.command.slip_trigger_magnitude = .05;
 
     ROS_INFO("Waiting for object placement contact...");
     event_detector_client_->sendGoal(place_goal);

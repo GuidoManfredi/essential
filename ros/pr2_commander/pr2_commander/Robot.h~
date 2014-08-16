@@ -12,13 +12,13 @@ class Robot {
     void give ();
     
     void moveArm ( bool arm, double shoulder_pan, double shoulder_lift,
-                    double upper_rool, double elbow_flex,
+                    double upper_roll, double elbow_flex,
                     double forearm_roll,
                     double wrist_flex, double wrist_roll);
     void moveWrist (double step);
     
-    void lookAt (std::string xyz_frame, double x, double y, double z);
-    void lookAtHand (std::string camera, std::string hand, double offset);
+    void lookAt (std::string camera, std::string xyz_frame, double x, double y, double z);
+    void lookAtTarget (std::string camera, std::string target);
     
     void scan (double start, double step, double end);
     void fullScan (double step);

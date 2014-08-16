@@ -29,31 +29,21 @@ void Arm::startTrajectory(pr2_controllers_msgs::JointTrajectoryGoal goal) {
     traj_client_->sendGoal(goal);
 }
 
+//! Sends the command to start a given trajectory
+void Arm::startTrajectoryBlock(pr2_controllers_msgs::JointTrajectoryGoal goal) {
+    // When to start the trajectory: 0.5s from now
+    goal.trajectory.header.stamp = ros::Time::now() + ros::Duration(0.5);
+    traj_client_->sendGoal(goal);
+    while (!getState().isDone()) {
+        usleep(50000);
+    }
+}
+
 pr2_controllers_msgs::JointTrajectoryGoal Arm::rollWrist (double angle) {
-    return moveArmTo("r_wrist_roll_joint", angle);
-}
-
-pr2_controllers_msgs::JointTrajectoryGoal Arm::moveWholeArmTo (vector<double> positions) {
-    assert(positions.size() == 7 && "moveWholeArmTo : Not enough positions provided");
-    
-    vector<string> joint_names;
-    joint_names.push_back("r_shoulder_pan_joint");
-    joint_names.push_back("r_shoulder_lift_joint");
-    joint_names.push_back("r_upper_arm_roll_joint");
-    joint_names.push_back("r_elbow_flex_joint");
-    joint_names.push_back("r_forearm_roll_joint");
-    joint_names.push_back("r_wrist_flex_joint");
-    joint_names.push_back("r_wrist_roll_joint");
-    return moveArmTo(joint_names, positions);
-}
-
-pr2_controllers_msgs::JointTrajectoryGoal Arm::moveArmTo(string joint_name,
-                                                         double position) {
-    vector<string> joint_names;
-    joint_names.push_back(joint_name);
     vector<double> positions;
-    positions.push_back(position);
-    return moveArmTo(joint_names, positions);
+    get_current_joint_angles(positions);
+    positions[6] += angle;
+    return moveWholeArmTo(positions);
 }
 
 pr2_controllers_msgs::JointTrajectoryGoal Arm::moveArmTo(std::vector<std::string> joint_names,
@@ -76,8 +66,35 @@ pr2_controllers_msgs::JointTrajectoryGoal Arm::moveArmTo(std::vector<std::string
     return goal;
 }
 
+pr2_controllers_msgs::JointTrajectoryGoal Arm::moveWholeArmTo (vector<double> positions) {
+    assert(positions.size() == 7 && "moveWholeArmTo : Not enough positions provided");
+    
+    vector<string> joint_names;
+    joint_names.push_back("r_shoulder_pan_joint");
+    joint_names.push_back("r_shoulder_lift_joint");
+    joint_names.push_back("r_upper_arm_roll_joint");
+    joint_names.push_back("r_elbow_flex_joint");
+    joint_names.push_back("r_forearm_roll_joint");
+    joint_names.push_back("r_wrist_flex_joint");
+    joint_names.push_back("r_wrist_roll_joint");
+    return moveArmTo(joint_names, positions);
+}
+
 actionlib::SimpleClientGoalState Arm::getState() {
     return traj_client_->getState();
 }
 
+void Arm::get_current_joint_angles(vector<double> &current_angles) {
+    int i;
+    //get a single message from the topic 'r_arm_controller/state'
+    pr2_controllers_msgs::JointTrajectoryControllerStateConstPtr state_msg = 
+        ros::topic::waitForMessage<pr2_controllers_msgs::JointTrajectoryControllerState>
+        ("r_arm_controller/state");
+    
+    //extract the joint angles from it
+    current_angles.resize(7);
+    for(i=0; i<7; i++){
+        current_angles[i] = state_msg->actual.positions[i];
+    }
+}
 
