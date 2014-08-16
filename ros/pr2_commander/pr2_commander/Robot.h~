@@ -13,13 +13,14 @@ class Robot {
     void moveWrist (double step);
     
     void lookAt (std::string xyz_frame, double x, double y, double z);
+    void lookAt (tf::transform trans);
     void lookAtHand (std::string camera, std::string hand, double offset);
     
     void scan (double start, double step, double end);
     void fullScan (double step);
     
-    joint_state (std::string joint_name);
-    joint_states (std::vector<std::string> joint_names);
+    //joint_state (std::string joint_name);
+    //joint_states (std::vector<std::string> joint_names);
 
   private:
     Arm* r_arm_;

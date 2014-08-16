@@ -35,10 +35,20 @@ void Robot::moveWrist (double step) {
         
     wrist_pose_ += step;
     r_arm_->rollWrist(wrist_pose_);
+    
+    
 }
 
 void Robot::lookAt(string xyz_frame, double x, double y, double z) {
     head_.lookAt(main_camera_, xyz_frame, x, y, z);
+}
+
+void lookAt (tf::transform trans) {
+    double x = transform.getOrigin().x();
+    double y = transform.getOrigin().y();
+    double z = transform.getOrigin().z() + offset; // add offset along z
+    // camera frame look at xyz in camera frame
+    lookAt (camera, x, y, z);
 }
 
 //"/r_wrist_roll_link"
