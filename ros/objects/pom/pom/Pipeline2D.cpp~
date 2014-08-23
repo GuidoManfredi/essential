@@ -19,7 +19,7 @@ Pipeline2D::Pipeline2D() {
     };
 
     matcher_.SetMaxSift (8192);
-    minNumberMatchesAllowed_                  = 8;
+    minNumberMatchesAllowed_ = 8;
 }
 
 void Pipeline2D::getGray(const cv::Mat& image, cv::Mat& gray)

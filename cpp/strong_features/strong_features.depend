@@ -1,0 +1,48 @@
+# depslib dependency file v1.0
+1408789761 source:/home/gmanfred/devel/essential/cpp/strong_features/Engine.cpp
+	"Engine.h"
+
+1408788926 /home/gmanfred/devel/essential/cpp/strong_features/Engine.h
+	"Pipeline2D.h"
+	"Containers.h"
+
+1408783431 /home/gmanfred/devel/essential/cpp/strong_features/Pipeline2D.h
+	<iostream>
+	<opencv2/core/core.hpp>
+	<opencv2/features2d/features2d.hpp>
+
+1408782842 /home/gmanfred/devel/essential/cpp/strong_features/Containers.h
+	<vector>
+	<opencv2/core/core.hpp>
+
+1408806158 source:/home/gmanfred/devel/essential/cpp/strong_features/FilesManager.cpp
+	"FilesManager.h"
+	<opencv2/highgui/highgui.hpp>
+	"alphanumComp.hpp"
+
+1408788426 /home/gmanfred/devel/essential/cpp/strong_features/FilesManager.h
+	<fstream>
+	<iostream>
+	<numeric>
+	<boost/filesystem.hpp>
+	<boost/algorithm/string.hpp>
+	"Containers.h"
+	"Pipeline2D.h"
+
+1408806265 source:/home/gmanfred/devel/essential/cpp/strong_features/Pipeline2D.cpp
+	<cassert>
+	<opencv2/imgproc/imgproc.hpp>
+	<opencv2/nonfree/nonfree.hpp>
+	"Pipeline2D.h"
+
+1408806325 source:/home/gmanfred/devel/essential/cpp/strong_features/main.cpp
+	"FilesManager.h"
+	"Engine.h"
+
+1408785451 /home/gmanfred/devel/essential/cpp/strong_features/alphanumComp.hpp
+	<cassert>
+	<functional>
+	<string>
+	<sstream>
+	<cctype>
+

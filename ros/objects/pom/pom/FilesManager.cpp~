@@ -25,7 +25,6 @@ void FilesManager::getImagesAndFaces (std::string images_path,
             if (image.data) {
                 images.push_back (image);
                 string face = getDirName(it->string());
-                cout << atoi(face.c_str()) << endl;
                 faces.push_back(atoi(face.c_str()));
             }
         }
