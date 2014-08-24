@@ -43,7 +43,7 @@ void Pipeline2D::getGray(const cv::Mat& image, cv::Mat& gray) {
     else if (image.channels() == 1)
         gray = image;
 }
-
+/*
 void Pipeline2D::extractDescriptors(const cv::Mat& image, const cv::Mat& mask, Mat &descriptors) {
     Mat gray;
     getGray(image, gray);
@@ -53,9 +53,57 @@ void Pipeline2D::extractDescriptors(const cv::Mat& image, const cv::Mat& mask, M
     // Extract descriptor for each keypoint
     extractor_->compute (gray, kpts, descriptors);
 }
-
+*/
+/*
 int Pipeline2D::match (const cv::Mat &descs1, const cv::Mat &descs2) {
     std::vector<cv::DMatch> matches;
     matcher_->match(descs1, descs2, matches);
     return matches.size();
+}
+*/
+
+void Pipeline2D::extractDescriptors(const cv::Mat& image, const cv::Mat& mask, vector<vector<keypointslist > > keys) {
+    Mat gray;
+    getGray(image, gray);
+    Mat gray_masked;
+    gray.copyTo(gray_masked, mask);
+    // Detect keypoints
+    vector<float> asift_image (gray_masked.data, gray_masked.data + gray_masked.width * gray_masked.height);
+    int num_tilts = 7;
+
+	siftPar siftparameters;
+	default_sift_parameters(siftparameters);
+    compute_asift_keypoints(asift_image, gray_masked.width, gray_masked.height, num_tilts, 0, keys, siftparameters);
+}
+
+int Pipeline2D::match (const cv::Mat &keys1, const cv::Mat &keys2) {
+    num_tilts = 7;
+    matchingslist matchings;
+	siftPar siftparameters;
+	default_sift_parameters(siftparameters);
+    num_matches = compute_asift_matches(num_tilts, num_tilts, wS1, hS1, wS2,
+                                      hS2, 0, keys1, keys2, matchings, siftparameters);
+    return matches.size();
+}
+
+void Pipeline2D::key2desc (vector<vector<keypointslist > > key, Mat &desc) {
+    for (size_t i = 0; i < keys.size(); ++i) {
+        for (size_t j = 0; j < keys[i].size(); ++j) {
+            for (size_t k = 0; k < keys[i][j].size(); ++k) {
+                Mat sift = Mat(1, 128, CV_32F, &keys[i][j][k].vec);
+                desc.push_back (sift);
+            }
+        }
+    }
+}
+
+void Pipeline2D::key2desc (vector<vector<keypointslist > > key, Mat &desc) {
+    for (size_t i = 0; i < keys.size(); ++i) {
+        for (size_t j = 0; j < keys[i].size(); ++j) {
+            for (size_t k = 0; k < keys[i][j].size(); ++k) {
+                Mat sift = Mat(1, 128, CV_32F, &keys[i][j][k].vec);
+                desc.push_back (sift);
+            }
+        }
+    }
 }

@@ -6,7 +6,11 @@ using namespace cv;
 Engine::Engine () {}
 
 vector<int> Engine::match (Model model, Object object) {
+#ifndef ASIFT
     return match (model.descriptors_, object.views_);
+#else
+    return match (model.keys_, object.views_);
+#endif
 }
 
 vector<int> Engine::match (Mat model_descriptors, vector<View> object_views) {
@@ -14,7 +18,11 @@ vector<int> Engine::match (Mat model_descriptors, vector<View> object_views) {
 
     int number_matches = 0;
     for (size_t i = 0; i < object_views.size(); ++i) {
+#ifndef ASIFT
         number_matches = pipe2d_.match (model_descriptors, object_views[i].descriptors_);
+#else
+        number_matches = pipe2d_.match (model_keys, object_views[i].keys_)
+#endif
         results[i] = number_matches;
     }
     return results;
@@ -39,4 +47,18 @@ void Engine::sortViewByAngle(Object &object) {
     sort (object.views_.begin(), object.views_.end(), Comparator);
 //    for (size_t i = 0; i < object.views_.size(); ++i)
 //        cout << object.views_[i].angle_ << endl;
+}
+
+int Engine::getIdxFromAngle (Object object, float angle) {
+    float min_diff = 360.0;
+    int min_idx = 0.0;
+    for (size_t i = 0; i < object.views_.size(); i+=3) {
+        //cout << object.views_[i].angle_ << endl;
+        float diff = fabs(object.views_[i].angle_ - angle);
+        if (diff < min_diff) {
+            min_diff = diff;
+            min_idx = i;
+        }
+    }
+    return min_idx;
 }

@@ -1,8 +1,8 @@
 # depslib dependency file v1.0
-1408789761 source:/home/gmanfred/devel/essential/cpp/strong_features/Engine.cpp
+1408857989 source:/home/gmanfred/devel/essential/cpp/strong_features/Engine.cpp
 	"Engine.h"
 
-1408788926 /home/gmanfred/devel/essential/cpp/strong_features/Engine.h
+1408857705 /home/gmanfred/devel/essential/cpp/strong_features/Engine.h
 	"Pipeline2D.h"
 	"Containers.h"
 
@@ -29,13 +29,13 @@
 	"Containers.h"
 	"Pipeline2D.h"
 
-1408806265 source:/home/gmanfred/devel/essential/cpp/strong_features/Pipeline2D.cpp
+1408862409 source:/home/gmanfred/devel/essential/cpp/strong_features/Pipeline2D.cpp
 	<cassert>
 	<opencv2/imgproc/imgproc.hpp>
 	<opencv2/nonfree/nonfree.hpp>
 	"Pipeline2D.h"
 
-1408806325 source:/home/gmanfred/devel/essential/cpp/strong_features/main.cpp
+1408858877 source:/home/gmanfred/devel/essential/cpp/strong_features/main.cpp
 	"FilesManager.h"
 	"Engine.h"
 
@@ -45,4 +45,936 @@
 	<string>
 	<sstream>
 	<cctype>
+
+1408862368 source:/home/gmanfred/devel/essential/cpp/strong_features/ASIFT/build/CMakeFiles/CompilerIdC/CMakeCCompilerId.c
+
+1408862368 source:/home/gmanfred/devel/essential/cpp/strong_features/ASIFT/build/CMakeFiles/CompilerIdCXX/CMakeCXXCompilerId.cpp
+
+1408862368 source:/home/gmanfred/devel/essential/cpp/strong_features/ASIFT/compute_asift_keypoints.cpp
+	<assert.h>
+	<stdlib.h>
+	<stdio.h>
+	<math.h>
+	<time.h>
+	"compute_asift_keypoints.h"
+	<omp.h>
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT/compute_asift_keypoints.h
+	"library.h"
+	"demo_lib_sift.h"
+	"frot.h"
+	"fproj.h"
+	<vector>
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT/library.h
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+	<time.h>
+	<float.h>
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT/demo_lib_sift.h
+	<stdlib.h>
+	<assert.h>
+	"numerics1.h"
+	"library.h"
+	"filter.h"
+	"domain.h"
+	"splines.h"
+	"flimage.h"
+	<vector>
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT/numerics1.h
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+	<fstream>
+	<iostream>
+	"library.h"
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT/filter.h
+	"library.h"
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT/domain.h
+	"numerics1.h"
+	"library.h"
+	"splines.h"
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT/splines.h
+	"numerics1.h"
+	"library.h"
+	"string.h"
+	<vector>
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT/flimage.h
+	<iostream>
+	<string>
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT/frot.h
+	"library.h"
+	<vector>
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT/fproj.h
+	"library.h"
+	<vector>
+
+1408862368 source:/home/gmanfred/devel/essential/cpp/strong_features/ASIFT/compute_asift_matches.cpp
+	<assert.h>
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+	<time.h>
+	<omp.h>
+	"compute_asift_matches.h"
+	"libMatch/match.h"
+	"orsa.h"
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT/compute_asift_matches.h
+	"library.h"
+	"demo_lib_sift.h"
+	"frot.h"
+	"fproj.h"
+	<vector>
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT/libMatch/match.h
+	<vector>
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT/orsa.h
+	<vector>
+	"libNumerics/numerics.h"
+	"libMatch/match.h"
+	<sstream>
+	<iostream>
+	<fstream>
+	<cmath>
+	<cstdio>
+	<cmath>
+	<cstdlib>
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT/libNumerics/numerics.h
+	"matrix.h"
+	<vector>
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT/libNumerics/matrix.h
+	<iostream>
+	<cassert>
+	"matrix.cpp"
+	"vector.cpp"
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT/libNumerics/matrix.cpp
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT/libNumerics/vector.cpp
+
+1408862368 source:/home/gmanfred/devel/essential/cpp/strong_features/ASIFT/demo_ASIFT.cpp
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<time.h>
+	<vector>
+	<omp.h>
+	"demo_lib_sift.h"
+	"io_png/io_png.h"
+	"library.h"
+	"frot.h"
+	"fproj.h"
+	"compute_asift_keypoints.h"
+	"compute_asift_matches.h"
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT/io_png/io_png.h
+
+1408862368 source:/home/gmanfred/devel/essential/cpp/strong_features/ASIFT/demo_lib_sift.cpp
+	"demo_lib_sift.h"
+
+1408862368 source:/home/gmanfred/devel/essential/cpp/strong_features/ASIFT/domain.cpp
+	"domain.h"
+
+1408862368 source:/home/gmanfred/devel/essential/cpp/strong_features/ASIFT/filter.cpp
+	"filter.h"
+
+1408862368 source:/home/gmanfred/devel/essential/cpp/strong_features/ASIFT/flimage.cpp
+	"flimage.h"
+
+1408862368 source:/home/gmanfred/devel/essential/cpp/strong_features/ASIFT/fproj.cpp
+	<stdio.h>
+	<math.h>
+	"splines.h"
+	"fproj.h"
+
+1408862368 source:/home/gmanfred/devel/essential/cpp/strong_features/ASIFT/frot.cpp
+	"frot.h"
+
+1408862368 source:/home/gmanfred/devel/essential/cpp/strong_features/ASIFT/io_png/io_png.c
+	<stdlib.h>
+	<stdio.h>
+	<math.h>
+	<assert.h>
+	"png.h"
+	<png.h>
+	"io_png.h"
+
+1408862368 source:/home/gmanfred/devel/essential/cpp/strong_features/ASIFT/io_png/libs/png/example.c
+	"png.h"
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT/io_png/libs/png/png.h
+	"../zlib/zlib.h"
+	"pngconf.h"
+	<crtdbg.h>
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT/io_png/libs/zlib/zlib.h
+	"zconf.h"
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT/io_png/libs/zlib/zconf.h
+	<windows.h>
+	<sys/types.h>
+	<unistd.h>
+	<unixio.h>
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT/io_png/libs/png/pngconf.h
+	"pngusr.h"
+	"config.h"
+	<windows.h>
+	<stdio.h>
+	<stdio.h>
+	<sys/types.h>
+	<setjmp.h>
+	<strings.h>
+	<string.h>
+	<stdlib.h>
+	<fp.h>
+	<math.h>
+	<m68881.h>
+	<mem.h>
+	<alloc.h>
+	<malloc.h>
+	<time.h>
+	<dos.h>
+
+1408862368 source:/home/gmanfred/devel/essential/cpp/strong_features/ASIFT/io_png/libs/png/png.c
+	"png.h"
+
+1408862368 source:/home/gmanfred/devel/essential/cpp/strong_features/ASIFT/io_png/libs/png/pngerror.c
+	"png.h"
+
+1408862368 source:/home/gmanfred/devel/essential/cpp/strong_features/ASIFT/io_png/libs/png/pnggccrd.c
+
+1408862368 source:/home/gmanfred/devel/essential/cpp/strong_features/ASIFT/io_png/libs/png/pngget.c
+	"png.h"
+
+1408862368 source:/home/gmanfred/devel/essential/cpp/strong_features/ASIFT/io_png/libs/png/pngmem.c
+	"png.h"
+
+1408862368 source:/home/gmanfred/devel/essential/cpp/strong_features/ASIFT/io_png/libs/png/pngpread.c
+	"png.h"
+
+1408862368 source:/home/gmanfred/devel/essential/cpp/strong_features/ASIFT/io_png/libs/png/pngread.c
+	"png.h"
+
+1408862368 source:/home/gmanfred/devel/essential/cpp/strong_features/ASIFT/io_png/libs/png/pngrio.c
+	"png.h"
+
+1408862368 source:/home/gmanfred/devel/essential/cpp/strong_features/ASIFT/io_png/libs/png/pngrtran.c
+	"png.h"
+
+1408862368 source:/home/gmanfred/devel/essential/cpp/strong_features/ASIFT/io_png/libs/png/pngrutil.c
+	"png.h"
+
+1408862368 source:/home/gmanfred/devel/essential/cpp/strong_features/ASIFT/io_png/libs/png/pngset.c
+	"png.h"
+
+1408862368 source:/home/gmanfred/devel/essential/cpp/strong_features/ASIFT/io_png/libs/png/pngtest.c
+	"png.h"
+	<windows.h>
+	<stdlib.h>
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+	<mem.h>
+
+1408862368 source:/home/gmanfred/devel/essential/cpp/strong_features/ASIFT/io_png/libs/png/pngtrans.c
+	"png.h"
+
+1408862368 source:/home/gmanfred/devel/essential/cpp/strong_features/ASIFT/io_png/libs/png/pngvcrd.c
+
+1408862368 source:/home/gmanfred/devel/essential/cpp/strong_features/ASIFT/io_png/libs/png/pngwio.c
+	"png.h"
+
+1408862368 source:/home/gmanfred/devel/essential/cpp/strong_features/ASIFT/io_png/libs/png/pngwrite.c
+	"png.h"
+
+1408862368 source:/home/gmanfred/devel/essential/cpp/strong_features/ASIFT/io_png/libs/png/pngwtran.c
+	"png.h"
+
+1408862368 source:/home/gmanfred/devel/essential/cpp/strong_features/ASIFT/io_png/libs/png/pngwutil.c
+	"png.h"
+
+1408862368 source:/home/gmanfred/devel/essential/cpp/strong_features/ASIFT/io_png/libs/zlib/adler32.c
+	"zlib.h"
+
+1408862368 source:/home/gmanfred/devel/essential/cpp/strong_features/ASIFT/io_png/libs/zlib/compress.c
+	"zlib.h"
+
+1408862368 source:/home/gmanfred/devel/essential/cpp/strong_features/ASIFT/io_png/libs/zlib/crc32.c
+	<stdio.h>
+	"zutil.h"
+	<limits.h>
+	"crc32.h"
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT/io_png/libs/zlib/zutil.h
+	"zlib.h"
+	<stddef.h>
+	<string.h>
+	<stdlib.h>
+	<errno.h>
+	<alloc.h>
+	<malloc.h>
+	<malloc.h>
+	<unix.h>
+	<stdio.h>
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT/io_png/libs/zlib/crc32.h
+
+1408862368 source:/home/gmanfred/devel/essential/cpp/strong_features/ASIFT/io_png/libs/zlib/deflate.c
+	"deflate.h"
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT/io_png/libs/zlib/deflate.h
+	"zutil.h"
+
+1408862368 source:/home/gmanfred/devel/essential/cpp/strong_features/ASIFT/io_png/libs/zlib/example.c
+	<stdio.h>
+	"zlib.h"
+	<string.h>
+	<stdlib.h>
+
+1408862368 source:/home/gmanfred/devel/essential/cpp/strong_features/ASIFT/io_png/libs/zlib/gzio.c
+	<stdio.h>
+	"zutil.h"
+	<stdarg.h>
+
+1408862368 source:/home/gmanfred/devel/essential/cpp/strong_features/ASIFT/io_png/libs/zlib/infback.c
+	"zutil.h"
+	"inftrees.h"
+	"inflate.h"
+	"inffast.h"
+	"inffixed.h"
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT/io_png/libs/zlib/inftrees.h
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT/io_png/libs/zlib/inflate.h
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT/io_png/libs/zlib/inffast.h
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT/io_png/libs/zlib/inffixed.h
+
+1408862368 source:/home/gmanfred/devel/essential/cpp/strong_features/ASIFT/io_png/libs/zlib/inffast.c
+	"zutil.h"
+	"inftrees.h"
+	"inflate.h"
+	"inffast.h"
+
+1408862368 source:/home/gmanfred/devel/essential/cpp/strong_features/ASIFT/io_png/libs/zlib/inflate.c
+	"zutil.h"
+	"inftrees.h"
+	"inflate.h"
+	"inffast.h"
+	"inffixed.h"
+	<stdio.h>
+
+1408862368 source:/home/gmanfred/devel/essential/cpp/strong_features/ASIFT/io_png/libs/zlib/inftrees.c
+	"zutil.h"
+	"inftrees.h"
+
+1408862368 source:/home/gmanfred/devel/essential/cpp/strong_features/ASIFT/io_png/libs/zlib/minigzip.c
+	<stdio.h>
+	"zlib.h"
+	<string.h>
+	<stdlib.h>
+	<sys/types.h>
+	<sys/mman.h>
+	<sys/stat.h>
+	<fcntl.h>
+	<io.h>
+	<unix.h>
+
+1408862368 source:/home/gmanfred/devel/essential/cpp/strong_features/ASIFT/io_png/libs/zlib/trees.c
+	"deflate.h"
+	<ctype.h>
+	"trees.h"
+	<stdio.h>
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT/io_png/libs/zlib/trees.h
+
+1408862368 source:/home/gmanfred/devel/essential/cpp/strong_features/ASIFT/io_png/libs/zlib/uncompr.c
+	"zlib.h"
+
+1408862368 source:/home/gmanfred/devel/essential/cpp/strong_features/ASIFT/io_png/libs/zlib/zutil.c
+	"zutil.h"
+
+1408862368 source:/home/gmanfred/devel/essential/cpp/strong_features/ASIFT/libMatch/match.cpp
+	"match.h"
+	<fstream>
+	<sstream>
+
+1408862368 source:/home/gmanfred/devel/essential/cpp/strong_features/ASIFT/libNumerics/computeH.cpp
+	"homography.h"
+	"numerics.h"
+	<algorithm>
+	<math.h>
+	<string.h>
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT/libNumerics/homography.h
+	"matrix.h"
+
+1408862368 source:/home/gmanfred/devel/essential/cpp/strong_features/ASIFT/libNumerics/homography.cpp
+	"homography.h"
+
+1408862368 source:/home/gmanfred/devel/essential/cpp/strong_features/ASIFT/libNumerics/matrix.cpp
+
+1408862368 source:/home/gmanfred/devel/essential/cpp/strong_features/ASIFT/libNumerics/numerics.cpp
+	"numerics.h"
+	<cmath>
+	<vector>
+	<limits>
+	<algorithm>
+
+1408862368 source:/home/gmanfred/devel/essential/cpp/strong_features/ASIFT/libNumerics/rodrigues.cpp
+
+1408862368 source:/home/gmanfred/devel/essential/cpp/strong_features/ASIFT/libNumerics/vector.cpp
+
+1408862368 source:/home/gmanfred/devel/essential/cpp/strong_features/ASIFT/library.cpp
+	"library.h"
+
+1408862368 source:/home/gmanfred/devel/essential/cpp/strong_features/ASIFT/numerics1.cpp
+	"numerics1.h"
+
+1408862888 source:/home/gmanfred/devel/essential/cpp/strong_features/ASIFT/orsa.cpp
+	<assert.h>
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+	<time.h>
+	"orsa.h"
+	<third_party/Eigen/Cholesky>
+	<third_party/Eigen/Core>
+	<third_party/Eigen/Eigenvalues>
+	<third_party/Eigen/LU>
+	<third_party/Eigen/QR>
+	<third_party/Eigen/SVD>
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/Cholesky
+	"Core"
+	"src/Core/util/DisableStupidWarnings.h"
+	"src/misc/Solve.h"
+	"src/Cholesky/LLT.h"
+	"src/Cholesky/LDLT.h"
+	"src/Core/util/ReenableStupidWarnings.h"
+
+1408862367 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/Core
+	"src/Core/util/DisableStupidWarnings.h"
+	"src/Core/util/Macros.h"
+	<malloc.h>
+	<emmintrin.h>
+	<xmmintrin.h>
+	<pmmintrin.h>
+	<tmmintrin.h>
+	<smmintrin.h>
+	<nmmintrin.h>
+	<altivec.h>
+	<arm_neon.h>
+	<omp.h>
+	<cerrno>
+	<cstdlib>
+	<cmath>
+	<complex>
+	<cassert>
+	<functional>
+	<iosfwd>
+	<cstring>
+	<string>
+	<limits>
+	<climits>
+	<algorithm>
+	<iostream>
+	<intrin.h>
+	<new>
+	"src/Core/util/Constants.h"
+	"src/Core/util/ForwardDeclarations.h"
+	"src/Core/util/Meta.h"
+	"src/Core/util/XprHelper.h"
+	"src/Core/util/StaticAssert.h"
+	"src/Core/util/Memory.h"
+	"src/Core/NumTraits.h"
+	"src/Core/MathFunctions.h"
+	"src/Core/GenericPacketMath.h"
+	"src/Core/arch/SSE/PacketMath.h"
+	"src/Core/arch/SSE/MathFunctions.h"
+	"src/Core/arch/SSE/Complex.h"
+	"src/Core/arch/AltiVec/PacketMath.h"
+	"src/Core/arch/AltiVec/Complex.h"
+	"src/Core/arch/NEON/PacketMath.h"
+	"src/Core/arch/NEON/Complex.h"
+	"src/Core/arch/Default/Settings.h"
+	"src/Core/Functors.h"
+	"src/Core/DenseCoeffsBase.h"
+	"src/Core/DenseBase.h"
+	"src/Core/MatrixBase.h"
+	"src/Core/EigenBase.h"
+	"src/Core/Assign.h"
+	"src/Core/util/BlasUtil.h"
+	"src/Core/DenseStorage.h"
+	"src/Core/NestByValue.h"
+	"src/Core/ForceAlignedAccess.h"
+	"src/Core/ReturnByValue.h"
+	"src/Core/NoAlias.h"
+	"src/Core/PlainObjectBase.h"
+	"src/Core/Matrix.h"
+	"src/Core/Array.h"
+	"src/Core/CwiseBinaryOp.h"
+	"src/Core/CwiseUnaryOp.h"
+	"src/Core/CwiseNullaryOp.h"
+	"src/Core/CwiseUnaryView.h"
+	"src/Core/SelfCwiseBinaryOp.h"
+	"src/Core/Dot.h"
+	"src/Core/StableNorm.h"
+	"src/Core/MapBase.h"
+	"src/Core/Stride.h"
+	"src/Core/Map.h"
+	"src/Core/Block.h"
+	"src/Core/VectorBlock.h"
+	"src/Core/Transpose.h"
+	"src/Core/DiagonalMatrix.h"
+	"src/Core/Diagonal.h"
+	"src/Core/DiagonalProduct.h"
+	"src/Core/PermutationMatrix.h"
+	"src/Core/Transpositions.h"
+	"src/Core/Redux.h"
+	"src/Core/Visitor.h"
+	"src/Core/Fuzzy.h"
+	"src/Core/IO.h"
+	"src/Core/Swap.h"
+	"src/Core/CommaInitializer.h"
+	"src/Core/Flagged.h"
+	"src/Core/ProductBase.h"
+	"src/Core/Product.h"
+	"src/Core/TriangularMatrix.h"
+	"src/Core/SelfAdjointView.h"
+	"src/Core/SolveTriangular.h"
+	"src/Core/products/Parallelizer.h"
+	"src/Core/products/CoeffBasedProduct.h"
+	"src/Core/products/GeneralBlockPanelKernel.h"
+	"src/Core/products/GeneralMatrixVector.h"
+	"src/Core/products/GeneralMatrixMatrix.h"
+	"src/Core/products/GeneralMatrixMatrixTriangular.h"
+	"src/Core/products/SelfadjointMatrixVector.h"
+	"src/Core/products/SelfadjointMatrixMatrix.h"
+	"src/Core/products/SelfadjointProduct.h"
+	"src/Core/products/SelfadjointRank2Update.h"
+	"src/Core/products/TriangularMatrixVector.h"
+	"src/Core/products/TriangularMatrixMatrix.h"
+	"src/Core/products/TriangularSolverMatrix.h"
+	"src/Core/products/TriangularSolverVector.h"
+	"src/Core/BandMatrix.h"
+	"src/Core/BooleanRedux.h"
+	"src/Core/Select.h"
+	"src/Core/VectorwiseOp.h"
+	"src/Core/Random.h"
+	"src/Core/Replicate.h"
+	"src/Core/Reverse.h"
+	"src/Core/ArrayBase.h"
+	"src/Core/ArrayWrapper.h"
+	"src/Core/GlobalFunctions.h"
+	"src/Core/util/ReenableStupidWarnings.h"
+	"Eigen2Support"
+
+1408862367 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/Core/util/DisableStupidWarnings.h
+
+1408862367 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/Core/util/Macros.h
+	<cstdlib>
+	<iostream>
+
+1408862367 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/Core/util/Constants.h
+
+1408862367 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/Core/util/ForwardDeclarations.h
+
+1408862367 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/Core/util/Meta.h
+
+1408862367 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/Core/util/XprHelper.h
+
+1408862367 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/Core/util/StaticAssert.h
+
+1408862367 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/Core/util/Memory.h
+
+1408862367 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/Core/NumTraits.h
+
+1408862367 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/Core/MathFunctions.h
+
+1408862367 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/Core/GenericPacketMath.h
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/Core/arch/SSE/PacketMath.h
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/Core/arch/SSE/MathFunctions.h
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/Core/arch/SSE/Complex.h
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/Core/arch/AltiVec/PacketMath.h
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/Core/arch/AltiVec/Complex.h
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/Core/arch/NEON/PacketMath.h
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/Core/arch/NEON/Complex.h
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/Core/arch/Default/Settings.h
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/Core/Functors.h
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/Core/DenseCoeffsBase.h
+
+1408862367 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/Core/DenseBase.h
+	"../plugins/BlockMethods.h"
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/plugins/BlockMethods.h
+
+1408862367 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/Core/MatrixBase.h
+	"../plugins/CommonCwiseUnaryOps.h"
+	"../plugins/CommonCwiseBinaryOps.h"
+	"../plugins/MatrixCwiseUnaryOps.h"
+	"../plugins/MatrixCwiseBinaryOps.h"
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/plugins/CommonCwiseUnaryOps.h
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/plugins/CommonCwiseBinaryOps.h
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/plugins/MatrixCwiseUnaryOps.h
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/plugins/MatrixCwiseBinaryOps.h
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/Core/EigenBase.h
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/Core/Assign.h
+
+1408862367 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/Core/util/BlasUtil.h
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/Core/DenseStorage.h
+
+1408862367 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/Core/NestByValue.h
+
+1408862367 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/Core/ForceAlignedAccess.h
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/Core/ReturnByValue.h
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/Core/NoAlias.h
+
+1408862367 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/Core/PlainObjectBase.h
+
+1408862367 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/Core/Matrix.h
+
+1408862367 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/Core/Array.h
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/Core/CwiseBinaryOp.h
+
+1408862367 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/Core/CwiseUnaryOp.h
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/Core/CwiseNullaryOp.h
+
+1408862367 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/Core/CwiseUnaryView.h
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/Core/SelfCwiseBinaryOp.h
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/Core/Dot.h
+
+1408862367 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/Core/StableNorm.h
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/Core/MapBase.h
+
+1408862367 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/Core/Stride.h
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/Core/Map.h
+
+1408862367 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/Core/Block.h
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/Core/VectorBlock.h
+
+1408862367 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/Core/Transpose.h
+
+1408862367 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/Core/DiagonalMatrix.h
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/Core/Diagonal.h
+
+1408862367 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/Core/DiagonalProduct.h
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/Core/PermutationMatrix.h
+
+1408862367 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/Core/Transpositions.h
+
+1408862367 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/Core/Redux.h
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/Core/Visitor.h
+
+1408862367 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/Core/Fuzzy.h
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/Core/IO.h
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/Core/Swap.h
+
+1408862367 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/Core/CommaInitializer.h
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/Core/Flagged.h
+
+1408862367 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/Core/ProductBase.h
+
+1408862367 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/Core/Product.h
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/Core/TriangularMatrix.h
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/Core/SelfAdjointView.h
+
+1408862367 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/Core/SolveTriangular.h
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/Core/products/Parallelizer.h
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/Core/products/CoeffBasedProduct.h
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/Core/products/GeneralBlockPanelKernel.h
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/Core/products/GeneralMatrixVector.h
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/Core/products/GeneralMatrixMatrix.h
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/Core/products/GeneralMatrixMatrixTriangular.h
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/Core/products/SelfadjointMatrixVector.h
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/Core/products/SelfadjointMatrixMatrix.h
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/Core/products/SelfadjointProduct.h
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/Core/products/SelfadjointRank2Update.h
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/Core/products/TriangularMatrixVector.h
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/Core/products/TriangularMatrixMatrix.h
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/Core/products/TriangularSolverMatrix.h
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/Core/products/TriangularSolverVector.h
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/Core/BandMatrix.h
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/Core/BooleanRedux.h
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/Core/Select.h
+
+1408862367 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/Core/VectorwiseOp.h
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/Core/Random.h
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/Core/Replicate.h
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/Core/Reverse.h
+
+1408862367 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/Core/ArrayBase.h
+	"../plugins/CommonCwiseUnaryOps.h"
+	"../plugins/MatrixCwiseUnaryOps.h"
+	"../plugins/ArrayCwiseUnaryOps.h"
+	"../plugins/CommonCwiseBinaryOps.h"
+	"../plugins/MatrixCwiseBinaryOps.h"
+	"../plugins/ArrayCwiseBinaryOps.h"
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/plugins/ArrayCwiseUnaryOps.h
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/plugins/ArrayCwiseBinaryOps.h
+
+1408862367 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/Core/ArrayWrapper.h
+
+1408862367 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/Core/GlobalFunctions.h
+
+1408862367 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/Core/util/ReenableStupidWarnings.h
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/Eigen2Support
+	"src/Core/util/DisableStupidWarnings.h"
+	"src/Eigen2Support/Macros.h"
+	"src/Eigen2Support/Memory.h"
+	"src/Eigen2Support/Meta.h"
+	"src/Eigen2Support/Lazy.h"
+	"src/Eigen2Support/Cwise.h"
+	"src/Eigen2Support/CwiseOperators.h"
+	"src/Eigen2Support/TriangularSolver.h"
+	"src/Eigen2Support/Block.h"
+	"src/Eigen2Support/VectorBlock.h"
+	"src/Eigen2Support/Minor.h"
+	"src/Eigen2Support/MathFunctions.h"
+	"src/Core/util/ReenableStupidWarnings.h"
+	<iostream>
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/Eigen2Support/Macros.h
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/Eigen2Support/Memory.h
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/Eigen2Support/Meta.h
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/Eigen2Support/Lazy.h
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/Eigen2Support/Cwise.h
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/Eigen2Support/CwiseOperators.h
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/Eigen2Support/TriangularSolver.h
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/Eigen2Support/Block.h
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/Eigen2Support/VectorBlock.h
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/Eigen2Support/Minor.h
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/Eigen2Support/MathFunctions.h
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/misc/Solve.h
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/Cholesky/LLT.h
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/Cholesky/LDLT.h
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/Eigenvalues
+	"Core"
+	"src/Core/util/DisableStupidWarnings.h"
+	"Cholesky"
+	"Jacobi"
+	"Householder"
+	"LU"
+	"src/Eigenvalues/Tridiagonalization.h"
+	"src/Eigenvalues/RealSchur.h"
+	"src/Eigenvalues/EigenSolver.h"
+	"src/Eigenvalues/SelfAdjointEigenSolver.h"
+	"src/Eigenvalues/GeneralizedSelfAdjointEigenSolver.h"
+	"src/Eigenvalues/HessenbergDecomposition.h"
+	"src/Eigenvalues/ComplexSchur.h"
+	"src/Eigenvalues/ComplexEigenSolver.h"
+	"src/Eigenvalues/MatrixBaseEigenvalues.h"
+	"src/Core/util/ReenableStupidWarnings.h"
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/Jacobi
+	"Core"
+	"src/Core/util/DisableStupidWarnings.h"
+	"src/Jacobi/Jacobi.h"
+	"src/Core/util/ReenableStupidWarnings.h"
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/Jacobi/Jacobi.h
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/Householder
+	"Core"
+	"src/Core/util/DisableStupidWarnings.h"
+	"src/Householder/Householder.h"
+	"src/Householder/HouseholderSequence.h"
+	"src/Householder/BlockHouseholder.h"
+	"src/Core/util/ReenableStupidWarnings.h"
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/Householder/Householder.h
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/Householder/HouseholderSequence.h
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/Householder/BlockHouseholder.h
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/LU
+	"Core"
+	"src/Core/util/DisableStupidWarnings.h"
+	"src/misc/Solve.h"
+	"src/misc/Kernel.h"
+	"src/misc/Image.h"
+	"src/LU/FullPivLU.h"
+	"src/LU/PartialPivLU.h"
+	"src/LU/Determinant.h"
+	"src/LU/Inverse.h"
+	"src/LU/arch/Inverse_SSE.h"
+	"src/Eigen2Support/LU.h"
+	"src/Core/util/ReenableStupidWarnings.h"
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/misc/Kernel.h
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/misc/Image.h
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/LU/FullPivLU.h
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/LU/PartialPivLU.h
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/LU/Determinant.h
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/LU/Inverse.h
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/LU/arch/Inverse_SSE.h
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/Eigen2Support/LU.h
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/Eigenvalues/Tridiagonalization.h
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/Eigenvalues/RealSchur.h
+	"./EigenvaluesCommon.h"
+	"./HessenbergDecomposition.h"
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/Eigenvalues/EigenvaluesCommon.h
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/Eigenvalues/HessenbergDecomposition.h
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/Eigenvalues/EigenSolver.h
+	"./EigenvaluesCommon.h"
+	"./RealSchur.h"
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/Eigenvalues/SelfAdjointEigenSolver.h
+	"./EigenvaluesCommon.h"
+	"./Tridiagonalization.h"
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/Eigenvalues/GeneralizedSelfAdjointEigenSolver.h
+	"./EigenvaluesCommon.h"
+	"./Tridiagonalization.h"
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/Eigenvalues/ComplexSchur.h
+	"./EigenvaluesCommon.h"
+	"./HessenbergDecomposition.h"
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/Eigenvalues/ComplexEigenSolver.h
+	"./EigenvaluesCommon.h"
+	"./ComplexSchur.h"
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/Eigenvalues/MatrixBaseEigenvalues.h
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/QR
+	"Core"
+	"src/Core/util/DisableStupidWarnings.h"
+	"Cholesky"
+	"Jacobi"
+	"Householder"
+	"src/misc/Solve.h"
+	"src/QR/HouseholderQR.h"
+	"src/QR/FullPivHouseholderQR.h"
+	"src/QR/ColPivHouseholderQR.h"
+	"src/Eigen2Support/QR.h"
+	"src/Core/util/ReenableStupidWarnings.h"
+	"Eigenvalues"
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/QR/HouseholderQR.h
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/QR/FullPivHouseholderQR.h
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/QR/ColPivHouseholderQR.h
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/Eigen2Support/QR.h
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/SVD
+	"QR"
+	"Householder"
+	"Jacobi"
+	"src/Core/util/DisableStupidWarnings.h"
+	"src/misc/Solve.h"
+	"src/SVD/JacobiSVD.h"
+	"src/SVD/UpperBidiagonalization.h"
+	"src/Eigen2Support/SVD.h"
+	"src/Core/util/ReenableStupidWarnings.h"
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/SVD/JacobiSVD.h
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/SVD/UpperBidiagonalization.h
+
+1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT//third_party/Eigen/src/Eigen2Support/SVD.h
+
+1408862368 source:/home/gmanfred/devel/essential/cpp/strong_features/ASIFT/splines.cpp
+	"splines.h"
 

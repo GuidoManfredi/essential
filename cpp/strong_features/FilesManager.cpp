@@ -12,7 +12,6 @@ FilesManager::FilesManager() {}
 
 Object FilesManager::loadObject (string folder_path) {
     Object object;
-
     boost::filesystem::path bf_folder_path(folder_path);
     if (is_directory(bf_folder_path)) {
         typedef vector<path> vec;
@@ -34,8 +33,13 @@ Object FilesManager::loadObject (string folder_path) {
                 Mat image = imread(image_path, CV_LOAD_IMAGE_GRAYSCALE);
                 //imshow("Debug", image); waitKey(0);
                 Mat mask = imread(mask_path, CV_LOAD_IMAGE_GRAYSCALE);
+#ifndef ASIFT
                 pipe2d_.extractDescriptors (image, mask, view.descriptors_);
-
+#else
+                pipe2d_.extractDescriptors (image, mask, view.keys_);
+                view.width_ = image.width;
+                view.height_ = image.height;
+#endif
                 object.views_.push_back(view);
             }
         }

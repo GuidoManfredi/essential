@@ -11,6 +11,7 @@ class Engine {
 
     Model modelFromObject (Object object, std::vector<int> model_images);
     void sortViewByAngle(Object &object);
+    int getIdxFromAngle (Object object, float angle);
 
   private:
     struct IndexDistanceComparatorClass {

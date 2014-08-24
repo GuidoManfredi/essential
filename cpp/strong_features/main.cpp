@@ -3,19 +3,26 @@
 
 using namespace std;
 
+// calculator, cell_phone, cereal_box, food_bag, food_box, food_can, food_jar,
+//  instant_noodles, keyboard, kleenex, notebook, soda_can, toothpaste, water_bottle
+
 void testAll (string object_path) {
     FilesManager files;
     Engine engine;
 
     cout << "Loading data and creating object" << endl;
     Object object = files.loadObject (object_path);
-    vector<int> idx;
-    idx.push_back(0);
-    //idx.push_back(20);
-    //idx.push_back(40);
-    //idx.push_back(60);
     cout << "Sorting object" << endl;
     engine.sortViewByAngle(object);
+
+    vector<int> idx;
+    idx.push_back(engine.getIdxFromAngle(object, 0.0));
+    idx.push_back(engine.getIdxFromAngle(object, 45.0));
+    idx.push_back(engine.getIdxFromAngle(object, 90.0));
+    idx.push_back(engine.getIdxFromAngle(object, 135.0));
+    idx.push_back(engine.getIdxFromAngle(object, 180.0));
+    idx.push_back(engine.getIdxFromAngle(object, 225.0));
+    idx.push_back(engine.getIdxFromAngle(object, 270.0));
     cout << "Creation partial model" << endl;
     Model model = engine.modelFromObject (object, idx);
     cout << "Matching model to object" << endl;
