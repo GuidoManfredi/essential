@@ -1,12 +1,13 @@
 # depslib dependency file v1.0
-1406559115 source:/home/gmanfred/devel/essential/ros/human/skin_segmentation/skin_segmentation/SkinSeg.cpp
+1408982713 source:/home/gmanfred/devel/essential/ros/human/skin_segmentation/skin_segmentation/SkinSeg.cpp
 	"SkinSeg.h"
 
-1406558205 /home/gmanfred/devel/essential/ros/human/skin_segmentation/skin_segmentation/SkinSeg.h
+1408979390 /home/gmanfred/devel/essential/ros/human/skin_segmentation/skin_segmentation/SkinSeg.h
 	<opencv2/core/core.hpp>
+	<opencv2/imgproc/imgproc.hpp>
 	<opencv2/highgui/highgui.hpp>
 	<opencv2/ml/ml.hpp>
 
-1406559162 source:/home/gmanfred/devel/essential/ros/human/skin_segmentation/skin_segmentation/main.cpp
+1408982728 source:/home/gmanfred/devel/essential/ros/human/skin_segmentation/skin_segmentation/main.cpp
 	"SkinSeg.h"
 

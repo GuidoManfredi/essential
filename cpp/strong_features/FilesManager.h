@@ -19,6 +19,10 @@ class FilesManager {
   private:
     float readAngle(std::string pose_path);
     int isPoseFile (std::string filename, std::string &base_name);
+
+    void key2desc (std::vector<std::vector<keypointslist > > key, cv::Mat &desc);
+    void key2kpts (std::vector<std::vector<keypointslist > > key, std::vector<cv::KeyPoint> &kpts);
+
     Pipeline2D pipe2d_;
 
 };

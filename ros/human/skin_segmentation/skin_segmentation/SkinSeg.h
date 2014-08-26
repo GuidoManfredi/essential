@@ -1,6 +1,7 @@
 #pragma once
 
 #include <opencv2/core/core.hpp>
+#include <opencv2/imgproc/imgproc.hpp>
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/ml/ml.hpp>
 
@@ -13,6 +14,8 @@ class SkinSeg {
     void train(cv::Mat model);
     // Transform image to a float column with each pixel in a row.
     void image2column(cv::Mat image, cv::Mat &column);
+    void post_process(cv::Mat &mask);
 
     cv::EM model_;
+    int num_gaussians_;
 };

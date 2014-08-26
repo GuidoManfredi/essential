@@ -25,21 +25,25 @@ Object FilesManager::loadObject (string folder_path) {
                 //cout << base_name << endl;
                 string pose_path = v[i].string();
                 string image_path = v[i].parent_path().string() + "/" + base_name + "_crop.png";
+                string depth_path = v[i].parent_path().string() + "/" + base_name + "_depthcrop.png";
                 string mask_path = v[i].parent_path().string() + "/" + base_name + "_maskcrop.png";
 
                 View view;
                 view.angle_ = readAngle (pose_path);
                 //cout << view.angle_ << endl;
                 Mat image = imread(image_path, CV_LOAD_IMAGE_GRAYSCALE);
+                Mat depth = imread(mask_path, CV_LOAD_IMAGE_GRAYSCALE);
                 //imshow("Debug", image); waitKey(0);
                 Mat mask = imread(mask_path, CV_LOAD_IMAGE_GRAYSCALE);
-#ifndef ASIFT
-                pipe2d_.extractDescriptors (image, mask, view.descriptors_);
-#else
+
+
+                //pipe2d_.extractDescriptors (image, mask, view.keypoints_, view.descriptors_);
                 pipe2d_.extractDescriptors (image, mask, view.keys_);
-                view.width_ = image.width;
-                view.height_ = image.height;
-#endif
+                key2kpts(view.keys_, view.keypoints_);
+                key2desc(view.keys_, view.descriptors_);
+
+                //view.width_ = image.cols;
+                //view.height_ = image.rows;
                 object.views_.push_back(view);
             }
         }
@@ -80,6 +84,32 @@ int FilesManager::isPoseFile (string filename, string &base_name) {
     }
 
     return 0;
+}
+
+void FilesManager::key2desc (vector<vector<keypointslist > > key, Mat &desc) {
+    for (size_t i = 0; i < key.size(); ++i) {
+        for (size_t j = 0; j < key[i].size(); ++j) {
+            for (size_t k = 0; k < key[i][j].size(); ++k) {
+                Mat sift = Mat(1, 128, CV_32F, &key[i][j][k].vec);
+                desc.push_back (sift);
+            }
+        }
+    }
+}
+
+void FilesManager::key2kpts (vector<vector<keypointslist > > key, vector<KeyPoint> &kpts) {
+    for (size_t i = 0; i < key.size(); ++i) {
+        for (size_t j = 0; j < key[i].size(); ++j) {
+            for (size_t k = 0; k < key[i][j].size(); ++k) {
+                KeyPoint kpt;
+                kpt.pt.x = key[i][j][k].x;
+                kpt.pt.y = key[i][j][k].y;
+                kpt.angle = key[i][j][k].angle;
+                kpt.size = key[i][j][k].scale;
+                kpts.push_back (kpt);
+            }
+        }
+    }
 }
 
 /*

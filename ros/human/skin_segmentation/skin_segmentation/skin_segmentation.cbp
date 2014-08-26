@@ -18,6 +18,7 @@
 					<Add library="/usr/local/lib/libopencv_core.so" />
 					<Add library="/usr/local/lib/libopencv_ml.so" />
 					<Add library="/usr/local/lib/libopencv_highgui.so" />
+					<Add library="/usr/local/lib/libopencv_imgproc.so" />
 				</Linker>
 			</Target>
 			<Target title="Release">

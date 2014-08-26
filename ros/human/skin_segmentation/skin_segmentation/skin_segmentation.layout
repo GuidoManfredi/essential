@@ -2,12 +2,12 @@
 <CodeBlocks_layout_file>
 	<ActiveTarget name="Debug" />
 	<File name="SkinSeg.cpp" open="1" top="1" tabpos="2">
-		<Cursor position="840" topLine="15" />
+		<Cursor position="475" topLine="0" />
 	</File>
 	<File name="SkinSeg.h" open="1" top="0" tabpos="3">
-		<Cursor position="85" topLine="0" />
+		<Cursor position="502" topLine="0" />
 	</File>
 	<File name="main.cpp" open="1" top="0" tabpos="1">
-		<Cursor position="303" topLine="0" />
+		<Cursor position="905" topLine="11" />
 	</File>
 </CodeBlocks_layout_file>
