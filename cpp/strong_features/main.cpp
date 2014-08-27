@@ -3,12 +3,15 @@
 // TODO Check if comparison is fair. ASIFT may have more match cause all its descriptors
 // can yield more matches. Probably not.
 // Compute percentage by taking min(model_view.kpts.size, object_view.kpts.size) to divide
+// Find a way to test depth2points function
 using namespace std;
+using namespace cv;
 
 // calculator, cell_phone, cereal_box, food_bag, food_box, food_can, food_jar,
 //  instant_noodles, keyboard, kleenex, notebook, soda_can, toothpaste, water_bottle
 
-FilesManager files;
+Mat K =  (Mat_<double>(3,3) << 535, 0, 320, 0, 535, 240, 0, 0, 1);
+FilesManager files(K);
 Engine engine;
 vector<int> idx;
 
@@ -31,7 +34,7 @@ Object common (string object_path) {
     return object;
 }
 
-void testASIFT (string object_path) {
+void test (string object_path) {
     Object object = common(object_path);
     cout << "Creation partial model" << endl;
     Object model = engine.objectFromObject (object, idx);
@@ -39,25 +42,10 @@ void testASIFT (string object_path) {
     vector<int> results = engine.match (model, object);
     cout << "Results:" << endl;
     for (size_t i = 0; i < results.size(); ++i) {
-        //cout << results[i] << " ";
         if (object.views_[i].keypoints_.size() != 0.0)
             cout << float(results[i])/float(object.views_[i].keypoints_.size()) * 100 << " ";
         else
             cout << 0.0 << " ";
-    }
-    cout << endl;
-}
-
-void testAll (string object_path) {
-    Object object = common(object_path);
-
-    cout << "Creation partial model" << endl;
-    Model model = engine.modelFromObject (object, idx);
-    cout << "Matching model to object" << endl;
-    vector<int> results = engine.match (model, object);
-    cout << "Results:" << endl;
-    for (size_t i = 0; i < results.size(); ++i) {
-        cout << results[i] << " ";
     }
     cout << endl;
 }
@@ -68,6 +56,7 @@ int main() {
     //testAll ("/home/gmanfred/devel/datasets/washington_rgbd/rgbd-dataset/food_can/food_can_2");
     //testAll ("/home/gmanfred/devel/datasets/washington_rgbd/rgbd-dataset/food_box/food_box_2");
     //testASIFT ("/home/gmanfred/devel/datasets/washington_rgbd/rgbd-dataset/food_box/food_box_2");
-    testASIFT ("/home/gmanfred/devel/datasets/washington_rgbd/rgbd-dataset/test_object");
+    //testASIFT ("/home/gmanfred/devel/datasets/washington_rgbd/rgbd-dataset/test_object");
+    test ("/home/gmanfred/devel/datasets/washington_rgbd/rgbd-dataset/test_object");
     return 0;
 }

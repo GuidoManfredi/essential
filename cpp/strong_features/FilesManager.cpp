@@ -8,7 +8,9 @@ using namespace std;
 using namespace boost::filesystem;
 using namespace cv;
 
-FilesManager::FilesManager() {}
+FilesManager::FilesManager(Mat K) {
+    K.copyTo(K_);
+}
 
 Object FilesManager::loadObject (string folder_path) {
     Object object;
@@ -36,11 +38,12 @@ Object FilesManager::loadObject (string folder_path) {
                 //imshow("Debug", image); waitKey(0);
                 Mat mask = imread(mask_path, CV_LOAD_IMAGE_GRAYSCALE);
 
-
-                //pipe2d_.extractDescriptors (image, mask, view.keypoints_, view.descriptors_);
-                pipe2d_.extractDescriptors (image, mask, view.keys_);
+                pipe2d_.extractDescriptors (image, mask, view.keypoints_, view.descriptors_);
+                //pipe2d_.extractDescriptors (image, mask, view.keys_);
                 key2kpts(view.keys_, view.keypoints_);
                 key2desc(view.keys_, view.descriptors_);
+
+                view.points_ = depth2points(depth);
 
                 //view.width_ = image.cols;
                 //view.height_ = image.rows;
@@ -110,6 +113,24 @@ void FilesManager::key2kpts (vector<vector<keypointslist > > key, vector<KeyPoin
             }
         }
     }
+}
+
+vector<Point3f> FilesManager::depth2points (Mat depth) {
+    float f = K_.at<float>(0, 0);
+    float u0 = K_.at<float>(0, 2);
+    float v0 = K_.at<float>(1, 2);
+
+    vector<Point3f> points;
+    for (int x = 0; x < depth.cols; ++x) {
+        for (int y = 0; y < depth.rows; ++y) {
+            Point3f pt;
+            pt.x = x * depth.at<float>(y, x) * f;
+            pt.y = y * depth.at<float>(y, x) * f;
+            pt.z = depth.at<float>(y, x);
+            points.push_back(pt);
+        }
+    }
+    return points;
 }
 
 /*
