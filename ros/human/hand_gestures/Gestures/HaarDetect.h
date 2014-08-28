@@ -7,7 +7,7 @@
 class HaarDetect {
   public:
     HaarDetect();
-    cv::Rect detect(cv::Mat frame, bool display);
+    cv::Rect detect(cv::Mat frame, cv::Point2f clue, int padding, bool display);
     int loadCascade(std::string cascade_path);
 
   private:

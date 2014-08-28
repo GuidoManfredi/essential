@@ -4,7 +4,6 @@
 // TODO Find a way to test depth2points function
 // TODO Check if depth2point is correct (probably using reprojection error).
 // TODO Save the result to a file.
-// TODO Make way to change descriptors online. Including ASIFT
 using namespace std;
 using namespace cv;
 

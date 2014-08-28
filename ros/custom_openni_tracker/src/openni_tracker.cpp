@@ -188,7 +188,8 @@ int main(int argc, char **argv) {
 	ros::Rate r(30);
         
     ros::NodeHandle pnh("~");
-    string frame_id("openni_depth_frame");
+    //string frame_id("openni_depth_frame");
+    string frame_id("camera_depth_frame");
     pnh.getParam("camera_frame_id", frame_id);
     
     ros::Publisher labels_publisher = pnh.advertise<sensor_msgs::Image>("user_mask", 1);
