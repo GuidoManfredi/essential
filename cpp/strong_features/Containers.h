@@ -7,6 +7,8 @@
 
 #include "ASIFT/demo_lib_sift.h"
 
+enum Feature {eASIFT, eSIFT, eSURF, eFREAK, eBRIEF}; // enum sift = eSIFT
+
 typedef struct cModel {
     cv::Mat descriptors_;
     vector<vector<keypointslist> > keys_;
@@ -18,8 +20,6 @@ typedef struct cView {
     cv::Mat descriptors_;
     vector<vector<keypointslist> > keys_;
     vector<cv::Point3f> points_;
-    int width_;
-    int height_;
 } View;
 
 typedef struct cObject {

@@ -6,6 +6,7 @@
 class Engine {
   public:
     Engine();
+    void setFeatures(Feature ft);
     std::vector<int> match (Model model, Object object);
     std::vector<int> match (cv::Mat descriptors, std::vector<View> image);
 

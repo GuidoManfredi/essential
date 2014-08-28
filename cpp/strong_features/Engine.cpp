@@ -5,12 +5,16 @@ using namespace cv;
 
 Engine::Engine () {}
 
+void Engine::setFeatures(Feature ft) {
+    pipe2d_.setFeatures(ft);
+}
+
 vector<int> Engine::match (Model model, Object object) {
     return match (model.descriptors_, object.views_);
 }
 
 vector<int> Engine::match (Object model, Object object) {
-    return match2 (model.views_, object.views_);
+    return match (model.views_, object.views_);
 }
 
 vector<int> Engine::match (Mat model_descriptors, vector<View> object_views) {
@@ -25,21 +29,6 @@ vector<int> Engine::match (Mat model_descriptors, vector<View> object_views) {
 }
 
 vector<int> Engine::match (vector<View> model_views, vector<View> object_views) {
-    vector<int> results (object_views.size());
-
-    for (size_t i = 0; i < object_views.size(); ++i) {
-        vector<int> number_matches (model_views.size());
-        for (size_t j = 0; j < model_views.size(); ++j) {
-            number_matches[j] = pipe2d_.match (model_views[j].keys_, object_views[i].keys_,
-                                                model_views[j].width_, model_views[j].height_,
-                                                object_views[i].width_, object_views[i].height_);
-        }
-        results[i] = *max_element(number_matches.begin(), number_matches.end());
-    }
-    return results;
-}
-
-vector<int> Engine::match2 (vector<View> model_views, vector<View> object_views) {
     vector<int> results (object_views.size());
 
     for (size_t i = 0; i < object_views.size(); ++i) {

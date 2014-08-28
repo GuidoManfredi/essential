@@ -13,21 +13,20 @@
 class Pipeline2D {
   public:
     Pipeline2D ();
-
+    void setFeatures (Feature ft);
     void getGray(const cv::Mat& image, cv::Mat& gray);
 
     void extractDescriptors(const cv::Mat& image, const cv::Mat& mask,
                              std::vector<cv::KeyPoint> &keypoints, cv::Mat &descriptors);
-	int match(const cv::Mat &desc1, const cv::Mat &desc2);
 
-    void extractDescriptors(const cv::Mat& image, const cv::Mat& mask,
-                             vector<vector<keypointslist > > &keys);
-    int match (std::vector<std::vector<keypointslist > > keys1,
-                std::vector<std::vector<keypointslist > > keys2,
-                int width1, int height1, int width2, int height2);
+	int match(const cv::Mat &desc1, const cv::Mat &desc2);
 
   private:
     cv::Ptr<cv::FeatureDetector>     detector_;
     cv::Ptr<cv::DescriptorExtractor> extractor_;
     cv::Ptr<cv::DescriptorMatcher>   matcher_;
+    bool ASIFT_;
+
+    void key2desc (std::vector<std::vector<keypointslist > > key, cv::Mat &desc);
+    void key2kpts (std::vector<std::vector<keypointslist > > key, std::vector<cv::KeyPoint> &kpts);
 };

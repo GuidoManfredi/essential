@@ -14,6 +14,8 @@
 #include "../Gestures/HandSeg.h"
 #include "../Gestures/HaarDetect.h"
 
+// TODO corriger decalage due au fait que image rgb et depth on une petite translation.
+
 using namespace std;
 using namespace cv;
 using namespace pcl;
@@ -112,9 +114,9 @@ int main (int argc, char** argv) {
 
 Mat transform2mat (tf::StampedTransform transform) {
     // Transform to camera optical frame
-    double x = transform.getOrigin().x();
-    double y = transform.getOrigin().y();
-    double z = transform.getOrigin().z();
+    double x = -transform.getOrigin().y();
+    double y = transform.getOrigin().z();
+    double z = transform.getOrigin().x();
     tf::Matrix3x3 R(transform.getRotation());
     Mat P = (Mat_<double>(4,4) << R[0][0], R[0][1], R[0][2], x,
                                  R[1][0], R[1][1], R[1][2], y, 

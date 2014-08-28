@@ -1,16 +1,19 @@
 #include "FilesManager.h"
 #include "Engine.h"
-// TODO Check if comparison is fair. ASIFT may have more match cause all its descriptors
-// can yield more matches. Probably not.
-// Compute percentage by taking min(model_view.kpts.size, object_view.kpts.size) to divide
-// Find a way to test depth2points function
+// TODO Compute percentage by taking min(model_view.kpts.size, object_view.kpts.size) to divide
+// TODO Find a way to test depth2points function
+// TODO Check if depth2point is correct (probably using reprojection error).
+// TODO Save the result to a file.
+// TODO Make way to change descriptors online. Including ASIFT
 using namespace std;
 using namespace cv;
 
 // calculator, cell_phone, cereal_box, food_bag, food_box, food_can, food_jar,
 //  instant_noodles, keyboard, kleenex, notebook, soda_can, toothpaste, water_bottle
 
-Mat K =  (Mat_<double>(3,3) << 535, 0, 320, 0, 535, 240, 0, 0, 1);
+// 570 for IR
+// 535 for RGB
+Mat K =  (Mat_<double>(3,3) << 570, 0, 320, 0, 570, 240, 0, 0, 1);
 FilesManager files(K);
 Engine engine;
 vector<int> idx;
