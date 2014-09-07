@@ -41,6 +41,7 @@
 			<Add library="/usr/lib/libboost_system.so" />
 			<Add library="/usr/lib/libboost_filesystem.so" />
 			<Add library="/usr/local/lib/libopencv_nonfree.so" />
+			<Add library="/usr/local/lib/libopencv_calib3d.so" />
 		</Linker>
 		<Unit filename="ASIFT/compute_asift_keypoints.cpp" />
 		<Unit filename="ASIFT/compute_asift_keypoints.h" />

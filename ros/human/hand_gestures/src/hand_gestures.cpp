@@ -17,6 +17,8 @@
 
 // TODO Recuperer uniquement image RGB, on n'utilise pas la profondeur pour l'instant
 //      faire 2 callbacks differents et une seule fonction de traitement.
+// TODO Trouver un moyen de ne pas se lancer tant que la transformation de la main et
+//      de la tete ne sont pas arrivées.
 
 using namespace std;
 using namespace cv;
@@ -121,7 +123,8 @@ void cloud_callback(const sensor_msgs::Image& msg) {
     mask;
 }
 */
-// rosrun hand_gestures hand_gestures /camera/depth_registered/points gest 0.7 1.2
+// Warning: launch openni.launch before pluging the kinect. Then plug the kinect.
+// rosrun hand_gestures hand_gestures /camera/depth_registered/points gest 1.2 1.5
 int main (int argc, char** argv) {
 	assert (argc == 5 && "Usage : hand_gesture in_registered_cloud_topic out_gesture_topic min_distance max_distance");
 	ros::init(argc, argv, "hand_gesture");

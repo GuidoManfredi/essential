@@ -62,14 +62,12 @@ int getGest (Mat image) {
     int thickness = 2;
     int lineType = 8;
     circle( image, left_hand, 5, Scalar( 0, 0, 255 ), -1, lineType );
-    if (gest == 1)
-        rectangle (image, Point(left_hand.x + fist.x - hand_padding, left_hand.y + fist.y - hand_padding),
-                          Point(left_hand.x + fist.x + fist.height - hand_padding, left_hand.y + fist.y + fist.width - hand_padding),
-                          Scalar(255, 0, 0), thickness, lineType);
-    else if ( gest == 2)
-        rectangle (image, Point(left_hand.x + palm.x - hand_padding, left_hand.y + palm.y - hand_padding),
-                          Point(left_hand.x + palm.x + palm.height - hand_padding, left_hand.y + palm.y + palm.width - hand_padding),
-                          Scalar(0, 255, 0), thickness, lineType);
+    rectangle (image, Point(left_hand.x + fist.x - hand_padding, left_hand.y + fist.y - hand_padding),
+                      Point(left_hand.x + fist.x + fist.height - hand_padding, left_hand.y + fist.y + fist.width - hand_padding),
+                      Scalar(255, 0, 0), thickness, lineType);
+    rectangle (image, Point(left_hand.x + palm.x - hand_padding, left_hand.y + palm.y - hand_padding),
+                      Point(left_hand.x + palm.x + palm.height - hand_padding, left_hand.y + palm.y + palm.width - hand_padding),
+                      Scalar(0, 255, 0), thickness, lineType);
     imshow("Debug", image); waitKey(1);
 
     if (fist.area() && !palm.area())

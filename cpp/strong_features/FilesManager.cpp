@@ -8,12 +8,11 @@ using namespace std;
 using namespace boost::filesystem;
 using namespace cv;
 
-FilesManager::FilesManager(Mat K) {
-    K.copyTo(K_);
+FilesManager::FilesManager(Mat K, Pipeline2D* pipe): pipe2d_(pipe), K_(K) {
 }
 
 void FilesManager::setFeatures(Feature ft) {
-    pipe2d_.setFeatures(ft);
+    pipe2d_->setFeatures(ft);
 }
 
 Object FilesManager::loadObject (string folder_path) {
@@ -41,13 +40,15 @@ Object FilesManager::loadObject (string folder_path) {
                 //cout << view.angle_ << endl;
                 //cout << origin << endl;
                 Mat image = imread(image_path, CV_LOAD_IMAGE_GRAYSCALE);
-                Mat depth = imread(mask_path, CV_LOAD_IMAGE_GRAYSCALE);
-                //imshow("Debug", image); waitKey(0);
+                Mat depth = imread(depth_path, CV_LOAD_IMAGE_ANYDEPTH | CV_LOAD_IMAGE_ANYCOLOR);
+                depth.convertTo(depth, CV_32F); // convert to float values
                 Mat mask = imread(mask_path, CV_LOAD_IMAGE_GRAYSCALE);
 
-                pipe2d_.extractDescriptors (image, mask, view.keypoints_, view.descriptors_);
+                pipe2d_->extractDescriptors (image, mask, view.keypoints_, view.descriptors_);
 
                 view.points_ = depth2points(depth, origin);
+                //cout << image_path << endl;
+                //imshow("Debug", image); waitKey(0);
 
                 object.views_.push_back(view);
             }
@@ -113,20 +114,24 @@ int FilesManager::isPoseFile (string filename, string &base_name) {
 
 vector<Point3f> FilesManager::depth2points (Mat depth, Point2f origin) {
     float mm_per_m = 1000; // milimeter per meter
-    float f = K_.at<float>(0, 0);
-    float u0 = K_.at<float>(0, 2);
-    float v0 = K_.at<float>(1, 2);
+    float f = K_.at<double>(0, 0);
+    float u0 = K_.at<double>(0, 2);
+    float v0 = K_.at<double>(1, 2);
 
     vector<Point3f> points;
     for (int x = 0; x < depth.cols; ++x) {
         for (int y = 0; y < depth.rows; ++y) {
             Point3f pt;
+            //cout << depth.at<float>(y, x) << " ";
             pt.x = (x + (origin.x - u0)) * depth.at<float>(y, x) / f / mm_per_m;
             pt.y = (y + (origin.y - v0)) * depth.at<float>(y, x) / f / mm_per_m;
-            pt.z = depth.at<float>(y, x);
+            pt.z = depth.at<float>(y, x) / mm_per_m;
             points.push_back(pt);
+            //cout << pt << endl;
         }
+        //cout << endl;
     }
+    //cout << points[0] << endl;
     return points;
 }
 

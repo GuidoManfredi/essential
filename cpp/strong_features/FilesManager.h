@@ -12,7 +12,7 @@
 
 class FilesManager {
   public:
-    FilesManager(cv::Mat K);
+    FilesManager(cv::Mat K, Pipeline2D* pipe);
     void setFeatures(Feature ft);
     // Load the path to all .png and .txt for an object
     Object loadObject(std::string folder_path);
@@ -26,6 +26,6 @@ class FilesManager {
 
     std::vector<cv::Point3f> depth2points (cv::Mat depth, cv::Point2f origin);
 
-    Pipeline2D pipe2d_;
+    Pipeline2D* pipe2d_;
 
 };
