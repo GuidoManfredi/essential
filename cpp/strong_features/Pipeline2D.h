@@ -23,6 +23,8 @@ class Pipeline2D {
 	int match(const cv::Mat &desc1, const cv::Mat &desc2, std::vector<cv::DMatch> &matches);
     float estimate_pose (std::vector<cv::KeyPoint> keypoints, std::vector<cv::Point3f> points,
                           std::vector<cv::DMatch> &matches);
+    float estimate_pose2 (std::vector<cv::KeyPoint> keypoints1, std::vector<cv::KeyPoint> keypoints2,
+                          std::vector<cv::DMatch> &matches);
     float dist_angle (float a, float b);
 
   private:
@@ -36,4 +38,6 @@ class Pipeline2D {
     void key2kpts (std::vector<std::vector<keypointslist > > key, std::vector<cv::KeyPoint> &kpts);
     void get_matched_point(std::vector<cv::KeyPoint> keypoints, std::vector<cv::Point3f> points, std::vector<cv::DMatch> matches,
                             std::vector<cv::Point2f> &kpts, std::vector<cv::Point3f> &pts);
+    void get_matched_keypoint(std::vector<cv::KeyPoint> keypoints1, std::vector<cv::KeyPoint> keypoints2, std::vector<cv::DMatch> matches,
+                                std::vector<cv::Point2f> &kpts1, std::vector<cv::Point2f> &kpts2);
 };

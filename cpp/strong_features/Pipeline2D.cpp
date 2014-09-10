@@ -87,19 +87,26 @@ float Pipeline2D::estimate_pose (vector<KeyPoint> keypoints, vector<Point3f> poi
                                   vector<DMatch> &matches) {
     vector<Point2f> kpts;
     vector<Point3f> pts;
-    get_matched_point(keypoints, points, matches,
-                      kpts, pts);
+    get_matched_point(keypoints, points, matches, kpts, pts);
     Mat rvec = Mat::zeros(1, 3, CV_32F);
     Mat tvec = Mat::zeros(1, 3, CV_32F);
     //K_.convertTo (K_, CV_32F);
-    cout << "Estimating pose with " << pts.size() << " points." << endl;
     vector<int> inliers;
-    /*
     solvePnPRansac (Mat(pts), Mat(kpts), K_, Mat(), rvec, tvec,
-                    false, 500, 4.0, 0.9 * kpts.size(), inliers, CV_EPNP);
-    */
-    solvePnPRansac (Mat(pts), Mat(kpts), K_, Mat(), rvec, tvec, false, CV_EPNP);
-    solvePnP (Mat(pts), Mat(kpts), K_, Mat(), rvec, tvec, true);
+                    false, 100, 8.0, 0.99 * kpts.size(), inliers, CV_EPNP);
+
+    vector<DMatch> tmp_matches;
+    for (size_t i = 0; i < inliers.size(); ++i) {
+        int idx = inliers[i];
+        tmp_matches.push_back(matches[idx]);
+    }
+    matches.swap(tmp_matches);
+
+    if (matches.size() > 4) {
+        get_matched_point(keypoints, points, matches, kpts, pts);
+        solvePnP (Mat(pts), Mat(kpts), K_, Mat(), rvec, tvec, true);
+    }
+
     rvec.convertTo (rvec, CV_32F);
     tvec.convertTo (tvec, CV_32F);
     /*
@@ -109,6 +116,25 @@ float Pipeline2D::estimate_pose (vector<KeyPoint> keypoints, vector<Point3f> poi
     */
     return rvec.at<float>(1);
 }
+
+float Pipeline2D::estimate_pose2 (vector<KeyPoint> keypoints1, vector<KeyPoint> keypoints2,
+                                  vector<DMatch> &matches) {
+    vector<Point2f> kpts1, kpts2;
+    get_matched_keypoint(keypoints1, keypoints2, matches, kpts1, kpts2);
+
+    vector<uchar> mask;
+    Mat F = findFundamentalMat(kpts1, kpts2, CV_FM_RANSAC, 2.0, 0.99, mask);
+    //Mat F = findFundamentalMat(kpts1, kpts2, CV_FM_7POINT, 4.0, 0.99, mask);
+
+    vector<DMatch> tmp_matches;
+    for (size_t i = 0; i < mask.size(); ++i)
+        if(mask[i])
+            tmp_matches.push_back(matches[i]);
+    matches.swap(tmp_matches);
+
+    return 0.0;
+}
+
 /*
 int Pipeline2D::match (vector<vector<keypointslist > > keys1, vector<vector<keypointslist > > keys2,
                        int width1, int height1, int width2, int height2) {
@@ -166,13 +192,32 @@ void Pipeline2D::get_matched_point(vector<KeyPoint> keypoints, vector<Point3f> p
     }
 }
 
-float Pipeline2D::dist_angle (float a, float b) {
-    if ( a >= 180 && b < 180 )
-        return fabs(360 - a + b);
-    else if ( a < 180 && b >= 180 )
-        return fabs(a + 360 - b);
-    else if ( a >= 180 && b >= 180 )
-        return fabs(a - b);
-    else if ( a < 180 && b < 180 )
-        return fabs(a - b);
+void Pipeline2D::get_matched_keypoint(vector<KeyPoint> keypoints1, vector<KeyPoint> keypoints2, vector<DMatch> matches,
+                                        vector<Point2f> &kpts1, vector<Point2f> &kpts2) {
+    int n = matches.size();
+    kpts1.clear();
+    kpts2.clear();
+    for (size_t i = 0; i < n; ++i) {
+        int idx1 = matches[i].trainIdx;
+        int idx2 = matches[i].queryIdx;
+        kpts1.push_back(keypoints1[idx1].pt);
+        kpts2.push_back(keypoints2[idx2].pt);
+    }
+}
+
+float Pipeline2D::dist_angle (float x, float y) {
+    float res = y - x;
+    res += (res>180) ? -360 : (res<-180) ? 360 : 0;
+    return res;
+    //return atan2(sin(x-y), cos(x-y));
+    /*
+    if ( x >= 180 && y < 180 )
+        return fabs(360 - x + y);
+    else if ( x < 180 && y >= 180 )
+        return fabs(x + 360 - y);
+    else if ( x >= 180 && y >= 180 )
+        return fabs(x - y);
+    else if ( x < 180 && y < 180 )
+        return fabs(x - y);
+    */
 }

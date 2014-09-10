@@ -33,13 +33,17 @@ Object FilesManager::loadObject (string folder_path) {
                 string depth_path = v[i].parent_path().string() + "/" + base_name + "_depthcrop.png";
                 string loc_path = v[i].parent_path().string() + "/" + base_name + "_loc.txt";
                 string mask_path = v[i].parent_path().string() + "/" + base_name + "_maskcrop.png";
+                vector<string> base_split;
+                boost::split(base_split, base_name, boost::is_any_of("_"));
 
                 View view;
+                view.tilt_ = atoi(base_split[3].c_str()); // 1, 2 or 4
                 view.angle_ = readAngle (pose_path);
                 Point2f origin = readOrigin (loc_path);
                 //cout << view.angle_ << endl;
                 //cout << origin << endl;
                 Mat image = imread(image_path, CV_LOAD_IMAGE_GRAYSCALE);
+                view.image_ = image;
                 Mat depth = imread(depth_path, CV_LOAD_IMAGE_ANYDEPTH | CV_LOAD_IMAGE_ANYCOLOR);
                 depth.convertTo(depth, CV_32F); // convert to float values
                 Mat mask = imread(mask_path, CV_LOAD_IMAGE_GRAYSCALE);

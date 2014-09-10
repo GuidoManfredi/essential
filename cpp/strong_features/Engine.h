@@ -1,5 +1,7 @@
 #pragma once
 
+#include <opencv2/highgui/highgui.hpp>
+
 #include "Pipeline2D.h"
 #include "Containers.h"
 
@@ -18,7 +20,7 @@ class Engine {
     Model modelFromObject (Object object, std::vector<int> model_images);
     Object objectFromObject (Object object, std::vector<int> images);
     void sortViewByAngle(Object &object);
-    int getIdxFromAngle (Object object, float angle);
+    int getIdxFromAngle (Object object, float angle, int tilt);
 
   private:
     struct IndexDistanceComparatorClass {

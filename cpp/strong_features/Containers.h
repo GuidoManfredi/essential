@@ -15,6 +15,8 @@ typedef struct cModel {
 } Model;
 
 typedef struct cView {
+    int tilt_;
+    cv::Mat image_;
     float angle_;
     vector<cv::KeyPoint> keypoints_;
     cv::Mat descriptors_;
