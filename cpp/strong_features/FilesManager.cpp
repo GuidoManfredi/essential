@@ -13,6 +13,11 @@ FilesManager::FilesManager(Mat K, Pipeline2D* pipe): pipe2d_(pipe), K_(K) {
 
 void FilesManager::setFeatures(Feature ft) {
     pipe2d_->setFeatures(ft);
+    features_ = ft;
+}
+
+int FilesManager::getFeatures() {
+    return features_;
 }
 
 Object FilesManager::loadObject (string folder_path) {

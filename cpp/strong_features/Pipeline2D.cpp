@@ -124,7 +124,7 @@ float Pipeline2D::estimate_pose2 (vector<KeyPoint> keypoints1, vector<KeyPoint> 
 
     vector<uchar> mask;
     Mat F = findFundamentalMat(kpts1, kpts2, CV_FM_RANSAC, 2.0, 0.99, mask);
-    //Mat F = findFundamentalMat(kpts1, kpts2, CV_FM_7POINT, 4.0, 0.99, mask);
+    //Mat F = findFundamentalMat(kpts1, kpts2, CV_FM_7POINT, 2.0, 0.99, mask);
 
     vector<DMatch> tmp_matches;
     for (size_t i = 0; i < mask.size(); ++i)

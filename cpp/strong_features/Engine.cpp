@@ -14,9 +14,12 @@ vector<int> Engine::match (Model model, Object object) {
     return match (model.descriptors_, object.views_);
 }
 
-vector<int> Engine::match (Object model, Object object,
-                           vector<float> &rotation_error) {
-    return match (model.views_, object.views_, rotation_error);
+int Engine::match (Object model, Object object,
+                   vector<int> &number_matches,
+                   vector<float> &percent_matches,
+                   vector<float> &rotation_error) {
+    return match (model.views_, object.views_,
+                   number_matches, percent_matches, rotation_error);
 }
 
 vector<int> Engine::match (Mat model_descriptors, vector<View> object_views) {
@@ -32,9 +35,12 @@ vector<int> Engine::match (Mat model_descriptors, vector<View> object_views) {
     return results;
 }
 
-vector<int> Engine::match (vector<View> model_views, vector<View> object_views,
+int Engine::match (vector<View> model_views, vector<View> object_views,
+                           vector<int> &final_number_matches,
+                           vector<float> &final_percent_matches,
                            vector<float> &final_rotation_error) {
-    vector<int> final_number_matches (object_views.size());
+    final_number_matches.resize(object_views.size());
+    final_percent_matches.resize(object_views.size());
     final_rotation_error.resize (object_views.size());
 
     for (size_t i = 0; i < object_views.size(); ++i) {
@@ -70,10 +76,13 @@ vector<int> Engine::match (vector<View> model_views, vector<View> object_views,
             number_matches[j] = matches.size();
         }
         final_number_matches[i] = *max_element(number_matches.begin(), number_matches.end());
+        //cout << final_number_matches[i] << endl;
+        final_percent_matches[i] = static_cast<float>(final_number_matches[i]) / static_cast<float>(object_views[i].keypoints_.size()) * 100;
+        //cout << final_percent_matches[i] << endl;
         final_rotation_error[i] = *min_element(rotation_error.begin(), rotation_error.end());
     }
 
-    return final_number_matches;
+    return 0;
 }
 
 Model Engine::modelFromObject (Object object, vector<int> model_images) {
@@ -124,4 +133,35 @@ int Engine::getIdxFromAngle (Object object, float angle, int tilt) {
         }
     }
     return min_idx;
+}
+
+void Engine::save(std::string out_basename, std::vector<int> matches_num, std::vector<float> matches_percent) {
+    std::string num_name = out_basename + "_num.csv";
+    std::string percent_name = out_basename + "_percent.csv";
+    saveVector(num_name, matches_num);
+    saveVector(percent_name, matches_percent);
+}
+
+void Engine::saveVector(std::string out, vector<int> vec) {
+    fstream stream;
+    stream.open(out.c_str(), std::fstream::out);
+    //    cout << "Could not open file " << out << endl;
+
+    for (size_t i = 0; i < vec.size(); ++i) {
+        stream << vec[i] << ",";
+    }
+    stream << endl;
+    stream.close();
+}
+
+void Engine::saveVector(std::string out, vector<float> vec) {
+    fstream stream;
+    stream.open(out.c_str(), std::fstream::out);
+    //    cout << "Could not open file " << out << endl;
+
+    for (size_t i = 0; i < vec.size(); ++i) {
+        stream << vec[i] << ",";
+    }
+    stream << endl;
+    stream.close();
 }
