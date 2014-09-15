@@ -27,3 +27,12 @@ typedef struct cView {
 typedef struct cObject {
     std::vector<View> views_;
 } Object;
+
+// N = number of matches, P = percent of matches (N/nb kpts * 100)
+typedef struct cError {
+    int N_;
+    float P_;
+    float Rerr_;
+} Error;
+
+

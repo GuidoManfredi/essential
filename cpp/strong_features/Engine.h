@@ -16,22 +16,18 @@ class Engine {
     std::vector<int> match (cv::Mat descriptors, std::vector<View> image);
 
     int match (Object model, Object object,
-                 std::vector<int> &number_matches,
-                 std::vector<float> &percent_matches,
-                 std::vector<float> &rotation_error);
+                 std::vector<Error> &errors);
     int match (std::vector<View> model_views, std::vector<View> object_views,
-                 std::vector<int> &number_matches,
-                 std::vector<float> &percent_matches,
-                 std::vector<float> &rotation_error);
+                 std::vector<Error> &errors);
 
     Model modelFromObject (Object object, std::vector<int> model_images);
     Object objectFromObject (Object object, std::vector<int> images);
     void sortViewByAngle(Object &object);
     int getIdxFromAngle (Object object, float angle, int tilt);
 
-    void save(std::string file, std::vector<int> num_matches, std::vector<float> matches_percent);
-    void saveVector(std::string out, std::vector<int> vec);
-    void saveVector(std::string out, std::vector<float> vec);
+    vector<Error> getMean (std::vector<std::vector<Error> > errors);
+
+    void save(std::string file, std::vector<Error> error);
 
   private:
     struct IndexDistanceComparatorClass {

@@ -75,9 +75,7 @@ vector<int> getIdxFromAngles (Object object, vector<int> angles) {
 }
 
 void computeObject (string object_path, vector<int> angles,
-                    vector<int> &number_matches,
-                    vector<float> &percent_matches,
-                    vector<float> &rotation_error) {
+                    vector<Error> &errors) {
     cout << "Processing " << object_path << endl;
     cout << "Loading data and creating object" << endl;
     Object object = files.loadObject (object_path);
@@ -88,69 +86,72 @@ void computeObject (string object_path, vector<int> angles,
     cout << "Creation partial model" << endl;
     Object model = engine.objectFromObject (object, idx);
     cout << "Matching model to object" << endl;
-    engine.match (model, object,
-                    number_matches,
-                    percent_matches,
-                    rotation_error);
+    engine.match (model, object, errors);
     cout << "Finished" << endl;
 }
 
-void computeClass (string base_object_path, int max, vector<int> angles) {
-    vector<int> number_matches, mean_number_matches;
-    vector<float> percent_matches, rotation_error, mean_percent_matches, mean_rotation_error;
+void computeClass (string base_object_path, int max, vector<int> angles,
+                    vector<vector<Error> > &errors) {
+    errors.resize(max);
+    for (size_t i = 0; i < max; ++i)
+        errors[i].resize(120);
 
-    // 120 = 360 / 9 * 3
-    mean_number_matches.resize(120);
-    mean_percent_matches.resize(120);
-    mean_rotation_error.resize(120);
-
-    char tmp[21];
     for (size_t i = 1; i <= max; ++i) {
         std::stringstream ss;
         ss << base_object_path << i;
         string object_path = ss.str();
-        computeObject (object_path, angles,
-                       number_matches, percent_matches, rotation_error);
+
+        vector<Error> tmp_error;
+        computeObject (object_path, angles, tmp_error);
+        cout << tmp_error.size() << endl;
         for (size_t n = 0; n < 120; ++n) {
-            mean_number_matches[n] += number_matches[n];
-            mean_percent_matches[n] += percent_matches[n];
-            mean_rotation_error[n] += rotation_error[n];
+            //cout << n << " " << i << endl;
+            errors[i-1][n] = tmp_error[n];
         }
     }
-
-    for (size_t n = 0; n < 120; ++n) {
-        mean_number_matches[n] /= 120;
-        mean_percent_matches[n] /= 120;
-        mean_rotation_error[n] /= 120;
-    }
-
-    std::stringstream ss;
-    ss << base_object_path << "feature_" << files.getFeatures() << "_modelsize_" << angles.size();
-    engine.save(ss.str(), mean_number_matches, mean_percent_matches);
 }
 
-void experiment() {
-    //files.setFeatures(eSURF);
-    files.setFeatures(eSIFT);
-    //files.setFeatures(eASIFT);
+void experiment(string dataset_path, vector<string> classes, Feature ft, vector<int> angles) {
+    files.setFeatures(ft);
 
-    vector<int> idx;
-    idx.push_back(0.0);
-    idx.push_back(90.0);
-    idx.push_back(180.0);
-    idx.push_back(270.0);
+    vector<vector<Error> > tmp_error;
+    for (size_t i = 0; i < classes.size(); ++i) {
+        string class_path = dataset_path + classes[i] + "/";
+        //cout << class_path << endl;
+        string full_path = class_path + classes[i] + "_";
+        //cout << full_path << endl;
+        int num_objects = files.getNumFolders(class_path);
+        //int num_objects = 1;
+        //cout << num_objects << endl;
+        computeClass(full_path, num_objects, angles, tmp_error);
+    }
 
-    computeClass("/home/gmanfred/devel/datasets/washington_rgbd/rgbd-dataset/cereal_box/cereal_box_", 5, idx);
+    //cout << "Computing mean" << endl;
+    vector<Error> mean = engine.getMean(tmp_error);
+
+    std::stringstream ss;
+    ss << classes[0] << "_feature_" << files.getFeatures() << "_modelsize_" << angles.size();
+    //cout << ss.str() << endl;
+    engine.save(ss.str(), mean);
 }
 
 int main() {
-    //files.setFeatures(eASIFT);
-    //test ("/home/gmanfred/devel/datasets/washington_rgbd/rgbd-dataset/cereal_box/cereal_box_5");
-    //test ("/home/gmanfred/devel/datasets/washington_rgbd/rgbd-dataset/food_can/food_can_6");
-    //test ("/home/gmanfred/devel/datasets/washington_rgbd/rgbd-dataset/food_can/food_can_2");
-    //test ("/home/gmanfred/devel/datasets/washington_rgbd/rgbd-dataset/food_box/food_box_2");
-    //test ("/home/gmanfred/devel/datasets/washington_rgbd/rgbd-dataset/test_object");
-    //test ("/home/gmanfred/devel/datasets/washington_rgbd/rgbd-dataset/test_object2");
-    experiment();
+    string dataset_path = "/home/gmanfred/devel/datasets/washington_rgbd/rgbd-dataset/";
+    vector<string> classes;
+    classes.push_back("cereal_box");
+
+    vector<int> angles;
+    angles.push_back(0);
+    angles.push_back(45);
+    angles.push_back(90);
+    angles.push_back(135);
+    angles.push_back(180);
+    angles.push_back(225);
+    angles.push_back(270);
+    angles.push_back(315);
+
+    Feature ft = eSIFT;
+
+    experiment(dataset_path, classes, ft, angles);
     return 0;
 }

@@ -15,11 +15,9 @@ vector<int> Engine::match (Model model, Object object) {
 }
 
 int Engine::match (Object model, Object object,
-                   vector<int> &number_matches,
-                   vector<float> &percent_matches,
-                   vector<float> &rotation_error) {
-    return match (model.views_, object.views_,
-                   number_matches, percent_matches, rotation_error);
+                   vector<Error> &errors) {
+    errors.clear();
+    return match (model.views_, object.views_, errors);
 }
 
 vector<int> Engine::match (Mat model_descriptors, vector<View> object_views) {
@@ -36,16 +34,12 @@ vector<int> Engine::match (Mat model_descriptors, vector<View> object_views) {
 }
 
 int Engine::match (vector<View> model_views, vector<View> object_views,
-                           vector<int> &final_number_matches,
-                           vector<float> &final_percent_matches,
-                           vector<float> &final_rotation_error) {
-    final_number_matches.resize(object_views.size());
-    final_percent_matches.resize(object_views.size());
-    final_rotation_error.resize (object_views.size());
+                    vector<Error> &errors) {
+    errors.resize(object_views.size());
 
     for (size_t i = 0; i < object_views.size(); ++i) {
         vector<int> number_matches (model_views.size());
-        vector<int> rotation_error (model_views.size());
+        vector<float> rotation_error (model_views.size());
         for (size_t j = 0; j < model_views.size(); ++j) {
             //pipe2d_->match (model_views[j].descriptors_, object_views[i].descriptors_);
             vector<DMatch> matches;
@@ -75,11 +69,9 @@ int Engine::match (vector<View> model_views, vector<View> object_views,
             rotation_error[j] = pose_rad;
             number_matches[j] = matches.size();
         }
-        final_number_matches[i] = *max_element(number_matches.begin(), number_matches.end());
-        //cout << final_number_matches[i] << endl;
-        final_percent_matches[i] = static_cast<float>(final_number_matches[i]) / static_cast<float>(object_views[i].keypoints_.size()) * 100;
-        //cout << final_percent_matches[i] << endl;
-        final_rotation_error[i] = *min_element(rotation_error.begin(), rotation_error.end());
+        errors[i].N_ = *max_element(number_matches.begin(), number_matches.end());
+        errors[i].P_ = static_cast<float>(errors[i].N_) / static_cast<float>(object_views[i].keypoints_.size()) * 100;
+        errors[i].Rerr_ = *min_element(rotation_error.begin(), rotation_error.end());
     }
 
     return 0;
@@ -135,33 +127,33 @@ int Engine::getIdxFromAngle (Object object, float angle, int tilt) {
     return min_idx;
 }
 
-void Engine::save(std::string out_basename, std::vector<int> matches_num, std::vector<float> matches_percent) {
-    std::string num_name = out_basename + "_num.csv";
-    std::string percent_name = out_basename + "_percent.csv";
-    saveVector(num_name, matches_num);
-    saveVector(percent_name, matches_percent);
+vector<Error> Engine::getMean (vector<vector<Error> > errors) {
+    int num_views = errors[0].size();
+    int num_objects = errors.size();
+    vector<Error> mean;
+    mean.resize(num_views);
+
+    for (size_t n = 0; n < num_views; ++n) {
+        for (size_t i = 0; i < num_objects; ++i) {
+            mean[n].N_ += errors[i][n].N_;
+            mean[n].P_ += errors[i][n].P_;
+            mean[n].Rerr_ += errors[i][n].Rerr_;
+        }
+        mean[n].N_ /= errors.size();
+        mean[n].P_ /= errors.size();
+        mean[n].Rerr_ /= errors.size();
+    }
+    return mean;
 }
 
-void Engine::saveVector(std::string out, vector<int> vec) {
+void Engine::save(std::string out_basename, std::vector<Error> error) {
+    std::string name = out_basename + "_error.csv";
+
     fstream stream;
-    stream.open(out.c_str(), std::fstream::out);
+    stream.open(name.c_str(), std::fstream::out);
     //    cout << "Could not open file " << out << endl;
 
-    for (size_t i = 0; i < vec.size(); ++i) {
-        stream << vec[i] << ",";
-    }
-    stream << endl;
-    stream.close();
-}
-
-void Engine::saveVector(std::string out, vector<float> vec) {
-    fstream stream;
-    stream.open(out.c_str(), std::fstream::out);
-    //    cout << "Could not open file " << out << endl;
-
-    for (size_t i = 0; i < vec.size(); ++i) {
-        stream << vec[i] << ",";
-    }
-    stream << endl;
+    for (size_t i = 0; i < error.size(); ++i)
+        stream << error[i].N_ << "," << error[i].P_ << "," << error[i].Rerr_ << endl;
     stream.close();
 }

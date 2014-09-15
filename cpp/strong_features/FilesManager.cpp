@@ -73,6 +73,21 @@ Object FilesManager::loadObject (string folder_path) {
     return object;
 }
 
+int FilesManager::getNumFolders(string p) {
+    boost::filesystem::path bf_folder_path(p);
+    if (is_directory(bf_folder_path)) {
+        typedef vector<path> vec;
+        vec v;
+        copy(directory_iterator(bf_folder_path), directory_iterator(), back_inserter(v));
+
+        int num_folders = 0;
+        for (size_t i = 0; i < v.size(); ++i)
+            if (is_directory(v[i])) ++num_folders;
+        return num_folders;
+    }
+    return 0;
+}
+
 float FilesManager::readAngle (std::string pose_path) {
     float angle = 0.0;
     string line;
