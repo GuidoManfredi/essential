@@ -41,31 +41,18 @@ int Engine::match (vector<View> model_views, vector<View> object_views,
         vector<int> number_matches (model_views.size());
         vector<float> rotation_error (model_views.size());
         for (size_t j = 0; j < model_views.size(); ++j) {
-            //pipe2d_->match (model_views[j].descriptors_, object_views[i].descriptors_);
             vector<DMatch> matches;
             pipe2d_->match (model_views[j].descriptors_, object_views[i].descriptors_, matches);
 
-            //float pose_rad = pipe2d_->estimate_pose (model_views[j].keypoints_, object_views[i].points_, matches);
-            float pose_rad = pipe2d_->estimate_pose2 (model_views[j].keypoints_, object_views[i].keypoints_, matches);
+            float pose_rad = 0;
+            if (matches.size() > 6)
+                pose_rad = pipe2d_->estimate_pose2 (model_views[j].keypoints_, object_views[i].keypoints_, matches);
+                //float pose_rad = pipe2d_->estimate_pose (model_views[j].keypoints_, object_views[i].points_, matches);
 /*
             Mat img;
             drawMatches (model_views[j].image_, model_views[j].keypoints_, object_views[i].image_, object_views[i].keypoints_, matches, img);
             imshow("Debug", img); waitKey(0);
 */
-
-            //float pose_deg = (pose_rad + M_PI) * 180 / M_PI;
-            //cout << "Found " << matches.size() << " inliers." << endl;
-
-            //float ground_truth = pipe2d_->dist_angle(object_views[i].angle_, model_views[j].angle_);
-            //float ground_truth = pipe2d_->dist_angle(model_views[j].angle_, object_views[i].angle_);
-            /*
-            cout << pose_deg << " "
-                 << ground_truth << " "
-                 //<< pipe2d_->dist_angle(pose_deg, ground_truth) / ground_truth * 100 << endl;
-                 << (fabs(pose_deg) - fabs(ground_truth)) / fabs(pose_deg) * 100 << endl;
-            */
-
-            //rotation_error[j] = fabs(pipe2d_->dist_angle(pose_deg, ground_truth)) / fabs(pose_deg) * 100; // pose - ground_truth in percents
             rotation_error[j] = pose_rad;
             number_matches[j] = matches.size();
         }
@@ -128,20 +115,34 @@ int Engine::getIdxFromAngle (Object object, float angle, int tilt) {
 }
 
 vector<Error> Engine::getMean (vector<vector<Error> > errors) {
-    int num_views = errors[0].size();
+    //int num_views = errors[0].size();
+    int num_views = 120;
     int num_objects = errors.size();
     vector<Error> mean;
     mean.resize(num_views);
 
     for (size_t n = 0; n < num_views; ++n) {
+        int count = 0;
         for (size_t i = 0; i < num_objects; ++i) {
-            mean[n].N_ += errors[i][n].N_;
-            mean[n].P_ += errors[i][n].P_;
-            mean[n].Rerr_ += errors[i][n].Rerr_;
+            if ( n < errors[i].size()) {
+                //if (errors[i][n].P_ > 100) cout << n << " " << i << " " << errors[i].size() << " " << errors[i][n].P_ <<endl;
+                mean[n].N_ += errors[i][n].N_;
+                mean[n].P_ += errors[i][n].P_;
+                mean[n].Rerr_ += errors[i][n].Rerr_;
+                ++count;
+            }
         }
-        mean[n].N_ /= errors.size();
-        mean[n].P_ /= errors.size();
-        mean[n].Rerr_ /= errors.size();
+
+        if (count != 0) {
+            mean[n].N_ /= count;
+            mean[n].P_ /= count;
+            mean[n].Rerr_ /= count;
+        } else {
+            mean[n].N_ = 0;
+            mean[n].P_ = 0;
+            mean[n].Rerr_ = 0;
+        }
+        //cout << count << endl;
     }
     return mean;
 }

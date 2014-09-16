@@ -3,8 +3,7 @@
 #include "FilesManager.h"
 #include "Engine.h"
 
-// TODO Faire en sorte que le model contiene des images qui matchent sont pas dans angles purrisµ.
-// TODO Save the result to a file.
+// TODO faire que compute traite correctement toutes les classes dans sa boucle "for"
 using namespace std;
 using namespace cv;
 
@@ -76,42 +75,43 @@ vector<int> getIdxFromAngles (Object object, vector<int> angles) {
 
 void computeObject (string object_path, vector<int> angles,
                     vector<Error> &errors) {
-    cout << "Processing " << object_path << endl;
-    cout << "Loading data and creating object" << endl;
+    //cout << "Processing " << object_path << endl;
+    //cout << "Loading data and creating object" << endl;
     Object object = files.loadObject (object_path);
-    cout << "Sorting object" << endl;
+    //cout << "Sorting object" << endl;
     engine.sortViewByAngle(object);
-    cout << "Getting model angles" << endl;
+    //cout << "Getting model angles" << endl;
     vector<int> idx = getIdxFromAngles(object, angles);
-    cout << "Creation partial model" << endl;
+    //cout << "Creation partial model" << endl;
     Object model = engine.objectFromObject (object, idx);
-    cout << "Matching model to object" << endl;
+    //cout << "Matching model to object" << endl;
     engine.match (model, object, errors);
-    cout << "Finished" << endl;
+    //cout << "Finished" << endl;
 }
 
-void computeClass (string base_object_path, int max, vector<int> angles,
+void computeClass (string base_object_path, int num_objects, vector<int> angles,
                     vector<vector<Error> > &errors) {
-    errors.resize(max);
-    for (size_t i = 0; i < max; ++i)
-        errors[i].resize(120);
+    errors.clear();
+    int num_views = 120;
+    errors.resize(num_objects);
+    //for (size_t i = 0; i < num_objects; ++i)
+        //errors[i].resize(num_views);
 
-    for (size_t i = 1; i <= max; ++i) {
+    for (size_t i = 0; i < num_objects; ++i) {
         std::stringstream ss;
-        ss << base_object_path << i;
+        ss << base_object_path << (i + 1);
         string object_path = ss.str();
 
         vector<Error> tmp_error;
         computeObject (object_path, angles, tmp_error);
-        cout << tmp_error.size() << endl;
-        for (size_t n = 0; n < 120; ++n) {
-            //cout << n << " " << i << endl;
-            errors[i-1][n] = tmp_error[n];
-        }
+
+        for (size_t n = 0; n < tmp_error.size(); ++n)
+            errors[i].push_back(tmp_error[n]);
     }
 }
 
-void experiment(string dataset_path, vector<string> classes, Feature ft, vector<int> angles) {
+void compute(string dataset_path, vector<string> classes, Feature ft, vector<int> angles, int idx) {
+    cout << "Computing...";
     files.setFeatures(ft);
 
     vector<vector<Error> > tmp_error;
@@ -125,33 +125,87 @@ void experiment(string dataset_path, vector<string> classes, Feature ft, vector<
         //cout << num_objects << endl;
         computeClass(full_path, num_objects, angles, tmp_error);
     }
-
+    cout << "...done." << endl;
     //cout << "Computing mean" << endl;
     vector<Error> mean = engine.getMean(tmp_error);
 
     std::stringstream ss;
-    ss << classes[0] << "_feature_" << files.getFeatures() << "_modelsize_" << angles.size();
+    ss << "results/" << classes[0] << "_feature_" << files.getFeatures() << "_modelsize_" << angles.size() << "_" << idx;
     //cout << ss.str() << endl;
     engine.save(ss.str(), mean);
+    cout << "Saved to " << ss.str() << endl;
+}
+
+void experiment_best_feature (string dataset_path, vector<string> classes) {
+    vector<int> angles;
+    angles.push_back(90);
+
+    // ASIFT -> ... ?
+    //for (int ft = 0; ft < 6; ++ft)
+    for (int ft = 0; ft < 1; ++ft)
+        compute(dataset_path, classes, static_cast<Feature>(ft), angles, static_cast<Feature>(ft));
+}
+
+void experiment_best_angles (string dataset_path, vector<string> classes) {
+    // ASIFT -> FREAK
+    for (int ft = 0; ft < 6; ++ft) {
+        vector<int> angles(1);
+        for (int angle = 0; angle < 360; angle += 9) {
+            angles[0] = angle;
+            compute(dataset_path, classes, static_cast<Feature>(ft), angles, angle);
+        }
+    }
+}
+
+void experiment_num_views (string dataset_path, vector<string> classes) {
+    Feature ft = eSIFT;
+
+    float step = 90.0;
+    float factor = 2.0;
+    while (step > 15.0) {
+        vector<int> angles;
+        int num_views = static_cast<int>(360.0/step);
+        for (int angle = 0; angle < num_views; angle += step) {
+            angles.push_back(angle);
+        }
+
+        compute(dataset_path, classes, ft, angles, step);
+
+        step = step / factor;
+    }
 }
 
 int main() {
     string dataset_path = "/home/gmanfred/devel/datasets/washington_rgbd/rgbd-dataset/";
+
     vector<string> classes;
+    //classes.push_back("test_object");
     classes.push_back("cereal_box");
+    //classes.push_back("food_box");
+
+    experiment_best_feature (dataset_path, classes);
+    //experiment_best_angles(dataset_path, classes);
+    //experiment_num_views (dataset_path, classes);
+
+    /*
+    string dataset_path = "/home/gmanfred/devel/datasets/washington_rgbd/rgbd-dataset/";
+    vector<string> classes;
+    //classes.push_back("cereal_box");
+    classes.push_back("food_box");
 
     vector<int> angles;
     angles.push_back(0);
-    angles.push_back(45);
-    angles.push_back(90);
-    angles.push_back(135);
-    angles.push_back(180);
-    angles.push_back(225);
-    angles.push_back(270);
-    angles.push_back(315);
+    //angles.push_back(45);
+    //angles.push_back(90);
+    //angles.push_back(135);
+    //angles.push_back(180);
+    //angles.push_back(225);
+    //angles.push_back(270);
+    //angles.push_back(315);
 
     Feature ft = eSIFT;
 
-    experiment(dataset_path, classes, ft, angles);
+    compute(dataset_path, classes, ft, angles);
+    */
     return 0;
 }

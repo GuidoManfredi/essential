@@ -30,15 +30,20 @@ void Pipeline2D::setFeatures (Feature ft) {
         detector_ = new cv::SURF();
         extractor_ = new cv::SURF();
         matcher_ = new BFMatcher(cv::NORM_L2, true);
+    } else if (ft == eORB) {
+        cout << "Using ORBs. " << endl;
+        detector_ = new cv::ORB(1000);
+        extractor_ = new cv::ORB();
+        matcher_ = new BFMatcher(cv::NORM_HAMMING, true);
+    } else if (ft == eBRISK) {
+        cout << "Using BRISKs. " << endl;
+        detector_ = new BRISK();
+        extractor_ = new BRISK();
+        matcher_ = new BFMatcher(cv::NORM_HAMMING, true);
     } else if (ft == eFREAK) {
         cout << "Using FREAKs. " << endl;
-        detector_ = new cv::ORB(1000);
-        extractor_ = new cv::FREAK(false, false);
-        matcher_ = new BFMatcher(cv::NORM_HAMMING, true);
-    } else if (ft == eBRIEF) {
-        cout << "Using BRIEFs. " << endl;
-        detector_ = new FastFeatureDetector();
-        extractor_ = new BriefDescriptorExtractor();
+        detector_ = new BRISK();
+        extractor_ = new FREAK();
         matcher_ = new BFMatcher(cv::NORM_HAMMING, true);
     } else {
         cout << "Error : setFeatures : Couldn't find specified feature" << endl;
@@ -65,7 +70,7 @@ void Pipeline2D::extractDescriptors(const cv::Mat& image, const cv::Mat& mask,
     if (ASIFT_) {
         cout << "Using ASIFT" << endl;
         vector<float> asift_image (gray_masked.data, gray_masked.data + gray_masked.cols * gray_masked.rows);
-        int num_tilts = 7;
+        int num_tilts = 5;
         siftPar siftparameters;
         default_sift_parameters(siftparameters);
         vector<vector<keypointslist > > keys;
@@ -76,9 +81,14 @@ void Pipeline2D::extractDescriptors(const cv::Mat& image, const cv::Mat& mask,
         detector_->detect (gray_masked, keypoints, mask);
         extractor_->compute (gray_masked, keypoints, descriptors);
     }
+    //cout << "Found " << keypoints.size() << " keypoints." << endl;
 }
 
 int Pipeline2D::match (const cv::Mat &descs1, const cv::Mat &descs2, vector<DMatch> &matches) {
+    matches.clear();
+    if (descs1.rows == 0 || descs2.rows == 0)
+        return matches.size();
+
     matcher_->match(descs1, descs2, matches);
     return matches.size();
 }

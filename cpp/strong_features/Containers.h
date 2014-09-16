@@ -7,7 +7,7 @@
 
 #include "ASIFT/demo_lib_sift.h"
 
-enum Feature {eASIFT, eSIFT, eSURF, eFREAK, eBRIEF}; // enum sift = eSIFT
+enum Feature {eASIFT, eSIFT, eSURF, eORB, eFREAK, eBRISK}; // enum sift = eSIFT
 
 typedef struct cModel {
     cv::Mat descriptors_;
