@@ -27,7 +27,10 @@ class Engine {
 
     vector<Error> getMean (std::vector<std::vector<Error> > errors);
 
+    void saveTimeSize (std::string output, float time, int size);
     void save(std::string file, std::vector<Error> error);
+
+    int getObjectSize(Object obj);
 
   private:
     struct IndexDistanceComparatorClass {

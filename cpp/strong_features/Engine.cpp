@@ -40,6 +40,7 @@ int Engine::match (vector<View> model_views, vector<View> object_views,
     for (size_t i = 0; i < object_views.size(); ++i) {
         vector<int> number_matches (model_views.size());
         vector<float> rotation_error (model_views.size());
+        int start = cv::getTickCount(); // Start counting time
         for (size_t j = 0; j < model_views.size(); ++j) {
             vector<DMatch> matches;
             pipe2d_->match (model_views[j].descriptors_, object_views[i].descriptors_, matches);
@@ -56,9 +57,13 @@ int Engine::match (vector<View> model_views, vector<View> object_views,
             rotation_error[j] = pose_rad;
             number_matches[j] = matches.size();
         }
+        int end = cv::getTickCount();
+        float time_period = 1 / cv::getTickFrequency();
         errors[i].N_ = *max_element(number_matches.begin(), number_matches.end());
         errors[i].P_ = static_cast<float>(errors[i].N_) / static_cast<float>(object_views[i].keypoints_.size()) * 100;
         errors[i].Rerr_ = *min_element(rotation_error.begin(), rotation_error.end());
+        errors[i].time_ = (end - start) * time_period;
+        //cout << errors[i].time_ << endl;
     }
 
     return 0;
@@ -82,11 +87,15 @@ Model Engine::modelFromObject (Object object, vector<int> model_images) {
 Object Engine::objectFromObject (Object object, vector<int> images) {
     Object res;
 
+    res.views_.resize(images.size());
     for (int i = 0; i < images.size(); ++i) {
         int idx = images[i];
-        res.views_.push_back(object.views_[idx]);
+        //cout << object.views_[idx].descriptors_.rows << endl;
+        res.views_[i] = object.views_[idx];
+        //cout << res.views_[i].descriptors_.rows << endl;
     }
 
+    //cout << res.views_[0].descriptors_.rows << endl;
     return res;
 }
 
@@ -121,6 +130,7 @@ vector<Error> Engine::getMean (vector<vector<Error> > errors) {
     vector<Error> mean;
     mean.resize(num_views);
 
+    float total_time = 0.0;
     for (size_t n = 0; n < num_views; ++n) {
         int count = 0;
         for (size_t i = 0; i < num_objects; ++i) {
@@ -129,7 +139,9 @@ vector<Error> Engine::getMean (vector<vector<Error> > errors) {
                 mean[n].N_ += errors[i][n].N_;
                 mean[n].P_ += errors[i][n].P_;
                 mean[n].Rerr_ += errors[i][n].Rerr_;
+                mean[n].time_ += errors[i][n].time_;
                 ++count;
+
             }
         }
 
@@ -137,14 +149,30 @@ vector<Error> Engine::getMean (vector<vector<Error> > errors) {
             mean[n].N_ /= count;
             mean[n].P_ /= count;
             mean[n].Rerr_ /= count;
+            mean[n].time_ /= count;
         } else {
             mean[n].N_ = 0;
             mean[n].P_ = 0;
             mean[n].Rerr_ = 0;
+            mean[n].time_ = 0;
         }
         //cout << count << endl;
     }
+
+    for (size_t i = 0; i < num_views; ++i)
+        if (mean[i].time_ != 0)
+            mean[i].time_ /= num_views;
+
     return mean;
+}
+
+void Engine::saveTimeSize (string output, float time, int size) {
+    fstream stream;
+    stream.open(output.c_str(), std::fstream::app|std::fstream::out);
+    //cout << time << " " << size << endl;
+    stream << time << ";" << size << endl;
+
+    stream.close();
 }
 
 void Engine::save(std::string out_basename, std::vector<Error> error) {
@@ -152,9 +180,21 @@ void Engine::save(std::string out_basename, std::vector<Error> error) {
 
     fstream stream;
     stream.open(name.c_str(), std::fstream::out);
-    //    cout << "Could not open file " << out << endl;
 
-    for (size_t i = 0; i < error.size(); ++i)
+    for (size_t i = 0; i < error.size(); ++i) {
         stream << error[i].N_ << "," << error[i].P_ << "," << error[i].Rerr_ << endl;
+    }
     stream.close();
+}
+
+int Engine::getObjectSize(Object obj) {
+    int size = 0;
+    for (size_t i = 0; i < obj.views_.size(); ++i) {
+        size += obj.views_[i].descriptors_.rows
+                * obj.views_[i].descriptors_.cols
+                * sizeof(float);
+        //cout << size << endl;
+    }
+
+    return size;
 }

@@ -7,8 +7,7 @@
 using namespace std;
 using namespace cv;
 
-// calculator, cell_phone, cereal_box, food_bag, food_box, food_can, food_jar,
-//  instant_noodles, keyboard, kleenex, notebook, soda_can, toothpaste, water_bottle
+// cereal_box, food_bag, food_box, food_can, food_jar, instant_noodles, soda_can, toothpast, water_bottle
 
 // 570 for IR
 // 535 for RGB
@@ -73,7 +72,7 @@ vector<int> getIdxFromAngles (Object object, vector<int> angles) {
     return idx;
 }
 
-void computeObject (string object_path, vector<int> angles,
+float computeObject (string object_path, vector<int> angles,
                     vector<Error> &errors) {
     //cout << "Processing " << object_path << endl;
     //cout << "Loading data and creating object" << endl;
@@ -84,14 +83,19 @@ void computeObject (string object_path, vector<int> angles,
     vector<int> idx = getIdxFromAngles(object, angles);
     //cout << "Creation partial model" << endl;
     Object model = engine.objectFromObject (object, idx);
+    //cout << model.views_[0].descriptors_.rows << endl;
     //cout << "Matching model to object" << endl;
     engine.match (model, object, errors);
+    //cout << model.views_[0].descriptors_.rows << endl;
     //cout << "Finished" << endl;
+    return engine.getObjectSize(model);
 }
 
-void computeClass (string base_object_path, int num_objects, vector<int> angles,
-                    vector<vector<Error> > &errors) {
+int computeClass (string base_object_path, int num_objects, vector<int> angles,
+                    vector<vector<Error> > &errors, int &objects_size) {
     errors.clear();
+    objects_size = 0;
+
     int num_views = 120;
     errors.resize(num_objects);
     //for (size_t i = 0; i < num_objects; ++i)
@@ -103,17 +107,22 @@ void computeClass (string base_object_path, int num_objects, vector<int> angles,
         string object_path = ss.str();
 
         vector<Error> tmp_error;
-        computeObject (object_path, angles, tmp_error);
+        objects_size += computeObject (object_path, angles, tmp_error);
 
         for (size_t n = 0; n < tmp_error.size(); ++n)
             errors[i].push_back(tmp_error[n]);
     }
+
+    return num_objects;
 }
 
 void compute(string dataset_path, vector<string> classes, Feature ft, vector<int> angles, int idx) {
     cout << "Computing...";
     files.setFeatures(ft);
 
+    int total_number_objects = 0;
+    int mean_size = 0;
+    vector<vector<Error> > error;
     vector<vector<Error> > tmp_error;
     for (size_t i = 0; i < classes.size(); ++i) {
         string class_path = dataset_path + classes[i] + "/";
@@ -121,18 +130,25 @@ void compute(string dataset_path, vector<string> classes, Feature ft, vector<int
         string full_path = class_path + classes[i] + "_";
         //cout << full_path << endl;
         int num_objects = files.getNumFolders(class_path);
-        //int num_objects = 1;
         //cout << num_objects << endl;
-        computeClass(full_path, num_objects, angles, tmp_error);
+        int tmp_size = 0;
+        total_number_objects += computeClass(full_path, num_objects, angles, tmp_error, tmp_size);
+        error.insert( error.end(), tmp_error.begin(), tmp_error.end() );
+        mean_size += tmp_size;
     }
     cout << "...done." << endl;
     //cout << "Computing mean" << endl;
-    vector<Error> mean = engine.getMean(tmp_error);
+    //vector<Error> mean = engine.getMean(tmp_error);
+    //cout << error.size() << endl;
+    vector<Error> mean = engine.getMean(error);
+    mean_size /= total_number_objects;
 
     std::stringstream ss;
     ss << "results/" << classes[0] << "_feature_" << files.getFeatures() << "_modelsize_" << angles.size() << "_" << idx;
     //cout << ss.str() << endl;
     engine.save(ss.str(), mean);
+    //cout << mean[0].time_ << " " << mean_size << endl;
+    engine.saveTimeSize("results/time_size.csv", mean[0].time_, mean_size);
     cout << "Saved to " << ss.str() << endl;
 }
 
@@ -141,20 +157,21 @@ void experiment_best_feature (string dataset_path, vector<string> classes) {
     angles.push_back(90);
 
     // ASIFT -> ... ?
-    //for (int ft = 0; ft < 6; ++ft)
-    for (int ft = 0; ft < 1; ++ft)
+    for (int ft = 1; ft < 6; ++ft)
+    //for (int ft = 0; ft < 1; ++ft)
         compute(dataset_path, classes, static_cast<Feature>(ft), angles, static_cast<Feature>(ft));
 }
 
 void experiment_best_angles (string dataset_path, vector<string> classes) {
     // ASIFT -> FREAK
-    for (int ft = 0; ft < 6; ++ft) {
+    //for (int ft = 0; ft < 6; ++ft) {
+        Feature ft = eSURF;
         vector<int> angles(1);
         for (int angle = 0; angle < 360; angle += 9) {
             angles[0] = angle;
             compute(dataset_path, classes, static_cast<Feature>(ft), angles, angle);
         }
-    }
+    //}
 }
 
 void experiment_num_views (string dataset_path, vector<string> classes) {
@@ -182,6 +199,7 @@ int main() {
     //classes.push_back("test_object");
     classes.push_back("cereal_box");
     //classes.push_back("food_box");
+    //classes.push_back("food_jar");
 
     experiment_best_feature (dataset_path, classes);
     //experiment_best_angles(dataset_path, classes);
