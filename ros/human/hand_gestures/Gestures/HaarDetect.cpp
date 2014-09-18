@@ -17,7 +17,8 @@ Rect HaarDetect::detect(Mat image, Point2f clue, int padding, bool display) {
     // Detect objects
     std::vector<Rect> objects;
     double scale_factor = 1.05;
-    int min_neighbors = 5;
+    //int min_neighbors = 15;
+    int min_neighbors = 10;
     face_cascade_.detectMultiScale( frame, objects, scale_factor, min_neighbors, 0, Size(20, 20) );
 
     if (display) {

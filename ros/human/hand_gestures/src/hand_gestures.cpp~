@@ -17,7 +17,8 @@
 
 // TODO Recuperer uniquement image RGB, on n'utilise pas la profondeur pour l'instant
 //      faire 2 callbacks differents et une seule fonction de traitement.
-
+// TODO Robustifier en permettant de continuer meme si number du user change.
+// TODO Faire anti rebond et anti bruit
 using namespace std;
 using namespace cv;
 using namespace pcl;
@@ -28,6 +29,7 @@ tf::TransformListener* listener;
 HandSeg seg;
 HaarDetect fist_detector;
 HaarDetect palm_detector;
+vector<int> list_gestes;
 
 Mat K (3, 3, CV_64F);
 Mat mask;
@@ -42,14 +44,38 @@ Point2f getLeftHand ();
 bool inside (Point2f pt, Rect rect);
 Mat getTransform (string camera, string frame);
 
+void draw (Mat image, int gest, Point2f left_hand, Rect fist, Rect palm) {
+    int thickness = 2;
+    int lineType = 8;
+    circle( image, left_hand, 5, Scalar( 0, 0, 255 ), -1, lineType );
+    if (gest == 1)
+        rectangle (image, Point(left_hand.x + fist.x - hand_padding, left_hand.y + fist.y - hand_padding),
+                          Point(left_hand.x + fist.x + fist.height - hand_padding, left_hand.y + fist.y + fist.width - hand_padding),
+                          Scalar(255, 0, 0), thickness, lineType);
+    else if (gest == 2)
+        rectangle (image, Point(left_hand.x + palm.x - hand_padding, left_hand.y + palm.y - hand_padding),
+                          Point(left_hand.x + palm.x + palm.height - hand_padding, left_hand.y + palm.y + palm.width - hand_padding),
+                          Scalar(0, 255, 0), thickness, lineType);
+    else if (gest == 3)
+        rectangle (image, Point(0,0), Point(image.cols, image.rows),
+                   Scalar(0, 0, 255), 7, lineType);
+                   
+    imshow("Debug", image); waitKey(1);     
+}
+
 int getGest (Mat image) {
     int gest = 0;
-    // Find position of hand in image
+
+    // Find position of hand in image and check it is in image
     Point2f left_hand = getLeftHand();
-    // Gesture detectors
+    if (left_hand.x < 0 || left_hand.x > image.cols || left_hand.y < 0 || left_hand.y > image.rows)
+        return 0;
+        
+    // Preprocess image
     Mat gray;
     cvtColor( image, gray, CV_BGR2GRAY );
     equalizeHist( gray, gray );
+    // Gesture detectors
     Rect fist = fist_detector.detect(gray, left_hand, hand_padding, display);
     Rect palm = palm_detector.detect(gray, left_hand, hand_padding, display);
     // Head distance detection
@@ -58,17 +84,6 @@ int getGest (Mat image) {
                                + camera_head.at<double>(1,3) * camera_head.at<double>(1,3)
                                + camera_head.at<double>(2,3) * camera_head.at<double>(2,3);
     cout << "Camera/head distance: " << camera_head_distance << endl;
-
-    int thickness = 2;
-    int lineType = 8;
-    circle( image, left_hand, 5, Scalar( 0, 0, 255 ), -1, lineType );
-    rectangle (image, Point(left_hand.x + fist.x - hand_padding, left_hand.y + fist.y - hand_padding),
-                      Point(left_hand.x + fist.x + fist.height - hand_padding, left_hand.y + fist.y + fist.width - hand_padding),
-                      Scalar(255, 0, 0), thickness, lineType);
-    rectangle (image, Point(left_hand.x + palm.x - hand_padding, left_hand.y + palm.y - hand_padding),
-                      Point(left_hand.x + palm.x + palm.height - hand_padding, left_hand.y + palm.y + palm.width - hand_padding),
-                      Scalar(0, 255, 0), thickness, lineType);
-    imshow("Debug", image); waitKey(1);
 
     if (fist.area() && !palm.area())
         gest = 1; // fist only
@@ -79,7 +94,33 @@ int getGest (Mat image) {
         gest = 3;
     else
         gest = 0; // other
+
+    draw(image, gest, left_hand, fist, palm);
+    
     return gest;
+}
+
+// Cette fonction va regarder quel geste (0, 1, 2 ou 3) est le plus present dans
+// les N dernieres frames. Si il est present plus de Threshold fois, alors c'est
+// bien un gest qui est detecté.
+// De plus, 
+int antiReboundAndNoise (int gest, vector<int> list) {
+    int threshold = 50;
+    
+    vector<int>gests_count(4);
+    for (size_t i = 0; i < list.size(); ++i) {
+        gests_count[list[i]] += 1;
+    }
+    
+    int maj_gest = *max_element(gests_count.begin(), gests_count.end());
+    int percent = gests_count[maj_gest] / list.size() * 100;
+
+    
+
+    if (percent > threshold)
+        return maj_gest;
+    
+    return 0;
 }
 
 void cloud2rgbd(PointCloud<PointXYZRGB>::Ptr cloud, Mat &image, Mat &depth) {
@@ -111,6 +152,9 @@ void cloud_callback(const sensor_msgs::PointCloud2& msg) {
 	int start = cv::getTickCount();
 	int gest = getGest(image);
 	int end = cv::getTickCount();
+
+    list_gestes.push_back(gest);
+	
     cout << "Gest: " << gest << endl;
     float time_period = 1 / cv::getTickFrequency();
     ROS_INFO("Procesing time: %f s.", (end - start) * time_period);
@@ -121,7 +165,8 @@ void cloud_callback(const sensor_msgs::Image& msg) {
     mask;
 }
 */
-// rosrun hand_gestures hand_gestures /camera/depth_registered/points gest 0.7 1.2
+// Warning: launch openni.launch before pluging the kinect. Then plug the kinect.
+// rosrun hand_gestures hand_gestures /camera/depth_registered/points gest 1.2 1.5
 int main (int argc, char** argv) {
 	assert (argc == 5 && "Usage : hand_gesture in_registered_cloud_topic out_gesture_topic min_distance max_distance");
 	ros::init(argc, argv, "hand_gesture");
@@ -133,7 +178,7 @@ int main (int argc, char** argv) {
     listener = new tf::TransformListener();
 
     fist_detector.loadCascade("/home/gmanfred/devel/datasets/cascades/hands/fist/fist_best.xml");
-    palm_detector.loadCascade("/home/gmanfred/devel/datasets/cascades/hands/palm/palm.xml");
+    palm_detector.loadCascade("/home/gmanfred/devel/datasets/cascades/hands/palm/palm.xml"); // best ;)
 
     FileStorage fs("/home/gmanfred/.ros/camera_info/my_xtion.yml", FileStorage::READ);
     fs["camera_matrix"] >> K;
@@ -197,8 +242,8 @@ Point2f projectFrame2Image (Mat T) {
 }
 
 Point2f getLeftHand () {
-    Mat T = getTransform("/camera_rgb_optical_frame", "left_hand_1");
-    //Mat T = getTransform("/camera_rgb_optical_frame", "right_hand_1");
+    //Mat T = getTransform("/camera_rgb_optical_frame", "left_hand_1");
+    Mat T = getTransform("/camera_rgb_optical_frame", "right_hand_1");
     return projectFrame2Image(T);
 }
 

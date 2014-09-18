@@ -7,7 +7,7 @@
 using namespace std;
 using namespace cv;
 
-// cereal_box, food_bag, food_box, food_can, food_jar, instant_noodles, soda_can, toothpast, water_bottle
+// cereal_box, food_bag, food_box, food_can, instant_noodles, soda_can, toothpast
 
 // 570 for IR
 // 535 for RGB
@@ -162,16 +162,15 @@ void experiment_best_feature (string dataset_path, vector<string> classes) {
         compute(dataset_path, classes, static_cast<Feature>(ft), angles, static_cast<Feature>(ft));
 }
 
-void experiment_best_angles (string dataset_path, vector<string> classes) {
+void experiment_best_angles_features (string dataset_path, vector<string> classes) {
     // ASIFT -> FREAK
-    //for (int ft = 0; ft < 6; ++ft) {
-        Feature ft = eSURF;
+    for (int ft = 1; ft < 6; ++ft) {
         vector<int> angles(1);
         for (int angle = 0; angle < 360; angle += 9) {
             angles[0] = angle;
             compute(dataset_path, classes, static_cast<Feature>(ft), angles, angle);
         }
-    //}
+    }
 }
 
 void experiment_num_views (string dataset_path, vector<string> classes) {
@@ -193,16 +192,23 @@ void experiment_num_views (string dataset_path, vector<string> classes) {
 }
 
 int main() {
-    string dataset_path = "/home/gmanfred/devel/datasets/washington_rgbd/rgbd-dataset/";
+    string dataset_path = "/home/gmanfred/devel/datasets/washington_rgbd/light-rgbd-dataset/";
 
     vector<string> classes;
-    //classes.push_back("test_object");
+    classes.push_back("food_jar");
+    /*
     classes.push_back("cereal_box");
-    //classes.push_back("food_box");
-    //classes.push_back("food_jar");
+    classes.push_back("food_bag");
+    classes.push_back("food_box");
+    classes.push_back("food_can");
+    classes.push_back("instant_noodles");
+    classes.push_back("soda_can");
+    classes.push_back("toothpaste");
+    classes.push_back("water_bottle");
+    */
 
-    experiment_best_feature (dataset_path, classes);
-    //experiment_best_angles(dataset_path, classes);
+    //experiment_best_feature (dataset_path, classes);
+    experiment_best_angles_features(dataset_path, classes);
     //experiment_num_views (dataset_path, classes);
 
     /*
