@@ -29,7 +29,9 @@ tf::TransformListener* listener;
 HandSeg seg;
 HaarDetect fist_detector;
 HaarDetect palm_detector;
-vector<int> list_gestes;
+
+size_t N = 30;
+deque<int> last_gestes;
 
 Mat K (3, 3, CV_64F);
 Mat mask;
@@ -85,13 +87,14 @@ int getGest (Mat image) {
                                + camera_head.at<double>(2,3) * camera_head.at<double>(2,3);
     cout << "Camera/head distance: " << camera_head_distance << endl;
 
-    if (fist.area() && !palm.area())
+    // urgence first
+    if (camera_head_distance < min_distance
+        || camera_head_distance > max_distance)
+        gest = 3;
+    else if (fist.area() && !palm.area())
         gest = 1; // fist only
     else if (!fist.area() && palm.area())
         gest = 2; // palm only
-    else if (camera_head_distance < min_distance
-            || camera_head_distance > max_distance)
-        gest = 3;
     else
         gest = 0; // other
 
@@ -104,22 +107,34 @@ int getGest (Mat image) {
 // les N dernieres frames. Si il est present plus de Threshold fois, alors c'est
 // bien un gest qui est detecté.
 // De plus, 
-int antiReboundAndNoise (int gest, vector<int> list) {
-    int threshold = 50;
-    
+int smoothing (deque<int> list) {    
     vector<int>gests_count(4);
     for (size_t i = 0; i < list.size(); ++i) {
         gests_count[list[i]] += 1;
     }
     
-    int maj_gest = *max_element(gests_count.begin(), gests_count.end());
-    int percent = gests_count[maj_gest] / list.size() * 100;
+    int max = 0;
+    int max_idx = 0;
+    for (size_t i = 0; i < gests_count.size(); ++i) {
+        if ( gests_count[i] > max) {
+            max = gests_count[i];
+            max_idx = i;
+        }
+    }    
+    return max_idx;
+}
 
-    
-
-    if (percent > threshold)
-        return maj_gest;
-    
+int antiRebound (int gest, deque<int> list) {
+    int n = list.size();
+    int i = gest;
+    int j = list[n-1];
+    if (i == j) // pas de front
+        return 0;
+    else if (i == 0 && j != 0) // front descendant
+        return 0;
+    else if (i != 0 && j == 0) // front montant
+        return i;
+        
     return 0;
 }
 
@@ -142,20 +157,32 @@ void cloud2rgbd(PointCloud<PointXYZRGB>::Ptr cloud, Mat &image, Mat &depth) {
 void cloud_callback(const sensor_msgs::PointCloud2& msg) {
 	PointCloud<PointXYZRGB>::Ptr cloud (new PointCloud<PointXYZRGB>);
 	fromROSMsg (msg, *cloud);
-	
+
 	unsigned int h = cloud->height;
 	unsigned int w = cloud->width;
 	Mat image (h, w, CV_8UC3);
     Mat depth (h, w, CV_32FC3);
 	cloud2rgbd(cloud, image, depth);
-	
+
 	int start = cv::getTickCount();
-	int gest = getGest(image);
+	gest = getGest(image);
 	int end = cv::getTickCount();
 
-    list_gestes.push_back(gest);
-	
-    cout << "Gest: " << gest << endl;
+    last_gestes.push_back(gest);
+    if (last_gestes.size() > N)
+        last_gestes.pop_front();
+
+    int smooth_gest = smoothing(last_gestes);
+    int sparse_gest = antiRebound(smooth_gest, last_gestes);
+
+    /*
+    for (size_t i = 0; i < last_gestes.size(); ++i)
+        cout << last_gestes.at(i);
+    cout << endl;
+    */
+    cout << gest << " " << smooth_gest << " " << sparse_gest << endl;
+    gest = sparse_gest; 
+
     float time_period = 1 / cv::getTickFrequency();
     ROS_INFO("Procesing time: %f s.", (end - start) * time_period);
 }
@@ -166,7 +193,7 @@ void cloud_callback(const sensor_msgs::Image& msg) {
 }
 */
 // Warning: launch openni.launch before pluging the kinect. Then plug the kinect.
-// rosrun hand_gestures hand_gestures /camera/depth_registered/points gest 1.2 1.5
+// rosrun hand_gestures hand_gestures /camera/depth_registered/points gest 1.0 1.7
 int main (int argc, char** argv) {
 	assert (argc == 5 && "Usage : hand_gesture in_registered_cloud_topic out_gesture_topic min_distance max_distance");
 	ros::init(argc, argv, "hand_gesture");
@@ -187,12 +214,14 @@ int main (int argc, char** argv) {
     max_distance = atof(argv[4]);
 
     ros::Rate rate(30);
+    std_msgs::Int32 msg;
 	while (ros::ok()) {
         ros::spinOnce();
         
-        std_msgs::Int32 msg;
-        msg.data = gest;
-        gest_publisher.publish(msg);
+        if ( gest != 0 ) {
+            msg.data = gest;
+            gest_publisher.publish(msg);
+        }
         
         rate.sleep();
     }

@@ -20,7 +20,7 @@ int FilesManager::getFeatures() {
     return features_;
 }
 
-Object FilesManager::loadObject (string folder_path) {
+Object FilesManager::createObject (string folder_path) {
     Object object;
     boost::filesystem::path bf_folder_path(folder_path);
     if (is_directory(bf_folder_path)) {
@@ -70,6 +70,7 @@ Object FilesManager::loadObject (string folder_path) {
 
     }
 */
+    object.number_views_ = object.views_.size();
     return object;
 }
 

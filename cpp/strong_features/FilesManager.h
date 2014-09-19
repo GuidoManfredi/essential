@@ -16,7 +16,7 @@ class FilesManager {
     void setFeatures(Feature ft);
     int getFeatures();
     // Load the path to all .png and .txt for an object
-    Object loadObject(std::string folder_path);
+    Object createObject(std::string folder_path);
     int getNumFolders(std::string path);
 
   private:

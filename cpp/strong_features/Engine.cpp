@@ -136,6 +136,7 @@ vector<Error> Engine::getMean (vector<vector<Error> > errors) {
         for (size_t i = 0; i < num_objects; ++i) {
             if ( n < errors[i].size()) {
                 //if (errors[i][n].P_ > 100) cout << n << " " << i << " " << errors[i].size() << " " << errors[i][n].P_ <<endl;
+                cout << n << " " << i << " " << errors[i].size() << " " << errors[i][n].P_ <<endl;
                 mean[n].N_ += errors[i][n].N_;
                 mean[n].P_ += errors[i][n].P_;
                 mean[n].Rerr_ += errors[i][n].Rerr_;

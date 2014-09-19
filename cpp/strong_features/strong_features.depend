@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1410954857 source:/home/gmanfred/devel/essential/cpp/strong_features/Engine.cpp
+1411116994 source:/home/gmanfred/devel/essential/cpp/strong_features/Engine.cpp
 	"Engine.h"
 
 1410945654 /home/gmanfred/devel/essential/cpp/strong_features/Engine.h
@@ -17,19 +17,19 @@
 	"ASIFT/compute_asift_keypoints.h"
 	"ASIFT/compute_asift_matches.h"
 
-1410954097 /home/gmanfred/devel/essential/cpp/strong_features/Containers.h
+1411128787 /home/gmanfred/devel/essential/cpp/strong_features/Containers.h
 	<vector>
 	<opencv2/core/core.hpp>
 	<opencv2/features2d/features2d.hpp>
 	<opencv2/calib3d/calib3d.hpp>
-	"ASIFT/demo_lib_sift.h"
+	"Object.h"
 
-1410940169 source:/home/gmanfred/devel/essential/cpp/strong_features/FilesManager.cpp
+1411130181 source:/home/gmanfred/devel/essential/cpp/strong_features/FilesManager.cpp
 	"FilesManager.h"
 	<opencv2/highgui/highgui.hpp>
 	"alphanumComp.hpp"
 
-1410769692 /home/gmanfred/devel/essential/cpp/strong_features/FilesManager.h
+1411128706 /home/gmanfred/devel/essential/cpp/strong_features/FilesManager.h
 	<fstream>
 	<iostream>
 	<numeric>
@@ -44,7 +44,7 @@
 	<opencv2/nonfree/nonfree.hpp>
 	"Pipeline2D.h"
 
-1410954410 source:/home/gmanfred/devel/essential/cpp/strong_features/main.cpp
+1411128899 source:/home/gmanfred/devel/essential/cpp/strong_features/main.cpp
 	<iostream>
 	"FilesManager.h"
 	"Engine.h"
@@ -1502,4 +1502,21 @@
 1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT/third_party/Eigen/src/SVD/UpperBidiagonalization.h
 
 1408862368 /home/gmanfred/devel/essential/cpp/strong_features/ASIFT/third_party/Eigen/src/Eigen2Support/SVD.h
+
+1411118145 /home/gmanfred/devel/essential/cpp/strong_features/Object.h
+	"View.h"
+
+1411128791 /home/gmanfred/devel/essential/cpp/strong_features/View.h
+	<iostream>
+	<opencv2/core/core.hpp>
+	<opencv2/features2d/features2d.hpp>
+	<opencv2/calib3d/calib3d.hpp>
+	"ASIFT/demo_lib_sift.h"
+
+1411118140 source:/home/gmanfred/devel/essential/cpp/strong_features/Object.cpp
+	<iostream>
+	"Object.h"
+
+1411118485 source:/home/gmanfred/devel/essential/cpp/strong_features/View.cpp
+	"View.h"
 
