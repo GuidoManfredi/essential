@@ -11,7 +11,7 @@ enum Feature {eASIFT, eSIFT, eSURF, eORB, eFREAK, eBRISK}; // enum sift = eSIFT
 
 typedef struct cModel {
     cv::Mat descriptors_;
-    vector<vector<keypointslist> > keys_;
+    std::vector<std::vector<keypointslist> > keys_;
 } Model;
 /*
 typedef struct cView {

@@ -60,7 +60,11 @@ int Engine::match (vector<View> model_views, vector<View> object_views,
         int end = cv::getTickCount();
         float time_period = 1 / cv::getTickFrequency();
         errors[i].N_ = *max_element(number_matches.begin(), number_matches.end());
-        errors[i].P_ = static_cast<float>(errors[i].N_) / static_cast<float>(object_views[i].keypoints_.size()) * 100;
+        //cout << object_views[i].keypoints_.size() << endl;
+        if (object_views[i].keypoints_.size() == 0)
+            errors[i].P_ = 0;
+        else
+            errors[i].P_ = static_cast<float>(errors[i].N_) / static_cast<float>(object_views[i].keypoints_.size()) * 100;
         errors[i].Rerr_ = *min_element(rotation_error.begin(), rotation_error.end());
         errors[i].time_ = (end - start) * time_period;
         //cout << errors[i].time_ << endl;
@@ -72,7 +76,7 @@ int Engine::match (vector<View> model_views, vector<View> object_views,
 Model Engine::modelFromObject (Object object, vector<int> model_images) {
     Model model;
 
-    for (int i = 0; i < model_images.size(); ++i) {
+    for (size_t i = 0; i < model_images.size(); ++i) {
         int idx = model_images[i];
         if (i == 0)
             model.descriptors_ = object.views_[idx].descriptors_;
@@ -88,7 +92,7 @@ Object Engine::objectFromObject (Object object, vector<int> images) {
     Object res;
 
     res.views_.resize(images.size());
-    for (int i = 0; i < images.size(); ++i) {
+    for (size_t i = 0; i < images.size(); ++i) {
         int idx = images[i];
         //cout << object.views_[idx].descriptors_.rows << endl;
         res.views_[i] = object.views_[idx];
@@ -136,7 +140,7 @@ vector<Error> Engine::getMean (vector<vector<Error> > errors) {
         for (size_t i = 0; i < num_objects; ++i) {
             if ( n < errors[i].size()) {
                 //if (errors[i][n].P_ > 100) cout << n << " " << i << " " << errors[i].size() << " " << errors[i][n].P_ <<endl;
-                cout << n << " " << i << " " << errors[i].size() << " " << errors[i][n].P_ <<endl;
+                //cout << n << " " << i << " " << errors[i].size() << " " << errors[i][n].P_ <<endl;
                 mean[n].N_ += errors[i][n].N_;
                 mean[n].P_ += errors[i][n].P_;
                 mean[n].Rerr_ += errors[i][n].Rerr_;

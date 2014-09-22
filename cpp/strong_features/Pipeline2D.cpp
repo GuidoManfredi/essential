@@ -16,6 +16,8 @@ Pipeline2D::Pipeline2D(Mat K): K_(K) {
 }
 
 void Pipeline2D::setFeatures (Feature ft) {
+    features_type = ft;
+
     ASIFT_ = false;
     if (ft == eASIFT) {
         ASIFT_ = true;
@@ -48,6 +50,10 @@ void Pipeline2D::setFeatures (Feature ft) {
     } else {
         cout << "Error : setFeatures : Couldn't find specified feature" << endl;
     }
+}
+
+int Pipeline2D::getFeatures () {
+    return static_cast<int>(features_type);
 }
 
 void Pipeline2D::getGray(const cv::Mat& image, cv::Mat& gray) {
@@ -210,8 +216,12 @@ void Pipeline2D::get_matched_keypoint(vector<KeyPoint> keypoints1, vector<KeyPoi
     for (size_t i = 0; i < n; ++i) {
         int idx1 = matches[i].trainIdx;
         int idx2 = matches[i].queryIdx;
-        kpts1.push_back(keypoints1[idx1].pt);
-        kpts2.push_back(keypoints2[idx2].pt);
+        //int idx1 = matches[i].queryIdx;
+        //int idx2 = matches[i].trainIdx;
+        if (idx1 <= keypoints1.size() && idx2 <= keypoints2.size()) {
+            kpts1.push_back(keypoints1[idx1].pt);
+            kpts2.push_back(keypoints2[idx2].pt);
+        }
     }
 }
 

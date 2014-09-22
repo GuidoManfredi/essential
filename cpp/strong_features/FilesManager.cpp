@@ -71,6 +71,7 @@ Object FilesManager::createObject (string folder_path) {
     }
 */
     object.number_views_ = object.views_.size();
+    object.features_type_ = pipe2d_->getFeatures();
     return object;
 }
 

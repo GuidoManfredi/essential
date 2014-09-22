@@ -279,6 +279,8 @@
 		<Unit filename="Engine.h" />
 		<Unit filename="FilesManager.cpp" />
 		<Unit filename="FilesManager.h" />
+		<Unit filename="Modeler.cpp" />
+		<Unit filename="Modeler.h" />
 		<Unit filename="Object.cpp" />
 		<Unit filename="Object.h" />
 		<Unit filename="Pipeline2D.cpp" />

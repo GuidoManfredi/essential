@@ -15,6 +15,7 @@ class Pipeline2D {
   public:
     Pipeline2D (cv::Mat K);
     void setFeatures (Feature ft);
+    int getFeatures ();
     void getGray(const cv::Mat& image, cv::Mat& gray);
 
     void extractDescriptors(const cv::Mat& image, const cv::Mat& mask,
@@ -32,6 +33,7 @@ class Pipeline2D {
     cv::Ptr<cv::FeatureDetector>     detector_;
     cv::Ptr<cv::DescriptorExtractor> extractor_;
     cv::Ptr<cv::DescriptorMatcher>   matcher_;
+    Feature features_type;
     bool ASIFT_;
 
     void key2desc (std::vector<std::vector<keypointslist > > key, cv::Mat &desc);
