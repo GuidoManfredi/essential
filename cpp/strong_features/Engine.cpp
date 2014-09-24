@@ -118,12 +118,14 @@ int Engine::getIdxFromAngle (Object object, float angle, int tilt) {
             //imshow("Debug", object.views_[i].image_); waitKey(0);
             //cout << object.views_[i].angle_ << endl;
             float diff = fabs(object.views_[i].angle_ - angle);
+            //cout << object.views_[i].angle_ << " " << angle << " " << diff << endl;
             if (diff < min_diff) {
                 min_diff = diff;
                 min_idx = i;
             }
         }
     }
+    //cout << min_diff << endl;
     return min_idx;
 }
 

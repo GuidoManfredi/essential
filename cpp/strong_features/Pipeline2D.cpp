@@ -47,6 +47,11 @@ void Pipeline2D::setFeatures (Feature ft) {
         detector_ = new BRISK();
         extractor_ = new FREAK();
         matcher_ = new BFMatcher(cv::NORM_HAMMING, true);
+    } else if (ft == eBRIEF) {
+        cout << "Using BRIEFs. " << endl;
+        detector_ = new FastFeatureDetector();
+        extractor_ = new  BriefDescriptorExtractor();
+        matcher_ = new BFMatcher(cv::NORM_HAMMING, true);
     } else {
         cout << "Error : setFeatures : Couldn't find specified feature" << endl;
     }
@@ -138,15 +143,19 @@ float Pipeline2D::estimate_pose2 (vector<KeyPoint> keypoints1, vector<KeyPoint> 
     vector<Point2f> kpts1, kpts2;
     get_matched_keypoint(keypoints1, keypoints2, matches, kpts1, kpts2);
 
-    vector<uchar> mask;
-    Mat F = findFundamentalMat(kpts1, kpts2, CV_FM_RANSAC, 2.0, 0.99, mask);
-    //Mat F = findFundamentalMat(kpts1, kpts2, CV_FM_7POINT, 2.0, 0.99, mask);
+    if (kpts1.size() > 6 && kpts2.size() > 6) {
+        vector<uchar> mask;
+        Mat F = findFundamentalMat(kpts1, kpts2, CV_FM_RANSAC, 2.0, 0.99, mask);
+        //Mat F = findFundamentalMat(kpts1, kpts2, CV_FM_7POINT, 2.0, 0.99, mask);
 
-    vector<DMatch> tmp_matches;
-    for (size_t i = 0; i < mask.size(); ++i)
-        if(mask[i])
-            tmp_matches.push_back(matches[i]);
-    matches.swap(tmp_matches);
+        vector<DMatch> tmp_matches;
+        for (size_t i = 0; i < mask.size(); ++i)
+            if(mask[i])
+                tmp_matches.push_back(matches[i]);
+        matches.swap(tmp_matches);
+    } else {
+        matches.clear();
+    }
 
     return 0.0;
 }
@@ -214,14 +223,16 @@ void Pipeline2D::get_matched_keypoint(vector<KeyPoint> keypoints1, vector<KeyPoi
     kpts1.clear();
     kpts2.clear();
     for (size_t i = 0; i < n; ++i) {
-        int idx1 = matches[i].trainIdx;
-        int idx2 = matches[i].queryIdx;
-        //int idx1 = matches[i].queryIdx;
-        //int idx2 = matches[i].trainIdx;
-        if (idx1 <= keypoints1.size() && idx2 <= keypoints2.size()) {
+        //int idx1 = matches[i].trainIdx;
+        //int idx2 = matches[i].queryIdx;
+        int idx1 = matches[i].queryIdx;
+        int idx2 = matches[i].trainIdx;
+        if (idx1 > keypoints1.size() || idx2 > keypoints2.size())
+            cout << "Kikou!!" << endl;
+        //if (idx1 <= keypoints1.size() && idx2 <= keypoints2.size()) {
             kpts1.push_back(keypoints1[idx1].pt);
             kpts2.push_back(keypoints2[idx2].pt);
-        }
+        //}
     }
 }
 

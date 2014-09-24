@@ -7,7 +7,7 @@
 #include <sensor_msgs/Image.h>
 #include <sensor_msgs/image_encodings.h>
 
-#include "std_msgs/Int32.h"
+#include "std_msgs/Int8.h"
 
 #include <pcl_ros/point_cloud.h>
 #include <pcl/point_types.h>
@@ -30,8 +30,9 @@ HandSeg seg;
 HaarDetect fist_detector;
 HaarDetect palm_detector;
 
-size_t N = 30;
+size_t N = 10; // soft tourne entre 20 et 30 fps => entre 0,5s et 0.3s de temps de reaction
 deque<int> last_gestes;
+deque<int> smoothed_last_gestes;
 
 Mat K (3, 3, CV_64F);
 Mat mask;
@@ -105,10 +106,9 @@ int getGest (Mat image) {
 
 // Cette fonction va regarder quel geste (0, 1, 2 ou 3) est le plus present dans
 // les N dernieres frames. Si il est present plus de Threshold fois, alors c'est
-// bien un gest qui est detecté.
-// De plus, 
-int smoothing (deque<int> list) {    
-    vector<int>gests_count(4);
+// bien un geste qui est detecté.
+int smoothing (deque<int> list) {
+    vector<int> gests_count(4);
     for (size_t i = 0; i < list.size(); ++i) {
         gests_count[list[i]] += 1;
     }
@@ -120,21 +120,19 @@ int smoothing (deque<int> list) {
             max = gests_count[i];
             max_idx = i;
         }
-    }    
+    }
     return max_idx;
 }
 
-int antiRebound (int gest, deque<int> list) {
+int antiRebound (int smoothed_gest, deque<int> list) {
     int n = list.size();
-    int i = gest;
-    int j = list[n-1];
-    if (i == j) // pas de front
-        return 0;
-    else if (i == 0 && j != 0) // front descendant
-        return 0;
-    else if (i != 0 && j == 0) // front montant
+    if (n < 2) return 0;
+    
+    int i = smoothed_gest; // gest at time t
+    int j = list[n-2]; // n-1 is gest at time t, n-2 == gest at time t-1
+    if (i != j) // front montant
         return i;
-        
+    // sinon pas de front
     return 0;
 }
 
@@ -168,20 +166,28 @@ void cloud_callback(const sensor_msgs::PointCloud2& msg) {
 	gest = getGest(image);
 	int end = cv::getTickCount();
 
-    last_gestes.push_back(gest);
+    last_gestes.push_front(gest);
     if (last_gestes.size() > N)
-        last_gestes.pop_front();
+        last_gestes.pop_back();
 
     int smooth_gest = smoothing(last_gestes);
-    int sparse_gest = antiRebound(smooth_gest, last_gestes);
+    smoothed_last_gestes.push_front(smooth_gest);
+    if (smoothed_last_gestes.size() > N)
+        smoothed_last_gestes.pop_back();
+    
+    int sparse_gest = antiRebound(smooth_gest, smoothed_last_gestes);
+    gest = sparse_gest;
+    
 
-    /*
     for (size_t i = 0; i < last_gestes.size(); ++i)
-        cout << last_gestes.at(i);
+        cout << last_gestes[i];
     cout << endl;
-    */
+    for (size_t i = 0; i < last_gestes.size(); ++i)
+        cout << smoothed_last_gestes[i];
+    cout << endl;
+    
+    //gest = smooth_gest;
     cout << gest << " " << smooth_gest << " " << sparse_gest << endl;
-    gest = sparse_gest; 
 
     float time_period = 1 / cv::getTickFrequency();
     ROS_INFO("Procesing time: %f s.", (end - start) * time_period);
@@ -200,7 +206,7 @@ int main (int argc, char** argv) {
 	ros::NodeHandle n;
 	ros::Subscriber cloud_subscriber = n.subscribe(argv[1], 1, cloud_callback);
 	//ros::Subscriber cloud_subscriber = n.subscribe(argv[1], 1, user_callback);
-	ros::Publisher gest_publisher = n.advertise<std_msgs::Int32>(argv[2], 1);
+	ros::Publisher gest_publisher = n.advertise<std_msgs::Int8>(argv[2], 1);
 
     listener = new tf::TransformListener();
 
@@ -214,7 +220,7 @@ int main (int argc, char** argv) {
     max_distance = atof(argv[4]);
 
     ros::Rate rate(30);
-    std_msgs::Int32 msg;
+    std_msgs::Int8 msg;
 	while (ros::ok()) {
         ros::spinOnce();
         
@@ -231,11 +237,6 @@ int main (int argc, char** argv) {
 
 Mat transform2mat (tf::StampedTransform transform) {
     // Transform to camera optical frame
-    /*
-    double x = -transform.getOrigin().y();
-    double y = transform.getOrigin().z();
-    double z = transform.getOrigin().x();
-    */
     double x = transform.getOrigin().x();
     double y = transform.getOrigin().y();
     double z = transform.getOrigin().z();

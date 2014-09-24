@@ -7,7 +7,7 @@
 
 #include "Object.h"
 
-enum Feature {eASIFT, eSIFT, eSURF, eORB, eFREAK, eBRISK}; // enum sift = eSIFT
+enum Feature {eASIFT, eSIFT, eSURF, eORB, eFREAK, eBRISK, eBRIEF}; // enum sift = eSIFT
 
 typedef struct cModel {
     cv::Mat descriptors_;

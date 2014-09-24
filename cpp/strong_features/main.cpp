@@ -44,6 +44,10 @@ string feature2string (Feature ft) {
             feature = "BRISK";
             break;
         }
+        case 6: {
+            feature = "BRIEF";
+            break;
+        }
         default: {
             cout << "error: feature2string: invalide feature." << endl;
         }
@@ -100,7 +104,7 @@ void modelClass (string dataset_path, string class_name, string output_folder, F
 }
 
 void modelAll (string dataset_path, vector<string> class_names, string output_folder) {
-    for (int i = 1; i < 6; ++i) {
+    for (int i = 0; i < 7; ++i) {
         for (size_t n = 0; n < class_names.size(); ++n) {
             Feature ft = static_cast<Feature>(i);
             modelClass (dataset_path, class_names[n], output_folder, ft);
@@ -176,11 +180,11 @@ void computeAll(string dataset_path, vector<string> class_names, string objects_
 void experiment_best_feature (string dataset_path, vector<string> class_names, string objects_path) {
     vector<int> angles;
     angles.push_back(90);
-    angles.push_back(180);
+    //angles.push_back(180);
     angles.push_back(270);
 
     // SIFT -> BRISK
-    for (int ft = 1; ft < 6; ++ft)
+    for (int ft = 0; ft < 7; ++ft)
         computeAll(dataset_path, class_names, objects_path, angles, static_cast<Feature>(ft));
 }
 /*
@@ -219,18 +223,16 @@ int main() {
     string objects_path = "results/objects";
 
     vector<string> classes;
-    //classes.push_back("cereal_box");
+//    classes.push_back("cereal_box");
     classes.push_back("food_bag");
-    //classes.push_back("instant_noodles");
-    //classes.push_back("soda_can");
-
-    //classes.push_back("food_box");
-    /*
+/*
+    classes.push_back("instant_noodles");
+    classes.push_back("soda_can");
+    classes.push_back("food_box"); // TODO TEST AND FIX THIS ONE
     classes.push_back("food_can");
     classes.push_back("food_jar");
     classes.push_back("water_bottle");
-    */
-
+*/
     //Feature ft = eSIFT;
     //modelObject(dataset_path + "cereal_box", "cereal_box_1", objects_path, ft);
     //modelClass(dataset_path, "cereal_box", objects_path, ft);
@@ -246,6 +248,7 @@ int main() {
     for (size_t i = 0; i < errors[2].size(); ++i)
         cout << errors[2][i].P_ << endl;
     */
+
     experiment_best_feature (dataset_path, classes, objects_path);
     //experiment_best_angles_features(dataset_path, classes);
     //experiment_num_views (dataset_path, classes);

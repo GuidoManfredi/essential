@@ -22,6 +22,8 @@ void View::write(cv::FileStorage& fs) const {
     //cout << "Writing view" << endl;
     fs << "{" << "keypoints" << keypoints_
               << "descriptors" << descriptors_
+              << "tilt" << tilt_
+              << "angle" << angle_
               << "}";
 }
 
@@ -30,4 +32,6 @@ void View::read(const FileNode& node) {
     FileNode keypoints = node["keypoints"];
     cv::read(keypoints, keypoints_);
     node["descriptors"] >> descriptors_;
+    node["tilt"] >> tilt_;
+    node["angle"] >> angle_;
 }
