@@ -156,7 +156,7 @@ int computeClass (string dataset_path, string class_name, string objects_path, F
     return num_objects;
 }
 
-void computeAll(string dataset_path, vector<string> class_names, string objects_path, vector<int> angles, Feature feature) {
+void computeAll(string dataset_path, vector<string> class_names, string objects_path, vector<int> angles, Feature feature, int more) {
     cout << "Computing..." << endl;
     vector<Error> mean;
     float mean_size = 0.0;
@@ -170,7 +170,7 @@ void computeAll(string dataset_path, vector<string> class_names, string objects_
         mean_size = tmp_model_size / number_objects;
 
         std::stringstream ss;
-        ss << "results/" << class_names[n] << "_feature_" << feature << "_modelsize_" << angles.size();
+        ss << "results/" << class_names[n] << "_feature_" << feature << "_modelsize_" << angles.size() << "_" << more;
         string result_path = ss.str();
         engine.save(result_path, mean);
         engine.saveTimeSize(result_path + "_time_size.csv", mean[0].time_, mean_size);
@@ -185,24 +185,26 @@ void experiment_best_feature (string dataset_path, vector<string> class_names, s
 
     // SIFT -> BRISK
     for (int ft = 0; ft < 7; ++ft)
-        computeAll(dataset_path, class_names, objects_path, angles, static_cast<Feature>(ft));
+    //for (int ft = 0; ft < 1; ++ft)
+        computeAll(dataset_path, class_names, objects_path, angles, static_cast<Feature>(ft), 0);
 }
-/*
-void experiment_best_angles_features (string dataset_path, vector<string> classes) {
+
+void experiment_best_angles (string dataset_path, vector<string> class_names, string objects_path) {
     // ASIFT -> FREAK
-    for (int ft = 1; ft < 6; ++ft) {
-        vector<int> angles(1);
+    vector<int> angles(1);
+    //for (int ft = 0; ft < 7; ++ft) {
+    int ft = 5; {
         for (int angle = 0; angle < 360; angle += 9) {
             angles[0] = angle;
-            //compute(dataset_path, classes, static_cast<Feature>(ft), angles, angle);
+            cout << angle << endl;
+            computeAll(dataset_path, class_names, objects_path, angles, static_cast<Feature>(ft), angle);
         }
     }
 }
 
-void experiment_num_views (string dataset_path, vector<string> classes) {
-    //Feature ft = eBRISK;
-    //Feature ft = eSIFT;
-    Feature ft = eORB;
+void experiment_num_views (string dataset_path, vector<string> class_names, string objects_path) {
+    //Feature ft = eASIFT;
+    Feature ft = eSIFT;
 
     float step = 90.0;
     float factor = 2.0;
@@ -211,28 +213,27 @@ void experiment_num_views (string dataset_path, vector<string> classes) {
         for (int angle = 0; angle < 360; angle += step)
             angles.push_back(angle);
 
-        //compute(dataset_path, classes, ft, angles, step);
+        computeAll (dataset_path, class_names, objects_path, angles, ft, step);
 
         step = step / factor;
     }
 }
-*/
+
 int main() {
     //string dataset_path = "/home/gmanfred/devel/datasets/washington_rgbd/light-rgbd-dataset";
     string dataset_path = "/home/gmanfred/devel/datasets/washington_rgbd/rgbd-dataset";
     string objects_path = "results/objects";
 
     vector<string> classes;
-//    classes.push_back("cereal_box");
+    classes.push_back("cereal_box");
     classes.push_back("food_bag");
-/*
     classes.push_back("instant_noodles");
     classes.push_back("soda_can");
     classes.push_back("food_box"); // TODO TEST AND FIX THIS ONE
     classes.push_back("food_can");
     classes.push_back("food_jar");
     classes.push_back("water_bottle");
-*/
+
     //Feature ft = eSIFT;
     //modelObject(dataset_path + "cereal_box", "cereal_box_1", objects_path, ft);
     //modelClass(dataset_path, "cereal_box", objects_path, ft);
@@ -249,9 +250,9 @@ int main() {
         cout << errors[2][i].P_ << endl;
     */
 
-    experiment_best_feature (dataset_path, classes, objects_path);
-    //experiment_best_angles_features(dataset_path, classes);
-    //experiment_num_views (dataset_path, classes);
+    //experiment_best_feature (dataset_path, classes, objects_path);
+    //experiment_best_angles (dataset_path, classes, objects_path);
+    experiment_num_views (dataset_path, classes, objects_path);
 
     return 0;
 }
