@@ -39,10 +39,10 @@ RM = /usr/bin/cmake -E remove -f
 CMAKE_EDIT_COMMAND = /usr/bin/ccmake
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/gmanfred/devel/ros/my_packs/opencv_util/opencv_display
+CMAKE_SOURCE_DIR = /home/gmanfred/devel/essential/ros/opencv_util/opencv_display
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/gmanfred/devel/ros/my_packs/opencv_util/opencv_display/build
+CMAKE_BINARY_DIR = /home/gmanfred/devel/essential/ros/opencv_util/opencv_display/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -110,9 +110,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/gmanfred/devel/ros/my_packs/opencv_util/opencv_display/build/CMakeFiles /home/gmanfred/devel/ros/my_packs/opencv_util/opencv_display/build/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/gmanfred/devel/essential/ros/opencv_util/opencv_display/build/CMakeFiles /home/gmanfred/devel/essential/ros/opencv_util/opencv_display/build/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/gmanfred/devel/ros/my_packs/opencv_util/opencv_display/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/gmanfred/devel/essential/ros/opencv_util/opencv_display/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -361,6 +361,19 @@ run_tests/fast:
 .PHONY : run_tests/fast
 
 #=============================================================================
+# Target rules for targets named static_single_pose
+
+# Build rule for target.
+static_single_pose: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 static_single_pose
+.PHONY : static_single_pose
+
+# fast build rule for target.
+static_single_pose/fast:
+	$(MAKE) -f CMakeFiles/static_single_pose.dir/build.make CMakeFiles/static_single_pose.dir/build
+.PHONY : static_single_pose/fast
+
+#=============================================================================
 # Target rules for targets named test
 
 # Build rule for target.
@@ -457,6 +470,7 @@ src/Visualizer.o: src/Visualizer.cc.o
 # target to build an object file
 src/Visualizer.cc.o:
 	$(MAKE) -f CMakeFiles/display_poses.dir/build.make CMakeFiles/display_poses.dir/src/Visualizer.cc.o
+	$(MAKE) -f CMakeFiles/static_single_pose.dir/build.make CMakeFiles/static_single_pose.dir/src/Visualizer.cc.o
 .PHONY : src/Visualizer.cc.o
 
 src/Visualizer.i: src/Visualizer.cc.i
@@ -465,6 +479,7 @@ src/Visualizer.i: src/Visualizer.cc.i
 # target to preprocess a source file
 src/Visualizer.cc.i:
 	$(MAKE) -f CMakeFiles/display_poses.dir/build.make CMakeFiles/display_poses.dir/src/Visualizer.cc.i
+	$(MAKE) -f CMakeFiles/static_single_pose.dir/build.make CMakeFiles/static_single_pose.dir/src/Visualizer.cc.i
 .PHONY : src/Visualizer.cc.i
 
 src/Visualizer.s: src/Visualizer.cc.s
@@ -473,6 +488,7 @@ src/Visualizer.s: src/Visualizer.cc.s
 # target to generate assembly for a file
 src/Visualizer.cc.s:
 	$(MAKE) -f CMakeFiles/display_poses.dir/build.make CMakeFiles/display_poses.dir/src/Visualizer.cc.s
+	$(MAKE) -f CMakeFiles/static_single_pose.dir/build.make CMakeFiles/static_single_pose.dir/src/Visualizer.cc.s
 .PHONY : src/Visualizer.cc.s
 
 src/display_poses.o: src/display_poses.cc.o
@@ -498,6 +514,30 @@ src/display_poses.s: src/display_poses.cc.s
 src/display_poses.cc.s:
 	$(MAKE) -f CMakeFiles/display_poses.dir/build.make CMakeFiles/display_poses.dir/src/display_poses.cc.s
 .PHONY : src/display_poses.cc.s
+
+src/static_single_pose.o: src/static_single_pose.cc.o
+.PHONY : src/static_single_pose.o
+
+# target to build an object file
+src/static_single_pose.cc.o:
+	$(MAKE) -f CMakeFiles/static_single_pose.dir/build.make CMakeFiles/static_single_pose.dir/src/static_single_pose.cc.o
+.PHONY : src/static_single_pose.cc.o
+
+src/static_single_pose.i: src/static_single_pose.cc.i
+.PHONY : src/static_single_pose.i
+
+# target to preprocess a source file
+src/static_single_pose.cc.i:
+	$(MAKE) -f CMakeFiles/static_single_pose.dir/build.make CMakeFiles/static_single_pose.dir/src/static_single_pose.cc.i
+.PHONY : src/static_single_pose.cc.i
+
+src/static_single_pose.s: src/static_single_pose.cc.s
+.PHONY : src/static_single_pose.s
+
+# target to generate assembly for a file
+src/static_single_pose.cc.s:
+	$(MAKE) -f CMakeFiles/static_single_pose.dir/build.make CMakeFiles/static_single_pose.dir/src/static_single_pose.cc.s
+.PHONY : src/static_single_pose.cc.s
 
 # Help Target
 help:
@@ -528,6 +568,7 @@ help:
 	@echo "... rospack_genmsg_libexe"
 	@echo "... rospack_gensrv"
 	@echo "... run_tests"
+	@echo "... static_single_pose"
 	@echo "... test"
 	@echo "... test-future"
 	@echo "... test-results"
@@ -541,6 +582,9 @@ help:
 	@echo "... src/display_poses.o"
 	@echo "... src/display_poses.i"
 	@echo "... src/display_poses.s"
+	@echo "... src/static_single_pose.o"
+	@echo "... src/static_single_pose.i"
+	@echo "... src/static_single_pose.s"
 .PHONY : help
 
 

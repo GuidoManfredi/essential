@@ -35,10 +35,10 @@ RM = /usr/bin/cmake -E remove -f
 CMAKE_EDIT_COMMAND = /usr/bin/ccmake
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/gmanfred/devel/ros/my_packs/opencv_util/opencv_display
+CMAKE_SOURCE_DIR = /home/gmanfred/devel/essential/ros/opencv_util/opencv_display
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/gmanfred/devel/ros/my_packs/opencv_util/opencv_display/build
+CMAKE_BINARY_DIR = /home/gmanfred/devel/essential/ros/opencv_util/opencv_display/build
 
 # Utility rule file for ROSBUILD_gensrv_lisp.
 
@@ -60,6 +60,6 @@ CMakeFiles/ROSBUILD_gensrv_lisp.dir/clean:
 .PHONY : CMakeFiles/ROSBUILD_gensrv_lisp.dir/clean
 
 CMakeFiles/ROSBUILD_gensrv_lisp.dir/depend:
-	cd /home/gmanfred/devel/ros/my_packs/opencv_util/opencv_display/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/gmanfred/devel/ros/my_packs/opencv_util/opencv_display /home/gmanfred/devel/ros/my_packs/opencv_util/opencv_display /home/gmanfred/devel/ros/my_packs/opencv_util/opencv_display/build /home/gmanfred/devel/ros/my_packs/opencv_util/opencv_display/build /home/gmanfred/devel/ros/my_packs/opencv_util/opencv_display/build/CMakeFiles/ROSBUILD_gensrv_lisp.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/gmanfred/devel/essential/ros/opencv_util/opencv_display/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/gmanfred/devel/essential/ros/opencv_util/opencv_display /home/gmanfred/devel/essential/ros/opencv_util/opencv_display /home/gmanfred/devel/essential/ros/opencv_util/opencv_display/build /home/gmanfred/devel/essential/ros/opencv_util/opencv_display/build /home/gmanfred/devel/essential/ros/opencv_util/opencv_display/build/CMakeFiles/ROSBUILD_gensrv_lisp.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/ROSBUILD_gensrv_lisp.dir/depend
 

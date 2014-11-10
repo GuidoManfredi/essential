@@ -8,7 +8,7 @@
 
 # since this file is sourced either use the provided _CATKIN_SETUP_DIR
 # or fall back to the destination set at configure time
-: ${_CATKIN_SETUP_DIR:=/home/gmanfred/devel/ros/my_packs/opencv_util/opencv_display/build/devel}
+: ${_CATKIN_SETUP_DIR:=/home/gmanfred/devel/essential/ros/opencv_util/opencv_display/build/devel}
 _SETUP_UTIL="$_CATKIN_SETUP_DIR/_setup_util.py"
 unset _CATKIN_SETUP_DIR
 

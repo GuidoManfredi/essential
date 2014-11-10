@@ -1,0 +1,17 @@
+<package>
+  <description brief="perfect_model">
+
+     perfect_model
+
+  </description>
+  <author>Guido ManfrediInconnuInconnu0561336342</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/perfect_model</url>
+  <depend package="rospy"/>
+  <depend package="opencv2"/>
+  <depend package="pysom"/>
+
+</package>
+
+

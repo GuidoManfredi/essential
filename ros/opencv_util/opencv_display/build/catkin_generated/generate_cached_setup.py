@@ -18,9 +18,9 @@ except ImportError:
             break
     from catkin.environment_cache import generate_environment_script
 
-code = generate_environment_script('/home/gmanfred/devel/ros/my_packs/opencv_util/opencv_display/build/devel/env.sh')
+code = generate_environment_script('/home/gmanfred/devel/essential/ros/opencv_util/opencv_display/build/devel/env.sh')
 
-output_filename = '/home/gmanfred/devel/ros/my_packs/opencv_util/opencv_display/build/catkin_generated/setup_cached.sh'
+output_filename = '/home/gmanfred/devel/essential/ros/opencv_util/opencv_display/build/catkin_generated/setup_cached.sh'
 with open(output_filename, 'w') as f:
     #print('Generate script for cached setup "%s"' % output_filename)
     f.write('\n'.join(code))

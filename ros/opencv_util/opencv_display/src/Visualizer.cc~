@@ -28,6 +28,7 @@ Visualizer::Visualizer(std::string windowName, Size frame_size, const Mat K)
   cv::resizeWindow(windowName, frame_size.width, frame_size.height);
   width_ = frame_size.width;
   height_ = frame_size.height;
+  
 
   // Initialize OpenGL draw callback
   setOpenGlContext(windowName);

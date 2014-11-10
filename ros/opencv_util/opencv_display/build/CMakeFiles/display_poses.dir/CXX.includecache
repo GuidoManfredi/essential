@@ -28,7 +28,15 @@ ros/macros.h
 ros/assert.h
 ../msg_gen/cpp/include/opencv_display/ros/assert.h
 
-/home/gmanfred/devel/ros/my_packs/opencv_util/opencv_display/src/Visualizer.h
+/home/gmanfred/devel/essential/ros/opencv_util/opencv_display/src/Visualizer.cc
+GL/gl.h
+-
+GL/glu.h
+-
+Visualizer.h
+/home/gmanfred/devel/essential/ros/opencv_util/opencv_display/src/Visualizer.h
+
+/home/gmanfred/devel/essential/ros/opencv_util/opencv_display/src/Visualizer.h
 string
 -
 opencv2/core/core.hpp
@@ -36,7 +44,7 @@ opencv2/core/core.hpp
 opencv2/highgui/highgui.hpp
 -
 
-/home/gmanfred/devel/ros/my_packs/opencv_util/opencv_display/src/display_poses.cc
+/home/gmanfred/devel/essential/ros/opencv_util/opencv_display/src/display_poses.cc
 iostream
 -
 ros/ros.h
@@ -50,9 +58,9 @@ sensor_msgs/Image.h
 sensor_msgs/image_encodings.h
 -
 opencv_display/LocaPose.h
-/home/gmanfred/devel/ros/my_packs/opencv_util/opencv_display/src/opencv_display/LocaPose.h
+/home/gmanfred/devel/essential/ros/opencv_util/opencv_display/src/opencv_display/LocaPose.h
 Visualizer.h
-/home/gmanfred/devel/ros/my_packs/opencv_util/opencv_display/src/Visualizer.h
+/home/gmanfred/devel/essential/ros/opencv_util/opencv_display/src/Visualizer.h
 
 /opt/ros/hydro/include/XmlRpcDecl.h
 ros/macros.h

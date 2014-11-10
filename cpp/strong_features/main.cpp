@@ -203,8 +203,8 @@ void experiment_best_angles (string dataset_path, vector<string> class_names, st
 }
 
 void experiment_num_views (string dataset_path, vector<string> class_names, string objects_path) {
-    //Feature ft = eASIFT;
-    Feature ft = eSIFT;
+    Feature ft = eASIFT;
+    //Feature ft = eSIFT;
 
     float step = 90.0;
     float factor = 2.0;
@@ -212,7 +212,7 @@ void experiment_num_views (string dataset_path, vector<string> class_names, stri
         vector<int> angles;
         for (int angle = 0; angle < 360; angle += step)
             angles.push_back(angle);
-
+        cout << angles.size() << endl;
         computeAll (dataset_path, class_names, objects_path, angles, ft, step);
 
         step = step / factor;
@@ -225,11 +225,12 @@ int main() {
     string objects_path = "results/objects";
 
     vector<string> classes;
-    classes.push_back("cereal_box");
+    //classes.push_back("cereal_box");
+
     classes.push_back("food_bag");
     classes.push_back("instant_noodles");
     classes.push_back("soda_can");
-    classes.push_back("food_box"); // TODO TEST AND FIX THIS ONE
+    classes.push_back("food_box");
     classes.push_back("food_can");
     classes.push_back("food_jar");
     classes.push_back("water_bottle");

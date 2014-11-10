@@ -1,5 +1,5 @@
 <package>
-  <description brief="opencv_visualization">
+  <description brief="opencv_display">
 
      opencv_visualization
 
@@ -9,13 +9,11 @@
   <review status="unreviewed" notes=""/>
   <url>http://ros.org/wiki/opencv_display</url>
 	<depend package="roscpp"/>
-	<depend package="opencv2"/>
 	<depend package="std_msgs"/>
 	<depend package="sensor_msgs"/>	
 	<depend package="image_transport"/>
 	<depend package="cv_bridge"/>
-	<depend package="segment_plans_objects"/>
-
+	<depend package="opencv2"/>
 </package>
 
 
