@@ -1,0 +1,16 @@
+<package>
+  <description brief="visual_slam">
+
+     visual_slam
+
+  </description>
+  <author>Guido ManfrediInconnuInconnu0561336342</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/visual_slam</url>
+  <depend package="opencv2"/>
+  <depend package="rospy"/>
+
+</package>
+
+
