@@ -1,26 +1,39 @@
 #!/usr/bin/env python
 
+from frame import Frame
+from object import Object
+from pipeline_frame import PipelineFrame
+
 class Modeler:
     def __init__(self):
         self.pf = PipelineFrame()
         self.object = Object()
-        self.inliers_threshold = 0.0
+        self.inliers_threshold = 100.0
     
-    def process(self, image):
-        frame = self.pf.create_frame(image)
+    def process(self, image, xyz=[], show_debug=False):
+        frame = self.pf.create_frame(image, xyz)
+        self.process_frame(frame)
+        
+    def process_frame(self, frame):
         # First frame
         if len(self.object.keyframes) == 0:
             self.object.add_keyframe(frame)
+            self.previous_frame = frame
             return
+        
         # Match frame with object
         num_inliers = self.pf.match(frame, self.object)
-        # Need new frame ?
+        print "Got " + str(num_inliers) + " inliers."
+        print "Object has " + str(len(self.object.p3ds)) + " p3ds."
+        
+        # Need new keyframe ?
         if num_inliers < self.inliers_threshold:
             self.pf.motion(self.previous_frame, self.object)
+            if len(self.previous_frame.p3ds) == 0: # no depth sensor, triangulation needed
+                self.pf.structure(self.previous_frame, self.object)
             self.object.add_keyframe(self.previous_frame)
+            print "Adding new keyframe."
+        
         # Save frame
         self.previous_frame = frame
-        
-
-    
 
