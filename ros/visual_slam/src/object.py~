@@ -26,10 +26,9 @@ class Object:
         self.kpts = self.kpts + frame.kpts
         self.descs = np.concatenate((self.descs, frame.descs), 0)
         self.p2ds = np.concatenate((self.p2ds, frame.p2ds), 0)
-        self.p3ds = np.concatenate((self.p3ds, frame.p3ds), 0)
-        
         # multiply structure by transform to express it in first frame
         frame.p3ds = tools.transform(frame.p3ds, np.linalg.inv(frame.T))
+        self.p3ds = np.concatenate((self.p3ds, frame.p3ds), 0)
         
         self.keyframes.append(frame)
         
@@ -38,4 +37,4 @@ class Object:
         return Ts
         
     def get_structure(self):
-        return out
+        return self.p3ds

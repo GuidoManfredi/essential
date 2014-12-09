@@ -42,6 +42,8 @@ class PipelineFrame:
         frame.set_matches(inliers)
         frame.set_motion(T)
         
+        return len(inliers)
+        
     def structure(self, frame, obj):
         p2ds_frame, p2ds_object = self.aligned_2d2d_points(frame.kpts, obj.kpts, frame.matches)
         structure = self.pg.triangulate(p2ds_frame, p2ds_object)

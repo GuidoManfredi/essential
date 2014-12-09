@@ -15,23 +15,24 @@ class Modeler:
     
     def process(self, image, xyz=[], show_debug=False):
         frame = self.pf.create_frame(image, xyz)
-        self.process_frame(frame)
+        return self.process_frame(frame)
         
     def process_frame(self, frame):
         # First frame
         if len(self.object.keyframes) == 0:
             self.object.add_keyframe(frame)
             self.previous_frame = frame
-            return
+            return frame.T
         
         # Match frame with object
         num_inliers = self.pf.match(frame, self.object)
+        num_inliers = self.pf.motion(frame, self.object)
         print "Frame " + str(frame.id) + " has " + str(num_inliers) + " inliers."
         
         # Need new keyframe ?
         if num_inliers < self.inliers_threshold:
             print "Object has " + str(len(self.object.p3ds)) + " p3ds."
-            self.pf.motion(self.previous_frame, self.object)
+            #num_inliers = self.pf.motion(self.previous_frame, self.object)
             if len(self.previous_frame.p3ds) == 0: # no depth sensor, triangulation needed
                 self.pf.structure(self.previous_frame, self.object)
             self.object.add_keyframe(self.previous_frame)
@@ -39,6 +40,8 @@ class Modeler:
         
         # Save frame
         self.previous_frame = frame
+        
+        return frame.T
 
     def getT(self):
         return self.object.getT()

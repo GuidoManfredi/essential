@@ -33,14 +33,17 @@ class PipelineFrame:
         return len(matches)
     
     def motion(self, frame, obj):
-        print "Object has " + str(len(obj.p3ds)) + " p3ds."
+        #print "Object has " + str(len(obj.p3ds)) + " p3ds."
         T = np.empty((3,4), np.float32)
         
         p2ds, p3ds = tools.aligned_2d3d_points(frame.kpts, obj.p3ds, frame.matches)
         inliers, T = self.pg.image_to_structure(p3ds, p2ds)
         
+        print T
         frame.set_matches(inliers)
         frame.set_motion(T)
+        
+        return len(inliers)
         
     def structure(self, frame, obj):
         p2ds_frame, p2ds_object = self.aligned_2d2d_points(frame.kpts, obj.kpts, frame.matches)
