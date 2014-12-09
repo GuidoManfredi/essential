@@ -8,14 +8,15 @@ import tools
 
 class PipelineGeometric:
     def __init__(self):
+        self.K = None
         self.d = None
         
-    def set_intrinsic(self, intrinsic, distortion):
-        self.K = intrinsic
-        self.invK = np.linalg.inv(intrinsic)
+    def set_calibration(self, intrinsic, distortion):
+        self.K = np.reshape(intrinsic, (3,3))
+        self.invK = np.linalg.inv(self.K)
         self.d = distortion
         
-    def image_to_structure(self, p2ds, p3ds):
+    def image_to_structure(self, p3ds, p2ds):
         r, t, inliers = cv2.solvePnPRansac(p3ds, p2ds, self.K, self.d)
         R, jacobian = cv2.Rodrigues(r)
         return inliers, tools.Rt2P(R, t)

@@ -3,7 +3,7 @@
 import numpy as np
 
 from pipeline_image import PipelineImage
-from pipeline_geometric3 import PipelineGeometric
+from pipeline_geometric import PipelineGeometric
 from frame import Frame
 import tools
 
@@ -13,6 +13,9 @@ class PipelineFrame:
         self.pg = PipelineGeometric()
         self.frame_id = 0
     
+    def set_calibration(self, intrinsic, distortion):
+        self.pg.set_calibration(intrinsic, distortion)
+    
     def create_frame(self, image, xyz=[]):
         mask = self.pi.createMask(xyz)
         kpts, descs = self.pi.features(image, mask)
@@ -20,7 +23,7 @@ class PipelineFrame:
         frame = Frame(self.frame_id, kpts, descs, p3ds)
 
         self.frame_id = self.frame_id + 1
-        print "New frame with " + str(len(kpts)) + " points."
+        #print "New frame with " + str(len(kpts)) + " points."
         #print "Got " + str(len(p3ds)) + " p3ds."
         return frame
     
@@ -34,7 +37,7 @@ class PipelineFrame:
         T = np.empty((3,4), np.float32)
         
         p2ds, p3ds = tools.aligned_2d3d_points(frame.kpts, obj.p3ds, frame.matches)
-        inliers, T = self.pg.image_to_structure(frame.p2ds, obj.p3ds)
+        inliers, T = self.pg.image_to_structure(p3ds, p2ds)
         
         frame.set_matches(inliers)
         frame.set_motion(T)
