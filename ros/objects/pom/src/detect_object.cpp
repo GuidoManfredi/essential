@@ -68,7 +68,8 @@ void image_callback(const sensor_msgs::ImageConstPtr& msg) {
 }
 
 // rosrun pom detect_object images intrinsic objects_list.txt
-// rosrun opencv_display display_poses /camera/rgb/image_rect_color /camera/rgb/camera_info pose
+// rosrun pom detect_object /camera/rgb/image_rect_color /camera/rgb/camera_info objects_list.txt
+// rosrun opencv_display display_poses /camera/rgb/image_rect_color pose
 int main (int argc, char** argv) {
 	assert (argc == 4 && "Usage : detect_object in_image_topic in_intrisic_topic objects_list");
 	ros::init(argc, argv, "pom");
@@ -94,19 +95,21 @@ void broadcastPoses (vector<Mat> Ps) {
     for (size_t i = 0; i < Ps.size(); ++i) {
         tf::Transform transform = mat2msg(Ps[i]);
         string object_name = names[i];
-        //cout << "broadcast " << names[i] << endl;
-        //br[i].sendTransform(tf::StampedTransform(transform, ros::Time::now(), object_name, "world"));
-        br[i].sendTransform(tf::StampedTransform(transform, ros::Time::now(), "world", object_name));
+        cout << "Broadcasting " << names[i] << endl;
+        //br[i].sendTransform(tf::StampedTransform(transform, ros::Time::now(), object_name, "narrow_stereo_l_stereo_camera_frame"));
+        br[i].sendTransform(tf::StampedTransform(transform, ros::Time::now(), "narrow_stereo_l_stereo_camera_optical_frame", object_name));
     }
-}
-  
+} 
 
 tf::Transform mat2msg (Mat P) {
+    cout << P << endl;
     Mat cvR = P(Rect(0,0,3,3));
+    cout << cvR << endl;
     tf::Matrix3x3 R = cvR2tfR(cvR);
     //tf::Vector3 t(P.at<float>(0, 3), P.at<float>(1, 3), P.at<float>(2, 3));
     tf::Vector3 t(P.at<float>(0, 3)/1000, P.at<float>(1, 3)/1000, P.at<float>(2, 3)/1000);
     return tf::Transform(R, t);
+    //return tf::Transform(R.transpose(), t);
 }
 
 tf::Matrix3x3 cvR2tfR(cv::Mat cv) {
@@ -114,7 +117,6 @@ tf::Matrix3x3 cvR2tfR(cv::Mat cv) {
                           cv.at<float>(1,0), cv.at<float>(1,1), cv.at<float>(1,2),
                           cv.at<float>(2,0), cv.at<float>(2,1), cv.at<float>(2,2));
 }
-
 
 cv::Mat rosK2cvK(double fx, double fy, double cx, double cy) {
     return (Mat_<double>(3,3) << fx,  0, cx,
