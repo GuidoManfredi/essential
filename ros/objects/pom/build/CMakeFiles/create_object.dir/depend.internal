@@ -4,29 +4,29 @@
 CMakeFiles/create_object.dir/pom/FilesManager.cpp.o
  /home/gmanfred/devel/essential/ros/objects/pom/pom/FilesManager.cpp
  /home/gmanfred/devel/essential/ros/objects/pom/pom/FilesManager.h
- /opt/ros/groovy/include/opencv2/core/core.hpp
- /opt/ros/groovy/include/opencv2/core/core_c.h
- /opt/ros/groovy/include/opencv2/core/mat.hpp
- /opt/ros/groovy/include/opencv2/core/operations.hpp
- /opt/ros/groovy/include/opencv2/core/types_c.h
- /opt/ros/groovy/include/opencv2/core/version.hpp
- /opt/ros/groovy/include/opencv2/highgui/highgui.hpp
- /opt/ros/groovy/include/opencv2/highgui/highgui_c.h
+ /opt/ros/hydro/include/opencv2/core/core.hpp
+ /opt/ros/hydro/include/opencv2/core/core_c.h
+ /opt/ros/hydro/include/opencv2/core/mat.hpp
+ /opt/ros/hydro/include/opencv2/core/operations.hpp
+ /opt/ros/hydro/include/opencv2/core/types_c.h
+ /opt/ros/hydro/include/opencv2/core/version.hpp
+ /opt/ros/hydro/include/opencv2/highgui/highgui.hpp
+ /opt/ros/hydro/include/opencv2/highgui/highgui_c.h
 CMakeFiles/create_object.dir/pom/Object.cpp.o
  /home/gmanfred/devel/essential/ros/objects/pom/pom/Object.cpp
  /home/gmanfred/devel/essential/ros/objects/pom/pom/Object.h
  /home/gmanfred/devel/essential/ros/objects/pom/pom/View.h
  /home/gmanfred/devel/essential/ros/objects/pom/pom/commons.h
- /opt/ros/groovy/include/opencv2/calib3d/calib3d.hpp
- /opt/ros/groovy/include/opencv2/core/core.hpp
- /opt/ros/groovy/include/opencv2/core/mat.hpp
- /opt/ros/groovy/include/opencv2/core/operations.hpp
- /opt/ros/groovy/include/opencv2/core/types_c.h
- /opt/ros/groovy/include/opencv2/core/version.hpp
- /opt/ros/groovy/include/opencv2/features2d/features2d.hpp
- /opt/ros/groovy/include/opencv2/flann/config.h
- /opt/ros/groovy/include/opencv2/flann/defines.h
- /opt/ros/groovy/include/opencv2/flann/miniflann.hpp
+ /opt/ros/hydro/include/opencv2/calib3d/calib3d.hpp
+ /opt/ros/hydro/include/opencv2/core/core.hpp
+ /opt/ros/hydro/include/opencv2/core/mat.hpp
+ /opt/ros/hydro/include/opencv2/core/operations.hpp
+ /opt/ros/hydro/include/opencv2/core/types_c.h
+ /opt/ros/hydro/include/opencv2/core/version.hpp
+ /opt/ros/hydro/include/opencv2/features2d/features2d.hpp
+ /opt/ros/hydro/include/opencv2/flann/config.h
+ /opt/ros/hydro/include/opencv2/flann/defines.h
+ /opt/ros/hydro/include/opencv2/flann/miniflann.hpp
 CMakeFiles/create_object.dir/pom/POM.cpp.o
  /home/gmanfred/devel/essential/ros/objects/pom/pom/Object.h
  /home/gmanfred/devel/essential/ros/objects/pom/pom/POM.cpp
@@ -35,69 +35,23 @@ CMakeFiles/create_object.dir/pom/POM.cpp.o
  /home/gmanfred/devel/essential/ros/objects/pom/pom/View.h
  /home/gmanfred/devel/essential/ros/objects/pom/pom/commons.h
  /home/gmanfred/devel/sandbox/SiftGPU/src/SiftGPU/SiftGPU.h
- /opt/ros/groovy/include/opencv2/calib3d/calib3d.hpp
- /opt/ros/groovy/include/opencv2/core/core.hpp
- /opt/ros/groovy/include/opencv2/core/core_c.h
- /opt/ros/groovy/include/opencv2/core/mat.hpp
- /opt/ros/groovy/include/opencv2/core/operations.hpp
- /opt/ros/groovy/include/opencv2/core/types_c.h
- /opt/ros/groovy/include/opencv2/core/version.hpp
- /opt/ros/groovy/include/opencv2/features2d/features2d.hpp
- /opt/ros/groovy/include/opencv2/flann/config.h
- /opt/ros/groovy/include/opencv2/flann/defines.h
- /opt/ros/groovy/include/opencv2/flann/miniflann.hpp
- /opt/ros/groovy/include/opencv2/highgui/highgui.hpp
- /opt/ros/groovy/include/opencv2/highgui/highgui_c.h
- /opt/ros/groovy/include/opencv2/imgproc/imgproc.hpp
- /opt/ros/groovy/include/opencv2/imgproc/types_c.h
- /opt/ros/groovy/include/pcl-1.6/pcl/channel_properties.h
- /opt/ros/groovy/include/pcl-1.6/pcl/cloud_properties.h
- /opt/ros/groovy/include/pcl-1.6/pcl/common/common.h
- /opt/ros/groovy/include/pcl-1.6/pcl/common/concatenate.h
- /opt/ros/groovy/include/pcl-1.6/pcl/common/distances.h
- /opt/ros/groovy/include/pcl-1.6/pcl/common/eigen.h
- /opt/ros/groovy/include/pcl-1.6/pcl/common/impl/common.hpp
- /opt/ros/groovy/include/pcl-1.6/pcl/common/impl/eigen.hpp
- /opt/ros/groovy/include/pcl-1.6/pcl/common/impl/io.hpp
- /opt/ros/groovy/include/pcl-1.6/pcl/common/io.h
- /opt/ros/groovy/include/pcl-1.6/pcl/console/print.h
- /opt/ros/groovy/include/pcl-1.6/pcl/exceptions.h
- /opt/ros/groovy/include/pcl-1.6/pcl/for_each_type.h
- /opt/ros/groovy/include/pcl-1.6/pcl/impl/point_types.hpp
- /opt/ros/groovy/include/pcl-1.6/pcl/io/file_io.h
- /opt/ros/groovy/include/pcl-1.6/pcl/io/impl/pcd_io.hpp
- /opt/ros/groovy/include/pcl-1.6/pcl/io/lzf.h
- /opt/ros/groovy/include/pcl-1.6/pcl/io/pcd_io.h
- /opt/ros/groovy/include/pcl-1.6/pcl/pcl_base.h
- /opt/ros/groovy/include/pcl-1.6/pcl/pcl_config.h
- /opt/ros/groovy/include/pcl-1.6/pcl/pcl_macros.h
- /opt/ros/groovy/include/pcl-1.6/pcl/point_cloud.h
- /opt/ros/groovy/include/pcl-1.6/pcl/point_traits.h
- /opt/ros/groovy/include/pcl-1.6/pcl/point_types.h
- /opt/ros/groovy/include/pcl-1.6/pcl/ros/conversions.h
- /opt/ros/groovy/include/pcl-1.6/pcl/ros/register_point_struct.h
- /opt/ros/groovy/include/pcl/PointIndices.h
- /opt/ros/groovy/include/ros/builtin_message_traits.h
- /opt/ros/groovy/include/ros/duration.h
- /opt/ros/groovy/include/ros/exception.h
- /opt/ros/groovy/include/ros/macros.h
- /opt/ros/groovy/include/ros/message_forward.h
- /opt/ros/groovy/include/ros/message_operations.h
- /opt/ros/groovy/include/ros/message_traits.h
- /opt/ros/groovy/include/ros/platform.h
- /opt/ros/groovy/include/ros/roscpp_serialization_macros.h
- /opt/ros/groovy/include/ros/rostime_decl.h
- /opt/ros/groovy/include/ros/serialization.h
- /opt/ros/groovy/include/ros/serialized_message.h
- /opt/ros/groovy/include/ros/time.h
- /opt/ros/groovy/include/ros/types.h
- /opt/ros/groovy/include/sensor_msgs/Image.h
- /opt/ros/groovy/include/sensor_msgs/PointCloud2.h
- /opt/ros/groovy/include/sensor_msgs/PointField.h
- /opt/ros/groovy/include/std_msgs/Header.h
+ /opt/ros/hydro/include/opencv2/calib3d/calib3d.hpp
+ /opt/ros/hydro/include/opencv2/core/core.hpp
+ /opt/ros/hydro/include/opencv2/core/core_c.h
+ /opt/ros/hydro/include/opencv2/core/mat.hpp
+ /opt/ros/hydro/include/opencv2/core/operations.hpp
+ /opt/ros/hydro/include/opencv2/core/types_c.h
+ /opt/ros/hydro/include/opencv2/core/version.hpp
+ /opt/ros/hydro/include/opencv2/features2d/features2d.hpp
+ /opt/ros/hydro/include/opencv2/flann/config.h
+ /opt/ros/hydro/include/opencv2/flann/defines.h
+ /opt/ros/hydro/include/opencv2/flann/miniflann.hpp
+ /opt/ros/hydro/include/opencv2/highgui/highgui.hpp
+ /opt/ros/hydro/include/opencv2/highgui/highgui_c.h
+ /opt/ros/hydro/include/opencv2/imgproc/imgproc.hpp
+ /opt/ros/hydro/include/opencv2/imgproc/types_c.h
  /usr/include/eigen3/Eigen/Cholesky
  /usr/include/eigen3/Eigen/Core
- /usr/include/eigen3/Eigen/Dense
  /usr/include/eigen3/Eigen/Eigen2Support
  /usr/include/eigen3/Eigen/Eigenvalues
  /usr/include/eigen3/Eigen/Geometry
@@ -278,69 +232,97 @@ CMakeFiles/create_object.dir/pom/POM.cpp.o
  /usr/include/eigen3/Eigen/src/misc/Image.h
  /usr/include/eigen3/Eigen/src/misc/Kernel.h
  /usr/include/eigen3/Eigen/src/misc/Solve.h
+ /usr/include/pcl-1.7/pcl/PCLHeader.h
+ /usr/include/pcl-1.7/pcl/PCLImage.h
+ /usr/include/pcl-1.7/pcl/PCLPointCloud2.h
+ /usr/include/pcl-1.7/pcl/PCLPointField.h
+ /usr/include/pcl-1.7/pcl/PointIndices.h
+ /usr/include/pcl-1.7/pcl/common/concatenate.h
+ /usr/include/pcl-1.7/pcl/common/impl/io.hpp
+ /usr/include/pcl-1.7/pcl/common/io.h
+ /usr/include/pcl-1.7/pcl/common/point_tests.h
+ /usr/include/pcl-1.7/pcl/console/print.h
+ /usr/include/pcl-1.7/pcl/conversions.h
+ /usr/include/pcl-1.7/pcl/exceptions.h
+ /usr/include/pcl-1.7/pcl/for_each_type.h
+ /usr/include/pcl-1.7/pcl/impl/pcl_base.hpp
+ /usr/include/pcl-1.7/pcl/impl/point_types.hpp
+ /usr/include/pcl-1.7/pcl/io/boost.h
+ /usr/include/pcl-1.7/pcl/io/file_io.h
+ /usr/include/pcl-1.7/pcl/io/impl/pcd_io.hpp
+ /usr/include/pcl-1.7/pcl/io/lzf.h
+ /usr/include/pcl-1.7/pcl/io/pcd_io.h
+ /usr/include/pcl-1.7/pcl/pcl_base.h
+ /usr/include/pcl-1.7/pcl/pcl_config.h
+ /usr/include/pcl-1.7/pcl/pcl_exports.h
+ /usr/include/pcl-1.7/pcl/pcl_macros.h
+ /usr/include/pcl-1.7/pcl/point_cloud.h
+ /usr/include/pcl-1.7/pcl/point_traits.h
+ /usr/include/pcl-1.7/pcl/point_types.h
+ /usr/include/pcl-1.7/pcl/register_point_struct.h
  /usr/include/qhull/io.h
 CMakeFiles/create_object.dir/pom/Pipeline2D.cpp.o
  /home/gmanfred/devel/essential/ros/objects/pom/pom/Pipeline2D.cpp
  /home/gmanfred/devel/essential/ros/objects/pom/pom/Pipeline2D.h
  /home/gmanfred/devel/sandbox/SiftGPU/src/SiftGPU/SiftGPU.h
- /opt/ros/groovy/include/opencv2/core/core.hpp
- /opt/ros/groovy/include/opencv2/core/core_c.h
- /opt/ros/groovy/include/opencv2/core/mat.hpp
- /opt/ros/groovy/include/opencv2/core/operations.hpp
- /opt/ros/groovy/include/opencv2/core/types_c.h
- /opt/ros/groovy/include/opencv2/core/version.hpp
- /opt/ros/groovy/include/opencv2/features2d/features2d.hpp
- /opt/ros/groovy/include/opencv2/flann/config.h
- /opt/ros/groovy/include/opencv2/flann/defines.h
- /opt/ros/groovy/include/opencv2/flann/miniflann.hpp
- /opt/ros/groovy/include/opencv2/imgproc/imgproc.hpp
- /opt/ros/groovy/include/opencv2/imgproc/types_c.h
- /opt/ros/groovy/include/opencv2/nonfree/features2d.hpp
- /opt/ros/groovy/include/opencv2/nonfree/nonfree.hpp
+ /opt/ros/hydro/include/opencv2/core/core.hpp
+ /opt/ros/hydro/include/opencv2/core/core_c.h
+ /opt/ros/hydro/include/opencv2/core/mat.hpp
+ /opt/ros/hydro/include/opencv2/core/operations.hpp
+ /opt/ros/hydro/include/opencv2/core/types_c.h
+ /opt/ros/hydro/include/opencv2/core/version.hpp
+ /opt/ros/hydro/include/opencv2/features2d/features2d.hpp
+ /opt/ros/hydro/include/opencv2/flann/config.h
+ /opt/ros/hydro/include/opencv2/flann/defines.h
+ /opt/ros/hydro/include/opencv2/flann/miniflann.hpp
+ /opt/ros/hydro/include/opencv2/imgproc/imgproc.hpp
+ /opt/ros/hydro/include/opencv2/imgproc/types_c.h
+ /opt/ros/hydro/include/opencv2/nonfree/features2d.hpp
+ /opt/ros/hydro/include/opencv2/nonfree/nonfree.hpp
 CMakeFiles/create_object.dir/pom/PipelineGeom.cpp.o
  /home/gmanfred/devel/essential/ros/objects/pom/pom/Object.h
  /home/gmanfred/devel/essential/ros/objects/pom/pom/PipelineGeom.cpp
  /home/gmanfred/devel/essential/ros/objects/pom/pom/PipelineGeom.h
  /home/gmanfred/devel/essential/ros/objects/pom/pom/View.h
  /home/gmanfred/devel/essential/ros/objects/pom/pom/commons.h
- /opt/ros/groovy/include/opencv2/calib3d/calib3d.hpp
- /opt/ros/groovy/include/opencv2/core/core.hpp
- /opt/ros/groovy/include/opencv2/core/core_c.h
- /opt/ros/groovy/include/opencv2/core/mat.hpp
- /opt/ros/groovy/include/opencv2/core/operations.hpp
- /opt/ros/groovy/include/opencv2/core/types_c.h
- /opt/ros/groovy/include/opencv2/core/version.hpp
- /opt/ros/groovy/include/opencv2/features2d/features2d.hpp
- /opt/ros/groovy/include/opencv2/flann/config.h
- /opt/ros/groovy/include/opencv2/flann/defines.h
- /opt/ros/groovy/include/opencv2/flann/miniflann.hpp
+ /opt/ros/hydro/include/opencv2/calib3d/calib3d.hpp
+ /opt/ros/hydro/include/opencv2/core/core.hpp
+ /opt/ros/hydro/include/opencv2/core/core_c.h
+ /opt/ros/hydro/include/opencv2/core/mat.hpp
+ /opt/ros/hydro/include/opencv2/core/operations.hpp
+ /opt/ros/hydro/include/opencv2/core/types_c.h
+ /opt/ros/hydro/include/opencv2/core/version.hpp
+ /opt/ros/hydro/include/opencv2/features2d/features2d.hpp
+ /opt/ros/hydro/include/opencv2/flann/config.h
+ /opt/ros/hydro/include/opencv2/flann/defines.h
+ /opt/ros/hydro/include/opencv2/flann/miniflann.hpp
 CMakeFiles/create_object.dir/pom/View.cpp.o
  /home/gmanfred/devel/essential/ros/objects/pom/pom/View.cpp
  /home/gmanfred/devel/essential/ros/objects/pom/pom/View.h
  /home/gmanfred/devel/essential/ros/objects/pom/pom/commons.h
- /opt/ros/groovy/include/opencv2/calib3d/calib3d.hpp
- /opt/ros/groovy/include/opencv2/core/core.hpp
- /opt/ros/groovy/include/opencv2/core/mat.hpp
- /opt/ros/groovy/include/opencv2/core/operations.hpp
- /opt/ros/groovy/include/opencv2/core/types_c.h
- /opt/ros/groovy/include/opencv2/core/version.hpp
- /opt/ros/groovy/include/opencv2/features2d/features2d.hpp
- /opt/ros/groovy/include/opencv2/flann/config.h
- /opt/ros/groovy/include/opencv2/flann/defines.h
- /opt/ros/groovy/include/opencv2/flann/miniflann.hpp
+ /opt/ros/hydro/include/opencv2/calib3d/calib3d.hpp
+ /opt/ros/hydro/include/opencv2/core/core.hpp
+ /opt/ros/hydro/include/opencv2/core/mat.hpp
+ /opt/ros/hydro/include/opencv2/core/operations.hpp
+ /opt/ros/hydro/include/opencv2/core/types_c.h
+ /opt/ros/hydro/include/opencv2/core/version.hpp
+ /opt/ros/hydro/include/opencv2/features2d/features2d.hpp
+ /opt/ros/hydro/include/opencv2/flann/config.h
+ /opt/ros/hydro/include/opencv2/flann/defines.h
+ /opt/ros/hydro/include/opencv2/flann/miniflann.hpp
 CMakeFiles/create_object.dir/pom/commons.cpp.o
  /home/gmanfred/devel/essential/ros/objects/pom/pom/commons.cpp
  /home/gmanfred/devel/essential/ros/objects/pom/pom/commons.h
- /opt/ros/groovy/include/opencv2/calib3d/calib3d.hpp
- /opt/ros/groovy/include/opencv2/core/core.hpp
- /opt/ros/groovy/include/opencv2/core/mat.hpp
- /opt/ros/groovy/include/opencv2/core/operations.hpp
- /opt/ros/groovy/include/opencv2/core/types_c.h
- /opt/ros/groovy/include/opencv2/core/version.hpp
- /opt/ros/groovy/include/opencv2/features2d/features2d.hpp
- /opt/ros/groovy/include/opencv2/flann/config.h
- /opt/ros/groovy/include/opencv2/flann/defines.h
- /opt/ros/groovy/include/opencv2/flann/miniflann.hpp
+ /opt/ros/hydro/include/opencv2/calib3d/calib3d.hpp
+ /opt/ros/hydro/include/opencv2/core/core.hpp
+ /opt/ros/hydro/include/opencv2/core/mat.hpp
+ /opt/ros/hydro/include/opencv2/core/operations.hpp
+ /opt/ros/hydro/include/opencv2/core/types_c.h
+ /opt/ros/hydro/include/opencv2/core/version.hpp
+ /opt/ros/hydro/include/opencv2/features2d/features2d.hpp
+ /opt/ros/hydro/include/opencv2/flann/config.h
+ /opt/ros/hydro/include/opencv2/flann/defines.h
+ /opt/ros/hydro/include/opencv2/flann/miniflann.hpp
 CMakeFiles/create_object.dir/src/create_object.cpp.o
  /home/gmanfred/devel/essential/ros/objects/pom/src/../pom/FilesManager.h
  /home/gmanfred/devel/essential/ros/objects/pom/src/../pom/Object.h
@@ -350,67 +332,76 @@ CMakeFiles/create_object.dir/src/create_object.cpp.o
  /home/gmanfred/devel/essential/ros/objects/pom/src/../pom/commons.h
  /home/gmanfred/devel/essential/ros/objects/pom/src/create_object.cpp
  /home/gmanfred/devel/sandbox/SiftGPU/src/SiftGPU/SiftGPU.h
- /opt/ros/groovy/include/opencv2/calib3d/calib3d.hpp
- /opt/ros/groovy/include/opencv2/core/core.hpp
- /opt/ros/groovy/include/opencv2/core/core_c.h
- /opt/ros/groovy/include/opencv2/core/mat.hpp
- /opt/ros/groovy/include/opencv2/core/operations.hpp
- /opt/ros/groovy/include/opencv2/core/types_c.h
- /opt/ros/groovy/include/opencv2/core/version.hpp
- /opt/ros/groovy/include/opencv2/features2d/features2d.hpp
- /opt/ros/groovy/include/opencv2/flann/config.h
- /opt/ros/groovy/include/opencv2/flann/defines.h
- /opt/ros/groovy/include/opencv2/flann/miniflann.hpp
- /opt/ros/groovy/include/opencv2/highgui/highgui.hpp
- /opt/ros/groovy/include/opencv2/highgui/highgui_c.h
- /opt/ros/groovy/include/pcl-1.6/pcl/channel_properties.h
- /opt/ros/groovy/include/pcl-1.6/pcl/cloud_properties.h
- /opt/ros/groovy/include/pcl-1.6/pcl/common/common.h
- /opt/ros/groovy/include/pcl-1.6/pcl/common/concatenate.h
- /opt/ros/groovy/include/pcl-1.6/pcl/common/distances.h
- /opt/ros/groovy/include/pcl-1.6/pcl/common/eigen.h
- /opt/ros/groovy/include/pcl-1.6/pcl/common/impl/common.hpp
- /opt/ros/groovy/include/pcl-1.6/pcl/common/impl/eigen.hpp
- /opt/ros/groovy/include/pcl-1.6/pcl/common/impl/io.hpp
- /opt/ros/groovy/include/pcl-1.6/pcl/common/io.h
- /opt/ros/groovy/include/pcl-1.6/pcl/console/print.h
- /opt/ros/groovy/include/pcl-1.6/pcl/exceptions.h
- /opt/ros/groovy/include/pcl-1.6/pcl/for_each_type.h
- /opt/ros/groovy/include/pcl-1.6/pcl/impl/point_types.hpp
- /opt/ros/groovy/include/pcl-1.6/pcl/io/file_io.h
- /opt/ros/groovy/include/pcl-1.6/pcl/io/impl/pcd_io.hpp
- /opt/ros/groovy/include/pcl-1.6/pcl/io/lzf.h
- /opt/ros/groovy/include/pcl-1.6/pcl/io/pcd_io.h
- /opt/ros/groovy/include/pcl-1.6/pcl/pcl_base.h
- /opt/ros/groovy/include/pcl-1.6/pcl/pcl_config.h
- /opt/ros/groovy/include/pcl-1.6/pcl/pcl_macros.h
- /opt/ros/groovy/include/pcl-1.6/pcl/point_cloud.h
- /opt/ros/groovy/include/pcl-1.6/pcl/point_traits.h
- /opt/ros/groovy/include/pcl-1.6/pcl/point_types.h
- /opt/ros/groovy/include/pcl-1.6/pcl/ros/conversions.h
- /opt/ros/groovy/include/pcl-1.6/pcl/ros/register_point_struct.h
- /opt/ros/groovy/include/pcl/PointIndices.h
- /opt/ros/groovy/include/ros/builtin_message_traits.h
- /opt/ros/groovy/include/ros/duration.h
- /opt/ros/groovy/include/ros/exception.h
- /opt/ros/groovy/include/ros/macros.h
- /opt/ros/groovy/include/ros/message_forward.h
- /opt/ros/groovy/include/ros/message_operations.h
- /opt/ros/groovy/include/ros/message_traits.h
- /opt/ros/groovy/include/ros/platform.h
- /opt/ros/groovy/include/ros/roscpp_serialization_macros.h
- /opt/ros/groovy/include/ros/rostime_decl.h
- /opt/ros/groovy/include/ros/serialization.h
- /opt/ros/groovy/include/ros/serialized_message.h
- /opt/ros/groovy/include/ros/time.h
- /opt/ros/groovy/include/ros/types.h
- /opt/ros/groovy/include/sensor_msgs/Image.h
- /opt/ros/groovy/include/sensor_msgs/PointCloud2.h
- /opt/ros/groovy/include/sensor_msgs/PointField.h
- /opt/ros/groovy/include/std_msgs/Header.h
+ /opt/ros/hydro/include/XmlRpcDecl.h
+ /opt/ros/hydro/include/XmlRpcValue.h
+ /opt/ros/hydro/include/opencv2/calib3d/calib3d.hpp
+ /opt/ros/hydro/include/opencv2/core/core.hpp
+ /opt/ros/hydro/include/opencv2/core/core_c.h
+ /opt/ros/hydro/include/opencv2/core/mat.hpp
+ /opt/ros/hydro/include/opencv2/core/operations.hpp
+ /opt/ros/hydro/include/opencv2/core/types_c.h
+ /opt/ros/hydro/include/opencv2/core/version.hpp
+ /opt/ros/hydro/include/opencv2/features2d/features2d.hpp
+ /opt/ros/hydro/include/opencv2/flann/config.h
+ /opt/ros/hydro/include/opencv2/flann/defines.h
+ /opt/ros/hydro/include/opencv2/flann/miniflann.hpp
+ /opt/ros/hydro/include/opencv2/highgui/highgui.hpp
+ /opt/ros/hydro/include/opencv2/highgui/highgui_c.h
+ /opt/ros/hydro/include/ros/advertise_options.h
+ /opt/ros/hydro/include/ros/advertise_service_options.h
+ /opt/ros/hydro/include/ros/assert.h
+ /opt/ros/hydro/include/ros/builtin_message_traits.h
+ /opt/ros/hydro/include/ros/common.h
+ /opt/ros/hydro/include/ros/console.h
+ /opt/ros/hydro/include/ros/console_backend.h
+ /opt/ros/hydro/include/ros/datatypes.h
+ /opt/ros/hydro/include/ros/duration.h
+ /opt/ros/hydro/include/ros/exception.h
+ /opt/ros/hydro/include/ros/exceptions.h
+ /opt/ros/hydro/include/ros/forwards.h
+ /opt/ros/hydro/include/ros/init.h
+ /opt/ros/hydro/include/ros/macros.h
+ /opt/ros/hydro/include/ros/master.h
+ /opt/ros/hydro/include/ros/message.h
+ /opt/ros/hydro/include/ros/message_event.h
+ /opt/ros/hydro/include/ros/message_forward.h
+ /opt/ros/hydro/include/ros/message_traits.h
+ /opt/ros/hydro/include/ros/names.h
+ /opt/ros/hydro/include/ros/node_handle.h
+ /opt/ros/hydro/include/ros/param.h
+ /opt/ros/hydro/include/ros/parameter_adapter.h
+ /opt/ros/hydro/include/ros/platform.h
+ /opt/ros/hydro/include/ros/publisher.h
+ /opt/ros/hydro/include/ros/rate.h
+ /opt/ros/hydro/include/ros/ros.h
+ /opt/ros/hydro/include/ros/roscpp_serialization_macros.h
+ /opt/ros/hydro/include/ros/rostime_decl.h
+ /opt/ros/hydro/include/ros/serialization.h
+ /opt/ros/hydro/include/ros/serialized_message.h
+ /opt/ros/hydro/include/ros/service.h
+ /opt/ros/hydro/include/ros/service_callback_helper.h
+ /opt/ros/hydro/include/ros/service_client.h
+ /opt/ros/hydro/include/ros/service_client_options.h
+ /opt/ros/hydro/include/ros/service_server.h
+ /opt/ros/hydro/include/ros/service_traits.h
+ /opt/ros/hydro/include/ros/single_subscriber_publisher.h
+ /opt/ros/hydro/include/ros/spinner.h
+ /opt/ros/hydro/include/ros/static_assert.h
+ /opt/ros/hydro/include/ros/subscribe_options.h
+ /opt/ros/hydro/include/ros/subscriber.h
+ /opt/ros/hydro/include/ros/subscription_callback_helper.h
+ /opt/ros/hydro/include/ros/this_node.h
+ /opt/ros/hydro/include/ros/time.h
+ /opt/ros/hydro/include/ros/timer.h
+ /opt/ros/hydro/include/ros/timer_options.h
+ /opt/ros/hydro/include/ros/topic.h
+ /opt/ros/hydro/include/ros/transport_hints.h
+ /opt/ros/hydro/include/ros/types.h
+ /opt/ros/hydro/include/ros/wall_timer.h
+ /opt/ros/hydro/include/ros/wall_timer_options.h
+ /opt/ros/hydro/include/rosconsole/macros_generated.h
  /usr/include/eigen3/Eigen/Cholesky
  /usr/include/eigen3/Eigen/Core
- /usr/include/eigen3/Eigen/Dense
  /usr/include/eigen3/Eigen/Eigen2Support
  /usr/include/eigen3/Eigen/Eigenvalues
  /usr/include/eigen3/Eigen/Geometry
@@ -591,4 +582,32 @@ CMakeFiles/create_object.dir/src/create_object.cpp.o
  /usr/include/eigen3/Eigen/src/misc/Image.h
  /usr/include/eigen3/Eigen/src/misc/Kernel.h
  /usr/include/eigen3/Eigen/src/misc/Solve.h
+ /usr/include/pcl-1.7/pcl/PCLHeader.h
+ /usr/include/pcl-1.7/pcl/PCLImage.h
+ /usr/include/pcl-1.7/pcl/PCLPointCloud2.h
+ /usr/include/pcl-1.7/pcl/PCLPointField.h
+ /usr/include/pcl-1.7/pcl/PointIndices.h
+ /usr/include/pcl-1.7/pcl/common/concatenate.h
+ /usr/include/pcl-1.7/pcl/common/impl/io.hpp
+ /usr/include/pcl-1.7/pcl/common/io.h
+ /usr/include/pcl-1.7/pcl/common/point_tests.h
+ /usr/include/pcl-1.7/pcl/console/print.h
+ /usr/include/pcl-1.7/pcl/conversions.h
+ /usr/include/pcl-1.7/pcl/exceptions.h
+ /usr/include/pcl-1.7/pcl/for_each_type.h
+ /usr/include/pcl-1.7/pcl/impl/pcl_base.hpp
+ /usr/include/pcl-1.7/pcl/impl/point_types.hpp
+ /usr/include/pcl-1.7/pcl/io/boost.h
+ /usr/include/pcl-1.7/pcl/io/file_io.h
+ /usr/include/pcl-1.7/pcl/io/impl/pcd_io.hpp
+ /usr/include/pcl-1.7/pcl/io/lzf.h
+ /usr/include/pcl-1.7/pcl/io/pcd_io.h
+ /usr/include/pcl-1.7/pcl/pcl_base.h
+ /usr/include/pcl-1.7/pcl/pcl_config.h
+ /usr/include/pcl-1.7/pcl/pcl_exports.h
+ /usr/include/pcl-1.7/pcl/pcl_macros.h
+ /usr/include/pcl-1.7/pcl/point_cloud.h
+ /usr/include/pcl-1.7/pcl/point_traits.h
+ /usr/include/pcl-1.7/pcl/point_types.h
+ /usr/include/pcl-1.7/pcl/register_point_struct.h
  /usr/include/qhull/io.h

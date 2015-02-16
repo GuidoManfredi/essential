@@ -4,22 +4,22 @@
 CMakeFiles/save_corners.dir/src/SaveCorners.cpp.o
  /home/gmanfred/devel/essential/ros/objects/pom/src/SaveCorners.cpp
  /home/gmanfred/devel/essential/ros/objects/pom/src/SaveCorners.h
- /opt/ros/groovy/include/opencv2/core/core.hpp
- /opt/ros/groovy/include/opencv2/core/core_c.h
- /opt/ros/groovy/include/opencv2/core/mat.hpp
- /opt/ros/groovy/include/opencv2/core/operations.hpp
- /opt/ros/groovy/include/opencv2/core/types_c.h
- /opt/ros/groovy/include/opencv2/core/version.hpp
- /opt/ros/groovy/include/opencv2/highgui/highgui.hpp
- /opt/ros/groovy/include/opencv2/highgui/highgui_c.h
+ /opt/ros/hydro/include/opencv2/core/core.hpp
+ /opt/ros/hydro/include/opencv2/core/core_c.h
+ /opt/ros/hydro/include/opencv2/core/mat.hpp
+ /opt/ros/hydro/include/opencv2/core/operations.hpp
+ /opt/ros/hydro/include/opencv2/core/types_c.h
+ /opt/ros/hydro/include/opencv2/core/version.hpp
+ /opt/ros/hydro/include/opencv2/highgui/highgui.hpp
+ /opt/ros/hydro/include/opencv2/highgui/highgui_c.h
 CMakeFiles/save_corners.dir/src/save_corners.cpp.o
  /home/gmanfred/devel/essential/ros/objects/pom/src/SaveCorners.h
  /home/gmanfred/devel/essential/ros/objects/pom/src/save_corners.cpp
- /opt/ros/groovy/include/opencv2/core/core.hpp
- /opt/ros/groovy/include/opencv2/core/core_c.h
- /opt/ros/groovy/include/opencv2/core/mat.hpp
- /opt/ros/groovy/include/opencv2/core/operations.hpp
- /opt/ros/groovy/include/opencv2/core/types_c.h
- /opt/ros/groovy/include/opencv2/core/version.hpp
- /opt/ros/groovy/include/opencv2/highgui/highgui.hpp
- /opt/ros/groovy/include/opencv2/highgui/highgui_c.h
+ /opt/ros/hydro/include/opencv2/core/core.hpp
+ /opt/ros/hydro/include/opencv2/core/core_c.h
+ /opt/ros/hydro/include/opencv2/core/mat.hpp
+ /opt/ros/hydro/include/opencv2/core/operations.hpp
+ /opt/ros/hydro/include/opencv2/core/types_c.h
+ /opt/ros/hydro/include/opencv2/core/version.hpp
+ /opt/ros/hydro/include/opencv2/highgui/highgui.hpp
+ /opt/ros/hydro/include/opencv2/highgui/highgui_c.h

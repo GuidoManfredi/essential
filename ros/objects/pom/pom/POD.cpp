@@ -1,10 +1,12 @@
 #include "POD.h"
+#include <fstream>
+#include <boost/algorithm/string.hpp>
 
 using namespace std;
 using namespace cv;
 
 POD::POD () {
-
+    bool is_intrinsic_set_ = false;
 }
 
 void POD::setObject (Object object) {
@@ -13,18 +15,36 @@ void POD::setObject (Object object) {
     objects_.push_back(object);
 }
 
-void POD::loadObject (std::string object_path) {
-    string object_name (object_path);
-    string object_file = object_name + ".yaml";
-    cout << "Loading object " << object_name << " from " << object_path << endl;
-    FileStorage fs(object_file, FileStorage::READ);
+void POD::loadObject (std::string object_path) {    
+    vector<string> strs;
+    boost::split(strs,object_path,boost::is_any_of("/"));
+    string object_file = strs[strs.size() - 1];
+    boost::split(strs,object_file,boost::is_any_of("."));
+    string object_name = strs[0];
+    cout << "Loading " << object_name << " from " << object_path << "." << endl;
+    
+    FileStorage fs(object_path, FileStorage::READ);
     Object object;
     fs[object_name] >> object;
     setObject(object);
 }
 
+void POD::loadObjectsFromList (string list_path) {
+    string line;
+    ifstream file(list_path.c_str());
+    if (file.is_open()) {
+        while( getline(file, line)) {
+            loadObject(line);
+        }
+        file.close();
+    } else {
+        cout << "Could not open " << list_path << "." << endl;
+    }
+}
+
 void POD::setIntrinsic (cv::Mat K) {
     K.copyTo(K_);
+    is_intrinsic_set_ = true;
 }
 
 void POD::loadIntrinsic (string calibration_file) {
@@ -34,6 +54,10 @@ void POD::loadIntrinsic (string calibration_file) {
     r_fs["camera_matrix"]>>K;
     r_fs.release ();
     setIntrinsic (K);
+}
+
+bool POD::isIntrinsicSet() {
+    return is_intrinsic_set_;
 }
 
 void POD::process (const Mat image, vector<Mat> &poses, vector<string> &names) {

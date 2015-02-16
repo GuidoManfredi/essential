@@ -9,6 +9,7 @@ class Modeler:
         self.pf = PipelineFrame()
         self.object = Object()
         self.inliers_threshold = 100.0
+        self.bundle_window_size = 10
 
     def set_calibration(self, intrinsic, distortion):
         self.pf.set_calibration(intrinsic, distortion)
@@ -26,6 +27,7 @@ class Modeler:
         
         # Match frame with object
         num_inliers = self.pf.match(frame, self.object)
+        # Compute Motion
         num_inliers = self.pf.motion(frame, self.object)
         print "Frame " + str(frame.id) + " has " + str(num_inliers) + " inliers."
         
@@ -36,6 +38,7 @@ class Modeler:
             if len(self.previous_frame.p3ds) == 0: # no depth sensor, triangulation needed
                 self.pf.structure(self.previous_frame, self.object)
             self.object.add_keyframe(self.previous_frame)
+            self.pf.bundle_adjust(self.object, self.bundle_window_size)
             print "Adding new keyframe."
         
         # Save frame

@@ -19,3 +19,4 @@ class Frame:
         
     def set_structure(self, p3ds):
         self.p3ds = p3ds
+        

@@ -6,6 +6,7 @@ from pipeline_image import PipelineImage
 from pipeline_geometric import PipelineGeometric
 from frame import Frame
 import tools
+import sba
 
 class PipelineFrame:
     def __init__(self):
@@ -48,5 +49,19 @@ class PipelineFrame:
         p2ds_frame, p2ds_object = self.aligned_2d2d_points(frame.kpts, obj.kpts, frame.matches)
         structure = self.pg.triangulate(p2ds_frame, p2ds_object)
         frame.set_structure(structure)
+    
+    def bundle_adjust(self, obj, window_size):
+        cameras = self.bundle_cameras(obj, window_size)
+        points = self.bundle_points(obj, window_size)
+        newcams, newpoints, info = sba.SparseBundleAdjust(cameras, points)
+        #print info # error
+        obj.set_cameras(newcams)
+        obj.set_points(newcams)
+    
+    def bundle_cameras(self, obj, window_size):
+    
+    def bundle_points(self, obj, window_size):
+    
+    
     
     

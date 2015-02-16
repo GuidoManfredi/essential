@@ -3,6 +3,7 @@
 #include <cv_bridge/cv_bridge.h>
 #include <sensor_msgs/Image.h>
 #include <sensor_msgs/image_encodings.h>
+#include <sensor_msgs/CameraInfo.h>
 
 #include <tf/transform_broadcaster.h>
 
@@ -17,12 +18,10 @@
 // ./bin/detect_object image purfruit
 // rosrun opencv_publisher stream 0 webcam image
 // rosrun opencv_display display_poses_from_tf image
-// TODO lire les parametres intrinseques depuis topic
-//      Donner un dossier out pour les objet.yaml
+// TODO Donner un dossier out pour les objet.yaml
 //      Faire la doc
-//      Charger models en lisant liste (+fonctions de debug quand fichier non disponible
 //      Blinder POM et POD mais mettre du debug pour faire remonter les problems ou les printer.
-//      Blinder create_objetct et detect_object avec un max de ROS_INFO/WARN/ERR
+//      Blinder detect_object avec un max de ROS_INFO/WARN/ERR
 //      Faire le multi object draw dans opencv_display_from_tf
 //      Ask for a camera name in the arguments and use it for broadcasting the right transform
 //      FINIR LOCAL2GLOBAL LES CAS 4 ET 5
@@ -40,6 +39,15 @@ vector<string> names;
 void broadcastPoses (vector<Mat> Ps);
 tf::Transform mat2msg (Mat P);
 tf::Matrix3x3 cvR2tfR(cv::Mat cv);
+cv::Mat rosK2cvK(double fx, double fy, double cx, double cy);
+
+void intrinsic_callback(const sensor_msgs::CameraInfoConstPtr& msg) {
+    if (!detecter.isIntrinsicSet()) {
+        cv::Mat K = rosK2cvK(msg->K[0], msg->K[4], msg->K[2], msg->K[5]);
+        detecter.setIntrinsic(K);
+        ROS_INFO("Loaded intrinsic parameters");
+    }
+}
 
 void image_callback(const sensor_msgs::ImageConstPtr& msg) {
     cv_bridge::CvImagePtr cv_ptr;
@@ -59,17 +67,17 @@ void image_callback(const sensor_msgs::ImageConstPtr& msg) {
     ROS_INFO("Procesing time: %f s.", (end - start) * time_period);
 }
 
-// ./bin/detect_object images purfruit
-// rosrun opencv_display display_poses /camera/rgb/image_rect_color pose
+// rosrun pom detect_object images intrinsic objects_list.txt
+// rosrun opencv_display display_poses /camera/rgb/image_rect_color /camera/rgb/camera_info pose
 int main (int argc, char** argv) {
-	assert (argc == 3 && "Usage : detect_objects in_image_topic object_name");
+	assert (argc == 4 && "Usage : detect_object in_image_topic in_intrisic_topic objects_list");
 	ros::init(argc, argv, "pom");
 	ros::NodeHandle n;
-	ros::Subscriber cloud_subscriber = n.subscribe(argv[1], 1, image_callback);
+	ros::Subscriber image_subscriber = n.subscribe(argv[1], 1, image_callback);
+	ros::Subscriber intrinsic_subscriber = n.subscribe(argv[2], 1, intrinsic_callback);
 
-    detecter.loadIntrinsic ("/home/gmanfred/.ros/camera_info/webcam_gilgamesh_opencv.yml");
-    detecter.loadObject("small_reveil_fruite");
-    detecter.loadObject(argv[2]);
+    ROS_INFO("Loading object");
+    detecter.loadObjectsFromList(argv[3]);
 
     ros::Rate loop_rate(10);
 	while (ros::ok()) {
@@ -106,3 +114,11 @@ tf::Matrix3x3 cvR2tfR(cv::Mat cv) {
                           cv.at<float>(1,0), cv.at<float>(1,1), cv.at<float>(1,2),
                           cv.at<float>(2,0), cv.at<float>(2,1), cv.at<float>(2,2));
 }
+
+
+cv::Mat rosK2cvK(double fx, double fy, double cx, double cy) {
+    return (Mat_<double>(3,3) << fx,  0, cx,
+                                  0, fy, cy,
+                                  0,  0,  1);
+}
+

@@ -4,7 +4,7 @@ import numpy as np
 
 class Frame:
     def __init__(self, frame_id, kpts, descs, p3ds):
-        self.id = id
+        self.id = frame_id
         self.kpts = kpts
         self.descs = descs
         self.p2ds = np.float32([kpt.pt for kpt in kpts])
@@ -19,3 +19,6 @@ class Frame:
         
     def set_structure(self, p3ds):
         self.p3ds = p3ds
+    
+    def update_covisibility(self, matches):
+        

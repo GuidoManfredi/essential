@@ -46,7 +46,7 @@ CMAKE_BINARY_DIR = /home/gmanfred/devel/essential/ros/objects/pom/build
 include CMakeFiles/rosbuild_clean-test-results.dir/progress.make
 
 CMakeFiles/rosbuild_clean-test-results:
-	if ! rm -rf /home/gmanfred/.ros/test_results/pom; then echo WARNING:\ failed\ to\ remove\ test-results\ directory ; fi
+	if ! rm -rf /home/gmanfred/.ros/test_results/pom; then echo "WARNING:\ failed\ to\ remove\ test-results\ directory"; fi
 
 rosbuild_clean-test-results: CMakeFiles/rosbuild_clean-test-results
 rosbuild_clean-test-results: CMakeFiles/rosbuild_clean-test-results.dir/build.make
