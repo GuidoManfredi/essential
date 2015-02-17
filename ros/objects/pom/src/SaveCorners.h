@@ -10,9 +10,9 @@
 #include <opencv2/highgui/highgui.hpp>
 
 /**
-*   This class allows reading a directory with images and displing them one by one.
+*   \class This class allows reading a directory with images and displing them one by one.
 *   For each image, one selects the four corners of an object of interest.
-*   The corners are selected in the given order: up-left, up-right, down-left, down-right.
+*   The corners are selected in the given order: up-left, up-right, down-right, down-left.
 *   The coordinates of these corners are saved in a text file and can later be 
 *   used to model the object with the POM software.
 */

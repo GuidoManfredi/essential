@@ -15,18 +15,14 @@
 // si des descripteurs sont en double, lors du matching ils ne seront pas pris
 // en compte par siftgpu, vas savoir pourquoi...
 
-// ./bin/detect_object image purfruit
-// rosrun opencv_publisher stream 0 webcam image
-// rosrun opencv_display display_poses_from_tf image
-// TODO Donner un dossier out pour les objet.yaml
-//      Faire la doc
+// TODO Faire la doc
+//      Verifier que la taille du broadcaster fonctionne (br[2])
 //      Blinder POM et POD mais mettre du debug pour faire remonter les problems ou les printer.
 //      Blinder detect_object avec un max de ROS_INFO/WARN/ERR
-//      Faire le multi object draw dans opencv_display_from_tf
-//      Ask for a camera name in the arguments and use it for broadcasting the right transform
 //      FINIR LOCAL2GLOBAL LES CAS 4 ET 5
 //      Faire en sorte de pouvoir creer un model meme quand on a que des images de front/top/bottom (cf petit beurre)
 //      Dans create model ne pas laisser de trailing / ou alors le nom du dossier ne sera pas bien lu. (a corriger)
+//      Faire le multi object draw dans opencv_display_from_tf
 using namespace std;
 using namespace cv;
 namespace enc = sensor_msgs::image_encodings;
@@ -35,6 +31,7 @@ POD detecter;
 Object object;
 vector<Mat> Ps;
 vector<string> names;
+string camera_frame;
 
 void broadcastPoses (vector<Mat> Ps);
 tf::Transform mat2msg (Mat P);
@@ -61,24 +58,30 @@ void image_callback(const sensor_msgs::ImageConstPtr& msg) {
 //	imshow ("Input", cv_ptr->image);
 //    waitKey(1);
     int start = cv::getTickCount();
-    detecter.process (cv_ptr->image, Ps, names);
+    detecter.process (cv_ptr->image, Ps, names); // MAIN CALL
     int end = cv::getTickCount();
     float time_period = 1 / cv::getTickFrequency();
     ROS_INFO("Procesing time: %f s.", (end - start) * time_period);
 }
 
-// rosrun pom detect_object images intrinsic objects_list.txt
-// rosrun pom detect_object /camera/rgb/image_rect_color /camera/rgb/camera_info objects_list.txt
+// ./bin/detect_object image purfruit
+// rosrun opencv_publisher stream 0 webcam image
+// rosrun opencv_display display_poses_from_tf image
+
+// rosrun pom detect_object images intrinsic camera_frame objects_list.txt
+// rosrun pom detect_object /narrow_stereo/left/image_rect /narrow_stereo/left/camera_info narrow_stereo_l_stereo_camera_optical_frame objects_list.txt
 // rosrun opencv_display display_poses /camera/rgb/image_rect_color pose
 int main (int argc, char** argv) {
-	assert (argc == 4 && "Usage : detect_object in_image_topic in_intrisic_topic objects_list");
+	assert (argc == 5 && "Usage : detect_object in_image_topic in_intrisic_topic camera_frame objects_list");
 	ros::init(argc, argv, "pom");
 	ros::NodeHandle n;
 	ros::Subscriber image_subscriber = n.subscribe(argv[1], 1, image_callback);
 	ros::Subscriber intrinsic_subscriber = n.subscribe(argv[2], 1, intrinsic_callback);
+	camera_frame = argv[3];
 
-    ROS_INFO("Loading object");
-    detecter.loadObjectsFromList(argv[3]);
+    ROS_INFO("Loading objects...");
+    detecter.loadObjectsFromList(argv[4]);
+    ROS_INFO("... objects loaded.");
 
     ros::Rate loop_rate(10);
 	while (ros::ok()) {
@@ -91,25 +94,24 @@ int main (int argc, char** argv) {
 }
 
 void broadcastPoses (vector<Mat> Ps) {
-    static tf::TransformBroadcaster br[2];
+    static vector<tf::TransformBroadcaster> br;
+    br.resize(Ps.size());
+    //static tf::TransformBroadcaster br[2];
     for (size_t i = 0; i < Ps.size(); ++i) {
         tf::Transform transform = mat2msg(Ps[i]);
         string object_name = names[i];
-        cout << "Broadcasting " << names[i] << endl;
+        //cout << "Broadcasting " << names[i] << endl;
         //br[i].sendTransform(tf::StampedTransform(transform, ros::Time::now(), object_name, "narrow_stereo_l_stereo_camera_frame"));
-        br[i].sendTransform(tf::StampedTransform(transform, ros::Time::now(), "narrow_stereo_l_stereo_camera_optical_frame", object_name));
+        br[i].sendTransform(tf::StampedTransform(transform, ros::Time::now(), camera_frame, object_name));
     }
-} 
+}
 
 tf::Transform mat2msg (Mat P) {
-    cout << P << endl;
     Mat cvR = P(Rect(0,0,3,3));
-    cout << cvR << endl;
     tf::Matrix3x3 R = cvR2tfR(cvR);
     //tf::Vector3 t(P.at<float>(0, 3), P.at<float>(1, 3), P.at<float>(2, 3));
     tf::Vector3 t(P.at<float>(0, 3)/1000, P.at<float>(1, 3)/1000, P.at<float>(2, 3)/1000);
     return tf::Transform(R, t);
-    //return tf::Transform(R.transpose(), t);
 }
 
 tf::Matrix3x3 cvR2tfR(cv::Mat cv) {
