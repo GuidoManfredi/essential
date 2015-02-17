@@ -17,6 +17,7 @@
 
 // TODO Faire la doc
 //      Verifier que la taille du broadcaster fonctionne (br[2])
+//      Tester avec un seul broadcaster
 //      Blinder POM et POD mais mettre du debug pour faire remonter les problems ou les printer.
 //      Blinder detect_object avec un max de ROS_INFO/WARN/ERR
 //      FINIR LOCAL2GLOBAL LES CAS 4 ET 5
@@ -80,19 +81,31 @@ int main (int argc, char** argv) {
 	camera_frame = argv[3];
 
     ROS_INFO("Loading objects...");
-    detecter.loadObjectsFromList(argv[4]);
+    int num_objects = detecter.loadObjectsFromList(argv[4]);
     ROS_INFO("... objects loaded.");
+
+    vector<tf::TransformBroadcaster> br;
+    br.resize(num_objects);
 
     ros::Rate loop_rate(10);
 	while (ros::ok()) {
         ros::spinOnce();
-        broadcastPoses(Ps);
+        
+        //int start = cv::getTickCount();
+        for (size_t i = 0; i < Ps.size(); ++i) {
+            tf::Transform transform = mat2msg(Ps[i]);
+            br[i].sendTransform(tf::StampedTransform(transform, ros::Time::now(), camera_frame, names[i]));
+        }
+        //int end = cv::getTickCount();
+        //float time_period = 1 / cv::getTickFrequency();
+        //ROS_INFO("Broadcasting time: %f s.", (end - start) * time_period);
+
         loop_rate.sleep();
     }
 
     return 0;
 }
-
+// Don't this function use cause slows everything down. Keep it in case...
 void broadcastPoses (vector<Mat> Ps) {
     static vector<tf::TransformBroadcaster> br;
     br.resize(Ps.size());

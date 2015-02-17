@@ -29,17 +29,20 @@ void POD::loadObject (std::string object_path) {
     setObject(object);
 }
 
-void POD::loadObjectsFromList (string list_path) {
+int POD::loadObjectsFromList (string list_path) {
+    int num_objects = 0;
     string line;
     ifstream file(list_path.c_str());
     if (file.is_open()) {
         while( getline(file, line)) {
             loadObject(line);
+            ++num_objects;
         }
         file.close();
     } else {
         cout << "Could not open " << list_path << "." << endl;
     }
+    return num_objects;
 }
 
 void POD::setIntrinsic (cv::Mat K) {

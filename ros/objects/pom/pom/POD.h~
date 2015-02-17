@@ -23,9 +23,11 @@ class POD
     */    
     void loadObject (std::string path);
     /**
-    *   \brief Same as loadObject but process a file containing paths.
+    *   \brief Same as loadObject but process a file containing paths and load
+    *   .       all objects.
+    *   \param list_path A file containing a list of paths to load.
     */
-    void loadObjectFromList (std::string list_path);
+    void loadObjectsFromList (std::string list_path);
     /**
     *   \brief Provide the intrinsic parameters of the camera to the detector.
     *   \param K The intrinsic parameters matrix.
