@@ -9,9 +9,12 @@
 #include <sensor_msgs/image_encodings.h>
 #include <cv_bridge/cv_bridge.h>
 
+#include <std_msgs/Float64.h>
+
 using namespace cv;
 using namespace std;
 
+// rosrun opencv_publisher 0 camera image
 int main(int argc, char** argv)
 {
 	if(argc != 4)
@@ -44,6 +47,7 @@ int main(int argc, char** argv)
 	
 	Mat in;
 	ros::Rate loop_rate(10);
+	
 	while(ros::ok()) {
 		capture >> in;
 		cv_img.header.stamp = ros::Time::now();
@@ -53,6 +57,8 @@ int main(int argc, char** argv)
 		
         info.header.stamp = cv_img.header.stamp;
         info.header.frame_id = cv_img.header.frame_id;
+        info.K[0] = 740; info.K[2] = 331;
+        info.K[4] = 740; info.K[5] = 244;
         info.width = in.cols;
         info.height = in.rows;
 

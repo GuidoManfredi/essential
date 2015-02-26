@@ -16,8 +16,9 @@
 // en compte par siftgpu, vas savoir pourquoi...
 
 // TODO Faire la doc
-//      Verifier que la taille du broadcaster fonctionne (br[2])
+//      Revert the mono object mode
 //      Tester avec un seul broadcaster
+//      Faire les match avec FLANN
 //      Blinder POM et POD mais mettre du debug pour faire remonter les problems ou les printer.
 //      Blinder detect_object avec un max de ROS_INFO/WARN/ERR
 //      FINIR LOCAL2GLOBAL LES CAS 4 ET 5
@@ -42,6 +43,7 @@ cv::Mat rosK2cvK(double fx, double fy, double cx, double cy);
 void intrinsic_callback(const sensor_msgs::CameraInfoConstPtr& msg) {
     if (!detecter.isIntrinsicSet()) {
         cv::Mat K = rosK2cvK(msg->K[0], msg->K[4], msg->K[2], msg->K[5]);
+        //cout << K << endl;
         detecter.setIntrinsic(K);
         ROS_INFO("Loaded intrinsic parameters");
     }
@@ -56,22 +58,24 @@ void image_callback(const sensor_msgs::ImageConstPtr& msg) {
       ROS_ERROR("cv_bridge exception: %s", e.what());
       return;
     }
-//	imshow ("Input", cv_ptr->image);
-//    waitKey(1);
+    
+    //imshow ("Input", cv_ptr->image);
+    //waitKey(1);
+    
     int start = cv::getTickCount();
     detecter.process (cv_ptr->image, Ps, names); // MAIN CALL
     int end = cv::getTickCount();
     float time_period = 1 / cv::getTickFrequency();
-    ROS_INFO("Procesing time: %f s.", (end - start) * time_period);
+    //ROS_INFO("Procesing time: %f s.", (end - start) * time_period);
 }
 
 // ./bin/detect_object image purfruit
 // rosrun opencv_publisher stream 0 webcam image
 // rosrun opencv_display display_poses_from_tf image
 
-// rosrun pom detect_object images intrinsic camera_frame objects_list.txt
 // rosrun pom detect_object /narrow_stereo/left/image_rect /narrow_stereo/left/camera_info narrow_stereo_l_stereo_camera_optical_frame objects_list.txt
-// rosrun opencv_display display_poses /camera/rgb/image_rect_color pose
+// rosrun pom detect_object /narrow_stereo/left/image_rect /narrow_stereo/left/camera_info narrow_stereo_l_stereo_camera_optical_frame object_path
+// rosrun pom detect_object image camera_info camera /home/gmanfred/devel/datasets/my_objects/pom/models/lait.yaml
 int main (int argc, char** argv) {
 	assert (argc == 5 && "Usage : detect_object in_image_topic in_intrisic_topic camera_frame objects_list");
 	ros::init(argc, argv, "pom");
@@ -81,42 +85,28 @@ int main (int argc, char** argv) {
 	camera_frame = argv[3];
 
     ROS_INFO("Loading objects...");
-    int num_objects = detecter.loadObjectsFromList(argv[4]);
+    //int num_objects = detecter.loadObjectsFromList(argv[4]); // Multi objects
+    int num_objects = 1;
+    detecter.loadObject(argv[4]); // Mono objects
     ROS_INFO("... objects loaded.");
 
     vector<tf::TransformBroadcaster> br;
     br.resize(num_objects);
 
-    ros::Rate loop_rate(10);
+    ros::Rate loop_rate(20);
 	while (ros::ok()) {
         ros::spinOnce();
         
-        //int start = cv::getTickCount();
         for (size_t i = 0; i < Ps.size(); ++i) {
+            //cout << Ps[i] << endl;
             tf::Transform transform = mat2msg(Ps[i]);
             br[i].sendTransform(tf::StampedTransform(transform, ros::Time::now(), camera_frame, names[i]));
         }
-        //int end = cv::getTickCount();
-        //float time_period = 1 / cv::getTickFrequency();
-        //ROS_INFO("Broadcasting time: %f s.", (end - start) * time_period);
 
         loop_rate.sleep();
     }
 
     return 0;
-}
-// Don't this function use cause slows everything down. Keep it in case...
-void broadcastPoses (vector<Mat> Ps) {
-    static vector<tf::TransformBroadcaster> br;
-    br.resize(Ps.size());
-    //static tf::TransformBroadcaster br[2];
-    for (size_t i = 0; i < Ps.size(); ++i) {
-        tf::Transform transform = mat2msg(Ps[i]);
-        string object_name = names[i];
-        //cout << "Broadcasting " << names[i] << endl;
-        //br[i].sendTransform(tf::StampedTransform(transform, ros::Time::now(), object_name, "narrow_stereo_l_stereo_camera_frame"));
-        br[i].sendTransform(tf::StampedTransform(transform, ros::Time::now(), camera_frame, object_name));
-    }
 }
 
 tf::Transform mat2msg (Mat P) {

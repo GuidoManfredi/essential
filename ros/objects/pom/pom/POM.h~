@@ -9,9 +9,12 @@
 #include "Object.h"
 #include "commons.h"
 
+#ifndef USE_GPU
+#define USE_GPU 1
+#endif
+
 // For PAVE dimensions are width, height and depth.
 // for CYL, it is Radius and height, last coordinate is not used and set to zero.
-// Images must have the same name as object
 enum SHAPE {PAVE, CYL};
 
 class POM {
@@ -26,9 +29,10 @@ class POM {
     Object model (SHAPE shape, std::vector<cv::Mat> images, std::vector<int> faces, std::vector<std::vector<cv::Point2f> > corners,
                   cv::Point3f dimensions);
     // for debug only
-    void savePoints3d (std::vector<cv::Point3f> points3d, std::string filename);
+    void savePoints3d (std::vector<cv::Point3f> points3d, std::vector<cv::Vec3b> color, std::string filename);
 
   private:
+    void saveColor(cv::Mat image, std::vector<cv::KeyPoint> kpts, std::vector<cv::Vec3b> &color);
     void extractFeatures (cv::Mat image, std::vector<cv::KeyPoint> &keypoints, cv::Mat &descriptors);
     // Faces, 0:front, 1:left, 2:right, 3:back, 4:top, 5:bottom (ordre pour des questions historique : le premier objet avait un back et front identique, mais
     // on ne peut pas mettre deux fois la même image car SiftGpu n'aime pas ça, il n'extrait pas de descripteurs).

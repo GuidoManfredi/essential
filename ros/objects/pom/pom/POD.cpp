@@ -71,13 +71,13 @@ void POD::process (const Mat image, vector<Mat> &poses, vector<string> &names) {
 
 void POD::process (View current, vector<Mat> &poses, vector<string> &names) {
     poses.clear(); names.clear();
+    vector<DMatch> matches;
     for (size_t i = 0; i < objects_.size(); ++i) {
-        vector<DMatch> matches;
-        //cout << "Matching" << endl;
+        matches.clear();
         match (current, objects_[i], matches);
-        cout << "Matches: " << matches.size() << endl;
-        //cout << "Computing pose" << endl;
+        //cout << "Matches: " << matches.size() << endl;        
         Mat pose = computePose (current, objects_[i], matches);
+        
         poses.push_back(pose);
         names.push_back(objects_[i].name());
     }
@@ -88,7 +88,8 @@ void POD::process (View current, vector<Mat> &poses, vector<string> &names) {
 View POD::createView (Mat image) {
     View view;
     pipeline2d_.getGray (image, view.view_);
-    pipeline2d_.extractFeatures (view.view_, view.keypoints_, view.descriptors_);
+    //pipeline2d_.extractFeatures (view.view_, false, view.keypoints_, view.descriptors_);
+    pipeline2d_.extractFeatures (view.view_, USE_SIFTGPU, view.keypoints_, view.descriptors_);
     //cout << "Extracted " << view.keypoints_.size() << " keypoints." << endl;
     return view;
 }
@@ -96,13 +97,14 @@ View POD::createView (Mat image) {
 void POD::match (View current, Object object, vector<DMatch> &matches) {
     Mat descriptors;
     object.getDescriptors(descriptors);
-    pipeline2d_.match (current.descriptors_, descriptors, matches);
     //cout << "Descs: " << descriptors.rows << " vs " << current.descriptors_.rows << endl;
+    //pipeline2d_.match (current.descriptors_, descriptors, false, matches);
+    pipeline2d_.match (current.descriptors_, descriptors, USE_SIFTGPU, matches);
 }
 
 Mat POD::computePose (View current, Object object, vector<DMatch> matches) {
     if ( matches.size() <= 4) {
-        cout << "ComputeTrainPose : not enought matches (" << matches.size() << ")." << endl;
+        cout << "POD.cpp: computePose : not enought matches (" << matches.size() << ")." << endl;
     }
 
     vector<Point3f> points;

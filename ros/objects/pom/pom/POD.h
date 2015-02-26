@@ -6,6 +6,7 @@
 #include "Object.h"
 #include "Pipeline2D.h"
 #include "PipelineGeom.h"
+#include "commons.h"
 
 class POD
 {

@@ -84,5 +84,6 @@ CMakeFiles/stream.dir/src/stream.cpp.o: /opt/ros/groovy/include/sensor_msgs/SetC
 CMakeFiles/stream.dir/src/stream.cpp.o: /opt/ros/groovy/include/sensor_msgs/SetCameraInfoRequest.h
 CMakeFiles/stream.dir/src/stream.cpp.o: /opt/ros/groovy/include/sensor_msgs/SetCameraInfoResponse.h
 CMakeFiles/stream.dir/src/stream.cpp.o: /opt/ros/groovy/include/sensor_msgs/image_encodings.h
+CMakeFiles/stream.dir/src/stream.cpp.o: /opt/ros/groovy/include/std_msgs/Float64.h
 CMakeFiles/stream.dir/src/stream.cpp.o: /opt/ros/groovy/include/std_msgs/Header.h
 

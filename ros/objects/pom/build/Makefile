@@ -257,6 +257,19 @@ doxygen/fast:
 .PHONY : doxygen/fast
 
 #=============================================================================
+# Target rules for targets named experiment
+
+# Build rule for target.
+experiment: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 experiment
+.PHONY : experiment
+
+# fast build rule for target.
+experiment/fast:
+	$(MAKE) -f CMakeFiles/experiment.dir/build.make CMakeFiles/experiment.dir/build
+.PHONY : experiment/fast
+
+#=============================================================================
 # Target rules for targets named rosbuild_clean-test-results
 
 # Build rule for target.
@@ -730,6 +743,30 @@ src/detect_object.cpp.s:
 	$(MAKE) -f CMakeFiles/detect_object.dir/build.make CMakeFiles/detect_object.dir/src/detect_object.cpp.s
 .PHONY : src/detect_object.cpp.s
 
+src/experiment.o: src/experiment.cpp.o
+.PHONY : src/experiment.o
+
+# target to build an object file
+src/experiment.cpp.o:
+	$(MAKE) -f CMakeFiles/experiment.dir/build.make CMakeFiles/experiment.dir/src/experiment.cpp.o
+.PHONY : src/experiment.cpp.o
+
+src/experiment.i: src/experiment.cpp.i
+.PHONY : src/experiment.i
+
+# target to preprocess a source file
+src/experiment.cpp.i:
+	$(MAKE) -f CMakeFiles/experiment.dir/build.make CMakeFiles/experiment.dir/src/experiment.cpp.i
+.PHONY : src/experiment.cpp.i
+
+src/experiment.s: src/experiment.cpp.s
+.PHONY : src/experiment.s
+
+# target to generate assembly for a file
+src/experiment.cpp.s:
+	$(MAKE) -f CMakeFiles/experiment.dir/build.make CMakeFiles/experiment.dir/src/experiment.cpp.s
+.PHONY : src/experiment.cpp.s
+
 src/save_corners.o: src/save_corners.cpp.o
 .PHONY : src/save_corners.o
 
@@ -754,6 +791,54 @@ src/save_corners.cpp.s:
 	$(MAKE) -f CMakeFiles/save_corners.dir/build.make CMakeFiles/save_corners.dir/src/save_corners.cpp.s
 .PHONY : src/save_corners.cpp.s
 
+xp/Gripper.o: xp/Gripper.cpp.o
+.PHONY : xp/Gripper.o
+
+# target to build an object file
+xp/Gripper.cpp.o:
+	$(MAKE) -f CMakeFiles/experiment.dir/build.make CMakeFiles/experiment.dir/xp/Gripper.cpp.o
+.PHONY : xp/Gripper.cpp.o
+
+xp/Gripper.i: xp/Gripper.cpp.i
+.PHONY : xp/Gripper.i
+
+# target to preprocess a source file
+xp/Gripper.cpp.i:
+	$(MAKE) -f CMakeFiles/experiment.dir/build.make CMakeFiles/experiment.dir/xp/Gripper.cpp.i
+.PHONY : xp/Gripper.cpp.i
+
+xp/Gripper.s: xp/Gripper.cpp.s
+.PHONY : xp/Gripper.s
+
+# target to generate assembly for a file
+xp/Gripper.cpp.s:
+	$(MAKE) -f CMakeFiles/experiment.dir/build.make CMakeFiles/experiment.dir/xp/Gripper.cpp.s
+.PHONY : xp/Gripper.cpp.s
+
+xp/Listener.o: xp/Listener.cpp.o
+.PHONY : xp/Listener.o
+
+# target to build an object file
+xp/Listener.cpp.o:
+	$(MAKE) -f CMakeFiles/experiment.dir/build.make CMakeFiles/experiment.dir/xp/Listener.cpp.o
+.PHONY : xp/Listener.cpp.o
+
+xp/Listener.i: xp/Listener.cpp.i
+.PHONY : xp/Listener.i
+
+# target to preprocess a source file
+xp/Listener.cpp.i:
+	$(MAKE) -f CMakeFiles/experiment.dir/build.make CMakeFiles/experiment.dir/xp/Listener.cpp.i
+.PHONY : xp/Listener.cpp.i
+
+xp/Listener.s: xp/Listener.cpp.s
+.PHONY : xp/Listener.s
+
+# target to generate assembly for a file
+xp/Listener.cpp.s:
+	$(MAKE) -f CMakeFiles/experiment.dir/build.make CMakeFiles/experiment.dir/xp/Listener.cpp.s
+.PHONY : xp/Listener.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -770,6 +855,7 @@ help:
 	@echo "... detect_object"
 	@echo "... doxygen"
 	@echo "... edit_cache"
+	@echo "... experiment"
 	@echo "... install"
 	@echo "... install/local"
 	@echo "... install/strip"
@@ -823,9 +909,18 @@ help:
 	@echo "... src/detect_object.o"
 	@echo "... src/detect_object.i"
 	@echo "... src/detect_object.s"
+	@echo "... src/experiment.o"
+	@echo "... src/experiment.i"
+	@echo "... src/experiment.s"
 	@echo "... src/save_corners.o"
 	@echo "... src/save_corners.i"
 	@echo "... src/save_corners.s"
+	@echo "... xp/Gripper.o"
+	@echo "... xp/Gripper.i"
+	@echo "... xp/Gripper.s"
+	@echo "... xp/Listener.o"
+	@echo "... xp/Listener.i"
+	@echo "... xp/Listener.s"
 .PHONY : help
 
 

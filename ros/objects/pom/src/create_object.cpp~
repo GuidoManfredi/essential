@@ -9,7 +9,8 @@ Object model (SHAPE shape, string input_dir, string output_dir);
 
 POM modeler;
 
-// rosrun pom create_object PAVE /home/gmanfred/devel/datasets/my_objects/pom/purfruit /home/gmanfred/devel/datasets/my_objects/pom/models
+// rosrun pom create_object 0 /home/gmanfred/devel/datasets/my_objects/pom/purfruit /home/gmanfred/devel/datasets/my_objects/pom/models
+// pcd_viewer model.pcd (to visualize the pointcloud in color press shift + 5)
 int main (int argc, char** argv) {
     assert(argc == 4 && "Usage: create_object shape images_dir output_dir");
     SHAPE shape = PAVE;

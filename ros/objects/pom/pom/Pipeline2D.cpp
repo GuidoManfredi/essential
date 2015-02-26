@@ -9,17 +9,26 @@ using namespace std;
 using namespace cv;
 
 Pipeline2D::Pipeline2D() {
-    char * argv[] ={ "-fo", "-1", "-v", "0"};
-    sift_.ParseParam(4, argv);
-    //char * argv[] = {"-fo", "0", "-v", "0", "-s", "2"};
-    //sift_.ParseParam (6, argv);
+    //char * argv[] ={ "-fo", "-1", "-v", "0"};
+    //sift_.ParseParam(4, argv);
+    //char * argv[] = {"-fo", "0", "-v", "1", "-s", "2"};
+    //char * argv[] = {"-fo", "0", "-v", "1", "-cuda", "0", "-di", "-nogl"};
+    //char * argv[] = {"-fo", "0", "-v", "0", "-s", "2", "-cuda", "0", "-di"};
+    char * argv[] = {"-fo", "0", "-v", "0", "-s", "2", "-cuda", "0", "-di"};
+    sift_.ParseParam (9, argv);
     int support = sift_.CreateContextGL();
     if(support != SiftGPU::SIFTGPU_FULL_SUPPORTED) {
         cout << "SiftGPU not supported" << endl;
     };
 
-    matcher_.SetMaxSift (8192);
+    matcher_gpu_.SetMaxSift (8192);
     minNumberMatchesAllowed_ = 8;
+    
+    detector_                                 = new cv::SIFT();
+    extractor_                                = new cv::SIFT();
+    matcher_                                  = new cv::FlannBasedMatcher();
+    //matcher_                                  = new cv::BFMatcher(cv::NORM_L2, true);
+    //matcher_                                  = new cv::BFMatcher(cv::NORM_L2, false);
 }
 
 void Pipeline2D::getGray(const cv::Mat& image, cv::Mat& gray)
@@ -44,8 +53,7 @@ vector<Point2f> Pipeline2D::getCorners(Mat image) {
 ////////////////////////////////////////////////////////////////////////////////
 // Features Part
 ////////////////////////////////////////////////////////////////////////////////
-bool Pipeline2D::detectFeatures(const cv::Mat& image, std::vector<cv::KeyPoint>& keypoints)
-{
+bool Pipeline2D::detectFeaturesGpu(const cv::Mat& image, std::vector<cv::KeyPoint>& keypoints) {
     assert(!image.empty());
     assert(image.channels() == 1);
     keypoints.clear();
@@ -70,8 +78,7 @@ bool Pipeline2D::detectFeatures(const cv::Mat& image, std::vector<cv::KeyPoint>&
     return true;
 }
 
-bool Pipeline2D::describeFeatures(const cv::Mat image, std::vector<cv::KeyPoint> keypoints, cv::Mat& descriptors)
-{
+bool Pipeline2D::describeFeaturesGpu(const cv::Mat image, std::vector<cv::KeyPoint> keypoints, cv::Mat& descriptors) {
     assert(!image.empty());
     assert(image.channels() == 1);
 
@@ -87,36 +94,69 @@ bool Pipeline2D::describeFeatures(const cv::Mat image, std::vector<cv::KeyPoint>
     return false;
 }
 
-bool Pipeline2D::extractFeatures(const cv::Mat& image, std::vector<cv::KeyPoint>& keypoints, cv::Mat& descriptors)
-{
-    detectFeatures(image, keypoints);
-    describeFeatures(image, keypoints, descriptors);
+bool Pipeline2D::detectFeatures(const cv::Mat& image, std::vector<cv::KeyPoint>& keypoints) {
+    assert(!image.empty());
+    assert(image.channels() == 1);
+    keypoints.clear();
+
+    detector_->detect(image, keypoints);
+    if (keypoints.empty())
+        return false;
     return true;
 }
 
-bool Pipeline2D::match (const cv::Mat &desc1, const cv::Mat &desc2,
+bool Pipeline2D::describeFeatures(const cv::Mat image, std::vector<cv::KeyPoint> keypoints, cv::Mat& descriptors) {
+    assert(!image.empty());
+    assert(image.channels() == 1);
+
+    if (!keypoints.empty()) {
+	    extractor_->compute(image, keypoints, descriptors);
+    	return true;
+    }
+
+    return false;
+}
+
+bool Pipeline2D::extractFeatures(const cv::Mat& image, bool gpu,
+                                    std::vector<cv::KeyPoint>& keypoints, cv::Mat& descriptors) {
+    if (gpu) {
+        detectFeaturesGpu (image, keypoints);
+        describeFeaturesGpu (image, keypoints, descriptors);
+    } else {
+        detectFeatures (image, keypoints);
+        describeFeatures (image, keypoints, descriptors);
+    }
+    return true;
+}
+
+bool Pipeline2D::match (const cv::Mat &desc1, const cv::Mat &desc2, bool gpu,
                         std::vector<cv::DMatch>& matches) {
-    matchNoMinimum (desc1, desc2, matches);
+    assert (desc1.data && desc2.data);
+    matches.clear ();
+  
+    if (gpu)
+        matchGpu (desc1, desc2, matches);
+    else
+        matchCV (desc1, desc2, matches);
+        
     if ( matches.size() > minNumberMatchesAllowed_ )
         return true;
 
     return false;
 }
 
-void Pipeline2D::matchNoMinimum (const cv::Mat &desc1, const cv::Mat &desc2,
+void Pipeline2D::matchGpu (const cv::Mat &desc1, const cv::Mat &desc2,
                                   std::vector<cv::DMatch>& matches) {
-    assert (desc1.data && desc2.data);
-    matches.clear();
-    if(matcher_.VerifyContextGL() == 0) return;
+    if(matcher_gpu_.VerifyContextGL() == 0) return;
     vector<float> des1 = desc2GPUdesc (desc1);
     vector<float> des2 = desc2GPUdesc (desc2);
 
-    matcher_.SetDescriptors(0, desc1.rows, &des1[0]);
-    matcher_.SetDescriptors(1, desc2.rows, &des2[0]);
+    matcher_gpu_.SetDescriptors(0, desc1.rows, &des1[0]);
+    matcher_gpu_.SetDescriptors(1, desc2.rows, &des2[0]);
     //Match and read back result to input buffer
     int match_buf[8192][2];
 
-    int nmatch = matcher_.GetSiftMatch(8192, match_buf);
+    int nmatch = matcher_gpu_.GetSiftMatch(8192, match_buf);
     //cout << "NMatch: " << nmatch << endl;
     // convert to opencv
     for ( size_t i = 0; i < nmatch; ++i) {
@@ -126,6 +166,25 @@ void Pipeline2D::matchNoMinimum (const cv::Mat &desc1, const cv::Mat &desc2,
         matches.push_back (m);
     }
     //cout << "Descs " << des1.size()/128 << " " << des2.size()/128 << endl;
+}
+
+void Pipeline2D::matchCV (const cv::Mat &desc1, const cv::Mat &desc2,
+                                  std::vector<cv::DMatch>& matches) {
+    matcher_->match(desc1, desc2, matches);
+    
+    double max_dist = 0; double min_dist = 100;
+    for( int i = 0; i < desc1.rows; i++ ) {
+        double dist = matches[i].distance;
+        if( dist < min_dist ) min_dist = dist;
+        if( dist > max_dist ) max_dist = dist;
+    }
+    
+    std::vector< DMatch > good_matches;
+    for( int i = 0; i < desc1.rows; i++ ) {
+        if( matches[i].distance <= max(2 * min_dist, 0.02) )
+            good_matches.push_back(matches[i]);
+    }
+    matches.swap(good_matches);
 }
 
 Mat Pipeline2D::getDescriptorsFromIndices (Mat train_descriptors,

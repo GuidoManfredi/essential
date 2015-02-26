@@ -51,4 +51,7 @@ rosbuild_add_executable(detect_object src/detect_object.cpp
 target_link_libraries(detect_object /home/gmanfred/devel/sandbox/SiftGPU/bin/libsiftgpu.so)
 rosbuild_add_executable(save_corners src/save_corners.cpp
                                      src/SaveCorners.cpp)
+rosbuild_add_executable(experiment src/experiment.cpp
+                                     xp/Listener.cpp
+                                     xp/Gripper.cpp)
 #target_link_libraries(example ${PROJECT_NAME})

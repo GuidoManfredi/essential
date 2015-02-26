@@ -22,18 +22,22 @@ class Pipeline2D {
     void getGray(const cv::Mat& image, cv::Mat& gray);
     std::vector<cv::Point2f> getCorners(cv::Mat image);
     // Features functions
+    bool detectFeaturesGpu(const cv::Mat& image,
+						std::vector<cv::KeyPoint>& keypoints);
+    bool describeFeaturesGpu(const cv::Mat image, std::vector<cv::KeyPoint> keypoints,
+						  cv::Mat& descriptors);
     bool detectFeatures(const cv::Mat& image,
 						std::vector<cv::KeyPoint>& keypoints);
     bool describeFeatures(const cv::Mat image, std::vector<cv::KeyPoint> keypoints,
 						  cv::Mat& descriptors);
-    bool describeFeatures(const cv::Mat image, std::vector<int> keypoints_index,
-                          cv::Mat& descriptors);
-    bool extractFeatures(const cv::Mat& image,
+    bool extractFeatures(const cv::Mat& image, bool gpu,
   						 std::vector<cv::KeyPoint>& keypoints, cv::Mat& descriptors);
-	void matchNoMinimum (const cv::Mat &desc1, const cv::Mat &desc2,
-                         std::vector<cv::DMatch>& matches);
-	bool match(const cv::Mat &desc1, const cv::Mat &desc2,
+	bool match(const cv::Mat &desc1, const cv::Mat &desc2, bool gpu,
                std::vector<cv::DMatch>& matches);
+	void matchGpu (const cv::Mat &desc1, const cv::Mat &desc2,
+                         std::vector<cv::DMatch>& matches);
+	void matchCV (const cv::Mat &desc1, const cv::Mat &desc2,
+                         std::vector<cv::DMatch>& matches);
     int getWordFromDescriptorIndex (std::vector<std::vector<int> > query_indices, int i);
     cv::Mat getDescriptorsFromIndices (cv::Mat train_descriptors,
                                        std::vector<int> train_descriptors_indices);
@@ -54,5 +58,9 @@ class Pipeline2D {
     std::vector<float> desc2GPUdesc (cv::Mat descs);
 
     SiftGPU sift_;
-    SiftMatchGPU matcher_;
+    SiftMatchGPU matcher_gpu_;
+    
+    cv::Ptr<cv::FeatureDetector>     detector_;
+    cv::Ptr<cv::DescriptorExtractor> extractor_;
+    cv::Ptr<cv::DescriptorMatcher>   matcher_;
 };

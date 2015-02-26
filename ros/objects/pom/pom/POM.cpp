@@ -12,11 +12,14 @@ Object POM::model (SHAPE shape, std::vector<cv::Mat> images, std::vector<int> fa
                    std::vector<std::vector<Point2f> > corners2d,
                    Point3f dimensions) {
     Object object;
+    vector<Vec3b> color;
     for ( size_t i = 0; i < images.size(); ++i ) {
         Mat rectified_image;
         rectifyImage (images[i], corners2d[i], dimensions,
                       rectified_image);
         //imshow ("Rectified Image", rectified_image); waitKey(0);
+        //string filename = "rectified_image.png";
+        //imwrite(filename.c_str() , rectified_image);
 
         vector<KeyPoint> keypoints;
         Mat descriptors;
@@ -28,24 +31,28 @@ Object POM::model (SHAPE shape, std::vector<cv::Mat> images, std::vector<int> fa
                        points3d);
         cout << "Computed " << points3d.size() << " 3D points." << endl;
         object.addView (points3d, descriptors);
+        
+        saveColor(rectified_image, keypoints, color);
     }
     // for visualization
     vector<Point3f> points3d;
     object.getPoints (points3d);
-    savePoints3d (points3d, "model.pcd");
+    savePoints3d (points3d, color, "model.pcd");
     //cout << "Total num p3ds: " << points3d.size() << endl;
 
     return object;
 }
 
-void POM::savePoints3d (std::vector<cv::Point3f> points3d, std::string filename) {
-  pcl::PointCloud<pcl::PointXYZ>::Ptr cloud (new pcl::PointCloud<pcl::PointXYZ>);
+void POM::savePoints3d (std::vector<cv::Point3f> points3d, std::vector<Vec3b> bgrs, std::string filename) {
+  pcl::PointCloud<pcl::PointXYZRGB>::Ptr cloud (new pcl::PointCloud<pcl::PointXYZRGB>);
 
   for (size_t i = 0; i < points3d.size(); ++i) {
-    pcl::PointXYZ pt;
+    pcl::PointXYZRGB pt;
     pt.x = points3d[i].x;
     pt.y = points3d[i].y;
     pt.z = points3d[i].z;
+    int32_t rgb = (bgrs[i][2] << 16) | (bgrs[i][1] << 8) | bgrs[i][0];
+    pt.rgb = *(float *)(&rgb);
     cloud->push_back(pt);
   }
 
@@ -55,13 +62,20 @@ void POM::savePoints3d (std::vector<cv::Point3f> points3d, std::string filename)
   pcl::io::savePCDFileASCII(filename, *cloud);
 }
 
+void POM::saveColor(Mat image, std::vector<KeyPoint> kpts, vector<Vec3b> &bgrs) {
+    for (size_t i = 0; i < kpts.size(); ++i) {
+        Vec3b bgr = image.at<Vec3b>(kpts[i].pt.y, kpts[i].pt.x);
+        bgrs.push_back(bgr);
+    }
+
+}
 ////////////////////////////////////////////////////////////////////////////////
 //  PRIVATE METHODS
 ////////////////////////////////////////////////////////////////////////////////
 void POM::extractFeatures (Mat image, vector<KeyPoint> &keypoints, Mat &descriptors) {
     Mat gray;
     pipeline2d_.getGray (image, gray);
-    pipeline2d_.extractFeatures(gray, keypoints, descriptors);
+    pipeline2d_.extractFeatures(gray, USE_SIFTGPU, keypoints, descriptors);
 }
 
 void POM::rectifyImage (Mat image, vector<Point2f> corners2d, Point3f dimensions,
@@ -100,6 +114,7 @@ void POM::convert2Dto3D(SHAPE shape, int face, Mat image, Point3f dimensions, ve
                       + local_points3d[i].y * R.at<float>(2, 1)
                       + local_points3d[i].z * R.at<float>(2, 2)
                       + t.at<float>(2);
+        //cout << points3d[i].x << " " << points3d[i].y << " " << points3d[i].z << endl;
     }
 }
 
@@ -188,11 +203,11 @@ void POM::convert2Dto3Dpave (int face, Mat image, Point3f dimensions, vector<Key
     points3d.resize(keypoints.size());
     for (size_t i = 0; i < keypoints.size(); ++i) {
         points3d[i].x = 0;
-        if ( face == 0 || face == 2)
-            points3d[i].y = (keypoints[i].pt.x - image.cols/2) * dimensions.x/image.cols;
+        if ( face == 0 || face == 3) // front or back
+            points3d[i].y = (keypoints[i].pt.x - image.cols/2) * dimensions.x / image.cols;
         else
-            points3d[i].y = (keypoints[i].pt.x - image.cols/2) * dimensions.z/image.cols;
-        points3d[i].z = -(keypoints[i].pt.y - image.rows/2) * dimensions.y/image.rows;
+            points3d[i].y = (keypoints[i].pt.x - image.cols/2) * dimensions.z / image.cols;
+        points3d[i].z = -(keypoints[i].pt.y - image.rows/2) * dimensions.y / image.rows;
     }
 }
 
@@ -201,9 +216,17 @@ void POM::convert2Dto3Dcyl (int face, Mat image, Point3f dimensions, vector<KeyP
     points3d.resize(keypoints.size());
     float diameter = 2 * dimensions.x; // 2 * radius
     for (size_t i = 0; i < keypoints.size(); ++i) {
-        points3d[i].y = (keypoints[i].pt.x - image.cols/2) * diameter/image.cols;
+        points3d[i].y = (keypoints[i].pt.x - image.cols/2) * diameter / image.cols;
+        /*
+        if (points3d[i].y >= dimensions.x) {
+            cout << image.cols << endl;
+            cout << image.rows << endl;
+            cout << keypoints[i].pt.x << endl;
+            cout << dimensions.x << endl;
+            cout << points3d[i].y << " " << dimensions.x << endl;
+        }*/
         points3d[i].x = sqrt(dimensions.x * dimensions.x - points3d[i].y * points3d[i].y);
-        points3d[i].z = -(keypoints[i].pt.y - image.rows/2) * dimensions.y/image.rows;
+        points3d[i].z = -(keypoints[i].pt.y - image.rows/2) * dimensions.y / image.rows;
         //cout << points3d[i].x << " " << points3d[i].y << endl;
     }
 }
