@@ -69,7 +69,6 @@ void image_callback(const sensor_msgs::ImageConstPtr& msg) {
     //ROS_INFO("Procesing time: %f s.", (end - start) * time_period);
 }
 
-// ./bin/detect_object image purfruit
 // rosrun opencv_publisher stream 0 webcam image
 // rosrun opencv_display display_poses_from_tf image
 

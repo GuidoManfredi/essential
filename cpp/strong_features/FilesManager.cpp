@@ -32,6 +32,7 @@ Object FilesManager::createObject (string folder_path) {
         for (size_t i = 0; i < v.size(); ++i) {
             string base_name;
             if (isPoseFile(v[i].filename().string(), base_name)) {
+                //cout << v[i].filename().string() << endl;
                 //cout << base_name << endl;
                 string pose_path = v[i].string();
                 string image_path = v[i].parent_path().string() + "/" + base_name + "_crop.png";
@@ -65,11 +66,7 @@ Object FilesManager::createObject (string folder_path) {
     } else {
         cout << "Error: loadObject: " << folder_path << " not a folder." << endl;
     }
-/*
-    for (size_t i = 0; i < ; ++i) {
 
-    }
-*/
     object.number_views_ = object.views_.size();
     object.features_type_ = pipe2d_->getFeatures();
     return object;

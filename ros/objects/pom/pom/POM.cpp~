@@ -17,10 +17,15 @@ Object POM::model (SHAPE shape, std::vector<cv::Mat> images, std::vector<int> fa
         Mat rectified_image;
         rectifyImage (images[i], corners2d[i], dimensions,
                       rectified_image);
-        //imshow ("Rectified Image", rectified_image); waitKey(0);
-        //string filename = "rectified_image.png";
-        //imwrite(filename.c_str() , rectified_image);
-
+          
+        /*            
+        std::stringstream ss;
+        ss << i;
+        imshow ("Rectified Image", rectified_image); waitKey(0);
+        string filename = "rectified_image_" + ss.str() + ".png";
+        imwrite(filename.c_str() , rectified_image);
+        */
+        
         vector<KeyPoint> keypoints;
         Mat descriptors;
         vector<Point3f> points3d;
@@ -39,6 +44,16 @@ Object POM::model (SHAPE shape, std::vector<cv::Mat> images, std::vector<int> fa
     object.getPoints (points3d);
     savePoints3d (points3d, color, "model.pcd");
     //cout << "Total num p3ds: " << points3d.size() << endl;
+
+    float minx = 300.0;
+    float maxx = 0.0;
+    for (size_t i = 0; i < points3d.size(); ++i) {
+        if (points3d[i].y > maxx)
+            maxx = points3d[i].y;
+        if (points3d[i].y < minx)
+            minx = points3d[i].y;
+    }
+    cout << minx << " " << maxx << endl;
 
     return object;
 }
@@ -86,9 +101,10 @@ void POM::rectifyImage (Mat image, vector<Point2f> corners2d, Point3f dimensions
 
     vector<Point2f> warped_corners;
     cv::perspectiveTransform(corners2d, warped_corners, T);
+    //cout << T << endl;
     Rect bb = boundingRect(warped_corners);
     cv::Size size (bb.width, bb.height);
-
+    //cout << size << endl;
     warpPerspective(image, rectified_image, T, size);
 }
 
@@ -114,7 +130,7 @@ void POM::convert2Dto3D(SHAPE shape, int face, Mat image, Point3f dimensions, ve
                       + local_points3d[i].y * R.at<float>(2, 1)
                       + local_points3d[i].z * R.at<float>(2, 2)
                       + t.at<float>(2);
-        cout << points3d[i].x << " " << points3d[i].y << " " << points3d[i].z << endl;
+        //cout << points3d[i].x << " " << points3d[i].y << " " << points3d[i].z << endl;
     }
 }
 
@@ -214,20 +230,13 @@ void POM::convert2Dto3Dpave (int face, Mat image, Point3f dimensions, vector<Key
 void POM::convert2Dto3Dcyl (int face, Mat image, Point3f dimensions, vector<KeyPoint> keypoints,
                             vector<Point3f> &points3d) {
     points3d.resize(keypoints.size());
-    float diameter = 2 * dimensions.x; // 2 * radius
+    float H = dimensions.y;
+    float R = dimensions.x; // radius
+    float D = 2 * R; // diameter
     for (size_t i = 0; i < keypoints.size(); ++i) {
-        points3d[i].y = (keypoints[i].pt.x - image.cols/2) * diameter / image.cols;
-        /*
-        if (points3d[i].y >= dimensions.x) {
-            cout << image.cols << endl;
-            cout << image.rows << endl;
-            cout << keypoints[i].pt.x << endl;
-            cout << dimensions.x << endl;
-            cout << points3d[i].y << " " << dimensions.x << endl;
-        }*/
-        points3d[i].x = sqrt(dimensions.x * dimensions.x - points3d[i].y * points3d[i].y);
-        points3d[i].z = -(keypoints[i].pt.y - image.rows/2) * dimensions.y / image.rows;
-        //cout << points3d[i].x << " " << points3d[i].y << endl;
+        points3d[i].y = (keypoints[i].pt.x - image.cols / 2) * D / image.cols;
+        points3d[i].x = sqrt(R * R - points3d[i].y * points3d[i].y);
+        points3d[i].z = -(keypoints[i].pt.y - image.rows / 2) * H / image.rows;
     }
 }
 

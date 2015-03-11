@@ -1,5 +1,6 @@
 #pragma once
 
+#include <string>
 #include <opencv2/highgui/highgui.hpp>
 
 #include <pcl/io/pcd_io.h>
@@ -51,6 +52,7 @@ class POM {
     void convert2Dto3Dcyl (int face, cv::Mat image, cv::Point3f dimensions, std::vector<cv::KeyPoint> keypoints,
                            std::vector<cv::Point3f> &points3d);
     std::vector<cv::Point2f> getCorners (std::vector<cv::Point2f> corners2d);
+    int solveSndDegEq(double a, double b, double c, double &sol1, double &sol2);
 
     Pipeline2D pipeline2d_;
 };

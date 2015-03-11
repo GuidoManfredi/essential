@@ -13,14 +13,14 @@ POM pom;
 
 void testModeling () {
     string intrinsics = "/home/gmanfred/.ros/camera_info/webcam_gilgamesh_opencv.yml";
-    pom.loadIntrinsic(intrinsics);
+    //pom.loadIntrinsic(intrinsics);
 
     FilesManager fm;
-    string base = "/home/gmanfred/devel/datasets/my_objects/purfruit/";
+    string base = "/home/gmanfred/devel/datasets/my_objects/pom/lentilles";
     vector<Mat> images = fm.getImages (base);
     vector< vector<Point2f> > corners = fm.getCorners (base + "corners.txt");
     Point3f dims = fm.getDimensions (base + "dimensions.txt");
-    Object obj = pom.model (images, corners, dims);
+    Object obj = pom.model (CYL, images, corners, dims);
 }
 
 int main()

@@ -45,7 +45,7 @@ typedef struct cObject {
 typedef struct cError {
     int N_;
     float P_;
-    float Rerr_;
+    float angle_;
     float time_;
 } Error;
 

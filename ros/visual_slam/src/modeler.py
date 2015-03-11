@@ -37,8 +37,8 @@ class Modeler:
             #num_inliers = self.pf.motion(self.previous_frame, self.object)
             if len(self.previous_frame.p3ds) == 0: # no depth sensor, triangulation needed
                 self.pf.structure(self.previous_frame, self.object)
+            self.pf.refine(self.previous_frame, self.object)
             self.object.add_keyframe(self.previous_frame)
-            self.pf.bundle_adjust(self.object, self.bundle_window_size)
             print "Adding new keyframe."
         
         # Save frame

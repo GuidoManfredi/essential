@@ -19,6 +19,8 @@ opencv2/imgproc/imgproc.hpp
 -
 
 /home/gmanfred/devel/essential/ros/objects/pom/pom/POM.h
+string
+-
 opencv2/highgui/highgui.hpp
 -
 pcl/io/pcd_io.h

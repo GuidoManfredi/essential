@@ -36,7 +36,8 @@ vector<int> Engine::match (Mat model_descriptors, vector<View> object_views) {
 int Engine::match (vector<View> model_views, vector<View> object_views,
                     vector<Error> &errors) {
     errors.resize(object_views.size());
-
+    //cout << object_views.size() << endl;
+    //bool eq = false;
     for (size_t i = 0; i < object_views.size(); ++i) {
         vector<int> number_matches (model_views.size());
         vector<float> rotation_error (model_views.size());
@@ -49,23 +50,26 @@ int Engine::match (vector<View> model_views, vector<View> object_views,
             if (matches.size() > 6)
                 pose_rad = pipe2d_->estimate_pose2 (model_views[j].keypoints_, object_views[i].keypoints_, matches);
                 //float pose_rad = pipe2d_->estimate_pose (model_views[j].keypoints_, object_views[i].points_, matches);
-/*
-            Mat img;
-            drawMatches (model_views[j].image_, model_views[j].keypoints_, object_views[i].image_, object_views[i].keypoints_, matches, img);
-            imshow("Debug", img); waitKey(0);
-*/
+
             rotation_error[j] = pose_rad;
             number_matches[j] = matches.size();
         }
         int end = cv::getTickCount();
         float time_period = 1 / cv::getTickFrequency();
         errors[i].N_ = *max_element(number_matches.begin(), number_matches.end());
+
+        //cout << "Max matches: " << errors[i].N_ << endl;
         //cout << object_views[i].keypoints_.size() << endl;
         if (object_views[i].keypoints_.size() == 0)
             errors[i].P_ = 0;
-        else
+        else {
             errors[i].P_ = static_cast<float>(errors[i].N_) / static_cast<float>(object_views[i].keypoints_.size()) * 100;
-        errors[i].Rerr_ = *min_element(rotation_error.begin(), rotation_error.end());
+            //cout << errors[i].N_ << " " << object_views[i].keypoints_.size() << endl;
+            //cout << static_cast<float>(errors[i].N_) << " " << static_cast<float>(object_views[i].keypoints_.size()) << endl;
+            //cout << errors[i].P_ << endl;
+        }
+        //errors[i].Rerr_ = *min_element(rotation_error.begin(), rotation_error.end());
+        errors[i].angle_ = object_views[i].angle_;
         errors[i].time_ = (end - start) * time_period;
         //cout << errors[i].time_ << endl;
     }
@@ -118,7 +122,7 @@ int Engine::getIdxFromAngle (Object object, float angle, int tilt) {
             //imshow("Debug", object.views_[i].image_); waitKey(0);
             //cout << object.views_[i].angle_ << endl;
             float diff = fabs(object.views_[i].angle_ - angle);
-            //cout << object.views_[i].angle_ << " " << angle << " " << diff << endl;
+            //cout << object.views_[i].angle_ << " " << angle << " " << diff << " " << i << endl;
             if (diff < min_diff) {
                 min_diff = diff;
                 min_idx = i;
@@ -126,49 +130,50 @@ int Engine::getIdxFromAngle (Object object, float angle, int tilt) {
         }
     }
     //cout << min_diff << endl;
+    //cout << min_idx << endl;
     return min_idx;
 }
 
 vector<Error> Engine::getMean (vector<vector<Error> > errors) {
     //int num_views = errors[0].size();
-    int num_views = 120;
+    //cout << errors[0].size() << endl;
+    //int num_views = 120;
+    int num_angles = 360;
     int num_objects = errors.size();
     vector<Error> mean;
-    mean.resize(num_views);
+    mean.resize(num_angles);
+    vector<int> count;
+    count.resize(num_angles);
 
     float total_time = 0.0;
-    for (size_t n = 0; n < num_views; ++n) {
-        int count = 0;
-        for (size_t i = 0; i < num_objects; ++i) {
-            if ( n < errors[i].size()) {
-                //if (errors[i][n].P_ > 100) cout << n << " " << i << " " << errors[i].size() << " " << errors[i][n].P_ <<endl;
-                //cout << n << " " << i << " " << errors[i].size() << " " << errors[i][n].P_ <<endl;
-                mean[n].N_ += errors[i][n].N_;
-                mean[n].P_ += errors[i][n].P_;
-                mean[n].Rerr_ += errors[i][n].Rerr_;
-                mean[n].time_ += errors[i][n].time_;
-                ++count;
-
-            }
-        }
-
-        if (count != 0) {
-            mean[n].N_ /= count;
-            mean[n].P_ /= count;
-            mean[n].Rerr_ /= count;
-            mean[n].time_ /= count;
-        } else {
-            mean[n].N_ = 0;
-            mean[n].P_ = 0;
-            mean[n].Rerr_ = 0;
-            mean[n].time_ = 0;
+    for (size_t o = 0; o < num_objects; ++o) {
+        //count.clear();
+        for (size_t v = 0; v < errors[o].size(); ++v) {
+            int idx = static_cast<int>(errors[o][v].angle_);
+            //cout << errors[o][v].angle_ << " " << idx << endl;
+            mean[idx].N_ += errors[o][v].N_;
+            mean[idx].P_ += errors[o][v].P_;
+            mean[idx].angle_ += errors[o][v].angle_;
+            mean[idx].time_ += errors[o][v].time_;
+            //cout << errors[o][v].angle_ << endl;
+            //cout << o << " " << v << " " << idx << " " << errors[o][v].N_ <<endl;
+            ++count[idx];
         }
         //cout << count << endl;
     }
 
-    for (size_t i = 0; i < num_views; ++i)
-        if (mean[i].time_ != 0)
-            mean[i].time_ /= num_views;
+    for (size_t i = 0; i < num_angles; ++i)
+        if (count[i] != 0) {
+            mean[i].N_ /= count[i];
+            mean[i].P_ /= count[i];
+            mean[i].angle_ /= count[i];
+            mean[i].time_ /= count[i];
+        } else {
+            mean[i].N_ = 0;
+            mean[i].P_ = 0;
+            mean[i].angle_ = 0;
+            mean[i].time_ = 0;
+        }
 
     return mean;
 }
@@ -189,7 +194,7 @@ void Engine::save(std::string out_basename, std::vector<Error> error) {
     stream.open(name.c_str(), std::fstream::out);
 
     for (size_t i = 0; i < error.size(); ++i) {
-        stream << error[i].N_ << "," << error[i].P_ << "," << error[i].Rerr_ << endl;
+        stream << error[i].N_ << "," << error[i].P_ << "," << error[i].angle_ << endl;
     }
     stream.close();
 }

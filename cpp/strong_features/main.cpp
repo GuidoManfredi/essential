@@ -57,8 +57,10 @@ string feature2string (Feature ft) {
 
 vector<int> getIdxFromAngles (Object object, vector<int> angles) {
     vector<int> idx;
-    for (size_t i = 0; i < angles.size(); ++i)
-        idx.push_back(engine.getIdxFromAngle(object, angles[i], 1));
+    for (size_t i = 0; i < angles.size(); ++i) {
+        idx.push_back(engine.getIdxFromAngle(object, angles[i], 2));
+        //cout << "Index:" << idx[i] << endl;
+    }
     return idx;
 }
 
@@ -81,6 +83,7 @@ void modelObject (string class_path, string object_name, string output_folder) {
     string object_path = class_path + "/" + object_name;
     //cout << object_path << endl;
     Object object = files.createObject (object_path);
+    cout << "Created object with " << object.views_.size() << " views." << endl;
     engine.sortViewByAngle(object);
 
     Feature eft = static_cast<Feature>(object.features_type_);
@@ -141,10 +144,10 @@ int computeClass (string dataset_path, string class_name, string objects_path, F
     int num_objects = files.getNumFolders(class_path);
     //cout << num_objects << endl;
     models_size = 0;
-    int num_views = 120;
     errors.resize(num_objects);
 
-    for (size_t i = 0; i < num_objects; ++i) {
+    for (size_t i = 0; i < num_objects; ++i) { // Compute all objects
+    //for (size_t i = 0; i < 1; ++i) { // Compute only for one object
         std::stringstream ss; ss << class_name << "_" << (i + 1); string object_name = ss.str();
         //cout << object_name << endl;
         vector<Error> tmp_error;
@@ -185,7 +188,7 @@ void experiment_best_feature (string dataset_path, vector<string> class_names, s
 
     // SIFT -> BRISK
     for (int ft = 0; ft < 7; ++ft)
-    //for (int ft = 0; ft < 1; ++ft)
+    //for (int ft = 3; ft < 4; ++ft)
         computeAll(dataset_path, class_names, objects_path, angles, static_cast<Feature>(ft), 0);
 }
 
@@ -196,7 +199,7 @@ void experiment_best_angles (string dataset_path, vector<string> class_names, st
     int ft = 5; {
         for (int angle = 0; angle < 360; angle += 9) {
             angles[0] = angle;
-            cout << angle << endl;
+            //cout << angle << endl;
             computeAll(dataset_path, class_names, objects_path, angles, static_cast<Feature>(ft), angle);
         }
     }
@@ -225,13 +228,12 @@ int main() {
     string objects_path = "results/objects";
 
     vector<string> classes;
-    //classes.push_back("cereal_box");
-
-    classes.push_back("food_bag");
+    classes.push_back("cereal_box");
+    classes.push_back("food_can");
     classes.push_back("instant_noodles");
     classes.push_back("soda_can");
     classes.push_back("food_box");
-    classes.push_back("food_can");
+    classes.push_back("food_bag");
     classes.push_back("food_jar");
     classes.push_back("water_bottle");
 

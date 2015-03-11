@@ -9,10 +9,6 @@
 #include "Object.h"
 #include "commons.h"
 
-#ifndef USE_GPU
-#define USE_GPU 1
-#endif
-
 // For PAVE dimensions are width, height and depth.
 // for CYL, it is Radius and height, last coordinate is not used and set to zero.
 enum SHAPE {PAVE, CYL};

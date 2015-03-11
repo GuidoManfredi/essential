@@ -12,8 +12,8 @@ Pipeline2D::Pipeline2D() {
     //char * argv[] ={ "-fo", "-1", "-v", "0"};
     //sift_.ParseParam(4, argv);
     //char * argv[] = {"-fo", "0", "-v", "1", "-s", "2"};
-    //char * argv[] = {"-fo", "0", "-v", "1", "-cuda", "0", "-di", "-nogl"};
     //char * argv[] = {"-fo", "0", "-v", "0", "-s", "2", "-cuda", "0", "-di"};
+    //char * argv[] = {"-fo", "-1", "-v", "0", "-s", "2", "-cuda", "0", "-di"};
     char * argv[] = {"-fo", "0", "-v", "0", "-s", "2", "-cuda", "0", "-di"};
     sift_.ParseParam (9, argv);
     int support = sift_.CreateContextGL();
@@ -22,6 +22,7 @@ Pipeline2D::Pipeline2D() {
     };
 
     matcher_gpu_.SetMaxSift (8192);
+    //matcher_gpu_.SetMaxSift (12288);
     minNumberMatchesAllowed_ = 8;
     
     detector_                                 = new cv::SIFT();
@@ -155,8 +156,10 @@ void Pipeline2D::matchGpu (const cv::Mat &desc1, const cv::Mat &desc2,
     matcher_gpu_.SetDescriptors(1, desc2.rows, &des2[0]);
     //Match and read back result to input buffer
     int match_buf[8192][2];
+    //int match_buf[12288][2];
 
     int nmatch = matcher_gpu_.GetSiftMatch(8192, match_buf);
+    //int nmatch = matcher_gpu_.GetSiftMatch(12288, match_buf);
     //cout << "NMatch: " << nmatch << endl;
     // convert to opencv
     for ( size_t i = 0; i < nmatch; ++i) {
