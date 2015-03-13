@@ -42,7 +42,7 @@ cv::Mat rosK2cvK(double fx, double fy, double cx, double cy);
 
 void intrinsic_callback(const sensor_msgs::CameraInfoConstPtr& msg) {
     if (!detecter.isIntrinsicSet()) {
-        cv::Mat K = rosK2cvK(msg->K[0], msg->K[4], msg->K[2], msg->K[5]);
+        cv::Mat K = rosK2cvK(msg->P[0], msg->P[5], msg->P[2], msg->P[6]);
         //cout << K << endl;
         detecter.setIntrinsic(K);
         ROS_INFO("Loaded intrinsic parameters");
@@ -69,7 +69,6 @@ void image_callback(const sensor_msgs::ImageConstPtr& msg) {
     //ROS_INFO("Procesing time: %f s.", (end - start) * time_period);
 }
 
-// ./bin/detect_object image purfruit
 // rosrun opencv_publisher stream 0 webcam image
 // rosrun opencv_display display_poses_from_tf image
 

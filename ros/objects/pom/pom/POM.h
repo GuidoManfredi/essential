@@ -55,4 +55,6 @@ class POM {
     int solveSndDegEq(double a, double b, double c, double &sol1, double &sol2);
 
     Pipeline2D pipeline2d_;
+    cv::Mat K_;
+    cv::Mat fpK_;
 };

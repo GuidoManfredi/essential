@@ -17,7 +17,7 @@ void PipelineGeom::mySolvePnP (Mat p3d, Mat p2d, Mat K,
 //    cout << p2d << endl;
     vector<int> inliers_idx;
     solvePnPRansac (p3d, p2d, K, vector<float>(), rvec, tov,
-                    false, 200, 2.0, p3d.rows*0.99, inliers_idx); // 99% inliers
+                    false, 200, 2.0, p3d.rows*0.95, inliers_idx); // 99% inliers
 //                    false, 500, 8.0, p3d.rows*0.80, inliers_idx); // 99% inliers
     p3d_inliers = p3d;
     p2d_inliers = p2d;
