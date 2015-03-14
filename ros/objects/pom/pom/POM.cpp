@@ -179,8 +179,8 @@ void POM::local2globalCyl (int face, Point3f dimensions,
 	Mat Rz = Mat::eye(3, 3, CV_32F);
     Rz.at<float>(0,0) = 0;
     Rz.at<float>(1,1) = 0;
-    Rz.at<float>(0,1) = 1;
-    Rz.at<float>(1,0) = -1;
+    Rz.at<float>(0,1) = -1;
+    Rz.at<float>(1,0) = 1;
 	Mat Ry = Mat::eye(3, 3, CV_32F);
     Ry.at<float>(0,0) = 0;
     Ry.at<float>(2,2) = 0;
@@ -209,7 +209,7 @@ void POM::local2globalCyl (int face, Point3f dimensions,
     } else {
         ;
     }
-    //R = R * Ry * Rz;
+    R = R * Ry * Rz;
 }
 
 void POM::convert2DtoLocal3D (SHAPE shape, int face, Mat image, Point3f dimensions, vector<KeyPoint> keypoints,
@@ -242,47 +242,40 @@ void POM::convert2Dto3Dcyl (int face, Mat image, Point3f dimensions, vector<KeyP
     double H = dimensions.y; // height
     double R = dimensions.x; // radius
     //cout << image.cols << " " << image.rows << "(apsect ratio: " << float(image.cols)/float(image.rows) << ")." << endl;
-    //double fx = 740 * 640 / image.cols;
-    //double fy = 740 * 480 /image.rows;
-    //double fx = 740 * image.cols / 640 * 3.0/4.0 * float(image.cols)/float(image.rows);
-    //double fy = 740 * image.rows / 480 * 3.0/4.0 * float(image.cols)/float(image.rows);
-    //double fx = 740 * image.cols / 640;
-    //double fy = 740 * image.rows / 480;
     double fx = fpK_.at<double>(0,0);
     double fy = fpK_.at<double>(1,1);
     //cout << "Focales: " << fx << " " << fy << endl;
     double u0 = fpK_.at<double>(0,2);
     double v0 = fpK_.at<double>(1,2);
-    //double u0 = image.cols / 2;
-    //double v0 = image.rows / 2;
     //cout << "Centre: " << v0 << " " << u0 << endl;
     double scaleX = 2 * R / image.cols;
     double scaleY = H / image.rows;
     //cout << "Scales: " << scaleX << " " << scaleY << endl;
-    cout << "Cz: " << scaleX * fx << " " << scaleY * fy << endl;
+    double Cz = scaleX * fx;
+    //cout << "Cz: " << scaleX * fx << " " << scaleY * fy << endl;
     double sol1, sol2;
     for (size_t i = 0; i < keypoints.size(); ++i) {
         double du = keypoints[i].pt.x - u0;
         double dv = keypoints[i].pt.y - v0;
+        /*
         int cmplx = solveSndDegEq( 1 + (du * du) / (fx * fx),
                                      -2 * (du * du) * scaleX / fx,
                                      (du * du) * (scaleX * scaleX) - (R * R),
                                      sol1, sol2);
-        // Pourquoi negatif les x,y et Z = max ?
+        */
+        int cmplx = solveSndDegEq( 1 + (fx * fx) / (du * du),
+                                    2 * Cz,
+                                    (Cz * Cz) - (R * R) * (fx * fx) / (du * du),
+                                     sol1, sol2);
+
         if(!cmplx) {
             //cout << "Kpt and sols: " << keypoints[i].pt.x << ": " << sol1 << " " << sol2 << endl;
             points3d[i].z = min(sol1, sol2); // negative Z solution
-            /*
-            if (du >= 0)
-                points3d[i].x = sqrt(R * R - points3d[i].z * points3d[i].z);
-            else
-                points3d[i].x = - sqrt(R * R - points3d[i].z * points3d[i].z);
-            */
 
-            points3d[i].x = - ((points3d[i].z / fx) - scaleX) * du;
+            points3d[i].x = ((points3d[i].z / fx) + scaleX) * du;
             //points3d[i].y = ((points3d[i].z / fy) - (fx / fy) * scaleX) * dv;
             //points3d[i].y = - ((points3d[i].z / fy) - (fx / fy) * scaleY) * dv;
-            points3d[i].y = - ((points3d[i].z / fy) - scaleY) * dv;
+            points3d[i].y = ((points3d[i].z / fy) + scaleY) * dv;
             //points3d[i].y = - (keypoints[i].pt.y - v0) * H / image.rows;
             //cout << points3d[i] << endl;
         }
