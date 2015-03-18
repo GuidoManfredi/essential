@@ -1,22 +1,23 @@
 #!/usr/bin/env python
 
-import numpy as np
+import rospy
+import roslib
+roslib.load_manifest("visual_slam")
+from icp_service.srv import *
 
-import vtk
+import numpy as np
+import pointclouds as pc
 
 from pipeline_image import PipelineImage
 from pipeline_geometric import PipelineGeometric
 from frame import Frame
 import tools
-import sba
 
 class PipelineFrame:
     def __init__(self):
         self.pi = PipelineImage()
         self.pg = PipelineGeometric()
         self.frame_id = 0
-        self.icp = vtk.vtkIterativeClosestPointTransform()
-        self.icpTransformFilter = vtk.vtkTransformPolyDataFilter()
     
     def set_calibration(self, intrinsic, distortion):
         self.pg.set_calibration(intrinsic, distortion)
@@ -56,50 +57,22 @@ class PipelineFrame:
     
     # Correct frame's motion by comparing it with obj data
     def refine(self, frame, obj):
-        pipo = True;
-        #T = self.icp(frame, obj)
-        #frame.set_motion(T)
-    
-    # use ICP to refine frame motion w.r.t the 3-D point cloud of the object.
-    def icp(self, frame, obj):
-        source = createVtkData(frame.p3ds):
-        target = createVtkData(obj.p3ds):
-        self.icp.SetSource(source)
-        self.icp.SetTarget(target)
-        self.icp.GetLandmarkTransform().SetModeToRigidBody()
-        #icp.DebugOn()
-        self.icp.SetMaximumNumberOfIterations(20)
-        self.icp.StartByMatchingCentroidsOn()
-        self.icp.Modified()
-        self.icp.Update()
-        
-        if vtk.VTK_MAJOR_VERSION <= 5:
-            self.icpTransformFilter.SetInput(source)
-        else:
-            self.icpTransformFilter.SetInputData(source)
- 
-        self.icpTransformFilter.SetTransform(icp)
-        self.icpTransformFilter.Update()
-        transformedSource = icpTransformFilter.GetOutput()
-
-        point_count = frame.p3ds.shape(2)
-        for index in range(pointCount):
-            point = [0,0,0]
-            transformedSource.GetPoint(index, point)
-            frame.p3ds[i] = point
-    
-    def bundle_adjust(self, obj, window_size):
-        cameras = self.bundle_cameras(obj, window_size)
-        points = self.bundle_points(obj, window_size)
-        newcams, newpoints, info = sba.SparseBundleAdjust(cameras, points)
-        #print info # error
-        obj.set_cameras(newcams)
-        obj.set_points(newcams)
-    
-    def bundle_cameras(self, obj, window_size):
-    
-    def bundle_points(self, obj, window_size):
-    
+        # Express frame p3ds in global frame
+        frame.p3ds = tools.transform(frame.p3ds, np.linalg.inv(frame.T))
+        # call for ICP service        
+        rospy.wait_for_service('icp')
+        try:
+            icp = rospy.ServiceProxy('icp', perform_icp)
+            pcframe3d = pc.array_to_pointcloud2(frame.p3ds)
+            pcobj3d = pc.array_to_pointcloud2(obj.p3ds)
+            resp = icp(pcframe3d, pcobj3d)
+            T = resp.pose
+        except rospy.ServiceException, e:
+            print "Service call failed: %s"%e
+        # Set new motion to frame
+        frame.set_motion(T * frame.T)
+        # Refine p3ds positions
+        frame.p3ds = tools.transform(frame.p3ds, np.linalg.inv(T))
     
     
     

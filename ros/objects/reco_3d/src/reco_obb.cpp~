@@ -26,6 +26,7 @@ bool recognize (reco_3d::OrientedBoundingBoxRecognition::Request &req,
 	pcl::fromROSMsg(req.cluster, *cloud);
 	//obb_computer.compute_obb_pca_hull (cloud, q, t, dims);
 	obb_computer.compute_obb_pca (cloud, q, t, dims);
+	//TODO file header
 	//res.pose.header = cloud->header;
 	res.pose.pose.position.x = t(0);
 	res.pose.pose.position.y = t(1);

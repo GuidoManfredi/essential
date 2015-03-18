@@ -102,8 +102,7 @@ void POM::rectifyImage (Mat image, vector<Point2f> corners2d, Point3f dimensions
     //cout << size << endl;
     warpPerspective(image, rectified_image, H, size);
 
-    fpK_ = H * K_;
-    cout << fpK_ << endl;
+    fpK_ = H * K_; // compute fronto-parelle view intrinsic parameters
 }
 
 void POM::convert2Dto3D(SHAPE shape, int face, Mat image, Point3f dimensions, vector<Point2f> corners2d,

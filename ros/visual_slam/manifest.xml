@@ -10,6 +10,7 @@
   <url>http://ros.org/wiki/visual_slam</url>
   <depend package="opencv2"/>
   <depend package="rospy"/>
+  <depend package="icp_service"/>
 
 </package>
 
