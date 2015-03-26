@@ -6,6 +6,12 @@
 
 #IncludeRegexTransform: 
 
+/home/gmanfred/devel/essential/ros/perception_models/src/generate_views.cpp
+pcl/visualization/pcl_visualizer.h
+-
+/home/gmanfred/devel/libraries/pcl/apps/3d_rec_framework/include/pcl/apps/3d_rec_framework/pc_source/mesh_source.h
+-
+
 /home/gmanfred/devel/libraries/pcl/apps/3d_rec_framework/include/pcl/apps/3d_rec_framework/pc_source/mesh_source.h
 pcl/apps/3d_rec_framework/pc_source/source.h
 -
@@ -18,12 +24,6 @@ pcl/io/pcd_io.h
 pcl/apps/3d_rec_framework/utils/vtk_model_sampling.h
 -
 boost/function.hpp
--
-
-/home/gmanfred/devel/ros/my_packs/perception_models/src/generate_views.cpp
-pcl/visualization/pcl_visualizer.h
--
-/home/gmanfred/devel/libraries/pcl/apps/3d_rec_framework/include/pcl/apps/3d_rec_framework/pc_source/mesh_source.h
 -
 
 /usr/include/eigen3/Eigen/Cholesky

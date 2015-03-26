@@ -32,7 +32,7 @@ CMAKE_COMMAND = /usr/bin/cmake
 RM = /usr/bin/cmake -E remove -f
 
 # The program to use to edit the cache.
-CMAKE_EDIT_COMMAND = /usr/bin/ccmake
+CMAKE_EDIT_COMMAND = /usr/bin/cmake-gui
 
 # The top-level source directory on which CMake was run.
 CMAKE_SOURCE_DIR = /home/gmanfred/devel/essential/ros/linemod_ros/Linemod
@@ -72,64 +72,39 @@ CMakeFiles/linemod_test.dir/linemod_test.cpp.o.provides: CMakeFiles/linemod_test
 
 CMakeFiles/linemod_test.dir/linemod_test.cpp.o.provides.build: CMakeFiles/linemod_test.dir/linemod_test.cpp.o
 
-CMakeFiles/linemod_test.dir/TrainLinemod.cpp.o: CMakeFiles/linemod_test.dir/flags.make
-CMakeFiles/linemod_test.dir/TrainLinemod.cpp.o: ../TrainLinemod.cpp
+CMakeFiles/linemod_test.dir/LinemodWrap.cpp.o: CMakeFiles/linemod_test.dir/flags.make
+CMakeFiles/linemod_test.dir/LinemodWrap.cpp.o: ../LinemodWrap.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/gmanfred/devel/essential/ros/linemod_ros/Linemod/build/CMakeFiles $(CMAKE_PROGRESS_2)
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/linemod_test.dir/TrainLinemod.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/linemod_test.dir/TrainLinemod.cpp.o -c /home/gmanfred/devel/essential/ros/linemod_ros/Linemod/TrainLinemod.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/linemod_test.dir/LinemodWrap.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/linemod_test.dir/LinemodWrap.cpp.o -c /home/gmanfred/devel/essential/ros/linemod_ros/Linemod/LinemodWrap.cpp
 
-CMakeFiles/linemod_test.dir/TrainLinemod.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/linemod_test.dir/TrainLinemod.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/gmanfred/devel/essential/ros/linemod_ros/Linemod/TrainLinemod.cpp > CMakeFiles/linemod_test.dir/TrainLinemod.cpp.i
+CMakeFiles/linemod_test.dir/LinemodWrap.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/linemod_test.dir/LinemodWrap.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/gmanfred/devel/essential/ros/linemod_ros/Linemod/LinemodWrap.cpp > CMakeFiles/linemod_test.dir/LinemodWrap.cpp.i
 
-CMakeFiles/linemod_test.dir/TrainLinemod.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/linemod_test.dir/TrainLinemod.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/gmanfred/devel/essential/ros/linemod_ros/Linemod/TrainLinemod.cpp -o CMakeFiles/linemod_test.dir/TrainLinemod.cpp.s
+CMakeFiles/linemod_test.dir/LinemodWrap.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/linemod_test.dir/LinemodWrap.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/gmanfred/devel/essential/ros/linemod_ros/Linemod/LinemodWrap.cpp -o CMakeFiles/linemod_test.dir/LinemodWrap.cpp.s
 
-CMakeFiles/linemod_test.dir/TrainLinemod.cpp.o.requires:
-.PHONY : CMakeFiles/linemod_test.dir/TrainLinemod.cpp.o.requires
+CMakeFiles/linemod_test.dir/LinemodWrap.cpp.o.requires:
+.PHONY : CMakeFiles/linemod_test.dir/LinemodWrap.cpp.o.requires
 
-CMakeFiles/linemod_test.dir/TrainLinemod.cpp.o.provides: CMakeFiles/linemod_test.dir/TrainLinemod.cpp.o.requires
-	$(MAKE) -f CMakeFiles/linemod_test.dir/build.make CMakeFiles/linemod_test.dir/TrainLinemod.cpp.o.provides.build
-.PHONY : CMakeFiles/linemod_test.dir/TrainLinemod.cpp.o.provides
+CMakeFiles/linemod_test.dir/LinemodWrap.cpp.o.provides: CMakeFiles/linemod_test.dir/LinemodWrap.cpp.o.requires
+	$(MAKE) -f CMakeFiles/linemod_test.dir/build.make CMakeFiles/linemod_test.dir/LinemodWrap.cpp.o.provides.build
+.PHONY : CMakeFiles/linemod_test.dir/LinemodWrap.cpp.o.provides
 
-CMakeFiles/linemod_test.dir/TrainLinemod.cpp.o.provides.build: CMakeFiles/linemod_test.dir/TrainLinemod.cpp.o
-
-CMakeFiles/linemod_test.dir/DetectLinemod.cpp.o: CMakeFiles/linemod_test.dir/flags.make
-CMakeFiles/linemod_test.dir/DetectLinemod.cpp.o: ../DetectLinemod.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/gmanfred/devel/essential/ros/linemod_ros/Linemod/build/CMakeFiles $(CMAKE_PROGRESS_3)
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/linemod_test.dir/DetectLinemod.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/linemod_test.dir/DetectLinemod.cpp.o -c /home/gmanfred/devel/essential/ros/linemod_ros/Linemod/DetectLinemod.cpp
-
-CMakeFiles/linemod_test.dir/DetectLinemod.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/linemod_test.dir/DetectLinemod.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/gmanfred/devel/essential/ros/linemod_ros/Linemod/DetectLinemod.cpp > CMakeFiles/linemod_test.dir/DetectLinemod.cpp.i
-
-CMakeFiles/linemod_test.dir/DetectLinemod.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/linemod_test.dir/DetectLinemod.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/gmanfred/devel/essential/ros/linemod_ros/Linemod/DetectLinemod.cpp -o CMakeFiles/linemod_test.dir/DetectLinemod.cpp.s
-
-CMakeFiles/linemod_test.dir/DetectLinemod.cpp.o.requires:
-.PHONY : CMakeFiles/linemod_test.dir/DetectLinemod.cpp.o.requires
-
-CMakeFiles/linemod_test.dir/DetectLinemod.cpp.o.provides: CMakeFiles/linemod_test.dir/DetectLinemod.cpp.o.requires
-	$(MAKE) -f CMakeFiles/linemod_test.dir/build.make CMakeFiles/linemod_test.dir/DetectLinemod.cpp.o.provides.build
-.PHONY : CMakeFiles/linemod_test.dir/DetectLinemod.cpp.o.provides
-
-CMakeFiles/linemod_test.dir/DetectLinemod.cpp.o.provides.build: CMakeFiles/linemod_test.dir/DetectLinemod.cpp.o
+CMakeFiles/linemod_test.dir/LinemodWrap.cpp.o.provides.build: CMakeFiles/linemod_test.dir/LinemodWrap.cpp.o
 
 # Object files for target linemod_test
 linemod_test_OBJECTS = \
 "CMakeFiles/linemod_test.dir/linemod_test.cpp.o" \
-"CMakeFiles/linemod_test.dir/TrainLinemod.cpp.o" \
-"CMakeFiles/linemod_test.dir/DetectLinemod.cpp.o"
+"CMakeFiles/linemod_test.dir/LinemodWrap.cpp.o"
 
 # External object files for target linemod_test
 linemod_test_EXTERNAL_OBJECTS =
 
 linemod_test: CMakeFiles/linemod_test.dir/linemod_test.cpp.o
-linemod_test: CMakeFiles/linemod_test.dir/TrainLinemod.cpp.o
-linemod_test: CMakeFiles/linemod_test.dir/DetectLinemod.cpp.o
+linemod_test: CMakeFiles/linemod_test.dir/LinemodWrap.cpp.o
 linemod_test: /usr/lib/libboost_system-mt.so
 linemod_test: /usr/lib/libboost_filesystem-mt.so
 linemod_test: /usr/lib/libboost_thread-mt.so
@@ -137,9 +112,22 @@ linemod_test: /usr/lib/libboost_date_time-mt.so
 linemod_test: /usr/lib/libboost_iostreams-mt.so
 linemod_test: /usr/lib/libboost_serialization-mt.so
 linemod_test: /usr/lib/libpcl_common.so
+linemod_test: /usr/lib/libOpenNI.so
+linemod_test: /usr/lib/libOpenNI2.so
 linemod_test: /usr/lib/libvtkCommon.so.5.8.0
+linemod_test: /usr/lib/libvtkFiltering.so.5.8.0
+linemod_test: /usr/lib/libvtkImaging.so.5.8.0
+linemod_test: /usr/lib/libvtkGraphics.so.5.8.0
+linemod_test: /usr/lib/libvtkGenericFiltering.so.5.8.0
+linemod_test: /usr/lib/libvtkIO.so.5.8.0
 linemod_test: /usr/lib/libvtkRendering.so.5.8.0
+linemod_test: /usr/lib/libvtkVolumeRendering.so.5.8.0
 linemod_test: /usr/lib/libvtkHybrid.so.5.8.0
+linemod_test: /usr/lib/libvtkWidgets.so.5.8.0
+linemod_test: /usr/lib/libvtkParallel.so.5.8.0
+linemod_test: /usr/lib/libvtkInfovis.so.5.8.0
+linemod_test: /usr/lib/libvtkGeovis.so.5.8.0
+linemod_test: /usr/lib/libvtkViews.so.5.8.0
 linemod_test: /usr/lib/libvtkCharts.so.5.8.0
 linemod_test: /usr/lib/libpcl_io.so
 linemod_test: /usr/lib/libboost_system-mt.so
@@ -166,9 +154,22 @@ linemod_test: /usr/lib/libboost_date_time-mt.so
 linemod_test: /usr/lib/libboost_iostreams-mt.so
 linemod_test: /usr/lib/libboost_serialization-mt.so
 linemod_test: /usr/lib/libpcl_common.so
+linemod_test: /usr/lib/libOpenNI.so
+linemod_test: /usr/lib/libOpenNI2.so
 linemod_test: /usr/lib/libvtkCommon.so.5.8.0
+linemod_test: /usr/lib/libvtkFiltering.so.5.8.0
+linemod_test: /usr/lib/libvtkImaging.so.5.8.0
+linemod_test: /usr/lib/libvtkGraphics.so.5.8.0
+linemod_test: /usr/lib/libvtkGenericFiltering.so.5.8.0
+linemod_test: /usr/lib/libvtkIO.so.5.8.0
 linemod_test: /usr/lib/libvtkRendering.so.5.8.0
+linemod_test: /usr/lib/libvtkVolumeRendering.so.5.8.0
 linemod_test: /usr/lib/libvtkHybrid.so.5.8.0
+linemod_test: /usr/lib/libvtkWidgets.so.5.8.0
+linemod_test: /usr/lib/libvtkParallel.so.5.8.0
+linemod_test: /usr/lib/libvtkInfovis.so.5.8.0
+linemod_test: /usr/lib/libvtkGeovis.so.5.8.0
+linemod_test: /usr/lib/libvtkViews.so.5.8.0
 linemod_test: /usr/lib/libvtkCharts.so.5.8.0
 linemod_test: /usr/lib/libpcl_io.so
 linemod_test: /usr/lib/libboost_system-mt.so
@@ -804,18 +805,20 @@ linemod_test: /usr/lib/libboost_date_time-mt.so
 linemod_test: /usr/lib/libboost_iostreams-mt.so
 linemod_test: /usr/lib/libboost_serialization-mt.so
 linemod_test: /usr/lib/libpcl_common.so
+linemod_test: /usr/lib/libOpenNI.so
+linemod_test: /usr/lib/libOpenNI2.so
 linemod_test: /usr/lib/libpcl_io.so
 linemod_test: /usr/lib/libpcl_recognition.so
 linemod_test: /usr/lib/libpcl_registration.so
 linemod_test: /usr/lib/libvtkViews.so.5.8.0
 linemod_test: /usr/lib/libvtkInfovis.so.5.8.0
 linemod_test: /usr/lib/libvtkWidgets.so.5.8.0
+linemod_test: /usr/lib/libvtkVolumeRendering.so.5.8.0
 linemod_test: /usr/lib/libvtkHybrid.so.5.8.0
 linemod_test: /usr/lib/libvtkParallel.so.5.8.0
-linemod_test: /usr/lib/libvtkVolumeRendering.so.5.8.0
 linemod_test: /usr/lib/libvtkRendering.so.5.8.0
-linemod_test: /usr/lib/libvtkGraphics.so.5.8.0
 linemod_test: /usr/lib/libvtkImaging.so.5.8.0
+linemod_test: /usr/lib/libvtkGraphics.so.5.8.0
 linemod_test: /usr/lib/libvtkIO.so.5.8.0
 linemod_test: /usr/lib/libvtkFiltering.so.5.8.0
 linemod_test: /usr/lib/libvtkCommon.so.5.8.0
@@ -830,8 +833,7 @@ CMakeFiles/linemod_test.dir/build: linemod_test
 .PHONY : CMakeFiles/linemod_test.dir/build
 
 CMakeFiles/linemod_test.dir/requires: CMakeFiles/linemod_test.dir/linemod_test.cpp.o.requires
-CMakeFiles/linemod_test.dir/requires: CMakeFiles/linemod_test.dir/TrainLinemod.cpp.o.requires
-CMakeFiles/linemod_test.dir/requires: CMakeFiles/linemod_test.dir/DetectLinemod.cpp.o.requires
+CMakeFiles/linemod_test.dir/requires: CMakeFiles/linemod_test.dir/LinemodWrap.cpp.o.requires
 .PHONY : CMakeFiles/linemod_test.dir/requires
 
 CMakeFiles/linemod_test.dir/clean:

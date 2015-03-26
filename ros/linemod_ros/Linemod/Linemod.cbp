@@ -32,12 +32,14 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
-		<Unit filename="DetectLinemod.cpp" />
-		<Unit filename="DetectLinemod.h" />
-		<Unit filename="TrainLinemod.cpp" />
-		<Unit filename="TrainLinemod.h" />
+		<Unit filename="CMakeLists.txt" />
+		<Unit filename="LinemodWrap.cpp" />
+		<Unit filename="LinemodWrap.h" />
+		<Unit filename="OnlineGrabber.cpp" />
+		<Unit filename="OnlineGrabber.h" />
 		<Unit filename="common.h" />
 		<Unit filename="linemod_test.cpp" />
+		<Unit filename="online_grabber.cpp" />
 		<Extensions>
 			<code_completion />
 			<debugger />

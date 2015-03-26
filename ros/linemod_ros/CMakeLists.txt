@@ -1,7 +1,7 @@
-cmake_minimum_required(VERSION 2.4.6)
+cmake_minimum_required(VERSION 2.8)
 include($ENV{ROS_ROOT}/core/rosbuild/rosbuild.cmake)
-
-find_package(PCL 1.7 REQUIRED)
+project(linemod_ros)
+find_package(PCL 1.7 REQUIRED COMPONENTS common io recognition segmentation visualization)
 
 # Set the build type.  Options are:
 #  Coverage       : w/ debug symbols, w/o optimization, w/ code-coverage
@@ -36,6 +36,12 @@ endif (NOT PCL_FOUND)
 #rosbuild_add_boost_directories()
 #rosbuild_link_boost(${PROJECT_NAME} thread)
 rosbuild_add_executable(train_test src/train_test.cpp
-                                        Linemod/Train.cpp)
-target_link_libraries(train_test ${PCL_LIBRARIES} libvtkCommon.so libvtkFiltering.so libvtkRendering.so libvtkHybrid.so)
+                                        Linemod/OnlineGrabber.cpp
+                                        Linemod/LinemodWrap.cpp)
+target_link_libraries(train_test ${PCL_COMMON_LIBRARIES}
+                                 ${PCL_IO_LIBRARIES}
+                                 ${PCL_RECOGNITION_LIBRARIES}
+                                 ${PCL_SEGMENTATION_LIBRARIES}
+                                 ${PCL_VISUALIZATION_LIBRARIES}
+                                 libvtkCommon.so libvtkFiltering.so libvtkRendering.so libvtkHybrid.so)
 #target_link_libraries(example ${PROJECT_NAME})

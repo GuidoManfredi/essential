@@ -44,7 +44,7 @@ CMAKE_COMMAND = /usr/bin/cmake
 RM = /usr/bin/cmake -E remove -f
 
 # The program to use to edit the cache.
-CMAKE_EDIT_COMMAND = /usr/bin/ccmake
+CMAKE_EDIT_COMMAND = /usr/bin/cmake-gui
 
 # The top-level source directory on which CMake was run.
 CMAKE_SOURCE_DIR = /home/gmanfred/devel/essential/ros/linemod_ros/Linemod
@@ -59,7 +59,7 @@ CMAKE_BINARY_DIR = /home/gmanfred/devel/essential/ros/linemod_ros/Linemod/build
 CMakeFiles/linemod_test.dir/all:
 	$(MAKE) -f CMakeFiles/linemod_test.dir/build.make CMakeFiles/linemod_test.dir/depend
 	$(MAKE) -f CMakeFiles/linemod_test.dir/build.make CMakeFiles/linemod_test.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/gmanfred/devel/essential/ros/linemod_ros/Linemod/build/CMakeFiles  1 2 3
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/gmanfred/devel/essential/ros/linemod_ros/Linemod/build/CMakeFiles  1 2
 	@echo "Built target linemod_test"
 .PHONY : CMakeFiles/linemod_test.dir/all
 
@@ -69,7 +69,7 @@ all: CMakeFiles/linemod_test.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/linemod_test.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/gmanfred/devel/essential/ros/linemod_ros/Linemod/build/CMakeFiles 3
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/gmanfred/devel/essential/ros/linemod_ros/Linemod/build/CMakeFiles 2
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/linemod_test.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/gmanfred/devel/essential/ros/linemod_ros/Linemod/build/CMakeFiles 0
 .PHONY : CMakeFiles/linemod_test.dir/rule
@@ -85,6 +85,41 @@ CMakeFiles/linemod_test.dir/clean:
 
 # clean rule for target.
 clean: CMakeFiles/linemod_test.dir/clean
+.PHONY : clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/online_grabber.dir
+
+# All Build rule for target.
+CMakeFiles/online_grabber.dir/all:
+	$(MAKE) -f CMakeFiles/online_grabber.dir/build.make CMakeFiles/online_grabber.dir/depend
+	$(MAKE) -f CMakeFiles/online_grabber.dir/build.make CMakeFiles/online_grabber.dir/build
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/gmanfred/devel/essential/ros/linemod_ros/Linemod/build/CMakeFiles  3 4 5
+	@echo "Built target online_grabber"
+.PHONY : CMakeFiles/online_grabber.dir/all
+
+# Include target in all.
+all: CMakeFiles/online_grabber.dir/all
+.PHONY : all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/online_grabber.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/gmanfred/devel/essential/ros/linemod_ros/Linemod/build/CMakeFiles 3
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/online_grabber.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/gmanfred/devel/essential/ros/linemod_ros/Linemod/build/CMakeFiles 0
+.PHONY : CMakeFiles/online_grabber.dir/rule
+
+# Convenience name for target.
+online_grabber: CMakeFiles/online_grabber.dir/rule
+.PHONY : online_grabber
+
+# clean rule for target.
+CMakeFiles/online_grabber.dir/clean:
+	$(MAKE) -f CMakeFiles/online_grabber.dir/build.make CMakeFiles/online_grabber.dir/clean
+.PHONY : CMakeFiles/online_grabber.dir/clean
+
+# clean rule for target.
+clean: CMakeFiles/online_grabber.dir/clean
 .PHONY : clean
 
 #=============================================================================

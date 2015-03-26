@@ -33,7 +33,7 @@ int main (int argc, char** argv) {
 	
 	ros::Rate loop_rate(10);
 	while (ros::ok() && !cloud_viewer.wasStopped()) {
-    cloud_viewer.spinOnce(1);
+	    cloud_viewer.spinOnce(1);
 		ros::spinOnce();
 		loop_rate.sleep ();
 	}

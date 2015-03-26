@@ -3,22 +3,21 @@
 OnlineTrain::OnlineTrain() {}
 
 void
-compute (const PointCloudXYZRGBA::ConstPtr & input, float min_depth, float max_depth, float max_height,
+compute (const PointCloudType::ConstPtr & input, float min_depth, float max_depth, float max_height,
 const std::string & template_pcd_filename, const std::string & template_sqmmt_filename)
 {
     // Segment the foreground object
     std::vector<bool> foreground_mask = maskForegroundPoints (input, min_depth, max_depth, max_height);
     // Save the masked template cloud (masking with NaNs to preserve its organized structure)
-    PointCloudXYZRGBA template_cloud (*input);
+    PointCloudType template_cloud (*input);
     for (size_t i = 0; i < foreground_mask.size (); ++i) {
         if (!foreground_mask[i]) {
-            pcl::PointXYZRGBA & p = template_cloud.points[i];
+            pcl::PointType &p = template_cloud.points[i];
             p.x = p.y = p.z = std::numeric_limits<float>::quiet_NaN ();
         }
     }
     pcl::io::savePCDFile (template_pcd_filename, template_cloud);
     // Create a LINEMOD template
-    pcl::LINEMOD linemod;
     trainTemplate (input, foreground_mask, linemod);
     // Save the LINEMOD template
     std::ofstream file_stream;
@@ -58,7 +57,7 @@ OnlineTrain::maskForegroundPoints (const PointCloudXYZRGBA::ConstPtr & input,
 
     // Mask off the plane inliers
     for (size_t i = 0; i < inliers->indices.size (); ++i)
-    foreground_mask[inliers->indices[i]] = false;
+        foreground_mask[inliers->indices[i]] = false;
 
     // Mask off any foreground points that are too high above the detected plane
     const std::vector<float> & c = coefficients->values;

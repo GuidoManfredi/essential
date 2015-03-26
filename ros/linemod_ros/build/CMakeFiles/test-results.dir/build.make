@@ -46,7 +46,7 @@ CMAKE_BINARY_DIR = /home/gmanfred/devel/essential/ros/linemod_ros/build
 include CMakeFiles/test-results.dir/progress.make
 
 CMakeFiles/test-results:
-	/opt/ros/groovy/share/rosunit/cmake/../scripts/summarize_results.py --nodeps linemod_ros
+	/opt/ros/hydro/share/rosunit/cmake/../scripts/summarize_results.py --nodeps linemod_ros
 
 test-results: CMakeFiles/test-results
 test-results: CMakeFiles/test-results.dir/build.make

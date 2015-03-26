@@ -50,15 +50,6 @@ Boost_IOSTREAMS_LIBRARY_RELEASE:FILEPATH=/usr/lib/libboost_iostreams-mt.so
 //Boost library directory
 Boost_LIBRARY_DIRS:FILEPATH=/usr/lib
 
-//The Boost MPI library
-Boost_MPI_LIBRARY:FILEPATH=/usr/lib/libboost_mpi-mt.so
-
-//Boost mpi library (debug)
-Boost_MPI_LIBRARY_DEBUG:FILEPATH=/usr/lib/libboost_mpi-mt.so
-
-//Boost mpi library (release)
-Boost_MPI_LIBRARY_RELEASE:FILEPATH=/usr/lib/libboost_mpi-mt.so
-
 //The Boost SERIALIZATION library
 Boost_SERIALIZATION_LIBRARY:FILEPATH=/usr/lib/libboost_serialization-mt.so
 
@@ -227,8 +218,8 @@ CMAKE_SKIP_RPATH:BOOL=NO
 //Path to a program.
 CMAKE_STRIP:FILEPATH=/usr/bin/strip
 
-//The CMake toolchain file
-CMAKE_TOOLCHAIN_FILE:FILEPATH=/opt/ros/groovy/share/ros/core/rosbuild/rostoolchain.cmake
+//No help, variable specified on the command line.
+CMAKE_TOOLCHAIN_FILE:UNINITIALIZED=/opt/ros/hydro/share/ros/core/rosbuild/rostoolchain.cmake
 
 //If true, cmake will use relative paths in makefiles and projects.
 CMAKE_USE_RELATIVE_PATHS:BOOL=OFF
@@ -255,13 +246,13 @@ EMPY_EXECUTABLE:FILEPATH=/usr/bin/empy
 EXECUTABLE_OUTPUT_PATH:PATH=
 
 //Path to a file.
-FLANN_INCLUDE_DIRS:PATH=/opt/ros/groovy/include
+FLANN_INCLUDE_DIRS:PATH=/usr/include
 
 //Path to a library.
-FLANN_LIBRARY:FILEPATH=/opt/ros/groovy/lib/libflann_cpp_s.a
+FLANN_LIBRARY:FILEPATH=/usr/lib/libflann_cpp_s.a
 
 //Path to a library.
-FLANN_LIBRARY_DEBUG:FILEPATH=/opt/ros/groovy/lib/libflann_cpp_s-gd.a
+FLANN_LIBRARY_DEBUG:FILEPATH=/usr/lib/libflann_cpp_s.a
 
 //Path to a file.
 GTEST_INCLUDE_DIR:PATH=/usr/include
@@ -297,292 +288,124 @@ LSB_RELEASE_EXECUTABLE:FILEPATH=/usr/bin/lsb_release
 NOSETESTS:FILEPATH=/usr/local/bin/nosetests
 
 //Path to a file.
-OPENNI_INCLUDE_DIRS:PATH=OPENNI_INCLUDE_DIRS-NOTFOUND
+OPENNI_INCLUDE_DIRS:PATH=/usr/include/ni
 
 //Path to a library.
 OPENNI_LIBRARY:FILEPATH=/usr/lib/libOpenNI.so
 
-//path to 2d headers
-PCL_2D_INCLUDE_DIR:PATH=/usr/local/include/pcl-1.7
-
-//path to apps headers
-PCL_APPS_INCLUDE_DIR:PATH=/usr/local/include/pcl-1.7
-
-//path to pcl_apps library
-PCL_APPS_LIBRARY:FILEPATH=/usr/local/lib/libpcl_apps.so
-
-//path to pcl_apps library debug
-PCL_APPS_LIBRARY_DEBUG:FILEPATH=/usr/local/lib/libpcl_apps.so
-
 //path to common headers
-PCL_COMMON_INCLUDE_DIR:PATH=/usr/local/include/pcl-1.7
+PCL_COMMON_INCLUDE_DIR:PATH=/usr/include/pcl-1.7
 
 //path to pcl_common library
-PCL_COMMON_LIBRARY:FILEPATH=/usr/local/lib/libpcl_common.so
+PCL_COMMON_LIBRARY:FILEPATH=/usr/lib/libpcl_common.so
 
 //path to pcl_common library debug
-PCL_COMMON_LIBRARY_DEBUG:FILEPATH=/usr/local/lib/libpcl_common.so
-
-//path to cuda_common headers
-PCL_CUDA_COMMON_INCLUDE_DIR:PATH=/usr/local/include/pcl-1.7
-
-//path to cuda_features headers
-PCL_CUDA_FEATURES_INCLUDE_DIR:PATH=/usr/local/include/pcl-1.7
-
-//path to pcl_cuda_features library
-PCL_CUDA_FEATURES_LIBRARY:FILEPATH=/usr/local/lib/libpcl_cuda_features.so
-
-//path to pcl_cuda_features library debug
-PCL_CUDA_FEATURES_LIBRARY_DEBUG:FILEPATH=/usr/local/lib/libpcl_cuda_features.so
-
-//path to cuda_io headers
-PCL_CUDA_IO_INCLUDE_DIR:PATH=/usr/local/include/pcl-1.7
-
-//path to pcl_cuda_io library
-PCL_CUDA_IO_LIBRARY:FILEPATH=/usr/local/lib/libpcl_cuda_io.so
-
-//path to pcl_cuda_io library debug
-PCL_CUDA_IO_LIBRARY_DEBUG:FILEPATH=/usr/local/lib/libpcl_cuda_io.so
-
-//path to cuda_sample_consensus headers
-PCL_CUDA_SAMPLE_CONSENSUS_INCLUDE_DIR:PATH=/usr/local/include/pcl-1.7
-
-//path to pcl_cuda_sample_consensus library
-PCL_CUDA_SAMPLE_CONSENSUS_LIBRARY:FILEPATH=/usr/local/lib/libpcl_cuda_sample_consensus.so
-
-//path to pcl_cuda_sample_consensus library debug
-PCL_CUDA_SAMPLE_CONSENSUS_LIBRARY_DEBUG:FILEPATH=/usr/local/lib/libpcl_cuda_sample_consensus.so
-
-//path to cuda_segmentation headers
-PCL_CUDA_SEGMENTATION_INCLUDE_DIR:PATH=/usr/local/include/pcl-1.7
-
-//path to pcl_cuda_segmentation library
-PCL_CUDA_SEGMENTATION_LIBRARY:FILEPATH=/usr/local/lib/libpcl_cuda_segmentation.so
-
-//path to pcl_cuda_segmentation library debug
-PCL_CUDA_SEGMENTATION_LIBRARY_DEBUG:FILEPATH=/usr/local/lib/libpcl_cuda_segmentation.so
+PCL_COMMON_LIBRARY_DEBUG:FILEPATH=/usr/lib/libpcl_common.so
 
 //The directory containing a CMake configuration file for PCL.
-PCL_DIR:PATH=/usr/local/share/pcl-1.7
+PCL_DIR:PATH=/usr/share/pcl-1.7
 
 //path to features headers
-PCL_FEATURES_INCLUDE_DIR:PATH=/usr/local/include/pcl-1.7
+PCL_FEATURES_INCLUDE_DIR:PATH=/usr/include/pcl-1.7
 
 //path to pcl_features library
-PCL_FEATURES_LIBRARY:FILEPATH=/usr/local/lib/libpcl_features.so
+PCL_FEATURES_LIBRARY:FILEPATH=/usr/lib/libpcl_features.so
 
 //path to pcl_features library debug
-PCL_FEATURES_LIBRARY_DEBUG:FILEPATH=/usr/local/lib/libpcl_features.so
+PCL_FEATURES_LIBRARY_DEBUG:FILEPATH=/usr/lib/libpcl_features.so
 
 //path to filters headers
-PCL_FILTERS_INCLUDE_DIR:PATH=/usr/local/include/pcl-1.7
+PCL_FILTERS_INCLUDE_DIR:PATH=/usr/include/pcl-1.7
 
 //path to pcl_filters library
-PCL_FILTERS_LIBRARY:FILEPATH=/usr/local/lib/libpcl_filters.so
+PCL_FILTERS_LIBRARY:FILEPATH=/usr/lib/libpcl_filters.so
 
 //path to pcl_filters library debug
-PCL_FILTERS_LIBRARY_DEBUG:FILEPATH=/usr/local/lib/libpcl_filters.so
+PCL_FILTERS_LIBRARY_DEBUG:FILEPATH=/usr/lib/libpcl_filters.so
 
 //path to geometry headers
-PCL_GEOMETRY_INCLUDE_DIR:PATH=/usr/local/include/pcl-1.7
-
-//path to gpu_containers headers
-PCL_GPU_CONTAINERS_INCLUDE_DIR:PATH=/usr/local/include/pcl-1.7
-
-//path to pcl_gpu_containers library
-PCL_GPU_CONTAINERS_LIBRARY:FILEPATH=/usr/local/lib/libpcl_gpu_containers.so
-
-//path to pcl_gpu_containers library debug
-PCL_GPU_CONTAINERS_LIBRARY_DEBUG:FILEPATH=/usr/local/lib/libpcl_gpu_containers.so
-
-//path to gpu_features headers
-PCL_GPU_FEATURES_INCLUDE_DIR:PATH=/usr/local/include/pcl-1.7
-
-//path to pcl_gpu_features library
-PCL_GPU_FEATURES_LIBRARY:FILEPATH=/usr/local/lib/libpcl_gpu_features.so
-
-//path to pcl_gpu_features library debug
-PCL_GPU_FEATURES_LIBRARY_DEBUG:FILEPATH=/usr/local/lib/libpcl_gpu_features.so
-
-//path to gpu_kinfu headers
-PCL_GPU_KINFU_INCLUDE_DIR:PATH=/usr/local/include/pcl-1.7
-
-//path to gpu_kinfu_large_scale headers
-PCL_GPU_KINFU_LARGE_SCALE_INCLUDE_DIR:PATH=/usr/local/include/pcl-1.7
-
-//path to pcl_gpu_kinfu_large_scale library
-PCL_GPU_KINFU_LARGE_SCALE_LIBRARY:FILEPATH=/usr/local/lib/libpcl_gpu_kinfu_large_scale.so
-
-//path to pcl_gpu_kinfu_large_scale library debug
-PCL_GPU_KINFU_LARGE_SCALE_LIBRARY_DEBUG:FILEPATH=/usr/local/lib/libpcl_gpu_kinfu_large_scale.so
-
-//path to pcl_gpu_kinfu library
-PCL_GPU_KINFU_LIBRARY:FILEPATH=/usr/local/lib/libpcl_gpu_kinfu.so
-
-//path to pcl_gpu_kinfu library debug
-PCL_GPU_KINFU_LIBRARY_DEBUG:FILEPATH=/usr/local/lib/libpcl_gpu_kinfu.so
-
-//path to gpu_octree headers
-PCL_GPU_OCTREE_INCLUDE_DIR:PATH=/usr/local/include/pcl-1.7
-
-//path to pcl_gpu_octree library
-PCL_GPU_OCTREE_LIBRARY:FILEPATH=/usr/local/lib/libpcl_gpu_octree.so
-
-//path to pcl_gpu_octree library debug
-PCL_GPU_OCTREE_LIBRARY_DEBUG:FILEPATH=/usr/local/lib/libpcl_gpu_octree.so
-
-//path to gpu_segmentation headers
-PCL_GPU_SEGMENTATION_INCLUDE_DIR:PATH=/usr/local/include/pcl-1.7
-
-//path to pcl_gpu_segmentation library
-PCL_GPU_SEGMENTATION_LIBRARY:FILEPATH=/usr/local/lib/libpcl_gpu_segmentation.so
-
-//path to pcl_gpu_segmentation library debug
-PCL_GPU_SEGMENTATION_LIBRARY_DEBUG:FILEPATH=/usr/local/lib/libpcl_gpu_segmentation.so
-
-//path to gpu_utils headers
-PCL_GPU_UTILS_INCLUDE_DIR:PATH=/usr/local/include/pcl-1.7
-
-//path to pcl_gpu_utils library
-PCL_GPU_UTILS_LIBRARY:FILEPATH=/usr/local/lib/libpcl_gpu_utils.so
-
-//path to pcl_gpu_utils library debug
-PCL_GPU_UTILS_LIBRARY_DEBUG:FILEPATH=/usr/local/lib/libpcl_gpu_utils.so
+PCL_GEOMETRY_INCLUDE_DIR:PATH=/usr/include/pcl-1.7
 
 //path to io headers
-PCL_IO_INCLUDE_DIR:PATH=/usr/local/include/pcl-1.7
+PCL_IO_INCLUDE_DIR:PATH=/usr/include/pcl-1.7
 
 //path to pcl_io library
-PCL_IO_LIBRARY:FILEPATH=/usr/local/lib/libpcl_io.so
+PCL_IO_LIBRARY:FILEPATH=/usr/lib/libpcl_io.so
 
 //path to pcl_io library debug
-PCL_IO_LIBRARY_DEBUG:FILEPATH=/usr/local/lib/libpcl_io.so
+PCL_IO_LIBRARY_DEBUG:FILEPATH=/usr/lib/libpcl_io.so
 
 //path to kdtree headers
-PCL_KDTREE_INCLUDE_DIR:PATH=/usr/local/include/pcl-1.7
+PCL_KDTREE_INCLUDE_DIR:PATH=/usr/include/pcl-1.7
 
 //path to pcl_kdtree library
-PCL_KDTREE_LIBRARY:FILEPATH=/usr/local/lib/libpcl_kdtree.so
+PCL_KDTREE_LIBRARY:FILEPATH=/usr/lib/libpcl_kdtree.so
 
 //path to pcl_kdtree library debug
-PCL_KDTREE_LIBRARY_DEBUG:FILEPATH=/usr/local/lib/libpcl_kdtree.so
-
-//path to keypoints headers
-PCL_KEYPOINTS_INCLUDE_DIR:PATH=/usr/local/include/pcl-1.7
-
-//path to pcl_keypoints library
-PCL_KEYPOINTS_LIBRARY:FILEPATH=/usr/local/lib/libpcl_keypoints.so
-
-//path to pcl_keypoints library debug
-PCL_KEYPOINTS_LIBRARY_DEBUG:FILEPATH=/usr/local/lib/libpcl_keypoints.so
-
-//path to ml headers
-PCL_ML_INCLUDE_DIR:PATH=/usr/local/include/pcl-1.7
-
-//path to pcl_ml library
-PCL_ML_LIBRARY:FILEPATH=/usr/local/lib/libpcl_ml.so
-
-//path to pcl_ml library debug
-PCL_ML_LIBRARY_DEBUG:FILEPATH=/usr/local/lib/libpcl_ml.so
+PCL_KDTREE_LIBRARY_DEBUG:FILEPATH=/usr/lib/libpcl_kdtree.so
 
 //path to octree headers
-PCL_OCTREE_INCLUDE_DIR:PATH=/usr/local/include/pcl-1.7
+PCL_OCTREE_INCLUDE_DIR:PATH=/usr/include/pcl-1.7
 
 //path to pcl_octree library
-PCL_OCTREE_LIBRARY:FILEPATH=/usr/local/lib/libpcl_octree.so
+PCL_OCTREE_LIBRARY:FILEPATH=/usr/lib/libpcl_octree.so
 
 //path to pcl_octree library debug
-PCL_OCTREE_LIBRARY_DEBUG:FILEPATH=/usr/local/lib/libpcl_octree.so
-
-//path to outofcore headers
-PCL_OUTOFCORE_INCLUDE_DIR:PATH=/usr/local/include/pcl-1.7
-
-//path to pcl_outofcore library
-PCL_OUTOFCORE_LIBRARY:FILEPATH=/usr/local/lib/libpcl_outofcore.so
-
-//path to pcl_outofcore library debug
-PCL_OUTOFCORE_LIBRARY_DEBUG:FILEPATH=/usr/local/lib/libpcl_outofcore.so
+PCL_OCTREE_LIBRARY_DEBUG:FILEPATH=/usr/lib/libpcl_octree.so
 
 //path to recognition headers
-PCL_RECOGNITION_INCLUDE_DIR:PATH=/usr/local/include/pcl-1.7
+PCL_RECOGNITION_INCLUDE_DIR:PATH=/usr/include/pcl-1.7
 
 //path to pcl_recognition library
-PCL_RECOGNITION_LIBRARY:FILEPATH=/usr/local/lib/libpcl_recognition.so
+PCL_RECOGNITION_LIBRARY:FILEPATH=/usr/lib/libpcl_recognition.so
 
 //path to pcl_recognition library debug
-PCL_RECOGNITION_LIBRARY_DEBUG:FILEPATH=/usr/local/lib/libpcl_recognition.so
+PCL_RECOGNITION_LIBRARY_DEBUG:FILEPATH=/usr/lib/libpcl_recognition.so
 
 //path to registration headers
-PCL_REGISTRATION_INCLUDE_DIR:PATH=/usr/local/include/pcl-1.7
+PCL_REGISTRATION_INCLUDE_DIR:PATH=/usr/include/pcl-1.7
 
 //path to pcl_registration library
-PCL_REGISTRATION_LIBRARY:FILEPATH=/usr/local/lib/libpcl_registration.so
+PCL_REGISTRATION_LIBRARY:FILEPATH=/usr/lib/libpcl_registration.so
 
 //path to pcl_registration library debug
-PCL_REGISTRATION_LIBRARY_DEBUG:FILEPATH=/usr/local/lib/libpcl_registration.so
+PCL_REGISTRATION_LIBRARY_DEBUG:FILEPATH=/usr/lib/libpcl_registration.so
 
 //path to sample_consensus headers
-PCL_SAMPLE_CONSENSUS_INCLUDE_DIR:PATH=/usr/local/include/pcl-1.7
+PCL_SAMPLE_CONSENSUS_INCLUDE_DIR:PATH=/usr/include/pcl-1.7
 
 //path to pcl_sample_consensus library
-PCL_SAMPLE_CONSENSUS_LIBRARY:FILEPATH=/usr/local/lib/libpcl_sample_consensus.so
+PCL_SAMPLE_CONSENSUS_LIBRARY:FILEPATH=/usr/lib/libpcl_sample_consensus.so
 
 //path to pcl_sample_consensus library debug
-PCL_SAMPLE_CONSENSUS_LIBRARY_DEBUG:FILEPATH=/usr/local/lib/libpcl_sample_consensus.so
+PCL_SAMPLE_CONSENSUS_LIBRARY_DEBUG:FILEPATH=/usr/lib/libpcl_sample_consensus.so
 
 //path to search headers
-PCL_SEARCH_INCLUDE_DIR:PATH=/usr/local/include/pcl-1.7
+PCL_SEARCH_INCLUDE_DIR:PATH=/usr/include/pcl-1.7
 
 //path to pcl_search library
-PCL_SEARCH_LIBRARY:FILEPATH=/usr/local/lib/libpcl_search.so
+PCL_SEARCH_LIBRARY:FILEPATH=/usr/lib/libpcl_search.so
 
 //path to pcl_search library debug
-PCL_SEARCH_LIBRARY_DEBUG:FILEPATH=/usr/local/lib/libpcl_search.so
+PCL_SEARCH_LIBRARY_DEBUG:FILEPATH=/usr/lib/libpcl_search.so
 
 //path to segmentation headers
-PCL_SEGMENTATION_INCLUDE_DIR:PATH=/usr/local/include/pcl-1.7
+PCL_SEGMENTATION_INCLUDE_DIR:PATH=/usr/include/pcl-1.7
 
 //path to pcl_segmentation library
-PCL_SEGMENTATION_LIBRARY:FILEPATH=/usr/local/lib/libpcl_segmentation.so
+PCL_SEGMENTATION_LIBRARY:FILEPATH=/usr/lib/libpcl_segmentation.so
 
 //path to pcl_segmentation library debug
-PCL_SEGMENTATION_LIBRARY_DEBUG:FILEPATH=/usr/local/lib/libpcl_segmentation.so
-
-//path to stereo headers
-PCL_STEREO_INCLUDE_DIR:PATH=/usr/local/include/pcl-1.7
-
-//path to pcl_stereo library
-PCL_STEREO_LIBRARY:FILEPATH=/usr/local/lib/libpcl_stereo.so
-
-//path to pcl_stereo library debug
-PCL_STEREO_LIBRARY_DEBUG:FILEPATH=/usr/local/lib/libpcl_stereo.so
-
-//path to surface headers
-PCL_SURFACE_INCLUDE_DIR:PATH=/usr/local/include/pcl-1.7
-
-//path to pcl_surface library
-PCL_SURFACE_LIBRARY:FILEPATH=/usr/local/lib/libpcl_surface.so
-
-//path to pcl_surface library debug
-PCL_SURFACE_LIBRARY_DEBUG:FILEPATH=/usr/local/lib/libpcl_surface.so
-
-//path to tracking headers
-PCL_TRACKING_INCLUDE_DIR:PATH=/usr/local/include/pcl-1.7
-
-//path to pcl_tracking library
-PCL_TRACKING_LIBRARY:FILEPATH=/usr/local/lib/libpcl_tracking.so
-
-//path to pcl_tracking library debug
-PCL_TRACKING_LIBRARY_DEBUG:FILEPATH=/usr/local/lib/libpcl_tracking.so
+PCL_SEGMENTATION_LIBRARY_DEBUG:FILEPATH=/usr/lib/libpcl_segmentation.so
 
 //path to visualization headers
-PCL_VISUALIZATION_INCLUDE_DIR:PATH=/usr/local/include/pcl-1.7
+PCL_VISUALIZATION_INCLUDE_DIR:PATH=/usr/include/pcl-1.7
 
 //path to pcl_visualization library
-PCL_VISUALIZATION_LIBRARY:FILEPATH=/usr/local/lib/libpcl_visualization.so
+PCL_VISUALIZATION_LIBRARY:FILEPATH=/usr/lib/libpcl_visualization.so
 
 //path to pcl_visualization library debug
-PCL_VISUALIZATION_LIBRARY_DEBUG:FILEPATH=/usr/local/lib/libpcl_visualization.so
+PCL_VISUALIZATION_LIBRARY_DEBUG:FILEPATH=/usr/lib/libpcl_visualization.so
 
 //pkg-config executable
 PKG_CONFIG_EXECUTABLE:FILEPATH=/usr/bin/pkg-config
@@ -596,23 +419,8 @@ PYTHON_EXECUTABLE:FILEPATH=/usr/bin/python
 //Specify specific Python version to use ('major.minor' or 'major')
 PYTHON_VERSION:STRING=
 
-//Value Computed by CMake
-Project_BINARY_DIR:STATIC=/home/gmanfred/devel/essential/ros/linemod_ros/build
-
-//Value Computed by CMake
-Project_SOURCE_DIR:STATIC=/home/gmanfred/devel/essential/ros/linemod_ros
-
-//Path to a file.
-QHULL_INCLUDE_DIRS:PATH=/usr/include/qhull
-
-//Path to a library.
-QHULL_LIBRARY:FILEPATH=/usr/lib/libqhull.so
-
-//Path to a library.
-QHULL_LIBRARY_DEBUG:FILEPATH=/usr/lib/libqhull.so
-
 //rospack executable
-ROSPACK_EXE:FILEPATH=/opt/ros/groovy/bin/rospack
+ROSPACK_EXE:FILEPATH=/opt/ros/hydro/bin/rospack
 
 //Path to a library.
 RT_LIBRARY:FILEPATH=/usr/lib/x86_64-linux-gnu/librt.so
@@ -639,22 +447,22 @@ _CATKIN_GTEST_INCLUDE:FILEPATH=/usr/include/gtest/gtest.h
 _CATKIN_GTEST_SRC:FILEPATH=/usr/src/gtest/src/gtest.cc
 
 //Path to a file.
-_file_name:FILEPATH=/home/gmanfred/devel/essential/ros/linemod_ros/Linemod/Train.cpp
+_file_name:FILEPATH=/home/gmanfred/devel/essential/ros/linemod_ros/Linemod/LinemodWrap.cpp
 
 //The directory containing a CMake configuration file for catkin.
-catkin_DIR:PATH=/opt/ros/groovy/share/catkin/cmake
+catkin_DIR:PATH=/opt/ros/hydro/share/catkin/cmake
 
 //The directory containing a CMake configuration file for gencpp.
-gencpp_DIR:PATH=/opt/ros/groovy/share/gencpp/cmake
+gencpp_DIR:PATH=/opt/ros/hydro/share/gencpp/cmake
 
 //The directory containing a CMake configuration file for genlisp.
-genlisp_DIR:PATH=/opt/ros/groovy/share/genlisp/cmake
+genlisp_DIR:PATH=/opt/ros/hydro/share/genlisp/cmake
 
 //The directory containing a CMake configuration file for genmsg.
-genmsg_DIR:PATH=/opt/ros/groovy/share/genmsg/cmake
+genmsg_DIR:PATH=/opt/ros/hydro/share/genmsg/cmake
 
 //The directory containing a CMake configuration file for genpy.
-genpy_DIR:PATH=/opt/ros/groovy/share/genpy/cmake
+genpy_DIR:PATH=/opt/ros/hydro/share/genpy/cmake
 
 //Value Computed by CMake
 gtest_BINARY_DIR:STATIC=/home/gmanfred/devel/essential/ros/linemod_ros/build/gtest
@@ -682,7 +490,7 @@ gtest_force_shared_crt:BOOL=OFF
 gtest_main_LIB_DEPENDS:STATIC=general;-lpthread;general;gtest;
 
 //Path to a library.
-lib:FILEPATH=/opt/ros/groovy/lib/libroslib.so
+lib:FILEPATH=/opt/ros/hydro/lib/libroslib.so
 
 //Value Computed by CMake
 linemod_ros_BINARY_DIR:STATIC=/home/gmanfred/devel/essential/ros/linemod_ros/build
@@ -691,10 +499,10 @@ linemod_ros_BINARY_DIR:STATIC=/home/gmanfred/devel/essential/ros/linemod_ros/bui
 linemod_ros_SOURCE_DIR:STATIC=/home/gmanfred/devel/essential/ros/linemod_ros
 
 //The directory containing a CMake configuration file for roslib.
-roslib_DIR:PATH=/opt/ros/groovy/share/roslib/cmake
+roslib_DIR:PATH=/opt/ros/hydro/share/roslib/cmake
 
 //The directory containing a CMake configuration file for rosunit.
-rosunit_DIR:PATH=/opt/ros/groovy/share/rosunit/cmake
+rosunit_DIR:PATH=/opt/ros/hydro/share/rosunit/cmake
 
 
 ########################
@@ -731,14 +539,6 @@ Boost_IOSTREAMS_LIBRARY_RELEASE-ADVANCED:INTERNAL=1
 Boost_LIBRARY_DIRS-ADVANCED:INTERNAL=1
 //The library version string for boost libraries
 Boost_LIB_VERSION:INTERNAL=1_46_1
-//Whether the Boost MPI library found
-Boost_MPI_FOUND:INTERNAL=ON
-//ADVANCED property for variable: Boost_MPI_LIBRARY
-Boost_MPI_LIBRARY-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: Boost_MPI_LIBRARY_DEBUG
-Boost_MPI_LIBRARY_DEBUG-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: Boost_MPI_LIBRARY_RELEASE
-Boost_MPI_LIBRARY_RELEASE-ADVANCED:INTERNAL=1
 //Whether the Boost SERIALIZATION library found
 Boost_SERIALIZATION_FOUND:INTERNAL=ON
 //ADVANCED property for variable: Boost_SERIALIZATION_LIBRARY
@@ -899,75 +699,35 @@ CMAKE_USE_RELATIVE_PATHS-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_VERBOSE_MAKEFILE
 CMAKE_VERBOSE_MAKEFILE-ADVANCED:INTERNAL=1
 //Details about finding Flann
-FIND_PACKAGE_MESSAGE_DETAILS_Flann:INTERNAL=[/opt/ros/groovy/lib/libflann_cpp_s.a][/opt/ros/groovy/include][v()]
+FIND_PACKAGE_MESSAGE_DETAILS_Flann:INTERNAL=[/usr/lib/libflann_cpp_s.a][/usr/include][v()]
 //Details about finding PCL
-FIND_PACKAGE_MESSAGE_DETAILS_PCL:INTERNAL=[/usr/lib/libboost_system-mt.so;/usr/lib/libboost_filesystem-mt.so;/usr/lib/libboost_thread-mt.so;pthread;/usr/lib/libboost_date_time-mt.so;/usr/lib/libboost_iostreams-mt.so;/usr/lib/libboost_mpi-mt.so;/usr/lib/libboost_serialization-mt.so;optimized;/usr/local/lib/libpcl_common.so;debug;/usr/local/lib/libpcl_common.so;optimized;/usr/local/lib/libpcl_octree.so;debug;/usr/local/lib/libpcl_octree.so;vtkCommon;vtkRendering;vtkHybrid;optimized;/usr/local/lib/libpcl_io.so;debug;/usr/local/lib/libpcl_io.so;optimized;/opt/ros/groovy/lib/libflann_cpp_s.a;debug;/opt/ros/groovy/lib/libflann_cpp_s-gd.a;optimized;/usr/local/lib/libpcl_kdtree.so;debug;/usr/local/lib/libpcl_kdtree.so;optimized;/usr/local/lib/libpcl_search.so;debug;/usr/local/lib/libpcl_search.so;optimized;/usr/lib/libqhull.so;debug;/usr/lib/libqhull.so;optimized;/usr/local/lib/libpcl_surface.so;debug;/usr/local/lib/libpcl_surface.so;optimized;/usr/local/lib/libpcl_sample_consensus.so;debug;/usr/local/lib/libpcl_sample_consensus.so;optimized;/usr/local/lib/libpcl_filters.so;debug;/usr/local/lib/libpcl_filters.so;optimized;/usr/local/lib/libpcl_features.so;debug;/usr/local/lib/libpcl_features.so;optimized;/usr/local/lib/libpcl_visualization.so;debug;/usr/local/lib/libpcl_visualization.so;optimized;/usr/local/lib/libpcl_keypoints.so;debug;/usr/local/lib/libpcl_keypoints.so;optimized;/usr/local/lib/libpcl_ml.so;debug;/usr/local/lib/libpcl_ml.so;optimized;/usr/local/lib/libpcl_segmentation.so;debug;/usr/local/lib/libpcl_segmentation.so;optimized;/usr/local/lib/libpcl_registration.so;debug;/usr/local/lib/libpcl_registration.so;optimized;/usr/local/lib/libpcl_recognition.so;debug;/usr/local/lib/libpcl_recognition.so;optimized;/usr/local/lib/libpcl_outofcore.so;debug;/usr/local/lib/libpcl_outofcore.so;optimized;/usr/local/lib/libpcl_cuda_io.so;debug;/usr/local/lib/libpcl_cuda_io.so;optimized;/usr/local/lib/libpcl_cuda_segmentation.so;debug;/usr/local/lib/libpcl_cuda_segmentation.so;optimized;/usr/local/lib/libpcl_cuda_sample_consensus.so;debug;/usr/local/lib/libpcl_cuda_sample_consensus.so;optimized;/usr/local/lib/libpcl_cuda_features.so;debug;/usr/local/lib/libpcl_cuda_features.so;optimized;/usr/local/lib/libpcl_stereo.so;debug;/usr/local/lib/libpcl_stereo.so;optimized;/usr/local/lib/libpcl_gpu_containers.so;debug;/usr/local/lib/libpcl_gpu_containers.so;optimized;/usr/local/lib/libpcl_gpu_utils.so;debug;/usr/local/lib/libpcl_gpu_utils.so;optimized;/usr/local/lib/libpcl_gpu_kinfu_large_scale.so;debug;/usr/local/lib/libpcl_gpu_kinfu_large_scale.so;optimized;/usr/local/lib/libpcl_gpu_kinfu.so;debug;/usr/local/lib/libpcl_gpu_kinfu.so;optimized;/usr/local/lib/libpcl_gpu_octree.so;debug;/usr/local/lib/libpcl_gpu_octree.so;optimized;/usr/local/lib/libpcl_gpu_segmentation.so;debug;/usr/local/lib/libpcl_gpu_segmentation.so;optimized;/usr/local/lib/libpcl_gpu_features.so;debug;/usr/local/lib/libpcl_gpu_features.so;optimized;/usr/local/lib/libpcl_tracking.so;debug;/usr/local/lib/libpcl_tracking.so;optimized;/usr/local/lib/libpcl_apps.so;debug;/usr/local/lib/libpcl_apps.so][/usr/local/include/pcl-1.7;/usr/include/eigen3;/usr/include;/usr/include/vtk-5.8;/opt/ros/groovy/include;/usr/include/qhull][v(1.6)]
-//Details about finding PCL_2D
-FIND_PACKAGE_MESSAGE_DETAILS_PCL_2D:INTERNAL=[/usr/local/include/pcl-1.7][v()]
-//Details about finding PCL_APPS
-FIND_PACKAGE_MESSAGE_DETAILS_PCL_APPS:INTERNAL=[/usr/local/lib/libpcl_apps.so][/usr/local/include/pcl-1.7][v()]
+FIND_PACKAGE_MESSAGE_DETAILS_PCL:INTERNAL=[/usr/lib/libboost_system-mt.so;/usr/lib/libboost_filesystem-mt.so;/usr/lib/libboost_thread-mt.so;/usr/lib/libboost_date_time-mt.so;/usr/lib/libboost_iostreams-mt.so;/usr/lib/libboost_serialization-mt.so;optimized;/usr/lib/libpcl_common.so;debug;/usr/lib/libpcl_common.so;optimized;/usr/lib/libpcl_octree.so;debug;/usr/lib/libpcl_octree.so;/usr/lib/libOpenNI.so;vtkCommon;vtkRendering;vtkHybrid;vtkCharts;optimized;/usr/lib/libpcl_io.so;debug;/usr/lib/libpcl_io.so;optimized;/usr/lib/libflann_cpp_s.a;debug;/usr/lib/libflann_cpp_s.a;optimized;/usr/lib/libpcl_kdtree.so;debug;/usr/lib/libpcl_kdtree.so;optimized;/usr/lib/libpcl_search.so;debug;/usr/lib/libpcl_search.so;optimized;/usr/lib/libpcl_sample_consensus.so;debug;/usr/lib/libpcl_sample_consensus.so;optimized;/usr/lib/libpcl_filters.so;debug;/usr/lib/libpcl_filters.so;optimized;/usr/lib/libpcl_features.so;debug;/usr/lib/libpcl_features.so;optimized;/usr/lib/libpcl_registration.so;debug;/usr/lib/libpcl_registration.so;optimized;/usr/lib/libpcl_recognition.so;debug;/usr/lib/libpcl_recognition.so;optimized;/usr/lib/libpcl_segmentation.so;debug;/usr/lib/libpcl_segmentation.so;optimized;/usr/lib/libpcl_visualization.so;debug;/usr/lib/libpcl_visualization.so;/usr/lib/libboost_system-mt.so;/usr/lib/libboost_filesystem-mt.so;/usr/lib/libboost_thread-mt.so;/usr/lib/libboost_date_time-mt.so;/usr/lib/libboost_iostreams-mt.so;/usr/lib/libboost_serialization-mt.so;/usr/lib/libOpenNI.so;optimized;/usr/lib/libflann_cpp_s.a;debug;/usr/lib/libflann_cpp_s.a;vtkCommon;vtkRendering;vtkHybrid;vtkCharts][/usr/include/pcl-1.7;/usr/include/eigen3;/usr/include;/usr/include/ni;/usr/include/vtk-5.8][v(1.7)]
 //Details about finding PCL_COMMON
-FIND_PACKAGE_MESSAGE_DETAILS_PCL_COMMON:INTERNAL=[/usr/local/lib/libpcl_common.so][/usr/local/include/pcl-1.7][v()]
-//Details about finding PCL_CUDA_COMMON
-FIND_PACKAGE_MESSAGE_DETAILS_PCL_CUDA_COMMON:INTERNAL=[/usr/local/include/pcl-1.7][v()]
-//Details about finding PCL_CUDA_FEATURES
-FIND_PACKAGE_MESSAGE_DETAILS_PCL_CUDA_FEATURES:INTERNAL=[/usr/local/lib/libpcl_cuda_features.so][/usr/local/include/pcl-1.7][v()]
-//Details about finding PCL_CUDA_IO
-FIND_PACKAGE_MESSAGE_DETAILS_PCL_CUDA_IO:INTERNAL=[/usr/local/lib/libpcl_cuda_io.so][/usr/local/include/pcl-1.7][v()]
-//Details about finding PCL_CUDA_SAMPLE_CONSENSUS
-FIND_PACKAGE_MESSAGE_DETAILS_PCL_CUDA_SAMPLE_CONSENSUS:INTERNAL=[/usr/local/lib/libpcl_cuda_sample_consensus.so][/usr/local/include/pcl-1.7][v()]
-//Details about finding PCL_CUDA_SEGMENTATION
-FIND_PACKAGE_MESSAGE_DETAILS_PCL_CUDA_SEGMENTATION:INTERNAL=[/usr/local/lib/libpcl_cuda_segmentation.so][/usr/local/include/pcl-1.7][v()]
+FIND_PACKAGE_MESSAGE_DETAILS_PCL_COMMON:INTERNAL=[/usr/lib/libpcl_common.so][/usr/include/pcl-1.7][v()]
 //Details about finding PCL_FEATURES
-FIND_PACKAGE_MESSAGE_DETAILS_PCL_FEATURES:INTERNAL=[/usr/local/lib/libpcl_features.so][/usr/local/include/pcl-1.7][v()]
+FIND_PACKAGE_MESSAGE_DETAILS_PCL_FEATURES:INTERNAL=[/usr/lib/libpcl_features.so][/usr/include/pcl-1.7][v()]
 //Details about finding PCL_FILTERS
-FIND_PACKAGE_MESSAGE_DETAILS_PCL_FILTERS:INTERNAL=[/usr/local/lib/libpcl_filters.so][/usr/local/include/pcl-1.7][v()]
+FIND_PACKAGE_MESSAGE_DETAILS_PCL_FILTERS:INTERNAL=[/usr/lib/libpcl_filters.so][/usr/include/pcl-1.7][v()]
 //Details about finding PCL_GEOMETRY
-FIND_PACKAGE_MESSAGE_DETAILS_PCL_GEOMETRY:INTERNAL=[/usr/local/include/pcl-1.7][v()]
-//Details about finding PCL_GPU_CONTAINERS
-FIND_PACKAGE_MESSAGE_DETAILS_PCL_GPU_CONTAINERS:INTERNAL=[/usr/local/lib/libpcl_gpu_containers.so][/usr/local/include/pcl-1.7][v()]
-//Details about finding PCL_GPU_FEATURES
-FIND_PACKAGE_MESSAGE_DETAILS_PCL_GPU_FEATURES:INTERNAL=[/usr/local/lib/libpcl_gpu_features.so][/usr/local/include/pcl-1.7][v()]
-//Details about finding PCL_GPU_KINFU
-FIND_PACKAGE_MESSAGE_DETAILS_PCL_GPU_KINFU:INTERNAL=[/usr/local/lib/libpcl_gpu_kinfu.so][/usr/local/include/pcl-1.7][v()]
-//Details about finding PCL_GPU_KINFU_LARGE_SCALE
-FIND_PACKAGE_MESSAGE_DETAILS_PCL_GPU_KINFU_LARGE_SCALE:INTERNAL=[/usr/local/lib/libpcl_gpu_kinfu_large_scale.so][/usr/local/include/pcl-1.7][v()]
-//Details about finding PCL_GPU_OCTREE
-FIND_PACKAGE_MESSAGE_DETAILS_PCL_GPU_OCTREE:INTERNAL=[/usr/local/lib/libpcl_gpu_octree.so][/usr/local/include/pcl-1.7][v()]
-//Details about finding PCL_GPU_SEGMENTATION
-FIND_PACKAGE_MESSAGE_DETAILS_PCL_GPU_SEGMENTATION:INTERNAL=[/usr/local/lib/libpcl_gpu_segmentation.so][/usr/local/include/pcl-1.7][v()]
-//Details about finding PCL_GPU_UTILS
-FIND_PACKAGE_MESSAGE_DETAILS_PCL_GPU_UTILS:INTERNAL=[/usr/local/lib/libpcl_gpu_utils.so][/usr/local/include/pcl-1.7][v()]
+FIND_PACKAGE_MESSAGE_DETAILS_PCL_GEOMETRY:INTERNAL=[/usr/include/pcl-1.7][v()]
 //Details about finding PCL_IO
-FIND_PACKAGE_MESSAGE_DETAILS_PCL_IO:INTERNAL=[/usr/local/lib/libpcl_io.so][/usr/local/include/pcl-1.7][v()]
+FIND_PACKAGE_MESSAGE_DETAILS_PCL_IO:INTERNAL=[/usr/lib/libpcl_io.so][/usr/include/pcl-1.7][v()]
 //Details about finding PCL_KDTREE
-FIND_PACKAGE_MESSAGE_DETAILS_PCL_KDTREE:INTERNAL=[/usr/local/lib/libpcl_kdtree.so][/usr/local/include/pcl-1.7][v()]
-//Details about finding PCL_KEYPOINTS
-FIND_PACKAGE_MESSAGE_DETAILS_PCL_KEYPOINTS:INTERNAL=[/usr/local/lib/libpcl_keypoints.so][/usr/local/include/pcl-1.7][v()]
-//Details about finding PCL_ML
-FIND_PACKAGE_MESSAGE_DETAILS_PCL_ML:INTERNAL=[/usr/local/lib/libpcl_ml.so][/usr/local/include/pcl-1.7][v()]
+FIND_PACKAGE_MESSAGE_DETAILS_PCL_KDTREE:INTERNAL=[/usr/lib/libpcl_kdtree.so][/usr/include/pcl-1.7][v()]
 //Details about finding PCL_OCTREE
-FIND_PACKAGE_MESSAGE_DETAILS_PCL_OCTREE:INTERNAL=[/usr/local/lib/libpcl_octree.so][/usr/local/include/pcl-1.7][v()]
-//Details about finding PCL_OUTOFCORE
-FIND_PACKAGE_MESSAGE_DETAILS_PCL_OUTOFCORE:INTERNAL=[/usr/local/lib/libpcl_outofcore.so][/usr/local/include/pcl-1.7][v()]
+FIND_PACKAGE_MESSAGE_DETAILS_PCL_OCTREE:INTERNAL=[/usr/lib/libpcl_octree.so][/usr/include/pcl-1.7][v()]
 //Details about finding PCL_RECOGNITION
-FIND_PACKAGE_MESSAGE_DETAILS_PCL_RECOGNITION:INTERNAL=[/usr/local/lib/libpcl_recognition.so][/usr/local/include/pcl-1.7][v()]
+FIND_PACKAGE_MESSAGE_DETAILS_PCL_RECOGNITION:INTERNAL=[/usr/lib/libpcl_recognition.so][/usr/include/pcl-1.7][v()]
 //Details about finding PCL_REGISTRATION
-FIND_PACKAGE_MESSAGE_DETAILS_PCL_REGISTRATION:INTERNAL=[/usr/local/lib/libpcl_registration.so][/usr/local/include/pcl-1.7][v()]
+FIND_PACKAGE_MESSAGE_DETAILS_PCL_REGISTRATION:INTERNAL=[/usr/lib/libpcl_registration.so][/usr/include/pcl-1.7][v()]
 //Details about finding PCL_SAMPLE_CONSENSUS
-FIND_PACKAGE_MESSAGE_DETAILS_PCL_SAMPLE_CONSENSUS:INTERNAL=[/usr/local/lib/libpcl_sample_consensus.so][/usr/local/include/pcl-1.7][v()]
+FIND_PACKAGE_MESSAGE_DETAILS_PCL_SAMPLE_CONSENSUS:INTERNAL=[/usr/lib/libpcl_sample_consensus.so][/usr/include/pcl-1.7][v()]
 //Details about finding PCL_SEARCH
-FIND_PACKAGE_MESSAGE_DETAILS_PCL_SEARCH:INTERNAL=[/usr/local/lib/libpcl_search.so][/usr/local/include/pcl-1.7][v()]
+FIND_PACKAGE_MESSAGE_DETAILS_PCL_SEARCH:INTERNAL=[/usr/lib/libpcl_search.so][/usr/include/pcl-1.7][v()]
 //Details about finding PCL_SEGMENTATION
-FIND_PACKAGE_MESSAGE_DETAILS_PCL_SEGMENTATION:INTERNAL=[/usr/local/lib/libpcl_segmentation.so][/usr/local/include/pcl-1.7][v()]
-//Details about finding PCL_STEREO
-FIND_PACKAGE_MESSAGE_DETAILS_PCL_STEREO:INTERNAL=[/usr/local/lib/libpcl_stereo.so][/usr/local/include/pcl-1.7][v()]
-//Details about finding PCL_SURFACE
-FIND_PACKAGE_MESSAGE_DETAILS_PCL_SURFACE:INTERNAL=[/usr/local/lib/libpcl_surface.so][/usr/local/include/pcl-1.7][v()]
-//Details about finding PCL_TRACKING
-FIND_PACKAGE_MESSAGE_DETAILS_PCL_TRACKING:INTERNAL=[/usr/local/lib/libpcl_tracking.so][/usr/local/include/pcl-1.7][v()]
+FIND_PACKAGE_MESSAGE_DETAILS_PCL_SEGMENTATION:INTERNAL=[/usr/lib/libpcl_segmentation.so][/usr/include/pcl-1.7][v()]
 //Details about finding PCL_VISUALIZATION
-FIND_PACKAGE_MESSAGE_DETAILS_PCL_VISUALIZATION:INTERNAL=[/usr/local/lib/libpcl_visualization.so][/usr/local/include/pcl-1.7][v()]
+FIND_PACKAGE_MESSAGE_DETAILS_PCL_VISUALIZATION:INTERNAL=[/usr/lib/libpcl_visualization.so][/usr/include/pcl-1.7][v()]
 //Details about finding PythonInterp
 FIND_PACKAGE_MESSAGE_DETAILS_PythonInterp:INTERNAL=[/usr/bin/python][v2.7.3()]
 //Details about finding Threads
@@ -976,8 +736,8 @@ FIND_PACKAGE_MESSAGE_DETAILS_Threads:INTERNAL=[TRUE][v()]
 FIND_PACKAGE_MESSAGE_DETAILS_eigen:INTERNAL=[/usr/include/eigen3][v()]
 //Details about finding libusb-1.0
 FIND_PACKAGE_MESSAGE_DETAILS_libusb-1.0:INTERNAL=[/usr/include][v()]
-//Details about finding qhull
-FIND_PACKAGE_MESSAGE_DETAILS_qhull:INTERNAL=[/usr/lib/libqhull.so][/usr/include/qhull][v()]
+//Details about finding openni
+FIND_PACKAGE_MESSAGE_DETAILS_openni:INTERNAL=[/usr/lib/libOpenNI.so][/usr/include/ni][v()]
 GTEST_FROM_SOURCE_FOUND:INTERNAL=TRUE
 GTEST_FROM_SOURCE_INCLUDE_DIRS:INTERNAL=/usr/include
 GTEST_FROM_SOURCE_LIBRARIES:INTERNAL=gtest
@@ -993,30 +753,10 @@ GTEST_LIBRARY_DEBUG-ADVANCED:INTERNAL=1
 GTEST_MAIN_LIBRARY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: GTEST_MAIN_LIBRARY_DEBUG
 GTEST_MAIN_LIBRARY_DEBUG-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: PCL_APPS_LIBRARY
-PCL_APPS_LIBRARY-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: PCL_APPS_LIBRARY_DEBUG
-PCL_APPS_LIBRARY_DEBUG-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: PCL_COMMON_LIBRARY
 PCL_COMMON_LIBRARY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: PCL_COMMON_LIBRARY_DEBUG
 PCL_COMMON_LIBRARY_DEBUG-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: PCL_CUDA_FEATURES_LIBRARY
-PCL_CUDA_FEATURES_LIBRARY-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: PCL_CUDA_FEATURES_LIBRARY_DEBUG
-PCL_CUDA_FEATURES_LIBRARY_DEBUG-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: PCL_CUDA_IO_LIBRARY
-PCL_CUDA_IO_LIBRARY-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: PCL_CUDA_IO_LIBRARY_DEBUG
-PCL_CUDA_IO_LIBRARY_DEBUG-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: PCL_CUDA_SAMPLE_CONSENSUS_LIBRARY
-PCL_CUDA_SAMPLE_CONSENSUS_LIBRARY-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: PCL_CUDA_SAMPLE_CONSENSUS_LIBRARY_DEBUG
-PCL_CUDA_SAMPLE_CONSENSUS_LIBRARY_DEBUG-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: PCL_CUDA_SEGMENTATION_LIBRARY
-PCL_CUDA_SEGMENTATION_LIBRARY-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: PCL_CUDA_SEGMENTATION_LIBRARY_DEBUG
-PCL_CUDA_SEGMENTATION_LIBRARY_DEBUG-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: PCL_FEATURES_LIBRARY
 PCL_FEATURES_LIBRARY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: PCL_FEATURES_LIBRARY_DEBUG
@@ -1025,34 +765,6 @@ PCL_FEATURES_LIBRARY_DEBUG-ADVANCED:INTERNAL=1
 PCL_FILTERS_LIBRARY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: PCL_FILTERS_LIBRARY_DEBUG
 PCL_FILTERS_LIBRARY_DEBUG-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: PCL_GPU_CONTAINERS_LIBRARY
-PCL_GPU_CONTAINERS_LIBRARY-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: PCL_GPU_CONTAINERS_LIBRARY_DEBUG
-PCL_GPU_CONTAINERS_LIBRARY_DEBUG-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: PCL_GPU_FEATURES_LIBRARY
-PCL_GPU_FEATURES_LIBRARY-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: PCL_GPU_FEATURES_LIBRARY_DEBUG
-PCL_GPU_FEATURES_LIBRARY_DEBUG-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: PCL_GPU_KINFU_LARGE_SCALE_LIBRARY
-PCL_GPU_KINFU_LARGE_SCALE_LIBRARY-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: PCL_GPU_KINFU_LARGE_SCALE_LIBRARY_DEBUG
-PCL_GPU_KINFU_LARGE_SCALE_LIBRARY_DEBUG-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: PCL_GPU_KINFU_LIBRARY
-PCL_GPU_KINFU_LIBRARY-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: PCL_GPU_KINFU_LIBRARY_DEBUG
-PCL_GPU_KINFU_LIBRARY_DEBUG-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: PCL_GPU_OCTREE_LIBRARY
-PCL_GPU_OCTREE_LIBRARY-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: PCL_GPU_OCTREE_LIBRARY_DEBUG
-PCL_GPU_OCTREE_LIBRARY_DEBUG-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: PCL_GPU_SEGMENTATION_LIBRARY
-PCL_GPU_SEGMENTATION_LIBRARY-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: PCL_GPU_SEGMENTATION_LIBRARY_DEBUG
-PCL_GPU_SEGMENTATION_LIBRARY_DEBUG-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: PCL_GPU_UTILS_LIBRARY
-PCL_GPU_UTILS_LIBRARY-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: PCL_GPU_UTILS_LIBRARY_DEBUG
-PCL_GPU_UTILS_LIBRARY_DEBUG-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: PCL_IO_LIBRARY
 PCL_IO_LIBRARY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: PCL_IO_LIBRARY_DEBUG
@@ -1061,22 +773,10 @@ PCL_IO_LIBRARY_DEBUG-ADVANCED:INTERNAL=1
 PCL_KDTREE_LIBRARY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: PCL_KDTREE_LIBRARY_DEBUG
 PCL_KDTREE_LIBRARY_DEBUG-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: PCL_KEYPOINTS_LIBRARY
-PCL_KEYPOINTS_LIBRARY-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: PCL_KEYPOINTS_LIBRARY_DEBUG
-PCL_KEYPOINTS_LIBRARY_DEBUG-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: PCL_ML_LIBRARY
-PCL_ML_LIBRARY-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: PCL_ML_LIBRARY_DEBUG
-PCL_ML_LIBRARY_DEBUG-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: PCL_OCTREE_LIBRARY
 PCL_OCTREE_LIBRARY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: PCL_OCTREE_LIBRARY_DEBUG
 PCL_OCTREE_LIBRARY_DEBUG-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: PCL_OUTOFCORE_LIBRARY
-PCL_OUTOFCORE_LIBRARY-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: PCL_OUTOFCORE_LIBRARY_DEBUG
-PCL_OUTOFCORE_LIBRARY_DEBUG-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: PCL_RECOGNITION_LIBRARY
 PCL_RECOGNITION_LIBRARY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: PCL_RECOGNITION_LIBRARY_DEBUG
@@ -1097,18 +797,6 @@ PCL_SEARCH_LIBRARY_DEBUG-ADVANCED:INTERNAL=1
 PCL_SEGMENTATION_LIBRARY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: PCL_SEGMENTATION_LIBRARY_DEBUG
 PCL_SEGMENTATION_LIBRARY_DEBUG-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: PCL_STEREO_LIBRARY
-PCL_STEREO_LIBRARY-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: PCL_STEREO_LIBRARY_DEBUG
-PCL_STEREO_LIBRARY_DEBUG-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: PCL_SURFACE_LIBRARY
-PCL_SURFACE_LIBRARY-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: PCL_SURFACE_LIBRARY_DEBUG
-PCL_SURFACE_LIBRARY_DEBUG-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: PCL_TRACKING_LIBRARY
-PCL_TRACKING_LIBRARY-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: PCL_TRACKING_LIBRARY_DEBUG
-PCL_TRACKING_LIBRARY_DEBUG-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: PCL_VISUALIZATION_LIBRARY
 PCL_VISUALIZATION_LIBRARY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: PCL_VISUALIZATION_LIBRARY_DEBUG
@@ -1151,27 +839,27 @@ PC_FLANN_CFLAGS:INTERNAL=
 PC_FLANN_CFLAGS_I:INTERNAL=
 PC_FLANN_CFLAGS_OTHER:INTERNAL=
 PC_FLANN_FOUND:INTERNAL=1
-PC_FLANN_INCLUDEDIR:INTERNAL=
+PC_FLANN_INCLUDEDIR:INTERNAL=/usr/include
 PC_FLANN_INCLUDE_DIRS:INTERNAL=
-PC_FLANN_LDFLAGS:INTERNAL=-L/opt/ros/groovy/lib
+PC_FLANN_LDFLAGS:INTERNAL=-lflann_cpp;-lflann_cpp-gd
 PC_FLANN_LDFLAGS_OTHER:INTERNAL=
-PC_FLANN_LIBDIR:INTERNAL=
-PC_FLANN_LIBRARIES:INTERNAL=
-PC_FLANN_LIBRARY_DIRS:INTERNAL=/opt/ros/groovy/lib
+PC_FLANN_LIBDIR:INTERNAL=/usr/lib
+PC_FLANN_LIBRARIES:INTERNAL=flann_cpp;flann_cpp-gd
+PC_FLANN_LIBRARY_DIRS:INTERNAL=
 PC_FLANN_LIBS:INTERNAL=
 PC_FLANN_LIBS_L:INTERNAL=
 PC_FLANN_LIBS_OTHER:INTERNAL=
 PC_FLANN_LIBS_PATHS:INTERNAL=
-PC_FLANN_PREFIX:INTERNAL=/opt/ros/groovy
+PC_FLANN_PREFIX:INTERNAL=/usr
 PC_FLANN_STATIC_CFLAGS:INTERNAL=
 PC_FLANN_STATIC_CFLAGS_I:INTERNAL=
 PC_FLANN_STATIC_CFLAGS_OTHER:INTERNAL=
 PC_FLANN_STATIC_INCLUDE_DIRS:INTERNAL=
-PC_FLANN_STATIC_LDFLAGS:INTERNAL=-L/opt/ros/groovy/lib
+PC_FLANN_STATIC_LDFLAGS:INTERNAL=-lflann_cpp;-lflann_cpp-gd
 PC_FLANN_STATIC_LDFLAGS_OTHER:INTERNAL=
 PC_FLANN_STATIC_LIBDIR:INTERNAL=
-PC_FLANN_STATIC_LIBRARIES:INTERNAL=
-PC_FLANN_STATIC_LIBRARY_DIRS:INTERNAL=/opt/ros/groovy/lib
+PC_FLANN_STATIC_LIBRARIES:INTERNAL=flann_cpp;flann_cpp-gd
+PC_FLANN_STATIC_LIBRARY_DIRS:INTERNAL=
 PC_FLANN_STATIC_LIBS:INTERNAL=
 PC_FLANN_STATIC_LIBS_L:INTERNAL=
 PC_FLANN_STATIC_LIBS_OTHER:INTERNAL=
@@ -1217,18 +905,18 @@ __pkg_config_checked_PC_EIGEN:INTERNAL=1
 __pkg_config_checked_PC_FLANN:INTERNAL=1
 __pkg_config_checked_PC_OPENNI:INTERNAL=1
 _rosbuild_EXPORTS:INTERNAL=
-_rosbuild_cached_flag_time:INTERNAL=1426671311.48
+_rosbuild_cached_flag_time:INTERNAL=1427381913.03
 _roslang_LANGS:INTERNAL=roslisp
-_rospack_deps_manifests_invoke_result:INTERNAL=/opt/ros/groovy/share/cpp_common/package.xml;/opt/ros/groovy/share/rostime/package.xml;/opt/ros/groovy/share/roscpp_traits/package.xml;/opt/ros/groovy/share/roscpp_serialization/package.xml;/opt/ros/groovy/share/genmsg/package.xml;/opt/ros/groovy/share/genpy/package.xml;/opt/ros/groovy/share/message_runtime/package.xml;/opt/ros/groovy/share/rosconsole/package.xml;/opt/ros/groovy/share/std_msgs/package.xml;/opt/ros/groovy/share/rosgraph_msgs/package.xml;/opt/ros/groovy/share/xmlrpcpp/package.xml;/opt/ros/groovy/share/roscpp/package.xml;/opt/ros/groovy/share/catkin/package.xml;/opt/ros/groovy/share/rospack/package.xml;/opt/ros/groovy/share/roslib/package.xml;/opt/ros/groovy/share/rosgraph/package.xml;/opt/ros/groovy/share/rospy/package.xml;/opt/ros/groovy/share/topic_tools/package.xml;/opt/ros/groovy/share/rosbag/package.xml;/opt/ros/groovy/share/rosmsg/package.xml;/opt/ros/groovy/share/rosservice/package.xml;/opt/ros/groovy/share/dynamic_reconfigure/package.xml;/opt/ros/groovy/share/bond/package.xml;/opt/ros/groovy/share/smclib/package.xml;/opt/ros/groovy/share/bondcpp/package.xml;/opt/ros/groovy/share/console_bridge/package.xml;/opt/ros/groovy/share/class_loader/package.xml;/opt/ros/groovy/share/pluginlib/package.xml;/opt/ros/groovy/share/nodelet/package.xml;/opt/ros/groovy/share/message_filters/package.xml;/opt/ros/groovy/share/nodelet_topic_tools/package.xml;/opt/ros/groovy/share/flann/package.xml;/opt/ros/groovy/share/geometry_msgs/package.xml;/opt/ros/groovy/share/sensor_msgs/package.xml;/opt/ros/groovy/share/pcl_msgs/package.xml;/opt/ros/groovy/share/pcl/package.xml;/opt/ros/groovy/share/tf/package.xml;/opt/ros/groovy/share/pcl_ros/package.xml;/opt/ros/groovy/share/pcl_conversions/package.xml
+_rospack_deps_manifests_invoke_result:INTERNAL=/opt/ros/hydro/share/catkin/package.xml;/opt/ros/hydro/share/console_bridge/package.xml;/opt/ros/hydro/share/cpp_common/package.xml;/opt/ros/hydro/share/rostime/package.xml;/opt/ros/hydro/share/roscpp_traits/package.xml;/opt/ros/hydro/share/roscpp_serialization/package.xml;/opt/ros/hydro/share/genmsg/package.xml;/opt/ros/hydro/share/genpy/package.xml;/opt/ros/hydro/share/message_runtime/package.xml;/opt/ros/hydro/share/gencpp/package.xml;/opt/ros/hydro/share/genlisp/package.xml;/opt/ros/hydro/share/message_generation/package.xml;/opt/ros/hydro/share/rosbuild/package.xml;/opt/ros/hydro/share/rosconsole/package.xml;/opt/ros/hydro/share/std_msgs/package.xml;/opt/ros/hydro/share/rosgraph_msgs/package.xml;/opt/ros/hydro/share/xmlrpcpp/package.xml;/opt/ros/hydro/share/roscpp/package.xml;/opt/ros/hydro/share/rospack/package.xml;/opt/ros/hydro/share/roslib/package.xml;/opt/ros/hydro/share/rosgraph/package.xml;/opt/ros/hydro/share/rospy/package.xml;/opt/ros/hydro/share/rosbag_storage/package.xml;/opt/ros/hydro/share/topic_tools/package.xml;/opt/ros/hydro/share/rosbag/package.xml;/opt/ros/hydro/share/rosmsg/package.xml;/opt/ros/hydro/share/rosservice/package.xml;/opt/ros/hydro/share/dynamic_reconfigure/package.xml;/opt/ros/hydro/share/message_filters/package.xml;/opt/ros/hydro/share/bond/package.xml;/opt/ros/hydro/share/smclib/package.xml;/opt/ros/hydro/share/bondcpp/package.xml;/opt/ros/hydro/share/class_loader/package.xml;/opt/ros/hydro/share/pluginlib/package.xml;/opt/ros/hydro/share/nodelet/package.xml;/opt/ros/hydro/share/nodelet_topic_tools/package.xml;/opt/ros/hydro/share/geometry_msgs/package.xml;/opt/ros/hydro/share/sensor_msgs/package.xml;/opt/ros/hydro/share/pcl_msgs/package.xml;/opt/ros/hydro/share/pcl_conversions/package.xml;/opt/ros/hydro/share/rosclean/package.xml;/opt/ros/hydro/share/rosmaster/package.xml;/opt/ros/hydro/share/rosout/package.xml;/opt/ros/hydro/share/rosparam/package.xml;/opt/ros/hydro/share/roslaunch/package.xml;/opt/ros/hydro/share/rostopic/package.xml;/opt/ros/hydro/share/rosnode/package.xml;/opt/ros/hydro/share/roswtf/package.xml;/opt/ros/hydro/share/actionlib_msgs/package.xml;/opt/ros/hydro/share/tf2_msgs/package.xml;/opt/ros/hydro/share/tf2/package.xml;/opt/ros/hydro/share/rosunit/package.xml;/opt/ros/hydro/share/rostest/package.xml;/opt/ros/hydro/share/actionlib/package.xml;/opt/ros/hydro/share/tf2_py/package.xml;/opt/ros/hydro/share/tf2_ros/package.xml;/opt/ros/hydro/share/tf/package.xml;/opt/ros/hydro/share/pcl_ros/package.xml
 _rospack_msgsrv_gen_invoke_result:INTERNAL=
 linemod_ros_CFLAGS_OTHER:INTERNAL=
 linemod_ros_INCLUDEDIR:INTERNAL=
-linemod_ros_INCLUDE_DIRS:INTERNAL=/opt/ros/groovy/include;/opt/ros/groovy/include/pcl-1.6;/usr/include/eigen3;/usr/include/vtk-5.8;/usr/include/qhull
+linemod_ros_INCLUDE_DIRS:INTERNAL=/opt/ros/hydro/include;/usr/include/eigen3;/usr/include/pcl-1.7;/usr/include/ni;/usr/include/vtk-5.8;/usr/include/qhull
 linemod_ros_LDFLAGS_OTHER:INTERNAL=
-linemod_ros_LIBRARIES:INTERNAL=pcl_ros_tf;pcl_ros_io;pcl_ros_filters;:/usr/lib/libboost_iostreams-mt.so;:/opt/ros/groovy/lib/libpcl_common.so;:/opt/ros/groovy/lib/libpcl_octree.so;:/usr/lib/libvtkCommon.so.5.8.0;:/usr/lib/libvtkRendering.so.5.8.0;:/usr/lib/libvtkHybrid.so.5.8.0;:/opt/ros/groovy/lib/libpcl_io.so;:/opt/ros/groovy/lib/libpcl_kdtree.so;:/opt/ros/groovy/lib/libpcl_search.so;:/opt/ros/groovy/lib/libpcl_sample_consensus.so;:/opt/ros/groovy/lib/libpcl_filters.so;:/opt/ros/groovy/lib/libpcl_segmentation.so;:/opt/ros/groovy/lib/libpcl_visualization.so;:/opt/ros/groovy/lib/libpcl_features.so;:/usr/lib/libqhull.so;:/opt/ros/groovy/lib/libpcl_surface.so;:/opt/ros/groovy/lib/libpcl_registration.so;:/opt/ros/groovy/lib/libpcl_keypoints.so;:/opt/ros/groovy/lib/libpcl_tracking.so;tf;message_filters;roscpp;:/usr/lib/libboost_signals-mt.so;:/usr/lib/libboost_filesystem-mt.so;rosconsole;:/usr/lib/libboost_regex-mt.so;:/usr/lib/liblog4cxx.so;xmlrpcpp;roscpp_serialization;rostime;:/usr/lib/libboost_date_time-mt.so;:/usr/lib/libboost_system-mt.so;:/usr/lib/libboost_thread-mt.so;pthread;cpp_common
-linemod_ros_LIBRARY_DIRS:INTERNAL=/opt/ros/groovy/lib
-linemod_ros_cached_manifest_list:INTERNAL=/home/gmanfred/devel/essential/ros/linemod_ros/manifest.xml;/opt/ros/groovy/share/cpp_common/package.xml;/opt/ros/groovy/share/rostime/package.xml;/opt/ros/groovy/share/roscpp_traits/package.xml;/opt/ros/groovy/share/roscpp_serialization/package.xml;/opt/ros/groovy/share/genmsg/package.xml;/opt/ros/groovy/share/genpy/package.xml;/opt/ros/groovy/share/message_runtime/package.xml;/opt/ros/groovy/share/rosconsole/package.xml;/opt/ros/groovy/share/std_msgs/package.xml;/opt/ros/groovy/share/rosgraph_msgs/package.xml;/opt/ros/groovy/share/xmlrpcpp/package.xml;/opt/ros/groovy/share/roscpp/package.xml;/opt/ros/groovy/share/catkin/package.xml;/opt/ros/groovy/share/rospack/package.xml;/opt/ros/groovy/share/roslib/package.xml;/opt/ros/groovy/share/rosgraph/package.xml;/opt/ros/groovy/share/rospy/package.xml;/opt/ros/groovy/share/topic_tools/package.xml;/opt/ros/groovy/share/rosbag/package.xml;/opt/ros/groovy/share/rosmsg/package.xml;/opt/ros/groovy/share/rosservice/package.xml;/opt/ros/groovy/share/dynamic_reconfigure/package.xml;/opt/ros/groovy/share/bond/package.xml;/opt/ros/groovy/share/smclib/package.xml;/opt/ros/groovy/share/bondcpp/package.xml;/opt/ros/groovy/share/console_bridge/package.xml;/opt/ros/groovy/share/class_loader/package.xml;/opt/ros/groovy/share/pluginlib/package.xml;/opt/ros/groovy/share/nodelet/package.xml;/opt/ros/groovy/share/message_filters/package.xml;/opt/ros/groovy/share/nodelet_topic_tools/package.xml;/opt/ros/groovy/share/flann/package.xml;/opt/ros/groovy/share/geometry_msgs/package.xml;/opt/ros/groovy/share/sensor_msgs/package.xml;/opt/ros/groovy/share/pcl_msgs/package.xml;/opt/ros/groovy/share/pcl/package.xml;/opt/ros/groovy/share/tf/package.xml;/opt/ros/groovy/share/pcl_ros/package.xml;/opt/ros/groovy/share/pcl_conversions/package.xml
+linemod_ros_LIBRARIES:INTERNAL=pcl_ros_filters;pcl_ros_io;pcl_ros_tf;:/usr/lib/libpcl_common.so;:/usr/lib/libpcl_kdtree.so;:/usr/lib/libpcl_octree.so;:/usr/lib/libpcl_search.so;:/usr/lib/libpcl_io.so;:/usr/lib/libpcl_sample_consensus.so;:/usr/lib/libpcl_filters.so;:/usr/lib/libpcl_visualization.so;:/usr/lib/libpcl_outofcore.so;:/usr/lib/libpcl_features.so;:/usr/lib/libpcl_segmentation.so;:/usr/lib/libpcl_people.so;:/usr/lib/libpcl_registration.so;:/usr/lib/libpcl_recognition.so;:/usr/lib/libpcl_keypoints.so;:/usr/lib/libpcl_surface.so;:/usr/lib/libpcl_tracking.so;:/usr/lib/libpcl_apps.so;:/usr/lib/libboost_iostreams-mt.so;:/usr/lib/libboost_serialization-mt.so;:/usr/lib/libqhull.so;:/usr/lib/libOpenNI.so;:/usr/lib/libvtkCommon.so.5.8.0;:/usr/lib/libvtkRendering.so.5.8.0;:/usr/lib/libvtkHybrid.so.5.8.0;:/usr/lib/libvtkCharts.so.5.8.0;dynamic_reconfigure_config_init_mutex;nodeletlib;rosbag;tf;bondcpp;:/usr/lib/x86_64-linux-gnu/libuuid.so;tinyxml;class_loader;:/usr/lib/libPocoFoundation.so;dl;roslib;rosbag_storage;:/usr/lib/libboost_program_options-mt.so;topic_tools;tf2_ros;actionlib;message_filters;tf2;roscpp;:/usr/lib/libboost_signals-mt.so;:/usr/lib/libboost_filesystem-mt.so;rosconsole;rosconsole_log4cxx;rosconsole_backend_interface;:/usr/lib/liblog4cxx.so;:/usr/lib/libboost_regex-mt.so;xmlrpcpp;roscpp_serialization;rostime;:/usr/lib/libboost_date_time-mt.so;:/usr/lib/libboost_system-mt.so;:/usr/lib/libboost_thread-mt.so;pthread;cpp_common;:/opt/ros/hydro/lib/libconsole_bridge.so
+linemod_ros_LIBRARY_DIRS:INTERNAL=/opt/ros/hydro/lib
+linemod_ros_cached_manifest_list:INTERNAL=/home/gmanfred/devel/essential/ros/linemod_ros/manifest.xml;/opt/ros/hydro/share/catkin/package.xml;/opt/ros/hydro/share/console_bridge/package.xml;/opt/ros/hydro/share/cpp_common/package.xml;/opt/ros/hydro/share/rostime/package.xml;/opt/ros/hydro/share/roscpp_traits/package.xml;/opt/ros/hydro/share/roscpp_serialization/package.xml;/opt/ros/hydro/share/genmsg/package.xml;/opt/ros/hydro/share/genpy/package.xml;/opt/ros/hydro/share/message_runtime/package.xml;/opt/ros/hydro/share/gencpp/package.xml;/opt/ros/hydro/share/genlisp/package.xml;/opt/ros/hydro/share/message_generation/package.xml;/opt/ros/hydro/share/rosbuild/package.xml;/opt/ros/hydro/share/rosconsole/package.xml;/opt/ros/hydro/share/std_msgs/package.xml;/opt/ros/hydro/share/rosgraph_msgs/package.xml;/opt/ros/hydro/share/xmlrpcpp/package.xml;/opt/ros/hydro/share/roscpp/package.xml;/opt/ros/hydro/share/rospack/package.xml;/opt/ros/hydro/share/roslib/package.xml;/opt/ros/hydro/share/rosgraph/package.xml;/opt/ros/hydro/share/rospy/package.xml;/opt/ros/hydro/share/rosbag_storage/package.xml;/opt/ros/hydro/share/topic_tools/package.xml;/opt/ros/hydro/share/rosbag/package.xml;/opt/ros/hydro/share/rosmsg/package.xml;/opt/ros/hydro/share/rosservice/package.xml;/opt/ros/hydro/share/dynamic_reconfigure/package.xml;/opt/ros/hydro/share/message_filters/package.xml;/opt/ros/hydro/share/bond/package.xml;/opt/ros/hydro/share/smclib/package.xml;/opt/ros/hydro/share/bondcpp/package.xml;/opt/ros/hydro/share/class_loader/package.xml;/opt/ros/hydro/share/pluginlib/package.xml;/opt/ros/hydro/share/nodelet/package.xml;/opt/ros/hydro/share/nodelet_topic_tools/package.xml;/opt/ros/hydro/share/geometry_msgs/package.xml;/opt/ros/hydro/share/sensor_msgs/package.xml;/opt/ros/hydro/share/pcl_msgs/package.xml;/opt/ros/hydro/share/pcl_conversions/package.xml;/opt/ros/hydro/share/rosclean/package.xml;/opt/ros/hydro/share/rosmaster/package.xml;/opt/ros/hydro/share/rosout/package.xml;/opt/ros/hydro/share/rosparam/package.xml;/opt/ros/hydro/share/roslaunch/package.xml;/opt/ros/hydro/share/rostopic/package.xml;/opt/ros/hydro/share/rosnode/package.xml;/opt/ros/hydro/share/roswtf/package.xml;/opt/ros/hydro/share/actionlib_msgs/package.xml;/opt/ros/hydro/share/tf2_msgs/package.xml;/opt/ros/hydro/share/tf2/package.xml;/opt/ros/hydro/share/rosunit/package.xml;/opt/ros/hydro/share/rostest/package.xml;/opt/ros/hydro/share/actionlib/package.xml;/opt/ros/hydro/share/tf2_py/package.xml;/opt/ros/hydro/share/tf2_ros/package.xml;/opt/ros/hydro/share/tf/package.xml;/opt/ros/hydro/share/pcl_ros/package.xml
 linemod_ros_temp:INTERNAL=
-roslib_path:INTERNAL=/opt/ros/groovy/share/roslib
-roslisp_CMAKE:INTERNAL=/opt/ros/groovy/share/roslisp/rosbuild/roslisp.cmake
+roslib_path:INTERNAL=/opt/ros/hydro/share/roslib
+roslisp_CMAKE:INTERNAL=/opt/ros/hydro/share/roslisp/rosbuild/roslisp.cmake
 

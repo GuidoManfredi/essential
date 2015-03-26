@@ -36,7 +36,7 @@ CMAKE_COMMAND = /usr/bin/cmake
 RM = /usr/bin/cmake -E remove -f
 
 # The program to use to edit the cache.
-CMAKE_EDIT_COMMAND = /usr/bin/ccmake
+CMAKE_EDIT_COMMAND = /usr/bin/cmake-gui
 
 # The top-level source directory on which CMake was run.
 CMAKE_SOURCE_DIR = /home/gmanfred/devel/essential/ros/linemod_ros/Linemod
@@ -50,7 +50,7 @@ CMAKE_BINARY_DIR = /home/gmanfred/devel/essential/ros/linemod_ros/Linemod/build
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake cache editor..."
-	/usr/bin/ccmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	/usr/bin/cmake-gui -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -111,53 +111,69 @@ linemod_test/fast:
 	$(MAKE) -f CMakeFiles/linemod_test.dir/build.make CMakeFiles/linemod_test.dir/build
 .PHONY : linemod_test/fast
 
-DetectLinemod.o: DetectLinemod.cpp.o
-.PHONY : DetectLinemod.o
+#=============================================================================
+# Target rules for targets named online_grabber
+
+# Build rule for target.
+online_grabber: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 online_grabber
+.PHONY : online_grabber
+
+# fast build rule for target.
+online_grabber/fast:
+	$(MAKE) -f CMakeFiles/online_grabber.dir/build.make CMakeFiles/online_grabber.dir/build
+.PHONY : online_grabber/fast
+
+LinemodWrap.o: LinemodWrap.cpp.o
+.PHONY : LinemodWrap.o
 
 # target to build an object file
-DetectLinemod.cpp.o:
-	$(MAKE) -f CMakeFiles/linemod_test.dir/build.make CMakeFiles/linemod_test.dir/DetectLinemod.cpp.o
-.PHONY : DetectLinemod.cpp.o
+LinemodWrap.cpp.o:
+	$(MAKE) -f CMakeFiles/linemod_test.dir/build.make CMakeFiles/linemod_test.dir/LinemodWrap.cpp.o
+	$(MAKE) -f CMakeFiles/online_grabber.dir/build.make CMakeFiles/online_grabber.dir/LinemodWrap.cpp.o
+.PHONY : LinemodWrap.cpp.o
 
-DetectLinemod.i: DetectLinemod.cpp.i
-.PHONY : DetectLinemod.i
+LinemodWrap.i: LinemodWrap.cpp.i
+.PHONY : LinemodWrap.i
 
 # target to preprocess a source file
-DetectLinemod.cpp.i:
-	$(MAKE) -f CMakeFiles/linemod_test.dir/build.make CMakeFiles/linemod_test.dir/DetectLinemod.cpp.i
-.PHONY : DetectLinemod.cpp.i
+LinemodWrap.cpp.i:
+	$(MAKE) -f CMakeFiles/linemod_test.dir/build.make CMakeFiles/linemod_test.dir/LinemodWrap.cpp.i
+	$(MAKE) -f CMakeFiles/online_grabber.dir/build.make CMakeFiles/online_grabber.dir/LinemodWrap.cpp.i
+.PHONY : LinemodWrap.cpp.i
 
-DetectLinemod.s: DetectLinemod.cpp.s
-.PHONY : DetectLinemod.s
+LinemodWrap.s: LinemodWrap.cpp.s
+.PHONY : LinemodWrap.s
 
 # target to generate assembly for a file
-DetectLinemod.cpp.s:
-	$(MAKE) -f CMakeFiles/linemod_test.dir/build.make CMakeFiles/linemod_test.dir/DetectLinemod.cpp.s
-.PHONY : DetectLinemod.cpp.s
+LinemodWrap.cpp.s:
+	$(MAKE) -f CMakeFiles/linemod_test.dir/build.make CMakeFiles/linemod_test.dir/LinemodWrap.cpp.s
+	$(MAKE) -f CMakeFiles/online_grabber.dir/build.make CMakeFiles/online_grabber.dir/LinemodWrap.cpp.s
+.PHONY : LinemodWrap.cpp.s
 
-TrainLinemod.o: TrainLinemod.cpp.o
-.PHONY : TrainLinemod.o
+OnlineGrabber.o: OnlineGrabber.cpp.o
+.PHONY : OnlineGrabber.o
 
 # target to build an object file
-TrainLinemod.cpp.o:
-	$(MAKE) -f CMakeFiles/linemod_test.dir/build.make CMakeFiles/linemod_test.dir/TrainLinemod.cpp.o
-.PHONY : TrainLinemod.cpp.o
+OnlineGrabber.cpp.o:
+	$(MAKE) -f CMakeFiles/online_grabber.dir/build.make CMakeFiles/online_grabber.dir/OnlineGrabber.cpp.o
+.PHONY : OnlineGrabber.cpp.o
 
-TrainLinemod.i: TrainLinemod.cpp.i
-.PHONY : TrainLinemod.i
+OnlineGrabber.i: OnlineGrabber.cpp.i
+.PHONY : OnlineGrabber.i
 
 # target to preprocess a source file
-TrainLinemod.cpp.i:
-	$(MAKE) -f CMakeFiles/linemod_test.dir/build.make CMakeFiles/linemod_test.dir/TrainLinemod.cpp.i
-.PHONY : TrainLinemod.cpp.i
+OnlineGrabber.cpp.i:
+	$(MAKE) -f CMakeFiles/online_grabber.dir/build.make CMakeFiles/online_grabber.dir/OnlineGrabber.cpp.i
+.PHONY : OnlineGrabber.cpp.i
 
-TrainLinemod.s: TrainLinemod.cpp.s
-.PHONY : TrainLinemod.s
+OnlineGrabber.s: OnlineGrabber.cpp.s
+.PHONY : OnlineGrabber.s
 
 # target to generate assembly for a file
-TrainLinemod.cpp.s:
-	$(MAKE) -f CMakeFiles/linemod_test.dir/build.make CMakeFiles/linemod_test.dir/TrainLinemod.cpp.s
-.PHONY : TrainLinemod.cpp.s
+OnlineGrabber.cpp.s:
+	$(MAKE) -f CMakeFiles/online_grabber.dir/build.make CMakeFiles/online_grabber.dir/OnlineGrabber.cpp.s
+.PHONY : OnlineGrabber.cpp.s
 
 linemod_test.o: linemod_test.cpp.o
 .PHONY : linemod_test.o
@@ -183,6 +199,30 @@ linemod_test.cpp.s:
 	$(MAKE) -f CMakeFiles/linemod_test.dir/build.make CMakeFiles/linemod_test.dir/linemod_test.cpp.s
 .PHONY : linemod_test.cpp.s
 
+online_grabber.o: online_grabber.cpp.o
+.PHONY : online_grabber.o
+
+# target to build an object file
+online_grabber.cpp.o:
+	$(MAKE) -f CMakeFiles/online_grabber.dir/build.make CMakeFiles/online_grabber.dir/online_grabber.cpp.o
+.PHONY : online_grabber.cpp.o
+
+online_grabber.i: online_grabber.cpp.i
+.PHONY : online_grabber.i
+
+# target to preprocess a source file
+online_grabber.cpp.i:
+	$(MAKE) -f CMakeFiles/online_grabber.dir/build.make CMakeFiles/online_grabber.dir/online_grabber.cpp.i
+.PHONY : online_grabber.cpp.i
+
+online_grabber.s: online_grabber.cpp.s
+.PHONY : online_grabber.s
+
+# target to generate assembly for a file
+online_grabber.cpp.s:
+	$(MAKE) -f CMakeFiles/online_grabber.dir/build.make CMakeFiles/online_grabber.dir/online_grabber.cpp.s
+.PHONY : online_grabber.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -191,16 +231,20 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... linemod_test"
+	@echo "... online_grabber"
 	@echo "... rebuild_cache"
-	@echo "... DetectLinemod.o"
-	@echo "... DetectLinemod.i"
-	@echo "... DetectLinemod.s"
-	@echo "... TrainLinemod.o"
-	@echo "... TrainLinemod.i"
-	@echo "... TrainLinemod.s"
+	@echo "... LinemodWrap.o"
+	@echo "... LinemodWrap.i"
+	@echo "... LinemodWrap.s"
+	@echo "... OnlineGrabber.o"
+	@echo "... OnlineGrabber.i"
+	@echo "... OnlineGrabber.s"
 	@echo "... linemod_test.o"
 	@echo "... linemod_test.i"
 	@echo "... linemod_test.s"
+	@echo "... online_grabber.o"
+	@echo "... online_grabber.i"
+	@echo "... online_grabber.s"
 .PHONY : help
 
 

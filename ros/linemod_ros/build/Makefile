@@ -425,29 +425,53 @@ gtest_main/fast:
 	$(MAKE) -f gtest/CMakeFiles/gtest_main.dir/build.make gtest/CMakeFiles/gtest_main.dir/build
 .PHONY : gtest_main/fast
 
-Linemod/Train.o: Linemod/Train.cpp.o
-.PHONY : Linemod/Train.o
+Linemod/LinemodWrap.o: Linemod/LinemodWrap.cpp.o
+.PHONY : Linemod/LinemodWrap.o
 
 # target to build an object file
-Linemod/Train.cpp.o:
-	$(MAKE) -f CMakeFiles/train_test.dir/build.make CMakeFiles/train_test.dir/Linemod/Train.cpp.o
-.PHONY : Linemod/Train.cpp.o
+Linemod/LinemodWrap.cpp.o:
+	$(MAKE) -f CMakeFiles/train_test.dir/build.make CMakeFiles/train_test.dir/Linemod/LinemodWrap.cpp.o
+.PHONY : Linemod/LinemodWrap.cpp.o
 
-Linemod/Train.i: Linemod/Train.cpp.i
-.PHONY : Linemod/Train.i
+Linemod/LinemodWrap.i: Linemod/LinemodWrap.cpp.i
+.PHONY : Linemod/LinemodWrap.i
 
 # target to preprocess a source file
-Linemod/Train.cpp.i:
-	$(MAKE) -f CMakeFiles/train_test.dir/build.make CMakeFiles/train_test.dir/Linemod/Train.cpp.i
-.PHONY : Linemod/Train.cpp.i
+Linemod/LinemodWrap.cpp.i:
+	$(MAKE) -f CMakeFiles/train_test.dir/build.make CMakeFiles/train_test.dir/Linemod/LinemodWrap.cpp.i
+.PHONY : Linemod/LinemodWrap.cpp.i
 
-Linemod/Train.s: Linemod/Train.cpp.s
-.PHONY : Linemod/Train.s
+Linemod/LinemodWrap.s: Linemod/LinemodWrap.cpp.s
+.PHONY : Linemod/LinemodWrap.s
 
 # target to generate assembly for a file
-Linemod/Train.cpp.s:
-	$(MAKE) -f CMakeFiles/train_test.dir/build.make CMakeFiles/train_test.dir/Linemod/Train.cpp.s
-.PHONY : Linemod/Train.cpp.s
+Linemod/LinemodWrap.cpp.s:
+	$(MAKE) -f CMakeFiles/train_test.dir/build.make CMakeFiles/train_test.dir/Linemod/LinemodWrap.cpp.s
+.PHONY : Linemod/LinemodWrap.cpp.s
+
+Linemod/OnlineGrabber.o: Linemod/OnlineGrabber.cpp.o
+.PHONY : Linemod/OnlineGrabber.o
+
+# target to build an object file
+Linemod/OnlineGrabber.cpp.o:
+	$(MAKE) -f CMakeFiles/train_test.dir/build.make CMakeFiles/train_test.dir/Linemod/OnlineGrabber.cpp.o
+.PHONY : Linemod/OnlineGrabber.cpp.o
+
+Linemod/OnlineGrabber.i: Linemod/OnlineGrabber.cpp.i
+.PHONY : Linemod/OnlineGrabber.i
+
+# target to preprocess a source file
+Linemod/OnlineGrabber.cpp.i:
+	$(MAKE) -f CMakeFiles/train_test.dir/build.make CMakeFiles/train_test.dir/Linemod/OnlineGrabber.cpp.i
+.PHONY : Linemod/OnlineGrabber.cpp.i
+
+Linemod/OnlineGrabber.s: Linemod/OnlineGrabber.cpp.s
+.PHONY : Linemod/OnlineGrabber.s
+
+# target to generate assembly for a file
+Linemod/OnlineGrabber.cpp.s:
+	$(MAKE) -f CMakeFiles/train_test.dir/build.make CMakeFiles/train_test.dir/Linemod/OnlineGrabber.cpp.s
+.PHONY : Linemod/OnlineGrabber.cpp.s
 
 src/train_test.o: src/train_test.cpp.o
 .PHONY : src/train_test.o
@@ -507,9 +531,12 @@ help:
 	@echo "... train_test"
 	@echo "... gtest"
 	@echo "... gtest_main"
-	@echo "... Linemod/Train.o"
-	@echo "... Linemod/Train.i"
-	@echo "... Linemod/Train.s"
+	@echo "... Linemod/LinemodWrap.o"
+	@echo "... Linemod/LinemodWrap.i"
+	@echo "... Linemod/LinemodWrap.s"
+	@echo "... Linemod/OnlineGrabber.o"
+	@echo "... Linemod/OnlineGrabber.i"
+	@echo "... Linemod/OnlineGrabber.s"
 	@echo "... src/train_test.o"
 	@echo "... src/train_test.i"
 	@echo "... src/train_test.s"
