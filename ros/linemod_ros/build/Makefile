@@ -218,6 +218,19 @@ clean_test_results/fast:
 .PHONY : clean_test_results/fast
 
 #=============================================================================
+# Target rules for targets named detect_test
+
+# Build rule for target.
+detect_test: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 detect_test
+.PHONY : detect_test
+
+# fast build rule for target.
+detect_test/fast:
+	$(MAKE) -f CMakeFiles/detect_test.dir/build.make CMakeFiles/detect_test.dir/build
+.PHONY : detect_test/fast
+
+#=============================================================================
 # Target rules for targets named doxygen
 
 # Build rule for target.
@@ -430,6 +443,7 @@ Linemod/LinemodWrap.o: Linemod/LinemodWrap.cpp.o
 
 # target to build an object file
 Linemod/LinemodWrap.cpp.o:
+	$(MAKE) -f CMakeFiles/detect_test.dir/build.make CMakeFiles/detect_test.dir/Linemod/LinemodWrap.cpp.o
 	$(MAKE) -f CMakeFiles/train_test.dir/build.make CMakeFiles/train_test.dir/Linemod/LinemodWrap.cpp.o
 .PHONY : Linemod/LinemodWrap.cpp.o
 
@@ -438,6 +452,7 @@ Linemod/LinemodWrap.i: Linemod/LinemodWrap.cpp.i
 
 # target to preprocess a source file
 Linemod/LinemodWrap.cpp.i:
+	$(MAKE) -f CMakeFiles/detect_test.dir/build.make CMakeFiles/detect_test.dir/Linemod/LinemodWrap.cpp.i
 	$(MAKE) -f CMakeFiles/train_test.dir/build.make CMakeFiles/train_test.dir/Linemod/LinemodWrap.cpp.i
 .PHONY : Linemod/LinemodWrap.cpp.i
 
@@ -446,6 +461,7 @@ Linemod/LinemodWrap.s: Linemod/LinemodWrap.cpp.s
 
 # target to generate assembly for a file
 Linemod/LinemodWrap.cpp.s:
+	$(MAKE) -f CMakeFiles/detect_test.dir/build.make CMakeFiles/detect_test.dir/Linemod/LinemodWrap.cpp.s
 	$(MAKE) -f CMakeFiles/train_test.dir/build.make CMakeFiles/train_test.dir/Linemod/LinemodWrap.cpp.s
 .PHONY : Linemod/LinemodWrap.cpp.s
 
@@ -454,6 +470,7 @@ Linemod/OnlineGrabber.o: Linemod/OnlineGrabber.cpp.o
 
 # target to build an object file
 Linemod/OnlineGrabber.cpp.o:
+	$(MAKE) -f CMakeFiles/detect_test.dir/build.make CMakeFiles/detect_test.dir/Linemod/OnlineGrabber.cpp.o
 	$(MAKE) -f CMakeFiles/train_test.dir/build.make CMakeFiles/train_test.dir/Linemod/OnlineGrabber.cpp.o
 .PHONY : Linemod/OnlineGrabber.cpp.o
 
@@ -462,6 +479,7 @@ Linemod/OnlineGrabber.i: Linemod/OnlineGrabber.cpp.i
 
 # target to preprocess a source file
 Linemod/OnlineGrabber.cpp.i:
+	$(MAKE) -f CMakeFiles/detect_test.dir/build.make CMakeFiles/detect_test.dir/Linemod/OnlineGrabber.cpp.i
 	$(MAKE) -f CMakeFiles/train_test.dir/build.make CMakeFiles/train_test.dir/Linemod/OnlineGrabber.cpp.i
 .PHONY : Linemod/OnlineGrabber.cpp.i
 
@@ -470,8 +488,33 @@ Linemod/OnlineGrabber.s: Linemod/OnlineGrabber.cpp.s
 
 # target to generate assembly for a file
 Linemod/OnlineGrabber.cpp.s:
+	$(MAKE) -f CMakeFiles/detect_test.dir/build.make CMakeFiles/detect_test.dir/Linemod/OnlineGrabber.cpp.s
 	$(MAKE) -f CMakeFiles/train_test.dir/build.make CMakeFiles/train_test.dir/Linemod/OnlineGrabber.cpp.s
 .PHONY : Linemod/OnlineGrabber.cpp.s
+
+src/detect_test.o: src/detect_test.cpp.o
+.PHONY : src/detect_test.o
+
+# target to build an object file
+src/detect_test.cpp.o:
+	$(MAKE) -f CMakeFiles/detect_test.dir/build.make CMakeFiles/detect_test.dir/src/detect_test.cpp.o
+.PHONY : src/detect_test.cpp.o
+
+src/detect_test.i: src/detect_test.cpp.i
+.PHONY : src/detect_test.i
+
+# target to preprocess a source file
+src/detect_test.cpp.i:
+	$(MAKE) -f CMakeFiles/detect_test.dir/build.make CMakeFiles/detect_test.dir/src/detect_test.cpp.i
+.PHONY : src/detect_test.cpp.i
+
+src/detect_test.s: src/detect_test.cpp.s
+.PHONY : src/detect_test.s
+
+# target to generate assembly for a file
+src/detect_test.cpp.s:
+	$(MAKE) -f CMakeFiles/detect_test.dir/build.make CMakeFiles/detect_test.dir/src/detect_test.cpp.s
+.PHONY : src/detect_test.cpp.s
 
 src/train_test.o: src/train_test.cpp.o
 .PHONY : src/train_test.o
@@ -509,6 +552,7 @@ help:
 	@echo "... ROSBUILD_gensrv_lisp"
 	@echo "... _catkin_empty_exported_target"
 	@echo "... clean_test_results"
+	@echo "... detect_test"
 	@echo "... doxygen"
 	@echo "... edit_cache"
 	@echo "... install"
@@ -537,6 +581,9 @@ help:
 	@echo "... Linemod/OnlineGrabber.o"
 	@echo "... Linemod/OnlineGrabber.i"
 	@echo "... Linemod/OnlineGrabber.s"
+	@echo "... src/detect_test.o"
+	@echo "... src/detect_test.i"
+	@echo "... src/detect_test.s"
 	@echo "... src/train_test.o"
 	@echo "... src/train_test.i"
 	@echo "... src/train_test.s"

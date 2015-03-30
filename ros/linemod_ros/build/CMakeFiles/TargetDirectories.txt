@@ -4,6 +4,7 @@
 /home/gmanfred/devel/essential/ros/linemod_ros/build/CMakeFiles/ROSBUILD_gensrv_lisp.dir
 /home/gmanfred/devel/essential/ros/linemod_ros/build/CMakeFiles/_catkin_empty_exported_target.dir
 /home/gmanfred/devel/essential/ros/linemod_ros/build/CMakeFiles/clean_test_results.dir
+/home/gmanfred/devel/essential/ros/linemod_ros/build/CMakeFiles/detect_test.dir
 /home/gmanfred/devel/essential/ros/linemod_ros/build/CMakeFiles/doxygen.dir
 /home/gmanfred/devel/essential/ros/linemod_ros/build/gtest/CMakeFiles/gtest.dir
 /home/gmanfred/devel/essential/ros/linemod_ros/build/gtest/CMakeFiles/gtest_main.dir

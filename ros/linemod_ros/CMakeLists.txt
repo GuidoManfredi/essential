@@ -44,4 +44,14 @@ target_link_libraries(train_test ${PCL_COMMON_LIBRARIES}
                                  ${PCL_SEGMENTATION_LIBRARIES}
                                  ${PCL_VISUALIZATION_LIBRARIES}
                                  libvtkCommon.so libvtkFiltering.so libvtkRendering.so libvtkHybrid.so)
+                                 
+rosbuild_add_executable(detect_test src/detect_test.cpp
+                                        Linemod/OnlineGrabber.cpp
+                                        Linemod/LinemodWrap.cpp)
+target_link_libraries(detect_test ${PCL_COMMON_LIBRARIES}
+                                 ${PCL_IO_LIBRARIES}
+                                 ${PCL_RECOGNITION_LIBRARIES}
+                                 ${PCL_SEGMENTATION_LIBRARIES}
+                                 ${PCL_VISUALIZATION_LIBRARIES}
+                                 libvtkCommon.so libvtkFiltering.so libvtkRendering.so libvtkHybrid.so)
 #target_link_libraries(example ${PROJECT_NAME})

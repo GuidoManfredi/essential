@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_layout_file>
 	<ActiveTarget name="Debug" />
-	<File name="CMakeLists.txt" open="1" top="0" tabpos="6">
+	<File name="CMakeLists.txt" open="1" top="0" tabpos="5">
 		<Cursor position="229" topLine="0" />
 	</File>
-	<File name="LinemodWrap.cpp" open="1" top="1" tabpos="4">
-		<Cursor position="3912" topLine="88" />
+	<File name="LinemodWrap.cpp" open="1" top="0" tabpos="3">
+		<Cursor position="5853" topLine="129" />
 	</File>
-	<File name="LinemodWrap.h" open="1" top="0" tabpos="5">
-		<Cursor position="263" topLine="0" />
+	<File name="LinemodWrap.h" open="1" top="0" tabpos="4">
+		<Cursor position="882" topLine="0" />
 	</File>
-	<File name="OnlineGrabber.cpp" open="1" top="0" tabpos="2">
-		<Cursor position="949" topLine="13" />
+	<File name="OnlineGrabber.cpp" open="1" top="0" tabpos="1">
+		<Cursor position="3600" topLine="0" />
 	</File>
-	<File name="OnlineGrabber.h" open="1" top="0" tabpos="3">
-		<Cursor position="807" topLine="7" />
+	<File name="OnlineGrabber.h" open="1" top="0" tabpos="2">
+		<Cursor position="1421" topLine="8" />
 	</File>
 	<File name="common.h" open="0" top="0" tabpos="7">
 		<Cursor position="96" topLine="0" />

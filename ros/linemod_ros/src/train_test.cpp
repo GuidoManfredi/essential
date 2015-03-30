@@ -6,6 +6,10 @@
 
 #include "../Linemod/OnlineGrabber.h"
 
+// TODO
+//  Check load/save
+//  Multiobjects
+
 using namespace std;
 using namespace pcl;
 
@@ -33,8 +37,10 @@ void cloud_cb(const PointCloudType::ConstPtr& msg) {
     viewer.addCube (min.x, max.x, min.y, max.y, min.z, max.z);
 }
 
+// Se mettre dans un dossier vide, ou seront ecris les templates.
+// rosrun linemod_ros train_test /camera/depth_registered/points model.lmt
 int main(int argc, char** argv) {
-    assert(argc == 2 && "Usage: train_test cloud_in");
+    assert(argc == 3 && "Usage: train_test cloud_in model_out");
 
 	ros::init(argc, argv, "linemod_online_train");
 	ros::NodeHandle n;
@@ -49,6 +55,8 @@ int main(int argc, char** argv) {
 		ros::spinOnce();
 		loop_rate.sleep ();
 	}
+
+    og.save(argv[2]);
 
 	return 0;
 }

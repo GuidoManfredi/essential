@@ -1,1 +1,0 @@
-/usr/bin/c++  -fPIC -O2 -g   -shared -Wl,-soname,libgtest.so -o /home/gmanfred/devel/essential/ros/visual_slam/lib/libgtest.so CMakeFiles/gtest.dir/src/gtest-all.cc.o -L/home/gmanfred/devel/essential/ros/visual_slam/build/gtest/src -lpthread -Wl,-rpath,/home/gmanfred/devel/essential/ros/visual_slam/build/gtest/src 
