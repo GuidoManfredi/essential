@@ -6,35 +6,31 @@
 
 #include "../Linemod/OnlineGrabber.h"
 
-// TODO
-//  Check load/save
-//  Multiobjects
-
 using namespace std;
 using namespace pcl;
 
 OnlineGrabber og(10.0, 0.95);
 visualization::PCLVisualizer viewer("Training");
 float detection_thresh = 0.95;
-float detection_score = 0.0;
+vector<double> detection_score(1);
 
 void cloud_cb(const PointCloudType::ConstPtr& msg) {
 	if (!viewer.updatePointCloud (msg, "single_cloud"))
 		viewer.addPointCloud (msg, "single_cloud");
     // Si reconnaissance sous seuil
 
-    PointXYZ min, max;
-    if (detection_score < detection_thresh) {
+    vector<PointXYZ> min, max;
+    if (detection_score[0] < detection_thresh) {
         og.grab(msg);
-        detection_score = og.detect(msg, min, max);
+        detection_score[0] = og.detect(msg, min, max);
     } else {
-        detection_score = og.detect(msg, min, max);
+        detection_score[0] = og.detect(msg, min, max);
     }
-    cout << "Detection: " << detection_score << endl;
+    cout << "Detection: " << detection_score[0] << endl;
 
     // Show result
     viewer.removeShape ("cube", 0);
-    viewer.addCube (min.x, max.x, min.y, max.y, min.z, max.z);
+    viewer.addCube (min[0].x, max[0].x, min[0].y, max[0].y, min[0].z, max[0].z);
 }
 
 // Se mettre dans un dossier vide, ou seront ecris les templates.
