@@ -1,0 +1,2 @@
+icp:visual_slam
+-DCATKIN_DEVEL_PREFIX=/home/gmanfred/devel/essential/ros/catkin_ws/devel -DCMAKE_INSTALL_PREFIX=/home/gmanfred/devel/essential/ros/catkin_ws/install

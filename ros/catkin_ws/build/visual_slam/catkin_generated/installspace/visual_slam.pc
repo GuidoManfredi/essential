@@ -1,0 +1,8 @@
+prefix=/home/gmanfred/devel/essential/ros/catkin_ws/install
+
+Name: visual_slam
+Description: Description of visual_slam
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/gmanfred/devel/essential/ros/catkin_ws/install/lib 
+Requires: 

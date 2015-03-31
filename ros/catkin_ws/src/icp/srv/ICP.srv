@@ -1,0 +1,4 @@
+sensor_msgs/PointCloud2 input
+sensor_msgs/PointCloud2 target
+---
+geometry_msgs/PoseStamped pose
