@@ -22,13 +22,13 @@ bool perform_icp(icp::ICP::Request  &req,
 	icp_engine.setInputSource(input);
 	icp_engine.setInputTarget (target);
     // Set the max correspondence distance to 5cm (e.g., correspondences with higher distances will be ignored)
-    icp_engine.setMaxCorrespondenceDistance (0.02);
+    icp_engine.setMaxCorrespondenceDistance (0.01);
     // Set the maximum number of iterations (criterion 1)
-    icp_engine.setMaximumIterations (100);
+    icp_engine.setMaximumIterations (300);
     // Set the transformation epsilon (criterion 2)
     icp_engine.setTransformationEpsilon (1e-8);
     // Set the euclidean distance difference epsilon (criterion 3)
-    icp_engine.setEuclideanFitnessEpsilon (0.1);
+    icp_engine.setEuclideanFitnessEpsilon (1e-3);
 	
     PointCloud<PointXYZ>::Ptr final (new PointCloud<PointXYZ>);
 	icp_engine.align(*final);

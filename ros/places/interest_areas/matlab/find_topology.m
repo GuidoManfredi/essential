@@ -1,0 +1,45 @@
+function map = find_topology(cloud, VM)
+% Compute position of smallest slice
+Z = cloud(:,3);
+[H,bins] = hist(Z, 44);
+min_idx = find(H == min(H));
+max_idx = size(H,2);
+walls = VM(:,:,max_idx) | VM(:,:,max_idx-1) | VM(:,:,max_idx-2);
+smallest = VM(:,:,min_idx) | VM(:,:,min_idx-1) | VM(:,:,min_idx+1);
+lowest = VM(:,:,4);
+
+% Preprocess slices.
+se = strel('square', 2);
+dil_walls = imdilate(walls, se);
+
+se = strel('square', 3);
+dil_smallest = imdilate(smallest, se);
+dil_lowest = imdilate(lowest, se);
+% Find rooms from smallest
+stats = regionprops(~dil_walls,'BoundingBox');
+cnt = 1;
+for k=1:size(stats)
+    if (stats(k).BoundingBox(3) * stats(k).BoundingBox(4) > 450) % 1m² == 400 pixels² ?
+        contours{cnt} = rect2contour(stats(k).BoundingBox);
+        cnt = cnt + 1;
+    end
+end
+% Find windows/doors (smaller than 1m == 50pixels wide are ignored)
+windoors = zeros(size(dil_smallest));
+for k=1:size(contours,2)
+    for l=1:size(contours{k})
+        x = contours{k}(l,1);
+        y = contours{k}(l,2);
+        if(dil_smallest(y,x) == 0)
+            windoors(y,x) = 1;
+        end
+    end
+end
+imshow(windoors);
+stats = regionprops(~windoors,'PixelList');
+stats
+size(stats)
+% Classify as window or door
+
+% Build map
+map = 0;

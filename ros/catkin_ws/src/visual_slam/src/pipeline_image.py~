@@ -9,32 +9,33 @@ class PipelineImage:
     def __init__(self):
         self.extractor = cv2.SIFT()
         self.matcher = cv2.BFMatcher()
-        #self.matcher = cv2.BFMatcher(cv2.NORM_L2, crossCheck=True)
+        #self.matcher = cv2.BFMatcher(cv2.NORM_L2, crossCheck=True) # not possible with distance ratio
 
     def features(self, image, mask):
         kpts, descs = self.extractor.detectAndCompute(image, mask, None)
         return kpts, descs
 
     def getCorrespondingP2DP3D(self, online_p3d, online_p2d, train_p2d, matches):
-        p3d = []
         p2d = []
+        p3d = []
         for m in matches:
             y, x = online_p2d[m.queryIdx]
-            finite_array = np.isfinite(online_p3d[x][y])
-            finite = np.logical_and.reduce(finite_array, 0)
-            if finite: # Remove NaN points from matches
-                p3d.append(online_p3d[x][y])
-                p2d.append(train_p2d[m.trainIdx])
+            #finite_array = np.isfinite(online_p3d[x][y])
+            #finite = np.logical_and.reduce(finite_array, 0)
+            #if finite: # Remove NaN points from matches
+            #    print kikou
+                #p3d.append(online_p3d[x][y])
+                #p2d.append(train_p2d[m.trainIdx])
+            p2d.append(train_p2d[m.trainIdx])
+            p3d.append(online_p3d[x][y])
         return p2d, p3d
 
     def match(self, descs1, descs2, ratio_test=True):
-        #self.matcher = cv2.BFMatcher() # Create a new matcher each time otherwise knnMatch bugs and returns always
-                                        # two identical neighbours which screw up distance ratio (no matches).
         matches = self.matcher.knnMatch(np.asarray(descs1,np.float32),np.asarray(descs2,np.float32),k = 2)
         if ratio_test:
             good = []
             for [m,n] in matches:
-                if m.distance < 0.75*n.distance:
+                if (m.distance < 0.8 * n.distance) or (m.distance - n.distance < 1e-5):
                     #good.append([m]) # list of lists
                     good.append(m)
             return good
@@ -46,21 +47,33 @@ class PipelineImage:
         if len(xyz) == 0:
             return None
 
-        #cv2.imshow('xyz', xyz)
-        #cv2.waitKey(0)
-        
+        # Filtering out NaN and Inf points
         finite = np.zeros(xyz.shape, dtype = np.uint8)
         np.isfinite(xyz, finite)
-        
-        mask = np.zeros((xyz.shape[0],xyz.shape[1]), dtype = np.uint8)
-        np.logical_and.reduce(finite, 2, np.uint8, mask)
 
-        #mask = np.asarray(mask,dtype=np.uint8)
-        #mask = mask * 255;        
-        #cv2.imshow('mask', mask)
-        #cv2.waitKey(0)
+        finite_mask = np.zeros((xyz.shape[0],xyz.shape[1]), dtype = np.uint8)
+        np.logical_and.reduce(finite, 2, np.uint8, finite_mask)
+
+        # Filtering out parts we don't want to model
+        x = -0.15
+        X = 0.15
+        y = -0.20
+        Y = 0.15
+        z = 0.40
+        Z = 0.70
+        # x,y and z filtered
+        xyz_mask = ( (x < xyz[:,:,0]) & (xyz[:,:,0] < X)
+                   & (y < xyz[:,:,1]) & (xyz[:,:,1] < Y)
+                   & (z < xyz[:,:,2]) & (xyz[:,:,2] < Z) )
+
+        final_mask = np.logical_and(finite_mask, xyz_mask)
+        final_mask = np.asarray(final_mask,dtype=np.uint8)
         
-        return mask
+        #display = final_mask * 255;
+        #cv2.imshow('mask', display)
+        #cv2.waitKey(1)
+        
+        return final_mask
 
     def get_p3ds(self, kpts, xyz):
         #for kpt in kpts:

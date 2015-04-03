@@ -27,7 +27,7 @@ class Object:
         
     def add_other_keyframe(self, frame):
         # multiply structure by transform to express it in first frame (world frame)
-        #frame.p3ds = tools.transform(frame.p3ds, np.linalg.inv(frame.T))
+        frame.p3ds = tools.transform(frame.p3ds, np.linalg.inv(frame.T))
         self.descs = np.concatenate((self.descs, frame.descs), 0)
         self.p3ds = np.concatenate((self.p3ds, frame.p3ds), 0)
         self.keyframes.append(frame)
@@ -40,8 +40,8 @@ class Object:
         return self.p3ds
         
     def save(self, filename):
-        np.save(filename + '_descs', descs)
-        np.save(filename + '_p3ds', p3ds)
+        np.save(filename + '_descs.npy', descs)
+        np.save(filename + '_p3ds.npy', p3ds)
         
     def load(self, filename):
         self.descs = np.load(filename + '_descs.npy')

@@ -40,10 +40,10 @@ class PipelineFrame:
     def motion(self, frame, obj):
         #print "Object has " + str(len(obj.p3ds)) + " p3ds."
         T = np.empty((3,4), np.float32)
-        
+    
         p2ds, p3ds = tools.aligned_2d3d_points(frame.kpts, obj.p3ds, frame.matches)
         inliers, T = self.pg.image_to_structure(p3ds, p2ds)
-        
+    
         frame.set_matches(inliers)
         frame.set_motion(T)
         
@@ -71,10 +71,11 @@ class PipelineFrame:
         except rospy.ServiceException, e:
             print "Service call failed: %s"%e
         # Set new motion to frame
-        #frame.set_motion(T * frame.T) #
-        frame.set_motion(frame.T * T) # a l'air bon
+        frame.set_motion(T * frame.T) #
+        #frame.set_motion(frame.T * T) # ou lui ?
         # Refine p3ds positions
-        frame.p3ds = tools.transform(frame.p3ds, np.linalg.inv(frame.T))
+        #frame.p3ds = tools.transform(frame.p3ds, np.linalg.inv(T))
+        frame.p3ds = tools.transform(frame.p3ds, T)
     
     
     

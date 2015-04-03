@@ -49,8 +49,9 @@ def cb_pointcloud(cloud_msg):
         #broadcaster.sendTransform(T[0:3,3], tf.transformations.quaternion_from_matrix(T), rospy.Time.now(), "/world", "/camera" + str(idx))
 
 def main():
+    input_topic = "camera/depth_registered/points"
     rospy.init_node('create_model')
-    rospy.Subscriber("camera/depth_registered/points", PointCloud2, cb_pointcloud)
+    rospy.Subscriber(input_topic, PointCloud2, cb_pointcloud)
     rospy.Subscriber("camera/rgb/camera_info", CameraInfo, cb_calib)
     #pub_pointcloud = rospy.Publisher("/structure", PointCloud2, queue_size=1)
     pub_pointcloud = rospy.Publisher("/structure", PointCloud2)
@@ -59,11 +60,14 @@ def main():
     rate = rospy.Rate(10)
     while not rospy.is_shutdown():
         p3ds = modeler.get_structure()
-        if (p3ds.shape[0] > 1):
+        if p3ds.shape[0] > 1:
             pointcloud_msg = pc.xyz_array_to_pointcloud2(p3ds, rospy.Time.now(), "/world")
             pub_pointcloud.publish(pointcloud_msg)
             rate.sleep()
-    
+        
+        if cv2.waitKey(1) == 27: # 27 == esc
+            break
+        
     modeler.save('model')
 
 if __name__ == "__main__":

@@ -1,0 +1,9 @@
+function voxelmap = cloud2voxelmap (cloud)
+    voxelmap = zeros(10.0/0.05, 8.0/0.05, 2.2/0.05);
+    
+    for i=1:size(cloud)
+        x = uint8((cloud(i,1) - 0.025)/0.05) + 1;
+        y = uint8((cloud(i,2) - 0.025)/0.05) + 1;
+        z = uint8((cloud(i,3) - 0.025)/0.05) + 1;
+        voxelmap(x, y, z) = 1;
+    end

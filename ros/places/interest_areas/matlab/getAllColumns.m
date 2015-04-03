@@ -1,0 +1,9 @@
+function C = getAllColumns (VM)
+    sizeX = size(VM, 1);
+    sizeY = size(VM, 2);
+    C = zeros(sizeX * sizeY, 44);
+    for x=1:sizeX
+        for y=1:sizeY
+            c = getColumn(VM, x, y);
+        end
+    end

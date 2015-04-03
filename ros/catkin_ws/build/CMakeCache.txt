@@ -14,8 +14,20 @@
 # EXTERNAL cache entries
 ########################
 
+//The directory containing a CMake configuration file for ASSIMP.
+ASSIMP_DIR:PATH=ASSIMP_DIR-NOTFOUND
+
 //Build shared libraries (DLLs).
 BUILD_SHARED_LIBS:BOOL=ON
+
+//The directory containing a CMake configuration file for Boost.
+Boost_DIR:PATH=Boost_DIR-NOTFOUND
+
+//Path to a file.
+Boost_INCLUDE_DIR:PATH=/usr/include
+
+//Boost library directory
+Boost_LIBRARY_DIRS:FILEPATH=/usr/lib
 
 //List of ';' separated packages to exclude
 CATKIN_BLACKLIST_PACKAGES:STRING=
@@ -202,6 +214,18 @@ LSB_RELEASE_EXECUTABLE:FILEPATH=/usr/bin/lsb_release
 //Path to a program.
 NOSETESTS:FILEPATH=/usr/local/bin/nosetests
 
+//Path to a file.
+OPENGL_INCLUDE_DIR:PATH=/usr/include
+
+//Path to a library.
+OPENGL_gl_LIBRARY:FILEPATH=/usr/lib/x86_64-linux-gnu/libGL.so
+
+//Path to a library.
+OPENGL_glu_LIBRARY:FILEPATH=/usr/lib/x86_64-linux-gnu/libGLU.so
+
+//Path to a file.
+OPENGL_xmesa_INCLUDE_DIR:PATH=OPENGL_xmesa_INCLUDE_DIR-NOTFOUND
+
 //Path where debug 3rdpaty OpenCV dependencies are located
 OpenCV_3RDPARTY_LIB_DIR_DBG:PATH=/usr/local/share/OpenCV/3rdparty/lib
 
@@ -218,6 +242,9 @@ OpenCV_LIB_DIR_DBG:PATH=/usr/local/lib
 
 //Path where release OpenCV libraries are located
 OpenCV_LIB_DIR_OPT:PATH=/usr/local/lib
+
+//pkg-config executable
+PKG_CONFIG_EXECUTABLE:FILEPATH=/usr/bin/pkg-config
 
 //Path to a program.
 PYTHON_EXECUTABLE:FILEPATH=/usr/bin/python
@@ -242,6 +269,183 @@ UBUNTU:BOOL=TRUE
 
 //LSB Distrib - codename tag
 UBUNTU_PRECISE:BOOL=TRUE
+
+//Use GLUT instead of OSMesa
+USE_GLUT:BOOL=OFF
+
+//Path to a file.
+X11_ICE_INCLUDE_PATH:PATH=/usr/include
+
+//Path to a library.
+X11_ICE_LIB:FILEPATH=/usr/lib/x86_64-linux-gnu/libICE.so
+
+//Path to a file.
+X11_SM_INCLUDE_PATH:PATH=/usr/include
+
+//Path to a library.
+X11_SM_LIB:FILEPATH=/usr/lib/x86_64-linux-gnu/libSM.so
+
+//Path to a file.
+X11_X11_INCLUDE_PATH:PATH=/usr/include
+
+//Path to a library.
+X11_X11_LIB:FILEPATH=/usr/lib/x86_64-linux-gnu/libX11.so
+
+//Path to a file.
+X11_XRes_INCLUDE_PATH:PATH=X11_XRes_INCLUDE_PATH-NOTFOUND
+
+//Path to a library.
+X11_XRes_LIB:FILEPATH=X11_XRes_LIB-NOTFOUND
+
+//Path to a file.
+X11_XShm_INCLUDE_PATH:PATH=/usr/include
+
+//Path to a file.
+X11_XSync_INCLUDE_PATH:PATH=/usr/include
+
+//Path to a file.
+X11_XTest_INCLUDE_PATH:PATH=X11_XTest_INCLUDE_PATH-NOTFOUND
+
+//Path to a library.
+X11_XTest_LIB:FILEPATH=X11_XTest_LIB-NOTFOUND
+
+//Path to a file.
+X11_Xaccessrules_INCLUDE_PATH:PATH=/usr/include
+
+//Path to a file.
+X11_Xaccessstr_INCLUDE_PATH:PATH=/usr/include
+
+//Path to a file.
+X11_Xau_INCLUDE_PATH:PATH=/usr/include
+
+//Path to a library.
+X11_Xau_LIB:FILEPATH=/usr/lib/x86_64-linux-gnu/libXau.so
+
+//Path to a file.
+X11_Xcomposite_INCLUDE_PATH:PATH=/usr/include
+
+//Path to a library.
+X11_Xcomposite_LIB:FILEPATH=/usr/lib/x86_64-linux-gnu/libXcomposite.so
+
+//Path to a file.
+X11_Xcursor_INCLUDE_PATH:PATH=/usr/include
+
+//Path to a library.
+X11_Xcursor_LIB:FILEPATH=/usr/lib/x86_64-linux-gnu/libXcursor.so
+
+//Path to a file.
+X11_Xdamage_INCLUDE_PATH:PATH=/usr/include
+
+//Path to a library.
+X11_Xdamage_LIB:FILEPATH=/usr/lib/x86_64-linux-gnu/libXdamage.so
+
+//Path to a file.
+X11_Xdmcp_INCLUDE_PATH:PATH=/usr/include
+
+//Path to a library.
+X11_Xdmcp_LIB:FILEPATH=/usr/lib/x86_64-linux-gnu/libXdmcp.so
+
+//Path to a library.
+X11_Xext_LIB:FILEPATH=/usr/lib/x86_64-linux-gnu/libXext.so
+
+//Path to a file.
+X11_Xfixes_INCLUDE_PATH:PATH=/usr/include
+
+//Path to a library.
+X11_Xfixes_LIB:FILEPATH=/usr/lib/x86_64-linux-gnu/libXfixes.so
+
+//Path to a file.
+X11_Xft_INCLUDE_PATH:PATH=/usr/include
+
+//Path to a library.
+X11_Xft_LIB:FILEPATH=/usr/lib/x86_64-linux-gnu/libXft.so
+
+//Path to a file.
+X11_Xi_INCLUDE_PATH:PATH=/usr/include
+
+//Path to a library.
+X11_Xi_LIB:FILEPATH=/usr/lib/x86_64-linux-gnu/libXi.so
+
+//Path to a file.
+X11_Xinerama_INCLUDE_PATH:PATH=/usr/include
+
+//Path to a library.
+X11_Xinerama_LIB:FILEPATH=/usr/lib/x86_64-linux-gnu/libXinerama.so
+
+//Path to a file.
+X11_Xinput_INCLUDE_PATH:PATH=/usr/include
+
+//Path to a library.
+X11_Xinput_LIB:FILEPATH=/usr/lib/x86_64-linux-gnu/libXi.so
+
+//Path to a file.
+X11_Xkb_INCLUDE_PATH:PATH=/usr/include
+
+//Path to a file.
+X11_Xkbfile_INCLUDE_PATH:PATH=/usr/include
+
+//Path to a library.
+X11_Xkbfile_LIB:FILEPATH=/usr/lib/x86_64-linux-gnu/libxkbfile.so
+
+//Path to a file.
+X11_Xkblib_INCLUDE_PATH:PATH=/usr/include
+
+//Path to a file.
+X11_Xlib_INCLUDE_PATH:PATH=/usr/include
+
+//Path to a file.
+X11_Xpm_INCLUDE_PATH:PATH=/usr/include
+
+//Path to a library.
+X11_Xpm_LIB:FILEPATH=/usr/lib/x86_64-linux-gnu/libXpm.so
+
+//Path to a file.
+X11_Xrandr_INCLUDE_PATH:PATH=/usr/include
+
+//Path to a library.
+X11_Xrandr_LIB:FILEPATH=/usr/lib/x86_64-linux-gnu/libXrandr.so
+
+//Path to a file.
+X11_Xrender_INCLUDE_PATH:PATH=/usr/include
+
+//Path to a library.
+X11_Xrender_LIB:FILEPATH=/usr/lib/x86_64-linux-gnu/libXrender.so
+
+//Path to a file.
+X11_Xscreensaver_INCLUDE_PATH:PATH=/usr/include
+
+//Path to a library.
+X11_Xscreensaver_LIB:FILEPATH=/usr/lib/x86_64-linux-gnu/libXss.so
+
+//Path to a file.
+X11_Xshape_INCLUDE_PATH:PATH=/usr/include
+
+//Path to a file.
+X11_Xt_INCLUDE_PATH:PATH=/usr/include
+
+//Path to a library.
+X11_Xt_LIB:FILEPATH=/usr/lib/x86_64-linux-gnu/libXt.so
+
+//Path to a file.
+X11_Xutil_INCLUDE_PATH:PATH=/usr/include
+
+//Path to a file.
+X11_Xv_INCLUDE_PATH:PATH=/usr/include
+
+//Path to a library.
+X11_Xv_LIB:FILEPATH=/usr/lib/x86_64-linux-gnu/libXv.so
+
+//Path to a library.
+X11_Xxf86misc_LIB:FILEPATH=X11_Xxf86misc_LIB-NOTFOUND
+
+//Path to a file.
+X11_dpms_INCLUDE_PATH:PATH=/usr/include
+
+//Path to a file.
+X11_xf86misc_INCLUDE_PATH:PATH=X11_xf86misc_INCLUDE_PATH-NOTFOUND
+
+//Path to a file.
+X11_xf86vmode_INCLUDE_PATH:PATH=/usr/include
 
 //Path to a file.
 _CATKIN_GTEST_INCLUDE:FILEPATH=/usr/include/gtest/gtest.h
@@ -337,6 +541,18 @@ message_runtime_DIR:PATH=/opt/ros/hydro/share/message_runtime/cmake
 //The directory containing a CMake configuration file for nodelet.
 nodelet_DIR:PATH=/opt/ros/hydro/share/nodelet/cmake
 
+//Dependencies for the target
+object_recognition_renderer_2d_LIB_DEPENDS:STATIC=general;opencv_videostab;general;opencv_video;general;opencv_superres;general;opencv_stitching;general;opencv_photo;general;opencv_ocl;general;opencv_objdetect;general;opencv_nonfree;general;opencv_ml;general;opencv_legacy;general;opencv_imgproc;general;opencv_highgui;general;opencv_gpu;general;opencv_flann;general;opencv_features2d;general;opencv_core;general;opencv_contrib;general;opencv_calib3d;
+
+//Dependencies for the target
+object_recognition_renderer_3d_LIB_DEPENDS:STATIC=general;OSMesa;general;GLU;general;opencv_videostab;general;opencv_video;general;opencv_superres;general;opencv_stitching;general;opencv_photo;general;opencv_ocl;general;opencv_objdetect;general;opencv_nonfree;general;opencv_ml;general;opencv_legacy;general;opencv_imgproc;general;opencv_highgui;general;opencv_gpu;general;opencv_flann;general;opencv_features2d;general;opencv_core;general;opencv_contrib;general;opencv_calib3d;general;opencv_videostab;general;opencv_video;general;opencv_superres;general;opencv_stitching;general;opencv_photo;general;opencv_ocl;general;opencv_objdetect;general;opencv_nonfree;general;opencv_ml;general;opencv_legacy;general;opencv_imgproc;general;opencv_highgui;general;opencv_gpu;general;opencv_flann;general;opencv_features2d;general;opencv_core;general;opencv_contrib;general;opencv_calib3d;general;freeimage;
+
+//Value Computed by CMake
+object_recognition_renderer_BINARY_DIR:STATIC=/home/gmanfred/devel/essential/ros/catkin_ws/build/ork_renderer
+
+//Value Computed by CMake
+object_recognition_renderer_SOURCE_DIR:STATIC=/home/gmanfred/devel/essential/ros/catkin_ws/src/ork_renderer
+
 //The directory containing a CMake configuration file for opencv2.
 opencv2_DIR:PATH=opencv2_DIR-NOTFOUND
 
@@ -426,6 +642,48 @@ xmlrpcpp_DIR:PATH=/opt/ros/hydro/share/xmlrpcpp/cmake
 # INTERNAL cache entries
 ########################
 
+ASSIMP_CFLAGS:INTERNAL=-I/usr/include/assimp
+ASSIMP_CFLAGS_I:INTERNAL=
+ASSIMP_CFLAGS_OTHER:INTERNAL=
+ASSIMP_FOUND:INTERNAL=1
+ASSIMP_INCLUDEDIR:INTERNAL=/usr/include/assimp
+ASSIMP_INCLUDE_DIRS:INTERNAL=/usr/include/assimp
+ASSIMP_LDFLAGS:INTERNAL=-lassimp
+ASSIMP_LDFLAGS_OTHER:INTERNAL=
+ASSIMP_LIBDIR:INTERNAL=/usr/lib
+ASSIMP_LIBRARIES:INTERNAL=assimp
+ASSIMP_LIBRARY_DIRS:INTERNAL=
+ASSIMP_LIBS:INTERNAL=
+ASSIMP_LIBS_L:INTERNAL=
+ASSIMP_LIBS_OTHER:INTERNAL=
+ASSIMP_LIBS_PATHS:INTERNAL=
+ASSIMP_PREFIX:INTERNAL=/usr
+ASSIMP_STATIC_CFLAGS:INTERNAL=-I/usr/include/assimp
+ASSIMP_STATIC_CFLAGS_I:INTERNAL=
+ASSIMP_STATIC_CFLAGS_OTHER:INTERNAL=
+ASSIMP_STATIC_INCLUDE_DIRS:INTERNAL=/usr/include/assimp
+ASSIMP_STATIC_LDFLAGS:INTERNAL=-lassimp
+ASSIMP_STATIC_LDFLAGS_OTHER:INTERNAL=
+ASSIMP_STATIC_LIBDIR:INTERNAL=
+ASSIMP_STATIC_LIBRARIES:INTERNAL=assimp
+ASSIMP_STATIC_LIBRARY_DIRS:INTERNAL=
+ASSIMP_STATIC_LIBS:INTERNAL=
+ASSIMP_STATIC_LIBS_L:INTERNAL=
+ASSIMP_STATIC_LIBS_OTHER:INTERNAL=
+ASSIMP_STATIC_LIBS_PATHS:INTERNAL=
+ASSIMP_VERSION:INTERNAL=2.0
+ASSIMP_assimp_INCLUDEDIR:INTERNAL=
+ASSIMP_assimp_LIBDIR:INTERNAL=
+ASSIMP_assimp_PREFIX:INTERNAL=
+ASSIMP_assimp_VERSION:INTERNAL=
+//ADVANCED property for variable: Boost_INCLUDE_DIR
+Boost_INCLUDE_DIR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: Boost_LIBRARY_DIRS
+Boost_LIBRARY_DIRS-ADVANCED:INTERNAL=1
+//The library version string for boost libraries
+Boost_LIB_VERSION:INTERNAL=1_46_1
+//The version number for boost libraries
+Boost_VERSION:INTERNAL=104601
 //catkin environment
 CATKIN_ENV:INTERNAL=/home/gmanfred/devel/essential/ros/catkin_ws/build/catkin_generated/env_cached.sh
 CATKIN_TEST_RESULTS_DIR:INTERNAL=/home/gmanfred/devel/essential/ros/catkin_ws/build/test_results
@@ -499,17 +757,27 @@ CMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 CMAKE_EXPORT_COMPILE_COMMANDS-ADVANCED:INTERNAL=1
 //Name of generator.
 CMAKE_GENERATOR:INTERNAL=Unix Makefiles
+//Have function connect
+CMAKE_HAVE_CONNECT:INTERNAL=1
+//Have function gethostbyname
+CMAKE_HAVE_GETHOSTBYNAME:INTERNAL=1
 //Have library pthreads
 CMAKE_HAVE_PTHREADS_CREATE:INTERNAL=
 //Have library pthread
 CMAKE_HAVE_PTHREAD_CREATE:INTERNAL=1
 //Have include CMAKE_HAVE_PTHREAD_H
 CMAKE_HAVE_PTHREAD_H:INTERNAL=1
+//Have function remove
+CMAKE_HAVE_REMOVE:INTERNAL=1
+//Have function shmat
+CMAKE_HAVE_SHMAT:INTERNAL=1
 //Start directory with the top level CMakeLists.txt file for this
 // project
 CMAKE_HOME_DIRECTORY:INTERNAL=/home/gmanfred/devel/essential/ros/catkin_ws/src
 //Install .so files without execute permission.
 CMAKE_INSTALL_SO_NO_EXE:INTERNAL=1
+//Have library ICE
+CMAKE_LIB_ICE_HAS_ICECONNECTIONNUMBER:INTERNAL=1
 //ADVANCED property for variable: CMAKE_LINKER
 CMAKE_LINKER-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_MAKE_PROGRAM
@@ -527,7 +795,7 @@ CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_NM
 CMAKE_NM-ADVANCED:INTERNAL=1
 //number of local generators
-CMAKE_NUMBER_OF_LOCAL_GENERATORS:INTERNAL=4
+CMAKE_NUMBER_OF_LOCAL_GENERATORS:INTERNAL=7
 //ADVANCED property for variable: CMAKE_OBJCOPY
 CMAKE_OBJCOPY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_OBJDUMP
@@ -556,10 +824,14 @@ CMAKE_UNAME:INTERNAL=/bin/uname
 CMAKE_USE_RELATIVE_PATHS-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_VERBOSE_MAKEFILE
 CMAKE_VERBOSE_MAKEFILE-ADVANCED:INTERNAL=1
+//Details about finding OpenGL
+FIND_PACKAGE_MESSAGE_DETAILS_OpenGL:INTERNAL=[/usr/lib/x86_64-linux-gnu/libGL.so][v()]
 //Details about finding PythonInterp
 FIND_PACKAGE_MESSAGE_DETAILS_PythonInterp:INTERNAL=[/usr/bin/python][v2.7.3()]
 //Details about finding Threads
 FIND_PACKAGE_MESSAGE_DETAILS_Threads:INTERNAL=[TRUE][v()]
+//Details about finding X11
+FIND_PACKAGE_MESSAGE_DETAILS_X11:INTERNAL=[/usr/lib/x86_64-linux-gnu/libX11.so][/usr/include;/usr/include;/usr/include;/usr/include;/usr/include;/usr/include;/usr/include;/usr/include;/usr/include;/usr/include;/usr/include;/usr/include;/usr/include;/usr/include;/usr/include;/usr/include;/usr/include;/usr/include;/usr/include;/usr/include;/usr/include;/usr/include;/usr/include;/usr/include;/usr/include]
 GTEST_FROM_SOURCE_FOUND:INTERNAL=TRUE
 GTEST_FROM_SOURCE_INCLUDE_DIRS:INTERNAL=/usr/include
 GTEST_FROM_SOURCE_LIBRARIES:INTERNAL=gtest
@@ -575,6 +847,14 @@ GTEST_LIBRARY_DEBUG-ADVANCED:INTERNAL=1
 GTEST_MAIN_LIBRARY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: GTEST_MAIN_LIBRARY_DEBUG
 GTEST_MAIN_LIBRARY_DEBUG-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: OPENGL_INCLUDE_DIR
+OPENGL_INCLUDE_DIR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: OPENGL_gl_LIBRARY
+OPENGL_gl_LIBRARY-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: OPENGL_glu_LIBRARY
+OPENGL_glu_LIBRARY-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: OPENGL_xmesa_INCLUDE_DIR
+OPENGL_xmesa_INCLUDE_DIR-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: OpenCV_3RDPARTY_LIB_DIR_DBG
 OpenCV_3RDPARTY_LIB_DIR_DBG-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: OpenCV_3RDPARTY_LIB_DIR_OPT
@@ -585,10 +865,131 @@ OpenCV_CONFIG_PATH-ADVANCED:INTERNAL=1
 OpenCV_LIB_DIR_DBG-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: OpenCV_LIB_DIR_OPT
 OpenCV_LIB_DIR_OPT-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: PKG_CONFIG_EXECUTABLE
+PKG_CONFIG_EXECUTABLE-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: PYTHON_EXECUTABLE
 PYTHON_EXECUTABLE-ADVANCED:INTERNAL=1
 //This needs to be in PYTHONPATH when 'setup.py install' is called.
 //  And it needs to match.  But setuptools won't tell us where
 // it will install things.
 PYTHON_INSTALL_DIR:INTERNAL=lib/python2.7/dist-packages
+//ADVANCED property for variable: X11_ICE_INCLUDE_PATH
+X11_ICE_INCLUDE_PATH-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: X11_ICE_LIB
+X11_ICE_LIB-ADVANCED:INTERNAL=1
+//Have library /usr/lib/x86_64-linux-gnu/libX11.so;/usr/lib/x86_64-linux-gnu/libXext.so
+X11_LIB_X11_SOLO:INTERNAL=1
+//ADVANCED property for variable: X11_SM_INCLUDE_PATH
+X11_SM_INCLUDE_PATH-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: X11_SM_LIB
+X11_SM_LIB-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: X11_X11_INCLUDE_PATH
+X11_X11_INCLUDE_PATH-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: X11_X11_LIB
+X11_X11_LIB-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: X11_XRes_INCLUDE_PATH
+X11_XRes_INCLUDE_PATH-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: X11_XRes_LIB
+X11_XRes_LIB-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: X11_XShm_INCLUDE_PATH
+X11_XShm_INCLUDE_PATH-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: X11_XSync_INCLUDE_PATH
+X11_XSync_INCLUDE_PATH-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: X11_XTest_INCLUDE_PATH
+X11_XTest_INCLUDE_PATH-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: X11_XTest_LIB
+X11_XTest_LIB-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: X11_Xaccessrules_INCLUDE_PATH
+X11_Xaccessrules_INCLUDE_PATH-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: X11_Xaccessstr_INCLUDE_PATH
+X11_Xaccessstr_INCLUDE_PATH-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: X11_Xau_INCLUDE_PATH
+X11_Xau_INCLUDE_PATH-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: X11_Xau_LIB
+X11_Xau_LIB-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: X11_Xcomposite_INCLUDE_PATH
+X11_Xcomposite_INCLUDE_PATH-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: X11_Xcomposite_LIB
+X11_Xcomposite_LIB-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: X11_Xcursor_INCLUDE_PATH
+X11_Xcursor_INCLUDE_PATH-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: X11_Xcursor_LIB
+X11_Xcursor_LIB-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: X11_Xdamage_INCLUDE_PATH
+X11_Xdamage_INCLUDE_PATH-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: X11_Xdamage_LIB
+X11_Xdamage_LIB-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: X11_Xdmcp_INCLUDE_PATH
+X11_Xdmcp_INCLUDE_PATH-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: X11_Xdmcp_LIB
+X11_Xdmcp_LIB-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: X11_Xext_LIB
+X11_Xext_LIB-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: X11_Xfixes_INCLUDE_PATH
+X11_Xfixes_INCLUDE_PATH-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: X11_Xfixes_LIB
+X11_Xfixes_LIB-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: X11_Xft_INCLUDE_PATH
+X11_Xft_INCLUDE_PATH-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: X11_Xft_LIB
+X11_Xft_LIB-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: X11_Xi_INCLUDE_PATH
+X11_Xi_INCLUDE_PATH-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: X11_Xi_LIB
+X11_Xi_LIB-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: X11_Xinerama_INCLUDE_PATH
+X11_Xinerama_INCLUDE_PATH-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: X11_Xinerama_LIB
+X11_Xinerama_LIB-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: X11_Xinput_INCLUDE_PATH
+X11_Xinput_INCLUDE_PATH-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: X11_Xinput_LIB
+X11_Xinput_LIB-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: X11_Xkb_INCLUDE_PATH
+X11_Xkb_INCLUDE_PATH-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: X11_Xkbfile_INCLUDE_PATH
+X11_Xkbfile_INCLUDE_PATH-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: X11_Xkbfile_LIB
+X11_Xkbfile_LIB-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: X11_Xkblib_INCLUDE_PATH
+X11_Xkblib_INCLUDE_PATH-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: X11_Xlib_INCLUDE_PATH
+X11_Xlib_INCLUDE_PATH-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: X11_Xpm_INCLUDE_PATH
+X11_Xpm_INCLUDE_PATH-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: X11_Xpm_LIB
+X11_Xpm_LIB-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: X11_Xrandr_INCLUDE_PATH
+X11_Xrandr_INCLUDE_PATH-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: X11_Xrandr_LIB
+X11_Xrandr_LIB-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: X11_Xrender_INCLUDE_PATH
+X11_Xrender_INCLUDE_PATH-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: X11_Xrender_LIB
+X11_Xrender_LIB-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: X11_Xscreensaver_INCLUDE_PATH
+X11_Xscreensaver_INCLUDE_PATH-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: X11_Xscreensaver_LIB
+X11_Xscreensaver_LIB-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: X11_Xshape_INCLUDE_PATH
+X11_Xshape_INCLUDE_PATH-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: X11_Xt_INCLUDE_PATH
+X11_Xt_INCLUDE_PATH-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: X11_Xt_LIB
+X11_Xt_LIB-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: X11_Xutil_INCLUDE_PATH
+X11_Xutil_INCLUDE_PATH-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: X11_Xv_INCLUDE_PATH
+X11_Xv_INCLUDE_PATH-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: X11_Xv_LIB
+X11_Xv_LIB-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: X11_Xxf86misc_LIB
+X11_Xxf86misc_LIB-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: X11_dpms_INCLUDE_PATH
+X11_dpms_INCLUDE_PATH-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: X11_xf86misc_INCLUDE_PATH
+X11_xf86misc_INCLUDE_PATH-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: X11_xf86vmode_INCLUDE_PATH
+X11_xf86vmode_INCLUDE_PATH-ADVANCED:INTERNAL=1
+__pkg_config_checked_ASSIMP:INTERNAL=1
 

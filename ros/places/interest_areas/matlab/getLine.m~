@@ -1,0 +1,18 @@
+function l = getLine(p1, p2)
+    [a b] = str_lin(p1(1), p1(2), p2(1), p2(2))
+    xs = [min(p1(1),p2(1)):1:max(p1(1),p2(1))]
+    %ys = a * xs + b;
+    %l = [xs ys];
+
+
+function [a, b] = str_lin(x1, y1, x2, y2)
+    dx = x2 - x1;
+    dy = y2 - y1;
+    err = 0;
+    
+    if (x2 == x1)
+        a = 0;
+    else
+        a = (y2-y1) / (x2-x1);
+    end
+    b = y1 - a*x1;

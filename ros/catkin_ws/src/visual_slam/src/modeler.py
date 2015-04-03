@@ -10,7 +10,7 @@ class Modeler:
     def __init__(self):
         self.pf = PipelineFrame()
         self.object = Object()
-        self.inliers_threshold = 75.0
+        self.inliers_threshold = 30.0
         self.counter = 0
 
     def set_calibration(self, intrinsic, distortion):
@@ -41,9 +41,9 @@ class Modeler:
         if num_inliers < self.inliers_threshold:
             print "Object has " + str(len(self.object.p3ds)) + " p3ds."
             #num_inliers = self.pf.motion(self.previous_frame, self.object)
-            if len(self.previous_frame.p3ds) == 0: # no depth sensor, triangulation needed
-                self.pf.structure(self.previous_frame, self.object)
-            print len(self.previous_frame.p3ds)
+            #if len(self.previous_frame.p3ds) == 0: # no depth sensor, triangulation needed
+                #self.pf.structure(self.previous_frame, self.object)
+            #print len(self.previous_frame.p3ds)
             self.pf.refine(self.previous_frame, self.object)
             self.object.add_keyframe(self.previous_frame)
             print "Added new keyframe."
