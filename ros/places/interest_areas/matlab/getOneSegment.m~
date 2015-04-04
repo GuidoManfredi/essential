@@ -13,12 +13,12 @@ function S = getOneSegment(start, finish, lines)
     
     [M, Midx] = max(category);
     [m, midx] = min(category);
-    if (m < 0.75 * M) % if a lot of this category
+    if (m < 0.78 * M) % if a lot of this category
         S.label = Midx;
     else
         S.label = -1;
     end
     S.seg = seg;
-    S.to = max(to);
+    [M S.to] = max(to);
     
     

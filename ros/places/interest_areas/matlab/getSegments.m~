@@ -7,7 +7,7 @@ function segs = getSegments(lines)
     for i=2:length(lines)
         pt = [lines{i-1}.line(1,:);lines{i}.line(1,:)];
         % if current point not adjacent, we have end of segment
-        if (pdist(pt,'euclidean') > 3.0)
+        if (pdist(pt,'euclidean') > 1.0)
             finish = i-1;
             seg = getOneSegment(start, finish, lines);
             segs{cnt} = seg;        
