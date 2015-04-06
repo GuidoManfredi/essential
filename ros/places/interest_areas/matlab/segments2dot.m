@@ -15,3 +15,4 @@ function [] = segments2dot(segs, num)
             end
         end
     end
+    fclose(fileId);

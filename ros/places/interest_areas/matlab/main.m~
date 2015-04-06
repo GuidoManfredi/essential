@@ -181,12 +181,15 @@ for b=1:length(bbs)-1
     % merge planes
     counter = 1;
     final_rooms{1} = rooms{1};
+    final_pidx{1} = pidx(1);
     for p=2:length(pks)
         if (pidx(p) - pidx(p-1)) <= 4 % 20cm between the planes
             final_rooms{counter} = final_rooms{counter} | rooms{p};
             pidx(p) = (pidx(p) + pidx(p-1))/2;
+            final_pidx{counter} = pidx(p);
         else
             counter = counter + 1;
+            final_pidx{counter} = pidx(p);
             final_rooms{counter} = rooms{p};
         end
     end
@@ -196,12 +199,14 @@ for b=1:length(bbs)-1
         subplot(2,ceil(length(final_rooms)/2),t);
         imshow(final_rooms{t});
     end
+    %length(final_rooms)
     print(p6,'-dpng',['/home/gmanfred/Desktop/tmp_sandra/merged_slices_of_interest' num2str(b)]);
     all_planes{b} = final_rooms;
+    all_pidx{b} = final_pidx;
 end
 
-%{
-interest_areas = areasFromPlanes(all_planes);
+interest_areas = areasFromPlanes(all_planes, all_pidx);
+%length(interest_areas)
 %display
 p7=figure('Visible',visible);
 imshow(tout);
@@ -209,8 +214,8 @@ for i=1:length(interest_areas)
     rectangle('Position',interest_areas{i},'LineWidth',3, 'EdgeColor', 'r'); % display
 end
 print(p7,'-dpng',['/home/gmanfred/Desktop/tmp_sandra/interest_areas']);
-%}
 
+saveAreas(interest_areas);
 %{
 [H,bins] = hist(Z, 44);
 [pks,idx] = findpeaks(H);
@@ -234,9 +239,8 @@ end
 
 %TODO
 % Generer toutes les images !
+    % Faire images avec les droites liant deux point du contour d'une region
     % Faire images avec les features utilisées dans la classif
-    % A partir des segments obtenir une arrete classifiée entre deux rooms.
-    % Creer graph topologique.
     % Plot histogram to show peaks.
 % Sauvegarder les interest_areas dans un fichiers
 % Faire code du robot
