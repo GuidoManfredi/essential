@@ -11,7 +11,7 @@
   <depend package="pcl_ros"/>
   <depend package="pcl_conversions"/>
   <depend package="roscpp"/>
-
+  <depend package="opencv2"/>
 </package>
 
 

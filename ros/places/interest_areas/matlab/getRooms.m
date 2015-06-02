@@ -13,5 +13,7 @@ end
 % Adding the exterior as a room
 s = size(murs);
 rooms{cnt} = [1 1 s(2)-1 s(1)-1];
+%offset = 2;
+%rooms{cnt} = [offset offset s(2)-offset s(1)-offset];
 contours{cnt} = rect2contour(rooms{cnt});
 rectangle('Position',rooms{cnt},'LineWidth',3, 'EdgeColor', 'r'); % display

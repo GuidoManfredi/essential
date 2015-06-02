@@ -5,6 +5,14 @@ CMakeFiles/train_test.dir/Linemod/LinemodWrap.cpp.o
  /home/gmanfred/devel/essential/ros/linemod_ros/Linemod/LinemodWrap.cpp
  /home/gmanfred/devel/essential/ros/linemod_ros/Linemod/LinemodWrap.h
  /home/gmanfred/devel/essential/ros/linemod_ros/Linemod/common.h
+ /opt/ros/hydro/include/opencv2/core/core.hpp
+ /opt/ros/hydro/include/opencv2/core/core_c.h
+ /opt/ros/hydro/include/opencv2/core/mat.hpp
+ /opt/ros/hydro/include/opencv2/core/operations.hpp
+ /opt/ros/hydro/include/opencv2/core/types_c.h
+ /opt/ros/hydro/include/opencv2/core/version.hpp
+ /opt/ros/hydro/include/opencv2/imgproc/imgproc.hpp
+ /opt/ros/hydro/include/opencv2/imgproc/types_c.h
  /usr/include/eigen3/Eigen/Cholesky
  /usr/include/eigen3/Eigen/Core
  /usr/include/eigen3/Eigen/Dense
@@ -274,6 +282,14 @@ CMakeFiles/train_test.dir/Linemod/OnlineGrabber.cpp.o
  /home/gmanfred/devel/essential/ros/linemod_ros/Linemod/OnlineGrabber.cpp
  /home/gmanfred/devel/essential/ros/linemod_ros/Linemod/OnlineGrabber.h
  /home/gmanfred/devel/essential/ros/linemod_ros/Linemod/common.h
+ /opt/ros/hydro/include/opencv2/core/core.hpp
+ /opt/ros/hydro/include/opencv2/core/core_c.h
+ /opt/ros/hydro/include/opencv2/core/mat.hpp
+ /opt/ros/hydro/include/opencv2/core/operations.hpp
+ /opt/ros/hydro/include/opencv2/core/types_c.h
+ /opt/ros/hydro/include/opencv2/core/version.hpp
+ /opt/ros/hydro/include/opencv2/imgproc/imgproc.hpp
+ /opt/ros/hydro/include/opencv2/imgproc/types_c.h
  /usr/include/eigen3/Eigen/Cholesky
  /usr/include/eigen3/Eigen/Core
  /usr/include/eigen3/Eigen/Dense
@@ -569,6 +585,14 @@ CMakeFiles/train_test.dir/src/train_test.cpp.o
  /home/gmanfred/devel/essential/ros/linemod_ros/src/train_test.cpp
  /opt/ros/hydro/include/XmlRpcDecl.h
  /opt/ros/hydro/include/XmlRpcValue.h
+ /opt/ros/hydro/include/opencv2/core/core.hpp
+ /opt/ros/hydro/include/opencv2/core/core_c.h
+ /opt/ros/hydro/include/opencv2/core/mat.hpp
+ /opt/ros/hydro/include/opencv2/core/operations.hpp
+ /opt/ros/hydro/include/opencv2/core/types_c.h
+ /opt/ros/hydro/include/opencv2/core/version.hpp
+ /opt/ros/hydro/include/opencv2/imgproc/imgproc.hpp
+ /opt/ros/hydro/include/opencv2/imgproc/types_c.h
  /opt/ros/hydro/include/pcl_conversions/pcl_conversions.h
  /opt/ros/hydro/include/pcl_msgs/ModelCoefficients.h
  /opt/ros/hydro/include/pcl_msgs/PointIndices.h

@@ -6,6 +6,10 @@
 
 #IncludeRegexTransform: 
 
+/home/gmanfred/devel/essential/ros/objects/pom/src/SaveCorners.cpp
+SaveCorners.h
+/home/gmanfred/devel/essential/ros/objects/pom/src/SaveCorners.h
+
 /home/gmanfred/devel/essential/ros/objects/pom/src/SaveCorners.h
 iostream
 -

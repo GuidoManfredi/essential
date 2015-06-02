@@ -63,24 +63,30 @@ bool POD::isIntrinsicSet() {
     return is_intrinsic_set_;
 }
 
-void POD::process (const Mat image, vector<Mat> &poses, vector<string> &names) {
+vector<int> POD::process (const Mat image, vector<Mat> &poses, vector<string> &names) {
     poses.clear(); names.clear();
     View view = createView (image);
-    process (view, poses, names);
+    return process (view, poses, names);
 }
 
-void POD::process (View current, vector<Mat> &poses, vector<string> &names) {
+vector<int> POD::process (View current, vector<Mat> &poses, vector<string> &names) {
     poses.clear(); names.clear();
+    vector<int> object_numbers;
     vector<DMatch> matches;
     for (size_t i = 0; i < objects_.size(); ++i) {
         matches.clear();
-        match (current, objects_[i], matches);
-        //cout << "Matches: " << matches.size() << endl;        
-        Mat pose = computePose (current, objects_[i], matches);
-        
-        poses.push_back(pose);
-        names.push_back(objects_[i].name());
+        if (current.descriptors_.rows) {
+            match (current, objects_[i], matches);
+            //cout << "Matches: " << matches.size() << endl;
+            if (matches.size() > 10) {
+                Mat pose = computePose (current, objects_[i], matches);
+                poses.push_back(pose);
+                names.push_back(objects_[i].name());
+                object_numbers.push_back(i);
+            }
+        }
     }
+    return object_numbers;
 }
 ////////////////////////////////////////////////////////////////////////////////
 //  PRIVATE METHODS
@@ -105,6 +111,9 @@ void POD::match (View current, Object object, vector<DMatch> &matches) {
 Mat POD::computePose (View current, Object object, vector<DMatch> matches) {
     if ( matches.size() <= 4) {
         cout << "POD.cpp: computePose : not enought matches (" << matches.size() << ")." << endl;
+        Mat R = Mat::eye(3,3,CV_32F);
+        Mat t = Mat::zeros(1,3,CV_32F);
+        return Rt2P(R,t);
     }
 
     vector<Point3f> points;

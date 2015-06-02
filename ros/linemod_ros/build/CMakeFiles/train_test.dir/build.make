@@ -31,6 +31,9 @@ CMAKE_COMMAND = /usr/bin/cmake
 # The command to remove a file.
 RM = /usr/bin/cmake -E remove -f
 
+# Escaping for special characters.
+EQUALS = =
+
 # The program to use to edit the cache.
 CMAKE_EDIT_COMMAND = /usr/bin/ccmake
 
@@ -110,6 +113,7 @@ CMakeFiles/train_test.dir/src/train_test.cpp.o: /opt/ros/hydro/share/tf2_py/pack
 CMakeFiles/train_test.dir/src/train_test.cpp.o: /opt/ros/hydro/share/tf2_ros/package.xml
 CMakeFiles/train_test.dir/src/train_test.cpp.o: /opt/ros/hydro/share/tf/package.xml
 CMakeFiles/train_test.dir/src/train_test.cpp.o: /opt/ros/hydro/share/pcl_ros/package.xml
+CMakeFiles/train_test.dir/src/train_test.cpp.o: /opt/ros/hydro/share/opencv2/package.xml
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/gmanfred/devel/essential/ros/linemod_ros/build/CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/train_test.dir/src/train_test.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/train_test.dir/src/train_test.cpp.o -c /home/gmanfred/devel/essential/ros/linemod_ros/src/train_test.cpp
@@ -192,6 +196,7 @@ CMakeFiles/train_test.dir/Linemod/OnlineGrabber.cpp.o: /opt/ros/hydro/share/tf2_
 CMakeFiles/train_test.dir/Linemod/OnlineGrabber.cpp.o: /opt/ros/hydro/share/tf2_ros/package.xml
 CMakeFiles/train_test.dir/Linemod/OnlineGrabber.cpp.o: /opt/ros/hydro/share/tf/package.xml
 CMakeFiles/train_test.dir/Linemod/OnlineGrabber.cpp.o: /opt/ros/hydro/share/pcl_ros/package.xml
+CMakeFiles/train_test.dir/Linemod/OnlineGrabber.cpp.o: /opt/ros/hydro/share/opencv2/package.xml
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/gmanfred/devel/essential/ros/linemod_ros/build/CMakeFiles $(CMAKE_PROGRESS_2)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/train_test.dir/Linemod/OnlineGrabber.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/train_test.dir/Linemod/OnlineGrabber.cpp.o -c /home/gmanfred/devel/essential/ros/linemod_ros/Linemod/OnlineGrabber.cpp
@@ -274,6 +279,7 @@ CMakeFiles/train_test.dir/Linemod/LinemodWrap.cpp.o: /opt/ros/hydro/share/tf2_py
 CMakeFiles/train_test.dir/Linemod/LinemodWrap.cpp.o: /opt/ros/hydro/share/tf2_ros/package.xml
 CMakeFiles/train_test.dir/Linemod/LinemodWrap.cpp.o: /opt/ros/hydro/share/tf/package.xml
 CMakeFiles/train_test.dir/Linemod/LinemodWrap.cpp.o: /opt/ros/hydro/share/pcl_ros/package.xml
+CMakeFiles/train_test.dir/Linemod/LinemodWrap.cpp.o: /opt/ros/hydro/share/opencv2/package.xml
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/gmanfred/devel/essential/ros/linemod_ros/build/CMakeFiles $(CMAKE_PROGRESS_3)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/train_test.dir/Linemod/LinemodWrap.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/train_test.dir/Linemod/LinemodWrap.cpp.o -c /home/gmanfred/devel/essential/ros/linemod_ros/Linemod/LinemodWrap.cpp
@@ -307,6 +313,7 @@ train_test_EXTERNAL_OBJECTS =
 ../bin/train_test: CMakeFiles/train_test.dir/src/train_test.cpp.o
 ../bin/train_test: CMakeFiles/train_test.dir/Linemod/OnlineGrabber.cpp.o
 ../bin/train_test: CMakeFiles/train_test.dir/Linemod/LinemodWrap.cpp.o
+../bin/train_test: CMakeFiles/train_test.dir/build.make
 ../bin/train_test: /usr/lib/libboost_system-mt.so
 ../bin/train_test: /usr/lib/libboost_filesystem-mt.so
 ../bin/train_test: /usr/lib/libboost_thread-mt.so
@@ -1400,7 +1407,6 @@ train_test_EXTERNAL_OBJECTS =
 ../bin/train_test: /usr/lib/libvtkFiltering.so.5.8.0
 ../bin/train_test: /usr/lib/libvtkCommon.so.5.8.0
 ../bin/train_test: /usr/lib/libvtksys.so.5.8.0
-../bin/train_test: CMakeFiles/train_test.dir/build.make
 ../bin/train_test: CMakeFiles/train_test.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --red --bold "Linking CXX executable ../bin/train_test"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/train_test.dir/link.txt --verbose=$(VERBOSE)

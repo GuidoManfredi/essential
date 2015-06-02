@@ -1,2 +1,0 @@
-set(icp_MESSAGE_FILES "")
-set(icp_SERVICE_FILES "/home/gmanfred/devel/essential/ros/catkin_ws/src/icp/srv/ICP.srv")

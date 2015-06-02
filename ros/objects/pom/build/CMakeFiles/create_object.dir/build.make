@@ -31,6 +31,9 @@ CMAKE_COMMAND = /usr/bin/cmake
 # The command to remove a file.
 RM = /usr/bin/cmake -E remove -f
 
+# Escaping for special characters.
+EQUALS = =
+
 # The program to use to edit the cache.
 CMAKE_EDIT_COMMAND = /usr/bin/ccmake
 
@@ -1135,8 +1138,8 @@ create_object_EXTERNAL_OBJECTS =
 ../bin/create_object: CMakeFiles/create_object.dir/pom/commons.cpp.o
 ../bin/create_object: CMakeFiles/create_object.dir/pom/POM.cpp.o
 ../bin/create_object: CMakeFiles/create_object.dir/pom/FilesManager.cpp.o
-../bin/create_object: /home/gmanfred/devel/sandbox/SiftGPU/bin/libsiftgpu.so
 ../bin/create_object: CMakeFiles/create_object.dir/build.make
+../bin/create_object: /home/gmanfred/devel/sandbox/SiftGPU/bin/libsiftgpu.so
 ../bin/create_object: CMakeFiles/create_object.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --red --bold "Linking CXX executable ../bin/create_object"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/create_object.dir/link.txt --verbose=$(VERBOSE)

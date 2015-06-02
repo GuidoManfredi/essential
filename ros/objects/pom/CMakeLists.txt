@@ -25,7 +25,7 @@ set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
 #uncomment if you have defined messages
 #rosbuild_genmsg()
 #uncomment if you have defined services
-#rosbuild_gensrv()
+rosbuild_gensrv()
 
 #common commands for building c++ executables and libraries
 #rosbuild_add_library(${PROJECT_NAME} src/example.cpp)
@@ -49,6 +49,14 @@ rosbuild_add_executable(detect_object src/detect_object.cpp
                                          pom/commons.cpp
                                          pom/POD.cpp)
 target_link_libraries(detect_object /home/gmanfred/devel/sandbox/SiftGPU/bin/libsiftgpu.so)
+rosbuild_add_executable(detect_service src/detect_service.cpp
+                                         pom/Object.cpp
+                                         pom/View.cpp
+                                         pom/Pipeline2D.cpp
+                                         pom/PipelineGeom.cpp
+                                         pom/commons.cpp
+                                         pom/POD.cpp)
+target_link_libraries(detect_service /home/gmanfred/devel/sandbox/SiftGPU/bin/libsiftgpu.so)
 rosbuild_add_executable(save_corners src/save_corners.cpp
                                      src/SaveCorners.cpp)
 rosbuild_add_executable(experiment src/experiment.cpp

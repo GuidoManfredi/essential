@@ -41,7 +41,17 @@ end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Z = cloud(:,3);
 [H,bins] = hist(Z, 44);
-min_idx = find(H == min(H));
+%{
+% display
+p0 = figure('Visible',visible);
+bar(H);
+font_size = 18;
+xlabel('Voxel index along Z (x0.05 for height)','FontSize',font_size);
+ylabel('Number of occupied voxels','FontSize',font_size);
+tightfig;
+print(p0,'-dpng','/home/gmanfred/Desktop/tmp_sandra/height_histogram');
+%}
+min_idx = find(H == min(H)); % min_idx = 33
 max_idx = size(H,2);
 sol = VM(:,:,1) | VM(:,:,2);
 pieds = VM(:,:,4); % 20cm du sol
@@ -68,12 +78,18 @@ se = strel('square', 3);
 dil_holes = imdilate(er_holes, se);
 %}
 
+p1bis=figure('Visible',visible);
+imshow(sol);
+tightfig;
+print(p1bis,'-dpng','/home/gmanfred/Desktop/tmp_sandra/floor_slice');
 p1=figure('Visible',visible);
 imshow(dil_murs);
-print(p1,'-dpng','/home/gmanfred/Desktop/tmp_sandra/walls');
+tightfig;
+print(p1,'-dpng','/home/gmanfred/Desktop/tmp_sandra/walls_slice');
 p2=figure('Visible',visible);
 imshow(dil_petit);
-print(p2,'-dpng','/home/gmanfred/Desktop/tmp_sandra/small');
+tightfig;
+print(p2,'-dpng','/home/gmanfred/Desktop/tmp_sandra/minimum_slice');
 %}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Find areas and get contours
@@ -81,7 +97,8 @@ print(p2,'-dpng','/home/gmanfred/Desktop/tmp_sandra/small');
 p3=figure('Visible',visible);
 imshow(dil_murs);
 [bbs contours] = getRooms(dil_murs);
-print(p3,'-dpng','/home/gmanfred/Desktop/tmp_sandra/areas');
+tightfig;
+print(p3,'-dpng','/home/gmanfred/Desktop/tmp_sandra/rooms');
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% For each areas classify contour points
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -94,13 +111,39 @@ for i=1:length(bbs)-1
     tmp = 1;    
     for j=1:length(lines)
         if lines{j}.label == 0
+            % display
+            %{
+            if mod(j,5) == 0
+                plot([lines{j}.line(1,1) lines{j}.line(end,1)],[lines{j}.line(1,2) lines{j}.line(end,2)],'Color','g','LineWidth',2);
+            end
+            %}
             windoor_lines{tmp} = lines{j};
             tmp = tmp + 1;
         end
     end
 
     cum_lines = getCumLines(VM, windoor_lines);
-
+    % display
+    %{
+    pDescsWin=figure('Visible',visible);
+    plot(cum_lines{4},'LineWidth',4) %
+    axis([1,44,-0.2,1.2]);
+    font_size = 18;
+    xlabel('Height','FontSize',font_size);
+    ylabel('Occupied','FontSize',font_size);
+    tightfig;
+    print(pDescsWin,'-dpng','/home/gmanfred/Desktop/tmp_sandra/descriptor_window');
+    
+    pDescsDoor=figure('Visible',visible);
+    plot(cum_lines{20},'LineWidth',4) %
+    axis([1,44,-0.2,1.2]);
+    font_size = 18;
+    xlabel('Height','FontSize',font_size);
+    ylabel('Occupied','FontSize',font_size);
+    tightfig;
+    print(pDescsDoor,'-dpng','/home/gmanfred/Desktop/tmp_sandra/descriptor_door');
+    %}
+    
     % cummulative lines to binary matrix
     D = single(cell2mat(cum_lines));
     for j=1:length(D)
@@ -111,15 +154,18 @@ for i=1:length(bbs)-1
     for c=1:length(C)
         windoor_lines{c}.label = C(c);
     end
-    %{
+    %
     % display walls
-    for i=1:length(lines)
-        if lines{i}.label == 3
-            pt = lines{i}.line(1,:);
+    %{
+    for j=1:length(lines)
+        if lines{j}.label == 3
+            pt = lines{j}.line(1,:);
             plot(pt(1),pt(2),'Marker','p','Color','b','MarkerSize',5);
         end
-    end 
+    end
+    %}
     % display windows and doors
+    %{
     for i=1:length(C)
         pt = windoor_lines{i}.line(1,:);
         if windoor_lines{i}.label == 1
@@ -128,12 +174,13 @@ for i=1:length(bbs)-1
             plot(pt(1),pt(2),'Marker','p','Color','g','MarkerSize',5);
         end
     end
+    tightfig;
     print(p4,'-dpng','/home/gmanfred/Desktop/tmp_sandra/classification_init');
     %}
     
     segments = getSegments(windoor_lines);
     % display
-    %
+    %{
     for j=1:length(segments)
         k = size(segments{j}.seg,1);
         if segments{j}.label == 1
@@ -144,12 +191,16 @@ for i=1:length(bbs)-1
             color = 'm';
         end
         plot([segments{j}.seg(1,1) segments{j}.seg(k,1)],[segments{j}.seg(1,2) segments{j}.seg(k,2)],'Color',color,'LineWidth',3);
-        %segments{j}.to
     end
+    tightfig;
     print(p4,'-dpng','/home/gmanfred/Desktop/tmp_sandra/classification_final');
+    %}
     %
     segments2dot(segments, i);
 end
+tightfig;
+%print(p4,'-dpng','/home/gmanfred/Desktop/tmp_sandra/bridges');
+print(p4,'-dpng','/home/gmanfred/Desktop/tmp_sandra/classification_final');
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Find planar areas
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -168,6 +219,16 @@ for b=1:length(bbs)-1
     Z = room_cloud(:,3);
     [H,bins] = hist(Z, 44);
     [pks,pidx] = findpeaks(H);
+    
+    % display
+    pLocMax = figure('Visible',visible);
+    bar(H);
+    font_size = 18;
+    xlabel('Voxel index along Z (x0.05 for height)','FontSize',font_size);
+    ylabel('Number of occupied voxels','FontSize',font_size);
+    tightfig;
+    print(pLocMax,'-dpng',['/home/gmanfred/Desktop/tmp_sandra/local_maxima_histogram' num2str(b)]);
+    pidx
 
     p5=figure('Visible',visible);
     % find planes
@@ -177,7 +238,8 @@ for b=1:length(bbs)-1
         rooms{p} = room_voxmap(1:Mx-25,my:My,idx) & ~dil_murs; % remove walls
         imshow(rooms{p});
     end
-    print(p5,'-dpng',['/home/gmanfred/Desktop/tmp_sandra/slices_of_interest' num2str(b)]);
+    tightfig;
+    print(p5,'-dpng',['/home/gmanfred/Desktop/tmp_sandra/slices' num2str(b)]);
     % merge planes
     counter = 1;
     final_rooms{1} = rooms{1};
@@ -200,12 +262,25 @@ for b=1:length(bbs)-1
         imshow(final_rooms{t});
     end
     %length(final_rooms)
-    print(p6,'-dpng',['/home/gmanfred/Desktop/tmp_sandra/merged_slices_of_interest' num2str(b)]);
+    print(p6,'-dpng',['/home/gmanfred/Desktop/tmp_sandra/merged_slices' num2str(b)]);
     all_planes{b} = final_rooms;
     all_pidx{b} = final_pidx;
 end
 
 interest_areas = areasFromPlanes(all_planes, all_pidx);
+
+%
+% display
+length(interest_areas)
+for l=1:length(interest_areas)
+    test = [interest_areas{l}(1) interest_areas{l}(2) interest_areas{l}(3) interest_areas{l}(4)];
+    figure;
+    imshow(tout); hold on;
+    rectangle('Position',test,'LineWidth',3, 'EdgeColor', 'r');
+end
+%
+%plot(meter2pixel(2.25),meter2pixel(5.85),'Marker','p','Color','r','MarkerSize',5);
+
 %length(interest_areas)
 %display
 %{

@@ -1,6 +1,10 @@
-#include "../Linemod/Train.h"
+#include "../Linemod/VirtualModeller.h"
 
+VirtualModeller vm(10.0, 0.75);
+
+// rosrun linemod_ros train_virtual /home/gmanfred/devel/datasets/my_objects/linemod/milk/views /home/gmanfred/devel/datasets/my_objects/linemod/milk/milk.lmt
 int main(int argc, char** argv) {
-
+    assert( (argc == 3) &&  "Usage: rosrun linemod_ros train_virtual path_to_views model_output_path");
+    vm.model(argv[1], argv[2]);
     return 0;
 }

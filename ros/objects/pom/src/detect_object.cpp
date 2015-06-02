@@ -72,9 +72,7 @@ void image_callback(const sensor_msgs::ImageConstPtr& msg) {
 // rosrun opencv_publisher stream 0 webcam image
 // rosrun opencv_display display_poses_from_tf image
 
-// rosrun pom detect_object /narrow_stereo/left/image_rect /narrow_stereo/left/camera_info narrow_stereo_l_stereo_camera_optical_frame objects_list.txt
-// rosrun pom detect_object /narrow_stereo/left/image_rect /narrow_stereo/left/camera_info narrow_stereo_l_stereo_camera_optical_frame object_path
-// rosrun pom detect_object image camera_info camera /home/gmanfred/devel/datasets/my_objects/pom/models/lait.yaml
+// rosrun pom detect_service /narrow_stereo/left/image_rect /narrow_stereo/left/camera_info narrow_stereo_l_stereo_camera_optical_frame objects_list.txt
 int main (int argc, char** argv) {
 	assert (argc == 5 && "Usage : detect_object in_image_topic in_intrisic_topic camera_frame objects_list");
 	ros::init(argc, argv, "pom");
@@ -84,9 +82,9 @@ int main (int argc, char** argv) {
 	camera_frame = argv[3];
 
     ROS_INFO("Loading objects...");
-    //int num_objects = detecter.loadObjectsFromList(argv[4]); // Multi objects
-    int num_objects = 1;
-    detecter.loadObject(argv[4]); // Mono objects
+    int num_objects = detecter.loadObjectsFromList(argv[4]); // Multi objects
+    //int num_objects = 1; // Mono objects
+    //detecter.loadObject(argv[4]); // Mono objects
     ROS_INFO("... objects loaded.");
 
     vector<tf::TransformBroadcaster> br;

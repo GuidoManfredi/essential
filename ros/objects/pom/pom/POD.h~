@@ -8,8 +8,6 @@
 #include "PipelineGeom.h"
 #include "commons.h"
 
-#define USE_GPU true
-
 class POD
 {
   public:
@@ -59,12 +57,12 @@ class POD
     *   \param poses A vector of recognised objects poses.
     *   \param names A vector containing the recognised objects names.
     */
-    void process (const cv::Mat image, std::vector<cv::Mat> &poses, std::vector<std::string> &names);
+    std::vector<int> process (const cv::Mat image, std::vector<cv::Mat> &poses, std::vector<std::string> &names);
     /**
     *   \brief Proceed as be previous one, except the image and extracted features
     *           are save in a View instance.
     */
-    void process (View current, std::vector<cv::Mat> &poses, std::vector<std::string> &names);
+    std::vector<int> process (View current, std::vector<cv::Mat> &poses, std::vector<std::string> &names);
 
   private:
     /**
@@ -72,7 +70,7 @@ class POD
     *   \param image An OpenCV image of a scene.
     */
     View createView (cv::Mat image);
-    void match (View current, Object object, std::vector<cv::DMatch> &matches);
+    int match (View current, Object object, std::vector<cv::DMatch> &matches);
     cv::Mat computePose (View current, Object object, std::vector<cv::DMatch> matches);
     void match2points (std::vector<cv::KeyPoint> keypoints, std::vector<cv::Point3f> points, std::vector<cv::DMatch> matches,
                         std::vector<cv::Point2f> &points2d, std::vector<cv::Point3f> &points3d);

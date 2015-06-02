@@ -35,6 +35,9 @@ CMAKE_COMMAND = /usr/bin/cmake
 # The command to remove a file.
 RM = /usr/bin/cmake -E remove -f
 
+# Escaping for special characters.
+EQUALS = =
+
 # The program to use to edit the cache.
 CMAKE_EDIT_COMMAND = /usr/bin/ccmake
 
@@ -192,6 +195,19 @@ ROSBUILD_gensrv_lisp/fast:
 .PHONY : ROSBUILD_gensrv_lisp/fast
 
 #=============================================================================
+# Target rules for targets named ROSBUILD_gensrv_py
+
+# Build rule for target.
+ROSBUILD_gensrv_py: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 ROSBUILD_gensrv_py
+.PHONY : ROSBUILD_gensrv_py
+
+# fast build rule for target.
+ROSBUILD_gensrv_py/fast:
+	$(MAKE) -f CMakeFiles/ROSBUILD_gensrv_py.dir/build.make CMakeFiles/ROSBUILD_gensrv_py.dir/build
+.PHONY : ROSBUILD_gensrv_py/fast
+
+#=============================================================================
 # Target rules for targets named _catkin_empty_exported_target
 
 # Build rule for target.
@@ -242,6 +258,19 @@ detect_object: cmake_check_build_system
 detect_object/fast:
 	$(MAKE) -f CMakeFiles/detect_object.dir/build.make CMakeFiles/detect_object.dir/build
 .PHONY : detect_object/fast
+
+#=============================================================================
+# Target rules for targets named detect_service
+
+# Build rule for target.
+detect_service: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 detect_service
+.PHONY : detect_service
+
+# fast build rule for target.
+detect_service/fast:
+	$(MAKE) -f CMakeFiles/detect_service.dir/build.make CMakeFiles/detect_service.dir/build
+.PHONY : detect_service/fast
 
 #=============================================================================
 # Target rules for targets named doxygen
@@ -346,6 +375,19 @@ rospack_gensrv: cmake_check_build_system
 rospack_gensrv/fast:
 	$(MAKE) -f CMakeFiles/rospack_gensrv.dir/build.make CMakeFiles/rospack_gensrv.dir/build
 .PHONY : rospack_gensrv/fast
+
+#=============================================================================
+# Target rules for targets named rospack_gensrv_all
+
+# Build rule for target.
+rospack_gensrv_all: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 rospack_gensrv_all
+.PHONY : rospack_gensrv_all
+
+# fast build rule for target.
+rospack_gensrv_all/fast:
+	$(MAKE) -f CMakeFiles/rospack_gensrv_all.dir/build.make CMakeFiles/rospack_gensrv_all.dir/build
+.PHONY : rospack_gensrv_all/fast
 
 #=============================================================================
 # Target rules for targets named run_tests
@@ -495,6 +537,7 @@ pom/Object.o: pom/Object.cpp.o
 pom/Object.cpp.o:
 	$(MAKE) -f CMakeFiles/create_object.dir/build.make CMakeFiles/create_object.dir/pom/Object.cpp.o
 	$(MAKE) -f CMakeFiles/detect_object.dir/build.make CMakeFiles/detect_object.dir/pom/Object.cpp.o
+	$(MAKE) -f CMakeFiles/detect_service.dir/build.make CMakeFiles/detect_service.dir/pom/Object.cpp.o
 .PHONY : pom/Object.cpp.o
 
 pom/Object.i: pom/Object.cpp.i
@@ -504,6 +547,7 @@ pom/Object.i: pom/Object.cpp.i
 pom/Object.cpp.i:
 	$(MAKE) -f CMakeFiles/create_object.dir/build.make CMakeFiles/create_object.dir/pom/Object.cpp.i
 	$(MAKE) -f CMakeFiles/detect_object.dir/build.make CMakeFiles/detect_object.dir/pom/Object.cpp.i
+	$(MAKE) -f CMakeFiles/detect_service.dir/build.make CMakeFiles/detect_service.dir/pom/Object.cpp.i
 .PHONY : pom/Object.cpp.i
 
 pom/Object.s: pom/Object.cpp.s
@@ -513,6 +557,7 @@ pom/Object.s: pom/Object.cpp.s
 pom/Object.cpp.s:
 	$(MAKE) -f CMakeFiles/create_object.dir/build.make CMakeFiles/create_object.dir/pom/Object.cpp.s
 	$(MAKE) -f CMakeFiles/detect_object.dir/build.make CMakeFiles/detect_object.dir/pom/Object.cpp.s
+	$(MAKE) -f CMakeFiles/detect_service.dir/build.make CMakeFiles/detect_service.dir/pom/Object.cpp.s
 .PHONY : pom/Object.cpp.s
 
 pom/POD.o: pom/POD.cpp.o
@@ -521,6 +566,7 @@ pom/POD.o: pom/POD.cpp.o
 # target to build an object file
 pom/POD.cpp.o:
 	$(MAKE) -f CMakeFiles/detect_object.dir/build.make CMakeFiles/detect_object.dir/pom/POD.cpp.o
+	$(MAKE) -f CMakeFiles/detect_service.dir/build.make CMakeFiles/detect_service.dir/pom/POD.cpp.o
 .PHONY : pom/POD.cpp.o
 
 pom/POD.i: pom/POD.cpp.i
@@ -529,6 +575,7 @@ pom/POD.i: pom/POD.cpp.i
 # target to preprocess a source file
 pom/POD.cpp.i:
 	$(MAKE) -f CMakeFiles/detect_object.dir/build.make CMakeFiles/detect_object.dir/pom/POD.cpp.i
+	$(MAKE) -f CMakeFiles/detect_service.dir/build.make CMakeFiles/detect_service.dir/pom/POD.cpp.i
 .PHONY : pom/POD.cpp.i
 
 pom/POD.s: pom/POD.cpp.s
@@ -537,6 +584,7 @@ pom/POD.s: pom/POD.cpp.s
 # target to generate assembly for a file
 pom/POD.cpp.s:
 	$(MAKE) -f CMakeFiles/detect_object.dir/build.make CMakeFiles/detect_object.dir/pom/POD.cpp.s
+	$(MAKE) -f CMakeFiles/detect_service.dir/build.make CMakeFiles/detect_service.dir/pom/POD.cpp.s
 .PHONY : pom/POD.cpp.s
 
 pom/POM.o: pom/POM.cpp.o
@@ -570,6 +618,7 @@ pom/Pipeline2D.o: pom/Pipeline2D.cpp.o
 pom/Pipeline2D.cpp.o:
 	$(MAKE) -f CMakeFiles/create_object.dir/build.make CMakeFiles/create_object.dir/pom/Pipeline2D.cpp.o
 	$(MAKE) -f CMakeFiles/detect_object.dir/build.make CMakeFiles/detect_object.dir/pom/Pipeline2D.cpp.o
+	$(MAKE) -f CMakeFiles/detect_service.dir/build.make CMakeFiles/detect_service.dir/pom/Pipeline2D.cpp.o
 .PHONY : pom/Pipeline2D.cpp.o
 
 pom/Pipeline2D.i: pom/Pipeline2D.cpp.i
@@ -579,6 +628,7 @@ pom/Pipeline2D.i: pom/Pipeline2D.cpp.i
 pom/Pipeline2D.cpp.i:
 	$(MAKE) -f CMakeFiles/create_object.dir/build.make CMakeFiles/create_object.dir/pom/Pipeline2D.cpp.i
 	$(MAKE) -f CMakeFiles/detect_object.dir/build.make CMakeFiles/detect_object.dir/pom/Pipeline2D.cpp.i
+	$(MAKE) -f CMakeFiles/detect_service.dir/build.make CMakeFiles/detect_service.dir/pom/Pipeline2D.cpp.i
 .PHONY : pom/Pipeline2D.cpp.i
 
 pom/Pipeline2D.s: pom/Pipeline2D.cpp.s
@@ -588,6 +638,7 @@ pom/Pipeline2D.s: pom/Pipeline2D.cpp.s
 pom/Pipeline2D.cpp.s:
 	$(MAKE) -f CMakeFiles/create_object.dir/build.make CMakeFiles/create_object.dir/pom/Pipeline2D.cpp.s
 	$(MAKE) -f CMakeFiles/detect_object.dir/build.make CMakeFiles/detect_object.dir/pom/Pipeline2D.cpp.s
+	$(MAKE) -f CMakeFiles/detect_service.dir/build.make CMakeFiles/detect_service.dir/pom/Pipeline2D.cpp.s
 .PHONY : pom/Pipeline2D.cpp.s
 
 pom/PipelineGeom.o: pom/PipelineGeom.cpp.o
@@ -597,6 +648,7 @@ pom/PipelineGeom.o: pom/PipelineGeom.cpp.o
 pom/PipelineGeom.cpp.o:
 	$(MAKE) -f CMakeFiles/create_object.dir/build.make CMakeFiles/create_object.dir/pom/PipelineGeom.cpp.o
 	$(MAKE) -f CMakeFiles/detect_object.dir/build.make CMakeFiles/detect_object.dir/pom/PipelineGeom.cpp.o
+	$(MAKE) -f CMakeFiles/detect_service.dir/build.make CMakeFiles/detect_service.dir/pom/PipelineGeom.cpp.o
 .PHONY : pom/PipelineGeom.cpp.o
 
 pom/PipelineGeom.i: pom/PipelineGeom.cpp.i
@@ -606,6 +658,7 @@ pom/PipelineGeom.i: pom/PipelineGeom.cpp.i
 pom/PipelineGeom.cpp.i:
 	$(MAKE) -f CMakeFiles/create_object.dir/build.make CMakeFiles/create_object.dir/pom/PipelineGeom.cpp.i
 	$(MAKE) -f CMakeFiles/detect_object.dir/build.make CMakeFiles/detect_object.dir/pom/PipelineGeom.cpp.i
+	$(MAKE) -f CMakeFiles/detect_service.dir/build.make CMakeFiles/detect_service.dir/pom/PipelineGeom.cpp.i
 .PHONY : pom/PipelineGeom.cpp.i
 
 pom/PipelineGeom.s: pom/PipelineGeom.cpp.s
@@ -615,6 +668,7 @@ pom/PipelineGeom.s: pom/PipelineGeom.cpp.s
 pom/PipelineGeom.cpp.s:
 	$(MAKE) -f CMakeFiles/create_object.dir/build.make CMakeFiles/create_object.dir/pom/PipelineGeom.cpp.s
 	$(MAKE) -f CMakeFiles/detect_object.dir/build.make CMakeFiles/detect_object.dir/pom/PipelineGeom.cpp.s
+	$(MAKE) -f CMakeFiles/detect_service.dir/build.make CMakeFiles/detect_service.dir/pom/PipelineGeom.cpp.s
 .PHONY : pom/PipelineGeom.cpp.s
 
 pom/View.o: pom/View.cpp.o
@@ -624,6 +678,7 @@ pom/View.o: pom/View.cpp.o
 pom/View.cpp.o:
 	$(MAKE) -f CMakeFiles/create_object.dir/build.make CMakeFiles/create_object.dir/pom/View.cpp.o
 	$(MAKE) -f CMakeFiles/detect_object.dir/build.make CMakeFiles/detect_object.dir/pom/View.cpp.o
+	$(MAKE) -f CMakeFiles/detect_service.dir/build.make CMakeFiles/detect_service.dir/pom/View.cpp.o
 .PHONY : pom/View.cpp.o
 
 pom/View.i: pom/View.cpp.i
@@ -633,6 +688,7 @@ pom/View.i: pom/View.cpp.i
 pom/View.cpp.i:
 	$(MAKE) -f CMakeFiles/create_object.dir/build.make CMakeFiles/create_object.dir/pom/View.cpp.i
 	$(MAKE) -f CMakeFiles/detect_object.dir/build.make CMakeFiles/detect_object.dir/pom/View.cpp.i
+	$(MAKE) -f CMakeFiles/detect_service.dir/build.make CMakeFiles/detect_service.dir/pom/View.cpp.i
 .PHONY : pom/View.cpp.i
 
 pom/View.s: pom/View.cpp.s
@@ -642,6 +698,7 @@ pom/View.s: pom/View.cpp.s
 pom/View.cpp.s:
 	$(MAKE) -f CMakeFiles/create_object.dir/build.make CMakeFiles/create_object.dir/pom/View.cpp.s
 	$(MAKE) -f CMakeFiles/detect_object.dir/build.make CMakeFiles/detect_object.dir/pom/View.cpp.s
+	$(MAKE) -f CMakeFiles/detect_service.dir/build.make CMakeFiles/detect_service.dir/pom/View.cpp.s
 .PHONY : pom/View.cpp.s
 
 pom/commons.o: pom/commons.cpp.o
@@ -651,6 +708,7 @@ pom/commons.o: pom/commons.cpp.o
 pom/commons.cpp.o:
 	$(MAKE) -f CMakeFiles/create_object.dir/build.make CMakeFiles/create_object.dir/pom/commons.cpp.o
 	$(MAKE) -f CMakeFiles/detect_object.dir/build.make CMakeFiles/detect_object.dir/pom/commons.cpp.o
+	$(MAKE) -f CMakeFiles/detect_service.dir/build.make CMakeFiles/detect_service.dir/pom/commons.cpp.o
 .PHONY : pom/commons.cpp.o
 
 pom/commons.i: pom/commons.cpp.i
@@ -660,6 +718,7 @@ pom/commons.i: pom/commons.cpp.i
 pom/commons.cpp.i:
 	$(MAKE) -f CMakeFiles/create_object.dir/build.make CMakeFiles/create_object.dir/pom/commons.cpp.i
 	$(MAKE) -f CMakeFiles/detect_object.dir/build.make CMakeFiles/detect_object.dir/pom/commons.cpp.i
+	$(MAKE) -f CMakeFiles/detect_service.dir/build.make CMakeFiles/detect_service.dir/pom/commons.cpp.i
 .PHONY : pom/commons.cpp.i
 
 pom/commons.s: pom/commons.cpp.s
@@ -669,6 +728,7 @@ pom/commons.s: pom/commons.cpp.s
 pom/commons.cpp.s:
 	$(MAKE) -f CMakeFiles/create_object.dir/build.make CMakeFiles/create_object.dir/pom/commons.cpp.s
 	$(MAKE) -f CMakeFiles/detect_object.dir/build.make CMakeFiles/detect_object.dir/pom/commons.cpp.s
+	$(MAKE) -f CMakeFiles/detect_service.dir/build.make CMakeFiles/detect_service.dir/pom/commons.cpp.s
 .PHONY : pom/commons.cpp.s
 
 src/SaveCorners.o: src/SaveCorners.cpp.o
@@ -742,6 +802,30 @@ src/detect_object.s: src/detect_object.cpp.s
 src/detect_object.cpp.s:
 	$(MAKE) -f CMakeFiles/detect_object.dir/build.make CMakeFiles/detect_object.dir/src/detect_object.cpp.s
 .PHONY : src/detect_object.cpp.s
+
+src/detect_service.o: src/detect_service.cpp.o
+.PHONY : src/detect_service.o
+
+# target to build an object file
+src/detect_service.cpp.o:
+	$(MAKE) -f CMakeFiles/detect_service.dir/build.make CMakeFiles/detect_service.dir/src/detect_service.cpp.o
+.PHONY : src/detect_service.cpp.o
+
+src/detect_service.i: src/detect_service.cpp.i
+.PHONY : src/detect_service.i
+
+# target to preprocess a source file
+src/detect_service.cpp.i:
+	$(MAKE) -f CMakeFiles/detect_service.dir/build.make CMakeFiles/detect_service.dir/src/detect_service.cpp.i
+.PHONY : src/detect_service.cpp.i
+
+src/detect_service.s: src/detect_service.cpp.s
+.PHONY : src/detect_service.s
+
+# target to generate assembly for a file
+src/detect_service.cpp.s:
+	$(MAKE) -f CMakeFiles/detect_service.dir/build.make CMakeFiles/detect_service.dir/src/detect_service.cpp.s
+.PHONY : src/detect_service.cpp.s
 
 src/experiment.o: src/experiment.cpp.o
 .PHONY : src/experiment.o
@@ -849,10 +933,12 @@ help:
 	@echo "... ROSBUILD_genmsg_lisp"
 	@echo "... ROSBUILD_gensrv_cpp"
 	@echo "... ROSBUILD_gensrv_lisp"
+	@echo "... ROSBUILD_gensrv_py"
 	@echo "... _catkin_empty_exported_target"
 	@echo "... clean_test_results"
 	@echo "... create_object"
 	@echo "... detect_object"
+	@echo "... detect_service"
 	@echo "... doxygen"
 	@echo "... edit_cache"
 	@echo "... experiment"
@@ -867,6 +953,7 @@ help:
 	@echo "... rospack_genmsg"
 	@echo "... rospack_genmsg_libexe"
 	@echo "... rospack_gensrv"
+	@echo "... rospack_gensrv_all"
 	@echo "... run_tests"
 	@echo "... save_corners"
 	@echo "... test"
@@ -909,6 +996,9 @@ help:
 	@echo "... src/detect_object.o"
 	@echo "... src/detect_object.i"
 	@echo "... src/detect_object.s"
+	@echo "... src/detect_service.o"
+	@echo "... src/detect_service.i"
+	@echo "... src/detect_service.s"
 	@echo "... src/experiment.o"
 	@echo "... src/experiment.i"
 	@echo "... src/experiment.s"

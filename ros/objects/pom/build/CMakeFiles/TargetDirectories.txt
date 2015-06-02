@@ -2,10 +2,12 @@
 /home/gmanfred/devel/essential/ros/objects/pom/build/CMakeFiles/ROSBUILD_genmsg_lisp.dir
 /home/gmanfred/devel/essential/ros/objects/pom/build/CMakeFiles/ROSBUILD_gensrv_cpp.dir
 /home/gmanfred/devel/essential/ros/objects/pom/build/CMakeFiles/ROSBUILD_gensrv_lisp.dir
+/home/gmanfred/devel/essential/ros/objects/pom/build/CMakeFiles/ROSBUILD_gensrv_py.dir
 /home/gmanfred/devel/essential/ros/objects/pom/build/CMakeFiles/_catkin_empty_exported_target.dir
 /home/gmanfred/devel/essential/ros/objects/pom/build/CMakeFiles/clean_test_results.dir
 /home/gmanfred/devel/essential/ros/objects/pom/build/CMakeFiles/create_object.dir
 /home/gmanfred/devel/essential/ros/objects/pom/build/CMakeFiles/detect_object.dir
+/home/gmanfred/devel/essential/ros/objects/pom/build/CMakeFiles/detect_service.dir
 /home/gmanfred/devel/essential/ros/objects/pom/build/CMakeFiles/doxygen.dir
 /home/gmanfred/devel/essential/ros/objects/pom/build/CMakeFiles/experiment.dir
 /home/gmanfred/devel/essential/ros/objects/pom/build/gtest/CMakeFiles/gtest.dir
@@ -16,6 +18,7 @@
 /home/gmanfred/devel/essential/ros/objects/pom/build/CMakeFiles/rospack_genmsg.dir
 /home/gmanfred/devel/essential/ros/objects/pom/build/CMakeFiles/rospack_genmsg_libexe.dir
 /home/gmanfred/devel/essential/ros/objects/pom/build/CMakeFiles/rospack_gensrv.dir
+/home/gmanfred/devel/essential/ros/objects/pom/build/CMakeFiles/rospack_gensrv_all.dir
 /home/gmanfred/devel/essential/ros/objects/pom/build/CMakeFiles/run_tests.dir
 /home/gmanfred/devel/essential/ros/objects/pom/build/CMakeFiles/save_corners.dir
 /home/gmanfred/devel/essential/ros/objects/pom/build/CMakeFiles/test.dir

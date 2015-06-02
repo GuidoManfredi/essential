@@ -1,8 +1,0 @@
-prefix=/home/gmanfred/devel/essential/ros/catkin_ws/install
-
-Name: icp
-Description: Description of icp
-Version: 0.0.0
-Cflags: -I/home/gmanfred/devel/essential/ros/catkin_ws/install/include
-Libs: -L/home/gmanfred/devel/essential/ros/catkin_ws/install/lib 
-Requires: 

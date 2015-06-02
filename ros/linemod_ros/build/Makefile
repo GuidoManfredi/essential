@@ -35,6 +35,9 @@ CMAKE_COMMAND = /usr/bin/cmake
 # The command to remove a file.
 RM = /usr/bin/cmake -E remove -f
 
+# Escaping for special characters.
+EQUALS = =
+
 # The program to use to edit the cache.
 CMAKE_EDIT_COMMAND = /usr/bin/ccmake
 
@@ -231,6 +234,19 @@ detect_test/fast:
 .PHONY : detect_test/fast
 
 #=============================================================================
+# Target rules for targets named detect_test_offline
+
+# Build rule for target.
+detect_test_offline: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 detect_test_offline
+.PHONY : detect_test_offline
+
+# fast build rule for target.
+detect_test_offline/fast:
+	$(MAKE) -f CMakeFiles/detect_test_offline.dir/build.make CMakeFiles/detect_test_offline.dir/build
+.PHONY : detect_test_offline/fast
+
+#=============================================================================
 # Target rules for targets named doxygen
 
 # Build rule for target.
@@ -400,17 +416,30 @@ tests/fast:
 .PHONY : tests/fast
 
 #=============================================================================
-# Target rules for targets named train_test
+# Target rules for targets named train_online
 
 # Build rule for target.
-train_test: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 train_test
-.PHONY : train_test
+train_online: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 train_online
+.PHONY : train_online
 
 # fast build rule for target.
-train_test/fast:
-	$(MAKE) -f CMakeFiles/train_test.dir/build.make CMakeFiles/train_test.dir/build
-.PHONY : train_test/fast
+train_online/fast:
+	$(MAKE) -f CMakeFiles/train_online.dir/build.make CMakeFiles/train_online.dir/build
+.PHONY : train_online/fast
+
+#=============================================================================
+# Target rules for targets named train_virtual
+
+# Build rule for target.
+train_virtual: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 train_virtual
+.PHONY : train_virtual
+
+# fast build rule for target.
+train_virtual/fast:
+	$(MAKE) -f CMakeFiles/train_virtual.dir/build.make CMakeFiles/train_virtual.dir/build
+.PHONY : train_virtual/fast
 
 #=============================================================================
 # Target rules for targets named gtest
@@ -444,7 +473,9 @@ Linemod/LinemodWrap.o: Linemod/LinemodWrap.cpp.o
 # target to build an object file
 Linemod/LinemodWrap.cpp.o:
 	$(MAKE) -f CMakeFiles/detect_test.dir/build.make CMakeFiles/detect_test.dir/Linemod/LinemodWrap.cpp.o
-	$(MAKE) -f CMakeFiles/train_test.dir/build.make CMakeFiles/train_test.dir/Linemod/LinemodWrap.cpp.o
+	$(MAKE) -f CMakeFiles/detect_test_offline.dir/build.make CMakeFiles/detect_test_offline.dir/Linemod/LinemodWrap.cpp.o
+	$(MAKE) -f CMakeFiles/train_online.dir/build.make CMakeFiles/train_online.dir/Linemod/LinemodWrap.cpp.o
+	$(MAKE) -f CMakeFiles/train_virtual.dir/build.make CMakeFiles/train_virtual.dir/Linemod/LinemodWrap.cpp.o
 .PHONY : Linemod/LinemodWrap.cpp.o
 
 Linemod/LinemodWrap.i: Linemod/LinemodWrap.cpp.i
@@ -453,7 +484,9 @@ Linemod/LinemodWrap.i: Linemod/LinemodWrap.cpp.i
 # target to preprocess a source file
 Linemod/LinemodWrap.cpp.i:
 	$(MAKE) -f CMakeFiles/detect_test.dir/build.make CMakeFiles/detect_test.dir/Linemod/LinemodWrap.cpp.i
-	$(MAKE) -f CMakeFiles/train_test.dir/build.make CMakeFiles/train_test.dir/Linemod/LinemodWrap.cpp.i
+	$(MAKE) -f CMakeFiles/detect_test_offline.dir/build.make CMakeFiles/detect_test_offline.dir/Linemod/LinemodWrap.cpp.i
+	$(MAKE) -f CMakeFiles/train_online.dir/build.make CMakeFiles/train_online.dir/Linemod/LinemodWrap.cpp.i
+	$(MAKE) -f CMakeFiles/train_virtual.dir/build.make CMakeFiles/train_virtual.dir/Linemod/LinemodWrap.cpp.i
 .PHONY : Linemod/LinemodWrap.cpp.i
 
 Linemod/LinemodWrap.s: Linemod/LinemodWrap.cpp.s
@@ -462,7 +495,9 @@ Linemod/LinemodWrap.s: Linemod/LinemodWrap.cpp.s
 # target to generate assembly for a file
 Linemod/LinemodWrap.cpp.s:
 	$(MAKE) -f CMakeFiles/detect_test.dir/build.make CMakeFiles/detect_test.dir/Linemod/LinemodWrap.cpp.s
-	$(MAKE) -f CMakeFiles/train_test.dir/build.make CMakeFiles/train_test.dir/Linemod/LinemodWrap.cpp.s
+	$(MAKE) -f CMakeFiles/detect_test_offline.dir/build.make CMakeFiles/detect_test_offline.dir/Linemod/LinemodWrap.cpp.s
+	$(MAKE) -f CMakeFiles/train_online.dir/build.make CMakeFiles/train_online.dir/Linemod/LinemodWrap.cpp.s
+	$(MAKE) -f CMakeFiles/train_virtual.dir/build.make CMakeFiles/train_virtual.dir/Linemod/LinemodWrap.cpp.s
 .PHONY : Linemod/LinemodWrap.cpp.s
 
 Linemod/OnlineGrabber.o: Linemod/OnlineGrabber.cpp.o
@@ -470,8 +505,7 @@ Linemod/OnlineGrabber.o: Linemod/OnlineGrabber.cpp.o
 
 # target to build an object file
 Linemod/OnlineGrabber.cpp.o:
-	$(MAKE) -f CMakeFiles/detect_test.dir/build.make CMakeFiles/detect_test.dir/Linemod/OnlineGrabber.cpp.o
-	$(MAKE) -f CMakeFiles/train_test.dir/build.make CMakeFiles/train_test.dir/Linemod/OnlineGrabber.cpp.o
+	$(MAKE) -f CMakeFiles/train_online.dir/build.make CMakeFiles/train_online.dir/Linemod/OnlineGrabber.cpp.o
 .PHONY : Linemod/OnlineGrabber.cpp.o
 
 Linemod/OnlineGrabber.i: Linemod/OnlineGrabber.cpp.i
@@ -479,8 +513,7 @@ Linemod/OnlineGrabber.i: Linemod/OnlineGrabber.cpp.i
 
 # target to preprocess a source file
 Linemod/OnlineGrabber.cpp.i:
-	$(MAKE) -f CMakeFiles/detect_test.dir/build.make CMakeFiles/detect_test.dir/Linemod/OnlineGrabber.cpp.i
-	$(MAKE) -f CMakeFiles/train_test.dir/build.make CMakeFiles/train_test.dir/Linemod/OnlineGrabber.cpp.i
+	$(MAKE) -f CMakeFiles/train_online.dir/build.make CMakeFiles/train_online.dir/Linemod/OnlineGrabber.cpp.i
 .PHONY : Linemod/OnlineGrabber.cpp.i
 
 Linemod/OnlineGrabber.s: Linemod/OnlineGrabber.cpp.s
@@ -488,9 +521,32 @@ Linemod/OnlineGrabber.s: Linemod/OnlineGrabber.cpp.s
 
 # target to generate assembly for a file
 Linemod/OnlineGrabber.cpp.s:
-	$(MAKE) -f CMakeFiles/detect_test.dir/build.make CMakeFiles/detect_test.dir/Linemod/OnlineGrabber.cpp.s
-	$(MAKE) -f CMakeFiles/train_test.dir/build.make CMakeFiles/train_test.dir/Linemod/OnlineGrabber.cpp.s
+	$(MAKE) -f CMakeFiles/train_online.dir/build.make CMakeFiles/train_online.dir/Linemod/OnlineGrabber.cpp.s
 .PHONY : Linemod/OnlineGrabber.cpp.s
+
+Linemod/VirtualModeller.o: Linemod/VirtualModeller.cpp.o
+.PHONY : Linemod/VirtualModeller.o
+
+# target to build an object file
+Linemod/VirtualModeller.cpp.o:
+	$(MAKE) -f CMakeFiles/train_virtual.dir/build.make CMakeFiles/train_virtual.dir/Linemod/VirtualModeller.cpp.o
+.PHONY : Linemod/VirtualModeller.cpp.o
+
+Linemod/VirtualModeller.i: Linemod/VirtualModeller.cpp.i
+.PHONY : Linemod/VirtualModeller.i
+
+# target to preprocess a source file
+Linemod/VirtualModeller.cpp.i:
+	$(MAKE) -f CMakeFiles/train_virtual.dir/build.make CMakeFiles/train_virtual.dir/Linemod/VirtualModeller.cpp.i
+.PHONY : Linemod/VirtualModeller.cpp.i
+
+Linemod/VirtualModeller.s: Linemod/VirtualModeller.cpp.s
+.PHONY : Linemod/VirtualModeller.s
+
+# target to generate assembly for a file
+Linemod/VirtualModeller.cpp.s:
+	$(MAKE) -f CMakeFiles/train_virtual.dir/build.make CMakeFiles/train_virtual.dir/Linemod/VirtualModeller.cpp.s
+.PHONY : Linemod/VirtualModeller.cpp.s
 
 src/detect_test.o: src/detect_test.cpp.o
 .PHONY : src/detect_test.o
@@ -516,29 +572,77 @@ src/detect_test.cpp.s:
 	$(MAKE) -f CMakeFiles/detect_test.dir/build.make CMakeFiles/detect_test.dir/src/detect_test.cpp.s
 .PHONY : src/detect_test.cpp.s
 
-src/train_test.o: src/train_test.cpp.o
-.PHONY : src/train_test.o
+src/detect_test_offline.o: src/detect_test_offline.cpp.o
+.PHONY : src/detect_test_offline.o
 
 # target to build an object file
-src/train_test.cpp.o:
-	$(MAKE) -f CMakeFiles/train_test.dir/build.make CMakeFiles/train_test.dir/src/train_test.cpp.o
-.PHONY : src/train_test.cpp.o
+src/detect_test_offline.cpp.o:
+	$(MAKE) -f CMakeFiles/detect_test_offline.dir/build.make CMakeFiles/detect_test_offline.dir/src/detect_test_offline.cpp.o
+.PHONY : src/detect_test_offline.cpp.o
 
-src/train_test.i: src/train_test.cpp.i
-.PHONY : src/train_test.i
+src/detect_test_offline.i: src/detect_test_offline.cpp.i
+.PHONY : src/detect_test_offline.i
 
 # target to preprocess a source file
-src/train_test.cpp.i:
-	$(MAKE) -f CMakeFiles/train_test.dir/build.make CMakeFiles/train_test.dir/src/train_test.cpp.i
-.PHONY : src/train_test.cpp.i
+src/detect_test_offline.cpp.i:
+	$(MAKE) -f CMakeFiles/detect_test_offline.dir/build.make CMakeFiles/detect_test_offline.dir/src/detect_test_offline.cpp.i
+.PHONY : src/detect_test_offline.cpp.i
 
-src/train_test.s: src/train_test.cpp.s
-.PHONY : src/train_test.s
+src/detect_test_offline.s: src/detect_test_offline.cpp.s
+.PHONY : src/detect_test_offline.s
 
 # target to generate assembly for a file
-src/train_test.cpp.s:
-	$(MAKE) -f CMakeFiles/train_test.dir/build.make CMakeFiles/train_test.dir/src/train_test.cpp.s
-.PHONY : src/train_test.cpp.s
+src/detect_test_offline.cpp.s:
+	$(MAKE) -f CMakeFiles/detect_test_offline.dir/build.make CMakeFiles/detect_test_offline.dir/src/detect_test_offline.cpp.s
+.PHONY : src/detect_test_offline.cpp.s
+
+src/train_online.o: src/train_online.cpp.o
+.PHONY : src/train_online.o
+
+# target to build an object file
+src/train_online.cpp.o:
+	$(MAKE) -f CMakeFiles/train_online.dir/build.make CMakeFiles/train_online.dir/src/train_online.cpp.o
+.PHONY : src/train_online.cpp.o
+
+src/train_online.i: src/train_online.cpp.i
+.PHONY : src/train_online.i
+
+# target to preprocess a source file
+src/train_online.cpp.i:
+	$(MAKE) -f CMakeFiles/train_online.dir/build.make CMakeFiles/train_online.dir/src/train_online.cpp.i
+.PHONY : src/train_online.cpp.i
+
+src/train_online.s: src/train_online.cpp.s
+.PHONY : src/train_online.s
+
+# target to generate assembly for a file
+src/train_online.cpp.s:
+	$(MAKE) -f CMakeFiles/train_online.dir/build.make CMakeFiles/train_online.dir/src/train_online.cpp.s
+.PHONY : src/train_online.cpp.s
+
+src/train_virtual.o: src/train_virtual.cpp.o
+.PHONY : src/train_virtual.o
+
+# target to build an object file
+src/train_virtual.cpp.o:
+	$(MAKE) -f CMakeFiles/train_virtual.dir/build.make CMakeFiles/train_virtual.dir/src/train_virtual.cpp.o
+.PHONY : src/train_virtual.cpp.o
+
+src/train_virtual.i: src/train_virtual.cpp.i
+.PHONY : src/train_virtual.i
+
+# target to preprocess a source file
+src/train_virtual.cpp.i:
+	$(MAKE) -f CMakeFiles/train_virtual.dir/build.make CMakeFiles/train_virtual.dir/src/train_virtual.cpp.i
+.PHONY : src/train_virtual.cpp.i
+
+src/train_virtual.s: src/train_virtual.cpp.s
+.PHONY : src/train_virtual.s
+
+# target to generate assembly for a file
+src/train_virtual.cpp.s:
+	$(MAKE) -f CMakeFiles/train_virtual.dir/build.make CMakeFiles/train_virtual.dir/src/train_virtual.cpp.s
+.PHONY : src/train_virtual.cpp.s
 
 # Help Target
 help:
@@ -553,6 +657,7 @@ help:
 	@echo "... _catkin_empty_exported_target"
 	@echo "... clean_test_results"
 	@echo "... detect_test"
+	@echo "... detect_test_offline"
 	@echo "... doxygen"
 	@echo "... edit_cache"
 	@echo "... install"
@@ -572,7 +677,8 @@ help:
 	@echo "... test-results"
 	@echo "... test-results-run"
 	@echo "... tests"
-	@echo "... train_test"
+	@echo "... train_online"
+	@echo "... train_virtual"
 	@echo "... gtest"
 	@echo "... gtest_main"
 	@echo "... Linemod/LinemodWrap.o"
@@ -581,12 +687,21 @@ help:
 	@echo "... Linemod/OnlineGrabber.o"
 	@echo "... Linemod/OnlineGrabber.i"
 	@echo "... Linemod/OnlineGrabber.s"
+	@echo "... Linemod/VirtualModeller.o"
+	@echo "... Linemod/VirtualModeller.i"
+	@echo "... Linemod/VirtualModeller.s"
 	@echo "... src/detect_test.o"
 	@echo "... src/detect_test.i"
 	@echo "... src/detect_test.s"
-	@echo "... src/train_test.o"
-	@echo "... src/train_test.i"
-	@echo "... src/train_test.s"
+	@echo "... src/detect_test_offline.o"
+	@echo "... src/detect_test_offline.i"
+	@echo "... src/detect_test_offline.s"
+	@echo "... src/train_online.o"
+	@echo "... src/train_online.i"
+	@echo "... src/train_online.s"
+	@echo "... src/train_virtual.o"
+	@echo "... src/train_virtual.i"
+	@echo "... src/train_virtual.s"
 .PHONY : help
 
 

@@ -57,12 +57,12 @@ class POD
     *   \param poses A vector of recognised objects poses.
     *   \param names A vector containing the recognised objects names.
     */
-    void process (const cv::Mat image, std::vector<cv::Mat> &poses, std::vector<std::string> &names);
+    std::vector<int> process (const cv::Mat image, std::vector<cv::Mat> &poses, std::vector<std::string> &names);
     /**
     *   \brief Proceed as be previous one, except the image and extracted features
     *           are save in a View instance.
     */
-    void process (View current, std::vector<cv::Mat> &poses, std::vector<std::string> &names);
+    std::vector<int> process (View current, std::vector<cv::Mat> &poses, std::vector<std::string> &names);
 
   private:
     /**

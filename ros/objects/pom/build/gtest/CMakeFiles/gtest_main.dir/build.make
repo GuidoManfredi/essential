@@ -31,6 +31,9 @@ CMAKE_COMMAND = /usr/bin/cmake
 # The command to remove a file.
 RM = /usr/bin/cmake -E remove -f
 
+# Escaping for special characters.
+EQUALS = =
+
 # The program to use to edit the cache.
 CMAKE_EDIT_COMMAND = /usr/bin/ccmake
 
@@ -80,8 +83,8 @@ gtest_main_OBJECTS = \
 gtest_main_EXTERNAL_OBJECTS =
 
 /home/gmanfred/devel/essential/ros/objects/pom/lib/libgtest_main.so: gtest/CMakeFiles/gtest_main.dir/src/gtest_main.cc.o
-/home/gmanfred/devel/essential/ros/objects/pom/lib/libgtest_main.so: /home/gmanfred/devel/essential/ros/objects/pom/lib/libgtest.so
 /home/gmanfred/devel/essential/ros/objects/pom/lib/libgtest_main.so: gtest/CMakeFiles/gtest_main.dir/build.make
+/home/gmanfred/devel/essential/ros/objects/pom/lib/libgtest_main.so: /home/gmanfred/devel/essential/ros/objects/pom/lib/libgtest.so
 /home/gmanfred/devel/essential/ros/objects/pom/lib/libgtest_main.so: gtest/CMakeFiles/gtest_main.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --red --bold "Linking CXX shared library /home/gmanfred/devel/essential/ros/objects/pom/lib/libgtest_main.so"
 	cd /home/gmanfred/devel/essential/ros/objects/pom/build/gtest && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/gtest_main.dir/link.txt --verbose=$(VERBOSE)

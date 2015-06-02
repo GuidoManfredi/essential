@@ -31,6 +31,9 @@ CMAKE_COMMAND = /usr/bin/cmake
 # The command to remove a file.
 RM = /usr/bin/cmake -E remove -f
 
+# Escaping for special characters.
+EQUALS = =
+
 # The program to use to edit the cache.
 CMAKE_EDIT_COMMAND = /usr/bin/ccmake
 
@@ -46,7 +49,7 @@ CMAKE_BINARY_DIR = /home/gmanfred/devel/essential/ros/linemod_ros/build
 include CMakeFiles/rosbuild_clean-test-results.dir/progress.make
 
 CMakeFiles/rosbuild_clean-test-results:
-	if ! rm -rf /home/gmanfred/devel/essential/ros/catkin_ws/build/test_results/linemod_ros; then echo "WARNING:\ failed\ to\ remove\ test-results\ directory"; fi
+	if ! rm -rf /home/gmanfred/devel/ros/hydro/catkin_ws/build/test_results/linemod_ros; then echo "WARNING:\ failed\ to\ remove\ test-results\ directory"; fi
 
 rosbuild_clean-test-results: CMakeFiles/rosbuild_clean-test-results
 rosbuild_clean-test-results: CMakeFiles/rosbuild_clean-test-results.dir/build.make
